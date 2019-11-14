@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmOrderView" title="工作项详情">
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnCannel" title="取消" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+				<control name="btnConfirm" title="确认收货" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+				<control name="btnBuyAgain" title="再次购买" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+				<control name="btnConfirmPayment" title="确认支付" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+				<control name="btnReturn" title="返回" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+			<panel name="pCondition" title="详细信息" object="tOrder" type="Group">
+				<control name="id" title="订单ID" property="id" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="" />
+			</panel>	
+			<panel name="pForm" title="详细信息" object="tOrder" type="Group">
+				<control name="id" title="订单ID" property="id"
+					type="Hidden" edit="N" required="N" format="" width="1" height="1"
+					column="" />
+				<control name="consignee" title="收货人" property="consignee"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="" />
+				<control name="tel" title="联系电话" property="tel"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="" />
+				<control name="goodName" title="商品名称" property="goodName"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="" />
+					
+				<control name="quantity" title="商品数量" property="quantity" type="TextBox"
+					edit="N" required="N" format="" width="1" height="1" column="4" />
+				
+				<control name="specification" title="规格" property="specification" type="TextBox"
+					edit="N" required="N" format="" width="1" height="1" column="" />
+
+				<control name="picId" title="图片ID" property="picId"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="" />
+				
+				<control name="code" title="订单号" property="code"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="" />
+				<control name="orderStatus" title="订单状态" property="orderStatus"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="4" />
+				
+				<control name="integral" title="需要的积分" property="integral"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="" />
+				<control name="amount" title="需要的金额" property="amount"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="" />
+				<control name="realIntegral" title="实际积分" property="amount"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="" />	
+				<control name="realAmount" title="实际金额" property="realAmount"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="4" />
+				<control name="payMethod" title="支付方式" property="payMethod"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="" />
+				<control name="totalAmount" title="商品总价" property="totalAmount"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="" />
+				<control name="logisticCode" title="配送单号" property="logisticCode"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="" />
+				<control name="logistic" title="配送物流" property="logistic"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					column="4" />
+			</panel>
+			
+			<panel name="pFormDetail" title="详细信息" object="" type="Grid">
+				<control name="id" title="商品支付ID" property="id" type="TextBox" edit="N" required="N" format="" width="" height="1" column="1" />
+				<control name="integral" title="需要的积分" property="integral" type="TextBox" edit="N" required="N" format="" width="" height="1" column="1" />
+				<control name="amount" title="需要的金额" property="amount" type="TextBox" edit="N" required="N" format="" width="" height="1" column="1" />
+			</panel>
+
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="j1" logic="DecodeId" ifyes="qid" ifno="">
+					<param name="Out" value="pCondition.id"></param>
+				</procedure>
+				<procedure name="qid" logic="Query" ifyes="queryMemo"
+					ifno="">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pForm"></param>
+					<param name="Sql" value="zhongdeorder/QryOrderViewList"></param>
+				</procedure>
+				
+				<procedure name="queryMemo"  logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pFormDetail"></param>
+                    <param name="Sql" value="zhongdeorder/QryOrderDetailList"></param>
+                </procedure>
+			</flow>
+			
+			<!-- 取消订单 -->
+			<flow trigger="pToolbar.btnCannel" event="OnClick" filter="">
+		          <procedure name="j1" logic="SaveCustom" ifyes="" ifno="">
+		              <param name="Sql" value="zhongdeorder/CannelOrderById"></param>
+		              <param name="In" value="pCondition"></param>
+		            <!--   <param name="Plugin" value="cannelOrder"/> -->
+		              <param name="Msg" value="'取消成功'"></param>
+		          </procedure>
+		      </flow>
+		      
+		      <!-- 确认收货 -->
+			<flow trigger="pToolbar.btnConfirm" event="OnClick" filter="">
+		          <procedure name="j1" logic="SaveCustom" ifyes="" ifno="">
+		              <param name="Sql" value="zhongdeorder/ConfirmOrderById"></param>
+		              <param name="In" value="pCondition"></param>
+		              <param name="Plugin" value="cannelOrder"/>
+		              <param name="Msg" value="'确认收货成功'"></param>
+		          </procedure>
+		      </flow>
+		      
+		      <!-- 再次购买 -->
+		      <flow trigger="pToolbar.btnBuyAgain" event="OnClick" filter="">
+		          <procedure name="qid" logic="SaveCustom" ifyes="queryMemo"
+					ifno="">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pForm"></param>
+					<param name="Plugin" value="buyAgainOrder"/>
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+				</procedure>
+		      </flow>
+			<!-- 确认支付 -->
+			<flow trigger="pToolbar.btnConfirmPayment" event="OnClick" filter="">
+				<procedure name="qid" logic="SaveCustom" ifyes="" ifno="">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pForm"></param>
+					<param name="Plugin" value="ConfirmPayment"/>
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+				</procedure>
+			</flow>
+
+			<flow trigger="pToolbar.btnReturn" event="OnClick" filter="root!=''">
+				<procedure name="jsclose" server="" logic="Back" ifyes=""
+					ifno="">
+					<param name="Mode" value="Edit" />
+				</procedure>
+			</flow>
+			<layout>
+				<!-- <region location="South" scale="400px">
+					<subregion panel="pToolbar" location="South" scale="" />
+				</region> -->
+				
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale="" />
+					<subregion panel="pCondition" location="Center" scale="" />
+				</region>
+				<region location="Center" scale="">
+					<!-- <subregion panel="pCondition" location="North" scale="200px" /> -->
+					<subregion panel="pForm" location="North" scale="" />
+					<subregion panel="pFormDetail" location="Center" scale="" />
+				</region>
+				
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

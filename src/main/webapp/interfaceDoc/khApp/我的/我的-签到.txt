@@ -1,0 +1,44 @@
+UI名称		frmAppSignEdit
+	
+tokenKey	OnClick_pButton_save_frmAppSignEdit_jsSave
+
+
+接口地址	/api/save
+
+接口类型	POST
+
+参数示例
+{
+Mode:"Add"//Add 必填
+createBy:""
+createTime:""
+id:""
+integral:""
+signTime:""
+userId:"17"//用户id必填
+}
+
+
+返回示例
+"data": {
+createBy:1
+createTime:"2018-08-09 17:47:58"
+create_by:1
+create_time:"2018-08-09 17:47:58"
+id:81
+signTime:"2018-08-09 17:47:58"
+sign_time:"2018-08-09 17:47:58"
+update_by:0
+update_time:null
+userId:17
+user_id:17
+valid_flag:0
+continuousSignDays：5     --连续签到天数
+integral：15                       --获得积分数
+		}]
+	},
+		
+
+
+如果返回msg:"重复请求"代表今天签到过了
+		

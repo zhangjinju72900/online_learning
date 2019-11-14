@@ -1,0 +1,1 @@
+select u.id,u.easemod_username as easUserName,u.easemod_password as easUserPassword from t_customer_user u order by id 

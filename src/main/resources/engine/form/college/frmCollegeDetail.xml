@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmCollegeDetail" title="院校详情">
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="pForm" title="院校详情" object="college"  type="Group" multiple="">
+		<control name="eq_id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="" column=""/>
+		<control name="title" title="院校名字" property="name" type="TextBox" edit="" required="Y" format="" width="1" height="1" column="3"/>
+		<!-- <control name="eq_type" title="院校类型" property="type" type="TextBox"  edit="" required="Y" format="" width="1" height="1" column="3"/> -->
+		<control name="typeName" title="院校类型名称" property="typeName" type="TextBox"  edit="" required="N" format="" width="1" height="1" column="3"/>
+    
+      <!--  <control name="eq_region" title="选择大区" property="regid" type="TextBox"  edit="" required="Y" format="" width="1" height="1" column="2"/>
+       <control name="eq_province" title="选择省份" property="provincecode" type="TextBox"  edit="" required="Y" format="" width="1" height="1" column="2"/>
+        --> 
+        <control name="regionName" title="大区名" property="regionName" type="TextBox"  edit="" required="N" format="" width="1" height="1" column="3"/>
+        <control name="provinceName" title="省份名" property="provinceName" type="TextBox"  edit="" required="N" format="" width="1" height="1" column="3"/>
+        <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit=""  required=""   format="" width="1" height="1" column="3"  />
+	    <control name="creater" title="创建人" property="empcreater" type="Hidden" edit=""  required=""   format="" width="1" height="1" column="3"  />
+	    <control name="updateTime" title="修改时间" property="updateTime" type="TextBox" edit="" required=""  format="" width="1" height="1" column="3" />
+	    <control name="updater" title="修改人" property="empupdater" type="Hidden" edit="" required=""  format="" width="1" height="1" column="3"  />
+  	</panel>
+  	
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="j1" server="" logic="DecodeId" ifyes="je" ifno="">
+        <param name="Out" value="pForm.eq_id"></param>
+      </procedure> 
+      <procedure name="je"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="college/Qrycollege"></param>
+      </procedure> 
+       
+    </flow>
+   
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmCollegeList" logic="Back" ifyes="" ifno="">
+         <param name="To" value="/frmCollegeList"></param>
+       </procedure>
+      </flow>
+    <layout>
+       <region location ="Center" scale="">
+       <subregion panel="pToolbar" location="North" scale=""/>
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region>
+      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

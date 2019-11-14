@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+		<ui name="frmAppAttendClassDtl" title="查看上课详情">
+			<panel name="addGroup" title="table" object="attendClass" type="Group">
+				<control name="id" title="id" property="id" type="TextBox" edit="" required="" format="" width="1" height="1" column="1" />
+				<control name="userId" title="userId" property="userId" type="TextBox" edit="Y" required="" format="" width="1" height="1" column="1" />
+				<control name="attendClassDate" title="时间" property="attendClassDate" type="TextBox" edit="Y"  required="" format="" width="3" height="" column="1" />
+				<control name="courseName" title="课程" property="courseName" type="TextBox" edit="Y" required="N" format="" width="3" height="1" column="1" />
+				<control name="sectionName" title="任务" property="sectionName" type="TextBox" edit="Y" required="N" format="" width="3" height="1" column="1" />
+				<control name="teacherName" title="教师名称" property="teacherName" type="TextBox" edit="Y" required="N" format="" width="3" height="1" column="1" />
+				<control name="className" title="班级" property="className" type="TextBox" edit="Y" required="N" format="" width="3" height="1" column="1" />
+				<control name="signStatus" title="出勤情况" property="signStatus" type="TextBox" edit="Y" required="N" format="" width="3" height="1" column="1" />
+				<control name="signStatus2" title="出勤情况" property="signStatus2" type="TextBox" edit="Y" required="N" format="" width="3" height="1" column="1" />
+				<control name="classId" title="班级id" property="" type="TextBox" edit="Y" required="N" format="" width="3" height="1" column="1" />
+			</panel>
+
+
+			<panel name="addGroup1" title="缺勤学生" object="attendClassSign" type="Grid" multiple="Y">
+				<control name="id" title="选项id" property="id" type="TextBox" edit="Y" required="" format="" width="80" height="" column="" />								
+				<control name="name" title="姓名" property="name" type="TextBox" edit="Y" required="Y" format="" width="80" height="" column="" />	
+				<control name="fileUrl" title="头像文件URL" property="fileUrl" type="TextBox" edit="Y" required="Y" format="" width="600" height="" column="" />
+				<control name="fileId" title="头像文件ID" property="fileId" type="TextBox" edit="Y" required="Y" format="" width="600" height="" column="" />							
+			</panel>
+			
+			<panel name="pformDown" title="pform" object="" type="Toolbar">
+				<control name="ctlQry" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+				<control name="ctlCancel" title="退出" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+			</panel>
+
+
+			<!-- 页面逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+ 				<procedure name="clear"  logic="Clear" ifyes="jsdecodeid" ifno="">
+           			<param name="Out" value="addGroup"></param>
+     			</procedure> 
+     			<procedure name="jsdecodeid" server="" logic="DecodeId" ifyes="queryTableAnser" ifno="">
+			        <param name="Out" value="addGroup.id"></param>
+			    </procedure>
+			</flow>
+
+
+			<!-- 取消 -->
+			<flow trigger="pformDown.ctlQry" event="OnClick" filter="">
+				<procedure name="queryTableAnser"  logic="Query" ifyes="queryTableQues" ifno="">
+        			<param name="In" value="addGroup"></param>
+        			<param name="Out" value="addGroup"></param>
+       				<param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+       				<param name="Plugin" value="appAttendClassInfoPlugin" />
+      			</procedure> 
+			    <procedure name="queryTableQues"  logic="Query" ifyes="" ifno="">
+        			<param name="In" value="addGroup"></param>
+        			<param name="Out" value="addGroup1"></param>
+       				<param name="Sql" value="khApp/study/attendClass/QryAttendClassNotSign"></param>
+      			</procedure>  
+			</flow>
+			
+			<flow trigger="pformDown.ctlCancel" event="OnClick" filter="">
+				<procedure name="proTransition" server="/frmAppAttendClassList" logic="Back" ifyes="" ifno="">
+		         <param name="To" value="frmAppAttendClassList"></param>
+		       </procedure>
+			</flow>
+
+			<layout>
+				<region location="Center" scale="">
+					<subregion panel="addGroup" location="North" scale="40%" />
+					<subregion panel="addGroup1" location="Center" scale="60%" />
+				</region>
+				<region location="North" scale="">
+					<subregion panel="pformDown" location="North" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

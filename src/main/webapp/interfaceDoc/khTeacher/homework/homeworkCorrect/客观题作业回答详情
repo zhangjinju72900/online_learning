@@ -1,0 +1,31 @@
+
+UI名称		客观题作业回答详情（frmObjectDetail）
+
+tokenKey	OnLoad__frmObjectDetail_qDetail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkAnswerId: "4"			--作业回答id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		answerOption: "B,C"				--学生回答选项
+		content: "今天星期几"			--题干
+		correctFlag: 1					--学生回答正确标识(0-正确，1-错误)
+		correctTitle: "A,C,D"			--该题正确答案选项
+		homeworkAnswerId: 4				-作业回答id
+		id: 4							-作业回答详情id
+		objectiveRealScore: 0			--客观题得分
+		questionId: 122					--题目id
+		}
+
+
+
+

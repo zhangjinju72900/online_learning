@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<object name="sectionDetail" table="t_section" primary="id" unique="" order="">
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="name" type="String" length="50" initial="" field="name"/>
+			<property name="remark" type="String" length="500" initial="" field="remark"/>
+			<property name="courseId" type="Long" length="20" initial="" field="course_id"/>
+			<property name="showOrder" type="Long" length="2" initial="" field="show_order"/>
+			<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+			<property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+			<property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+			<property name="key" type="String" length="" initial="" field=""/>
+			<property name="ossUrl" type="String" length="" initial="" field=""/>
+		</object>
+	</model_layer>
+</tsoftware>

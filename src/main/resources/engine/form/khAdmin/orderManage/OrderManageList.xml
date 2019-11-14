@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+				
+	<ui_layer>
+		<ui name="OrderManageList" title="订单管理">
+		
+			<!-- 按钮 -->
+			<panel name="pToolbar" title="工具条" object="productOrder" type="Toolbar">
+				<control name="btnSearch" title="搜索" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			</panel> 
+			
+			<!-- 搜索框 -->
+			<panel name="pCondition" title="搜索框" object="productOrder" type="Group">
+				<!-- <control name="eq_id" title="订单ID" property="id" type="TextBox" edit="Y" required="N" format="" width="1" height="1" column=""/>
+				<control name="eq_userId" title="用户编号" property="userId" type="TextBox" edit="Y" required="N" format="" width="1" height="1" column=""/> -->
+				<control name="eq_userId" title="用户ID" property="userId" type="Hidden"	 edit="" required="" format="" width="150" height="" column=""/>
+				<control name="lk_userName" title="用户名" property="userName" type="TextBox"	edit="Y" required="N" format="" width="1" height="1" column=""/>
+				<control name="eq_id" title="ID" property="id" type="Hidden"	edit="" required="" format="" width="200" height="" column=""/>
+				<control name="lk_orderName" title="商品名称"  type="TextBox" height="1" width="1" format="" required="N" edit="Y" property="orderName" column=""/>
+				<control name="lk_code" title="订单编号" property="code" type="TextBox" edit="Y" required="N" format="" width="1" height="1" column="4"/>
+				<control name="eq_orderStatus" title="订单状态" property="orderStatus" type="ComboBox"	edit="Y" required="N" format="" width="1" height="1" column="4"/>
+				<!-- <control name="eq_logistic" title="配送" property="logistic" type="TextBox" edit="Y" required="N" format="" width="1" height="1" column=""/>
+				<control name="eq_logisticCode" title="配送编号" property="logisticCode" type="TextBox" edit="Y" required="N" format="" width="1" height="1" column="4"/> -->
+			</panel>	
+			
+			<!-- 查询结果 -->
+			<panel name="pTable" title="查询结果" object="productOrder" type="Grid">
+				<control name="edit" title="编辑" property="" type="Link" edit="" required="" format="" width="50" height="" column=""/>
+				<control name="id" title="ID" property="id" type="Hidden"	edit="" required="" format="" width="200" height="" column=""/>
+				<control name="userId" title="用户ID" property="userId" type="Hidden"	 edit="" required="" format="" width="150" height="" column=""/>
+				<control name="userName" title="用户名" property="userName" type="TextBox"	edit="" required="" format="" width="100" height="" column=""/>
+				<control name="orderName" title="商品名称:"  type="TextBox" height="1" width="100" format="" required="N" edit="N" property="orderName" column=""/>
+				<control name="remark" title="备注" property="remark" type="TextBox" height="1" width="200" format="" required="N" edit="N"  column=""/>
+				<control name="code" title="订单编号" property="code" type="TextBox"	edit="" required="" format="" width="200" height="" column=""/>
+				<control name="orderTime" title="订单时间" property="orderTime" type="DateBox"	edit="" required="" format="" width="170" height="" column=""/>
+				<control name="orderStatus" title="订单状态" property="orderStatus" type="Hidden"	edit="" required="" format="" width="50" height="" column=""/>
+				<control name="orderStatusName" title="订单状态" property="orderStatusName" type="TextBox"	edit="" required="" format="" width="50" height="" column=""/>
+				<control name="integral" title="所需积分" property="integral" type="TextBox"	edit="" required="" format="" width="50" height="" column=""/>
+				<control name="amount" title="金额" property="amount" type="TextBox"	edit="" required="" format="" width="50" height="" column=""/>
+				<control name="realIntegral" title="真实积分" property="realIntegral" type="TextBox"	edit="" required="" format="" width="50" height="" column=""/>
+				<control name="realAmount" title="真实金额" property="realAmount" type="TextBox"	edit="" required="" format="" width="50" height="" column=""/>
+				<control name="payMathod" title="支付方式" property="payMathod" type="TextBox"	edit="" required="" format="" width="50" height="" column=""/>
+				<control name="name" title="收货人" property="name" type="TextBox"	edit="" required="" format="" width="100" height="" column=""/>
+				<control name="tel" title="联系方式" property="tel" type="TextBox"	edit="" required="" format="" width="100" height="" column=""/>
+				<control name="consignAddressId" title="收货地址" property="consignAddressId" type="TextBox"	edit="" required="" format="" width="200" height="" column=""/>
+				<control name="logisticAmount" title="配送金额" property="logisticAmount" type="TextBox"	edit="" required="" format="" width="40" height="" column=""/>
+				<control name="logistic" title="物流" property="logistic" type="TextBox"	edit="" required="" format="" width="100" height="" column=""/>
+				<control name="logisticCode" title="物流编号" property="logisticCode" type="TextBox"	edit="" required="" format="" width="200" height="" column=""/>
+				<control name="createTime" title="创建时间" property="createTime" type="TimeBox"	edit="" required="" format="" width="200" height="" column=""/>
+				<control name="createBy" title="创建人" property="createBy" type="Hidden" 	edit="" required="" format="" width="200" height="" column=""/>
+				<control name="createName" title="创建人" property="createName" type="TextBox"	edit="" required="" format="" width="100" height="" column=""/>
+				<control name="updateTime" title="更新时间" property="updateTime" type="TimeBox"	edit="" required="" format="" width="200" height="" column=""/>
+				<control name="updateBy" title="更新人" property="updateBy"  type="Hidden"	edit="" required="" format="" width="200" height="" column=""/>
+				<control name="updateName" title="更新人" property="updateName"  type="TextBox"	edit="" required="" format="" width="100" height="" column=""/>
+				
+		</panel>
+			
+		   <!-- 逻辑加载 -->
+		<flow filter="" event="OnLoad" trigger="">
+			<procedure name="orderClear" sync="Y" ifno="" ifyes="listOrderStatus" logic="Clear">
+				<param name="Out" value="pCondition"/>
+			</procedure>
+			<procedure name="listOrderStatus" logic="List" ifyes="orderSelectResult"  ifno="">
+				<param name="Out" value="pCondition.eq_orderStatus" />
+				<param name="Sql" value="khAdmin/orderManage/ListOrderStatus" />
+			</procedure>
+			<procedure name="orderSelectResult" ifno="" ifyes="" logic="Query">
+				<param name="In" value="pCondition"/>
+				<param name="Out" value="pTable"/>
+				<param name="Sql" value="khAdmin/orderManage/QryOrderList"/>
+			</procedure>
+		</flow>
+		    
+		 	<!-- 查询 -->
+		<flow filter="" event="OnClick" trigger="pToolbar.btnSearch">
+			<procedure name="orderquery" ifno="" ifyes="" logic="Query">
+				<param name="In" value="pCondition"/>
+				<param name="Out" value="pTable"/>
+				<param name="Sql" value="khAdmin/orderManage/QryOrderList"/>
+			</procedure>
+		</flow>  
+			
+			<!-- 删除 -->
+		<flow filter="" event="OnClick" trigger="pTable.delete">
+			<procedure name="OrderDeleteMsg" ifno="" ifyes="orderDelete" logic="ConfirmMsg" server="">
+				<param name="Title" value="删除提示"/>
+				<param name="Msg" value="确认删除当前订单吗?"/>
+			</procedure>
+			<procedure name="orderDelete" ifno="" ifyes="orderQuery" logic="Delete">
+				<param name="In" value="pTable"/>
+				<param name="Msg" value="'该订单已删除'"/>
+			</procedure>
+			<procedure name="orderQuery" ifno="" ifyes="" logic="Query">
+				<param name="In" value="pCondition"/>
+				<param name="Out" value="pTable"/>
+				<param name="Sql" value="khAdmin/orderManage/QryOrderList"/>
+			</procedure>
+		</flow>
+		
+			<!-- 发送(编辑) -->
+		<flow filter="" event="OnClick" trigger="pTable.edit">
+			<procedure name="orderEncodeid" ifno="" ifyes="orderPopup" logic="EncodeId" server="">
+				<param name="In" value="pTable.id"/>
+			</procedure>
+			<procedure name="orderPopup" ifno="" ifyes="orderQuery" logic="Popup">
+				<param name="To" value="OrderChangeEdit"/>
+				<param name="Mode" value="Edit"/>
+				<param name="Window" value="Medium"/>
+				<param name="Title" value="编辑订单信息"/>
+			</procedure>
+			<procedure name="orderQuery" ifno="" ifyes="" logic="Query">
+				<param name="In" value="pCondition"/>
+				<param name="Out" value="pTable"/>
+				<param name="Sql" value="khAdmin/orderManage/QryOrderList"/>
+			</procedure>
+		</flow>
+		
+		
+			<!-- 布局 -->
+		    <layout>
+			  	<region location ="North" scale="">
+			    		<subregion panel="pToolbar" location ="North" scale=""/>
+			    </region>
+				<region location ="Center" scale="">
+					<subregion panel="pCondition" location="North" scale=""/>
+					<subregion panel="pTable" location="Center" scale=""/>
+			    </region>
+		    </layout>
+		    
+    		</ui>
+    </ui_layer>
+</tsoftware>

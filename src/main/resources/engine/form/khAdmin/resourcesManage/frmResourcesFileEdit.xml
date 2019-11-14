@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+      xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmResourcesFileEdit" title="资源编辑" template="frmResourcesFileEdit">
+  <!-- <ui name="frmResourcesFileEdit" title="资源编辑"> -->
+   	<panel name="pnlHidden" title="查询条件" object="org" type="Hidden">
+		<control name="eq_id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+        <control name="modelId" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="empGroup" title="tab1" object="tCustomerResources" type="Group">
+		<control name="ctlName1" title="支持格式" property="" type="Label" edit="N" required="" format="" tip="当前支持单个文件上传(mp4,swf,flv,pdf,docx,doc,xls,xlsx,ppt,pptx,zip)" width="80" height="1" column="5"/>
+		<control name="ctlId" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+		<control name="ctlName" title="资源名称" property="name" type="FileBox" edit="Y" required="" format="" width="1" height="1" column=""/>
+		<control name="ctlCoding" title="编码格式" property="" type="ComboBox" edit="Y" required="Y" format="" width="1" height="1" column="1"/>
+		
+	    <control name="fileId" title="文件id" property="fileId" type="Hidden" edit="Y" required="" format="" width="" height="1" column=""/>
+		<control name="ctlFileType" title="资源后缀名" property="fileType" type="TextBox" edit="N" required="N" format="" width="1" height="1" column=""/>
+		<control name="ctlFilePath" title="资源路径" property="filePath" type="TextBox" edit="N" required="N" format="" width="1" height="1" column=""/>
+		<control name="ctlVersionCode" title="版本号" property="versionCode" type="TextBox" edit="N" required="N" format="" width="1" height="1" column="3"  />
+		<control name="ossKey" title="id" property="ossKey" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+		<control name="ossUrl" title="id" property="ossUrl" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+		<control name="ctlParentId" title="父Id" property="parentId" type="Hidden" edit="Y" required="N" format="" width="1" height="1" column="3"/>
+		<control name="ctlBackupType" title="是否为备份" property="backupType" type="Hidden" edit="Y" required="N" format="" width="3" height="1" column="3"  />
+		<control name="ctlResourcesType" title="文件类型" property="resourcesType" type="Hidden" edit="Y" required="N" format="" width="3" height="2" column="3"  />
+		<control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column=""  />
+		<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />		
+		<control name="createTime" title="创建日期" property="createTime" type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():nil" format="" width="1" height="1" column=""  />
+		<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="editMode=='Add'?session.userInfo.empId:nil" format="" width="1" height="1" column=""  />
+	</panel>
+	<panel name="empDown" title="pnlDown" object="" type="Toolbar">
+		<control name="ctlSave" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>	
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="getId" server="" logic="DecodeId" ifyes="getEmptype" ifno="">
+        <param name="Out" value="empGroup.ctlId"></param>
+      </procedure> 
+      <procedure name="getEmptype"  logic="List" ifyes="qid" ifno="">
+        <param name="Out" value="empGroup.ctlCoding"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryResourcesCoding"></param>
+      </procedure>
+      <procedure name="qid"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="empGroup"></param>
+        <param name="Out" value="empGroup"></param>
+        <param name="Plugin" value="fileUrlPlugin" />
+        <param name="Sql" value="khAdmin/resourcesManage/QryFileList"></param>
+      </procedure>  
+    </flow>
+    <!-- 确认 -->
+    <flow trigger="empDown.ctlSave" event="OnClick" filter="" >
+     <procedure name="jBranch" logic="Branch" ifyes="message" ifno="jssave">
+     	 <param name="In" value="getPanelControlValue('empGroup.ctlCoding')==''" />
+     </procedure>
+     <procedure name="message"  logic="InfoMsg">
+     	<param name="Msg" value="编码格式不能为空" />
+     </procedure>
+      <procedure name="jssave"  logic="SaveCustom" ifyes="jsclose" ifno="">
+        <param name="In" value="empGroup"></param>
+        <param name="Out" value="empGroup.ctlId"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+        <param name="Plugin" value="saveExecute" />
+        <param name="Msg" value="'文件信息已被保存'"></param>
+      </procedure>
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>
+    <!-- 取消 -->
+    <flow trigger="empDown.ctlCancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="false"></param>
+      </procedure>
+    </flow>
+    <!-- 图片上传 -->
+     <flow trigger="empGroup.ctlName" event="OnClick" filter="">
+      <procedure name="fileUpload" server="" logic="Upload" ifyes="" ifno="">
+        <param name="Size" value="1000000"></param>
+        <param name="Type" value="mp4,swf,flv,pdf,docx,doc,xls,xlsx,ppt,pptx,zip"></param>
+        <param name="Bucket" value="public"></param>
+        <param name="Out" value="empGroup.fileId"></param>
+      </procedure>
+    </flow>
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="empDown" location="South" scale="" />
+      </region>
+      <region location ="North" scale="">
+        <subregion panel="empGroup" location="Center" scale="" />
+        <subregion panel="pnlHidden" location="North" scale="" />
+      </region>
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

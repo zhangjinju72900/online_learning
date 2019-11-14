@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+        <object name="sumPeople" table="" primary="" unique="" order="">
+            <property name="grade" type="String" length="" initial=""/>
+            <property name="userNum" type="Long" length="" initial=""/>
+            <property name="classType" type="String" length="" initial=""/>
+        </object>
+        
+         <object name="sumactTimes" table="" primary="" unique="" order="activityTimes asc">
+            <property name="activityTimes" type="Long" length="" initial=""/>
+            <property name="schoolName" type="String" length="" initial=""/>
+        </object>
+    </model_layer>
+       
+
+<ui_layer>
+  <ui name="frmColumnChart" title="图"> 
+  	<panel name="pToolbar" title="工具条" object="sumactTimes" type="Toolbar">
+		<control name="btnQueryDay" title="日" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+  		<control name="btnQueryWeek" title="周" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+  		<control name="btnQueryMonth" title="月" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+  	</panel>
+  	
+   	<panel name="pnlactivityTimes0" title="中职学院活跃度排名" object="sumactTimes" type="BarChart">
+        <control name="activityTimes" title="活跃次数" type="TextBox" property="activityTimes"/>
+        <control name="schoolName" title="学校名称" type="TextBox" property="schoolName"/>
+    </panel>
+    
+    <panel name="pnlactivityTimes1" title="高职学院活跃度排名" object="sumactTimes" type="BarChart">
+        <control name="activityTimes" title="活跃次数" type="TextBox" property="activityTimes"/>
+        <control name="schoolName" title="学校名称" type="TextBox" property="schoolName"/>
+    </panel>
+	
+	<panel name="pnlEmpGradeColumnChart" title="按年级统计人数" object="sumPeople" type="ColumnChart" >
+		<control name="grade" title="年级" property="grade" type="TextBox" />
+	 	<control name="userNum" title="学生人数" property="userNum" type="TextBox" />
+	</panel>
+	
+	<panel name="pnlEmpTypeColumnChart" title="按项目统计人数" object="sumPeople" type="ColumnChart">
+        <control name="classType" title="类型" type="TextBox" property="classType"/>
+        <control name="userNum" title="人数" type="TextBox" property="userNum"/>
+    </panel>
+   
+	
+      
+        
+        
+       <!-- 逻辑加载 -->  
+         <flow trigger="" event="OnLoad" filter="">     
+		    <procedure name="QueryByYear" logic="Query" ifyes="QueryByType" ifno="">
+		         <param name="Out" value="pnlEmpGradeColumnChart"></param>
+		         <param name="Sql" value="pic/selectByYear"></param>
+		    </procedure>
+		    <procedure name="QueryByType" logic="Query" ifyes="QueryBySchool0" ifno="">
+		         <param name="Out" value="pnlEmpTypeColumnChart"></param>
+		         <param name="Sql" value="pic/selectByType"></param>
+		    </procedure>
+		      <procedure name="QueryBySchool0" logic="Query" ifyes="QueryBySchool1" ifno="">
+		         <param name="Out" value="pnlactivityTimes0"></param>
+		         <param name="Sql" value="pic/selectByschoolDay0"></param>
+		    </procedure>
+		      <procedure name="QueryBySchool1" logic="Query" ifyes="" ifno="">
+		         <param name="Out" value="pnlactivityTimes1"></param>
+		         <param name="Sql" value="pic/selectByschoolDay1"></param>
+		    </procedure>
+  		</flow>
+        
+        <!-- 按钮功能实现 -->
+        <flow trigger="pToolbar.btnQueryDay" event="OnClick" filter="">  
+      		<procedure name="QueryBySchoolDay0" logic="Query" ifyes="QueryBySchoolDay1" ifno="">
+		         <param name="Out" value="pnlactivityTimes0"></param>
+		         <param name="Sql" value="pic/selectByschoolDay0"></param>
+		    </procedure>
+		      <procedure name="QueryBySchoolDay1" logic="Query" ifyes="" ifno="">
+		         <param name="Out" value="pnlactivityTimes1"></param>
+		         <param name="Sql" value="pic/selectByschoolDay1"></param>
+		    </procedure>
+    	</flow>
+    	
+    	<flow trigger="pToolbar.btnQueryWeek" event="OnClick" filter="">  
+      		<procedure name="QueryBySchoolWeek0" logic="Query" ifyes="QueryBySchoolWeek1" ifno="">
+		         <param name="Out" value="pnlactivityTimes0"></param>
+		         <param name="Sql" value="pic/selectByschoolWeek0"></param>
+		    </procedure>
+		      <procedure name="QueryBySchoolWeek1" logic="Query" ifyes="" ifno="">
+		         <param name="Out" value="pnlactivityTimes1"></param>
+		         <param name="Sql" value="pic/selectByschoolWeek1"></param>
+		    </procedure>
+    	</flow>
+    	
+    	<flow trigger="pToolbar.btnQueryMonth" event="OnClick" filter="">  
+      		<procedure name="QueryBySchoolMonth0" logic="Query" ifyes="QueryBySchoolMonth1" ifno="">
+		         <param name="Out" value="pnlactivityTimes0"></param>
+		         <param name="Sql" value="pic/selectByschoolMonth0"></param>
+		    </procedure>
+		      <procedure name="QueryBySchoolMonth1" logic="Query" ifyes="" ifno="">
+		         <param name="Out" value="pnlactivityTimes1"></param>
+		         <param name="Sql" value="pic/selectByschoolMonth1"></param>
+		    </procedure>
+    	</flow>
+        
+	<!-- 布局 -->
+    <layout>
+  	<region location ="North" scale="180px">
+  		<subregion panel="pToolbar" location="North" scale="7px"/>
+  	  	<subregion panel="pnlactivityTimes0" location="East" scale="50%"/>
+        <subregion panel="pnlactivityTimes1" location="West" scale="50%"/>
+    </region>
+    <region location ="Center" scale="300px">
+        <subregion panel="pnlEmpGradeColumnChart" location="East" scale="50%"/>
+        <subregion panel="pnlEmpTypeColumnChart" location="West" scale="50%"/>
+    </region>
+    </layout>
+    </ui>
+    </ui_layer>
+    </tsoftware>

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+
+    <ui_layer>
+        <ui name="frmChangeApplyView" title="变更申请表详情">
+            <panel name="pnlToolbar" title="工具条" object="" type="Toolbar">
+                <control name="ctlEdit" title="编辑申请" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlDelete" title="删除申请" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlWorkflowStart" title="启动审批" property="" type="Button" edit="" required="" format=""
+                         width=""
+                         height="" column=""/>
+                <control name="ctlAudit" title="审核" property="" type="Button" edit="" required="" format=""
+                         width=""
+                         height="" column=""/>
+                <control name="ctlWorkflowList" title="查看流程进度" property="" type="Button" edit="" required="" format=""
+                         width=""
+                         height="" column=""/>
+                <control name="ctlBack" title="返回" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+            </panel>
+            <panel name="pnlInfo" title="详情" object="changeApply" type="Group">
+                <control name="changeId" title="申请ID" property="id" type="Hidden" initial="" edit="" required="" format=""
+                         width="1" height="" column=""/>
+                <control name="ctrProjName" title="项目" property="projectName" type="PopupBox" edit="Y" required="N"
+                         format=""
+                         width="1" height="1" column=""/>
+                <control name="ctlApplicant" title="申请人" property="applicant" type="TextBox" edit="Y" required="N"
+                         format=""
+                         width="1" height="" column="1"/>
+                <control name="ctlApplyDate" title="申请时间" property="applyDate" type="DateBox" edit="Y" required="N"
+                         format="" width="1" height="1" column=""/>
+                <control name="ctlCompleteDate" title="要求完成时间" property="completeDate" type="DateBox" edit="N"
+                         required="N"
+                         format="" width="1" height="1" column="1"/>
+                <control name="ctlTitle" title="标题" property="title" type="TextBox" edit="Y" required="Y"
+                         format="" width="1" height="1" column="1"/>
+
+                <control name="ctlChangeReason" title="变更理由" property="changeReason" type="TextBox" edit="Y"
+                         required="N"
+                         format=""
+                         width="1" height="3" column="1"/>
+                <control name="ctlChangeContent" title="变更内容" property="changeContent" type="TextBox" edit="Y"
+                         required="N"
+                         format=""
+                         width="1" height="3" column="1"/>
+                <control name="ctlChangePlan" title="变更方案" property="changePlan" type="TextBox" edit="Y" required="N"
+                         format=""
+                         width="1" height="3" column="1"/>
+
+                <!--存储issueId-->
+                <control name="issueId" title="选中的issueId" property="" type="Hidden" edit="N" required="N" format="" width="1" height="1" column=""/>
+
+                <control name="eq_changeId" title="查询IssueList" property="id" type="Hidden" edit="N" required="N" format="" width="1" height="1" column=""/>
+
+                <control name="createByName" title="创建人" property="createByName" type="TextBox" edit="N" required="N"
+                         format=""
+                         width="1" height="1" column=""/>
+                <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="N" required="N"
+                         format=""
+                         width="1" height="1" column=""/>
+                <control name="updateByName" title="最后修改人" property="updateByName" type="TextBox" edit="N" required="N"
+                         format=""
+                         width="1" height="1" column=""/>
+                <control name="updateTime" title="最后修改时间" property="updateTime" type="TextBox" edit="N" required="N"
+                         format=""
+                         width="1" height="1" column="4"/>
+                <control name="updateBy" title="最后修改人ID" property="updateBy" target="session.userInfo.empId"
+                         type="Hidden" edit="N" required="N" format=""
+                         width="1" height="1" column=""/>
+                <control name="createBy" title="创建人ID" property="createBy" type="Hidden" edit="N" required="N" format=""
+                         width="1" height="1" column=""/>
+            </panel>
+            <panel name="pnlHiddenGrid" title="保存系表" object="changeIssue" type="HiddenTable">
+                <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="120" height="" column=""/>
+                <control name="changeId" title="变更ID" property="changeId" type="TextBox" edit="" required="" format="" width="180" height="" column=""/>
+                <control name="issueId" title="工作项ID" property="issueId" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+                <control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column="1"  />
+                <control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column="1"  />
+                <control name="createTime" title="创建日期" property="createTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column="1"  />
+                <control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column="1"  />
+            </panel>
+
+            <panel name="pnlDetailFile" title="附件" object="changeFile" type="Grid">
+                <control name="ctlDel" title="删除" property="" type="Link" edit="" required="" format="" width=""
+                         height="" column=""/>
+
+                <control name="id" title="主键ID" property="id" type="Hidden" edit="" required="" format=""
+                         width="140" height="" column=""/>
+                <control name="fileId" title="附件编号" property="fileId" type="TextBox" edit="" required="" format=""
+                         width="140" height="" column=""/>
+                <control name="fileName" title="附件名" property="fileName" type="DataLink" edit="" required="" format=""
+                         width="300" height="" column=""/>
+                <control name="remark" title="备注" property="remark" type="TextBox" edit="" required="" format=""
+                         width="300" height="" column=""/>
+                <control name="ctlChangeId" title="变更ID" property="changeId" type="Hidden" edit="Y" />
+                <control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column=""  />
+                <control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />
+                <control name="createTime" title="操作日期" property="createTime" type="TextBox" edit="" required="N" target="editMode=='Add'?CurrentTime():nil" format="" width="200" height="1" column=""  />
+                <control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="editMode=='Add'?session.userInfo.empId:nil" format="" width="1" height="1" column=""  />
+            </panel>
+            <panel name="pnlDetailIssue" title="相关工作项" object="changeIssue" type="Grid">
+                <control name="ctlDel" title="删除" property="" type="Link" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="id" title="主键ID" property="id" type="Hidden" edit="" required="" format=""
+                         width="140" height="" column=""/>
+                <control name="issueId" title="工作项编号" property="issueId" type="DataLink" edit="" required="" format=""
+                         width="140" height="" column=""/>
+                <control name="issueName" title="工作项名称" property="issueName" type="TextBox" edit="" required="" format=""
+                         width="300" height="" column=""/>
+                <control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column=""  />
+                <control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />
+                <control name="createTime" title="操作日期" property="createTime" type="TextBox" edit="" required="N" target="editMode=='Add'?CurrentTime():nil" format="" width="200" height="1" column=""  />
+                <control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="editMode=='Add'?session.userInfo.empId:nil" format="" width="1" height="1" column=""  />
+
+            </panel>
+            <panel name="pnlDetailView" title="相关模块" object="changeView" type="Grid">
+                 <control name="id" title="模块id" property="id" type="TextBox" edit="" required="" format=""
+                          width="100" height="" column=""/>
+                 <control name="name" title="模块名称" property="name" type="TextBox" edit="" required="" format=""
+                          width="140" height="" column=""/>
+                 <control name="createTime" title="操作日期" property="createTime" type="TextBox" edit="" required="N" target="" format="" width="160" height="1" column=""  />
+                 <control name="createBy" title="创建人" property="createBy" type="TextBox" edit="" required="N" target="" format="" width="100" height="1" column=""  />
+ 				<control name="updateTime" title="更新日期" property="updateTime" type="TextBox" edit="" required="N" target="CurrentTime()" format="" width="160" height="1" column=""  />
+                 <control name="updateBy" title="更新人" property="updateBy" type="TextBox" edit="" required="N" target="" format="" width="100" height="1" column=""  />
+	
+                 <control name="remark" title="备注" property="remark" type="TextBox" edit="" required="N" target="" format="" width="200" height="1" column=""  />
+             </panel>
+
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="procDecodeId" server="" logic="DecodeId" ifyes="procEncodeId" ifno="procQbi">
+                    <param name="Out" value="pnlInfo.changeId"></param>
+                </procedure>
+                <procedure name="procEncodeId" server="" logic="EncodeId" ifyes="procDecodeId1" ifno="">
+                    <param name="In" value="pnlInfo.changeId"></param>
+                </procedure>
+                <procedure name="procDecodeId1" server="" logic="DecodeId" ifyes="procQbi" ifno="procQbi">
+                    <param name="Out" value="pnlInfo.eq_changeId"></param>
+                </procedure>
+                <procedure name="procQbi" logic="QueryById" ifyes="procQueryFile" ifno=""><!-- procQuery -->
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Out" value="pnlInfo"></param>
+                    <param name="Sql" value="proj/QryChangeApplyList"></param>
+                </procedure>
+                <procedure name="procQueryFile" logic="Query" ifyes="procQueryIssue" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Out" value="pnlDetailFile"></param>
+                    <param name="Sql" value="proj/QryChangeApplyFile"></param>
+                </procedure>
+                <procedure name="procQueryIssue" logic="Query" ifyes="procDetailView" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Out" value="pnlDetailIssue"></param>
+                    <param name="Sql" value="proj/QryChangeIssueList"></param>
+                </procedure>
+                <procedure name="procDetailView" logic="Query" ifyes="" ifno="">
+                		<param name="In" value="pnlInfo"></param>
+                     <param name="Out" value="pnlDetailView"></param>
+                     <param name="Sql" value="proj/QryChangeIssueView"></param>
+                 </procedure>
+            </flow>
+
+            <flow trigger="pnlToolbar.ctlEdit" event="OnClick" filter="WorkflowState('frmChangeApplyView_'+model.pnlInfo.changeId,'NotStart')">
+                <procedure name="procEncodeId" server="" logic="EncodeId" ifyes="procPopup" ifno="">
+                    <param name="In" value="pnlInfo.changeId"></param>
+                    <param name="Mode" value="onClick"></param>
+                </procedure>
+                <procedure name="procPopup" logic="Popup" ifyes="procQbi" ifno="">
+                    <param name="To" value="frmChangeApplyEdit"></param>
+                    <param name="Mode" value="Edit"></param>
+                    <param name="Window" value="Large"></param>
+                    <param name="Title" value="编辑变更申请"></param>
+                </procedure>
+                <procedure name="procQbi" logic="QueryById" ifyes="procQueryFile" ifno=""><!-- procQuery -->
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Out" value="pnlInfo"></param>
+                    <param name="Sql" value="proj/QryChangeApplyList"></param>
+                </procedure>
+                <procedure name="procQueryFile" logic="Query" ifyes="procQueryIssue" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Out" value="pnlDetailFile"></param>
+                    <param name="Sql" value="proj/QryChangeApplyFile"></param>
+                </procedure>
+                <procedure name="procQueryIssue" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Out" value="pnlDetailIssue"></param>
+                    <param name="Sql" value="proj/QryChangeIssueList"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlDelete" event="OnClick" filter="WorkflowState('frmChangeApplyView_'+model.pnlInfo.changeId,'NotStart')">
+                <procedure name="procConfirm" server="" logic="ConfirmMsg" ifyes="procDelete" ifno="">
+                    <param name="Title" value="删除变更"></param>
+                    <param name="Msg" value="确认删除当前记录吗?"></param>
+                </procedure>
+                <procedure name="procDelete" logic="Delete" ifyes="proTransition" ifno="">
+                    <param name="In" value="pnlInfo"/>
+                    <param name="Cascade" value="t_change_apply_file.change_id;t_change_apply_issue.change_id" />
+                    <param name="Msg" value="model.name+'已删除'"/>
+                </procedure>
+                <procedure name="proTransition" server="/frmChangeApplyList" logic="Back" ifyes="" ifno="">
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlWorkflowStart" event="OnClick" filter="WorkflowState('frmChangeApplyView_'+model.pnlInfo.changeId,'NotStart')">
+                <procedure name="procConfirm" server="" logic="ConfirmMsg" ifyes="procStartWorkflow" ifno="">
+                    <param name="Title" value="启动审批流程"></param>
+                    <param name="Msg" value="确认启动审批流程吗?"></param>
+                </procedure>
+                <procedure name="procStartWorkflow" logic="StartWorkflow" ifyes="proTransition" ifno="">
+                    <param name="Workflow" value="changeApplyProcess"></param>
+                    <param name="ViewUrl" value="frmChangeApplyView"></param>
+                    <param name="In" value="pnlInfo.changeId"></param>
+                </procedure>
+                <procedure name="proTransition" server="/frmChangeApplyList" logic="Back" ifyes="" ifno="">
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlAudit" event="OnClick" filter="HasTask('frmChangeApplyView_'+model.pnlInfo.changeId,session.userInfo.userId)">
+                <procedure name="procExecActivity" logic="ExecActivity" ifyes="proTransition" ifno="">
+                    <param name="WorkFlow" value="changeApplyProcess"></param>
+                    <param name="UiName" value="frmChangeApplyView"></param>
+                    <param name="In" value="pnlInfo.changeId"></param>
+                    <param name="Desc" value="变更申请表审核"></param>
+                </procedure>
+                <procedure name="proTransition" server="/frmChangeApplyList" logic="Back" ifyes="" ifno="">
+                </procedure>
+
+            </flow>
+            <flow trigger="pnlToolbar.ctlWorkflowList" event="OnClick" filter="" >
+                <procedure name="procListActivity" logic="ListActivity" ifyes="" ifno="">
+                    <param name="WorkFlow" value="changeApplyProcess"></param>
+                    <param name="UiName" value="frmChangeApplyView"></param>
+                    <param name="In" value="pnlInfo.changeId"></param>
+                </procedure>
+            </flow>
+
+            <!-- 预览附件 -->
+            <flow trigger="pnlDetailFile.fileName" event="OnClick" filter="">
+                <procedure name="procPreview" logic="PreviewFile" ifyes="" ifno="">
+                    <param name="In" value="pnlDetailFile.fileId"></param>
+                </procedure>
+
+            </flow>
+            <!-- 删除附件 -->
+            <flow trigger="pnlDetailFile.ctlDel" event="OnClick" filter="">
+                <procedure name="msg" server="" logic="ConfirmMsg" ifyes="procDelete" ifno="">
+                    <param name="Title" value="删除"></param>
+                    <param name="Msg" value="确认删除当前记录吗?"></param>
+                </procedure>
+                <procedure name="procDelete"  logic="Delete" ifyes="procQueryFile" ifno="">
+                    <param name="In" value="pnlDetailFile" />
+                    <param name="Msg" value="'记录已删除'" />
+                </procedure>
+                <procedure name="procQueryFile"  logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Out" value="pnlDetailFile"></param>
+                    <param name="Sql" value="proj/QryChangeApplyFile"></param>
+                </procedure>
+            </flow>
+
+            <!-- 删除工作项 -->
+            <flow trigger="pnlDetailIssue.ctlDel" event="OnClick" filter="">
+                <procedure name="msg" server="" logic="ConfirmMsg" ifyes="procDelete" ifno="">
+                    <param name="Title" value="删除"></param>
+                    <param name="Msg" value="确认删除当前记录吗?"></param>
+                </procedure>
+                <procedure name="procDelete"  logic="Delete" ifyes="procQueryIssue" ifno="">
+                    <param name="In" value="pnlDetailIssue" />
+                    <param name="Msg" value="'记录已删除'" />
+                </procedure>
+                <procedure name="procQueryIssue"  logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Out" value="pnlDetailIssue"></param>
+                    <param name="Sql" value="proj/QryChangeIssueList"></param>
+                </procedure>
+            </flow>
+
+
+            <flow trigger="pnlToolbar.ctlBack" event="OnClick" filter="">
+                <procedure name="proTransition" logic="Back" ifyes="" ifno="">
+                    <param name="To" value="frmChangeApplyList"></param>
+                </procedure>
+            </flow>
+
+            <!--钻取逻辑-->
+            <flow trigger="pnlDetailIssue.issueId" event="OnClick" filter="">
+                <procedure name="procEncodeId" server="" logic="EncodeId" ifyes="procToIssueView" ifno="">
+                    <param name="In" value="pnlDetailIssue.issueId"/>
+                </procedure>
+                <procedure name="procToIssueView" logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmIssueView"/>
+                    <param name="Mode" value="Readonly"/>
+                </procedure>
+            </flow>
+
+
+            <layout>
+                <region location="North" scale="">
+                    <subregion panel="pnlToolbar" location="North" scale=""/>
+                    <subregion panel="pnlInfo" location="Center" scale=""/>
+                    <subregion panel="pnlHiddenGrid" location="Center" scale=""/>
+                </region>
+                <region location="South" scale="300px">
+                    <subregion panel="pnlDetailFile" location="South" scale="300px"/>
+                    <subregion panel="pnlDetailIssue" location="South" scale="300px"/>
+                    <subregion panel="pnlDetailView" location="South" scale="300px"/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

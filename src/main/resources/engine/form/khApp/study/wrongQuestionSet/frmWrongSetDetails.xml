@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmWrongSetDetails" title="错题集详情">
+        	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		  		<control name="btnQry" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		  		<control name="btnreturn" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		  		<control name="btnRemove" title="从错题集移除" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+        	<panel name="pCondition" title="错题条件" object="wrongQuestionSet"  type="Group" multiple="">
+        		<control name="courseId" title="课程id" property="courseId" type="TextBox" edit="Y" required="" format="" width="1" height="" column="4"/>
+				<control name="type" title="上一题/下一题" property="type" type="TextBox" edit="Y" required="" format="" width="1" height="" column="4"/>
+				<control name="questionId" title="试题ID" property="questionId" type="TextBox" edit="Y" required="" format="" width="1" height="" column="4"/>
+				<control name="userId" title="当前用户ID" property="userId" type="TextBox" edit="Y" required="" format="" width="1" height="" column="4"/>
+			</panel>
+			<!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		      <procedure name="MisDecode" logic="DecodeId" ifyes="je" ifno="">
+		         <param name="Out" value="pCondition.userId"></param>
+		      </procedure>
+		      <procedure name="je"  logic="SaveCustom" ifyes="" ifno="">
+			        <param name="In" value="pCondition"></param>
+			        <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+			        <param name="Plugin" value="wrongSetDetailPlugin" />
+			  </procedure> 
+		    </flow>
+		    <!-- 查询详情 -->
+		    <flow trigger="pToolbar.btnQry" event="OnClick" filter="">
+			       <procedure name="je"  logic="SaveCustom" ifyes="" ifno="">
+			        <param name="In" value="pCondition"></param>
+			        <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+			        <param name="Plugin" value="wrongSetDetailPlugin" />
+			      </procedure> 
+			</flow>
+			   
+			<!-- 从错题集移除 -->
+		    <flow trigger="pToolbar.btnRemove" event="OnClick" filter="">
+			      <procedure name="je"  logic="SaveCustom" ifyes="" ifno="">
+			        <param name="In" value="pCondition"></param>
+			        <param name="Sql" value="khApp/study/misques/DeleteFromWrongSet"></param>
+			        <param name="Msg" value="'已从错题集移除'" />
+			      </procedure> 
+			      
+			</flow> 
+		    <!--返回-->
+		    <flow trigger="pToolbar.btnreturn" event="OnClick" filter="">
+		       <procedure name="proTransition" server="/frmWrongQuesCollect" logic="Back" ifyes="" ifno="">
+		         <param name="To" value="frmWrongQuesCollect"></param>
+		       </procedure>
+		    </flow>
+            <!-- 布局 -->
+            <layout>
+            	<region location ="North" scale="">
+                    <subregion panel="pToolbar" location ="North" scale=""/>
+                </region> 
+                <region location ="Center" scale="">
+                    <subregion panel="pCondition" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

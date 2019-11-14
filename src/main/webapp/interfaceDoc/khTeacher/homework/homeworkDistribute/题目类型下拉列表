@@ -1,0 +1,18 @@
+
+
+UI名称		作业分发-从题库选择-选择题目类型（frmQuestionList）
+
+tokenKey	 OnLoad__frmQuestionList_typeList
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{}
+
+返回示例
+"data":		{text: "单选"
+			value: "0"				--试题类型（0-单选，1-多选，2-判断，3-主观）
+		
+

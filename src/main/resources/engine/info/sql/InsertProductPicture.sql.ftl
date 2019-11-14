@@ -1,0 +1,2 @@
+INSERT INTO t_goods_pic (good_id,course_id,update_time,update_by,create_time,create_by) 
+VALUES (#{data.good_id},#{data.course_id},now(),#{data.session.userInfo.userId},now(),#{data.session.userInfo.userId})

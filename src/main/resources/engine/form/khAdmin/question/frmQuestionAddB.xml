@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+		<ui name="frmQuestionAddB" title="新增题目">
+			<panel name="addGroup" title="table" object="questionA" type="Group">
+				<control name="id" title="id" property="id" type="Hidden" edit="Y" required="N" multiple="N" format="" width="" height="" column="" />
+				<control name="questionClassifyId" title="题库分类" property="questionClassifyId" type="ComboBox" edit="N"  required="" format="" width="1" height="" column="" />
+				<control name="questionClassifyName" title="题库分类" property="questionClassifyName" type="Hidden" edit="N"  required="" format="" width="1" height="" column="" />
+				<control name="questionType" title="试题类型" property="questionType" type="ComboBox" edit="Y" required="Y" initial="0" format="" width="1" height="1" column="2" />
+				<control name="difficultyLevel" title="试题难度" property="difficultyLevel" type="ComboBox" edit="Y" required="Y" initial="0" format="" width="1" height="1" column="" />
+				<control name="enableStatus" title="启用状态" property="enableStatus" type="ComboBox" edit="Y" required="Y" format="" initial="0" width="1" height="1" column="2" />
+				<control name="content" title="试题题干内容" property="content" type="TextBox" edit="Y" required="Y" format="" width="1" height="3" column="1" />
+				<control name="answerThought" title="回答思路" property="answerThought" type="TextBox" edit="Y" required="N" format="" width="1" height="3" column="1" />
+				<control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column="1"  />
+		        <control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column="1"  />		
+				<control name="createTime" title="创建日期" property="createTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column="1"  />
+				<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column="1"  />
+			</panel>
+
+			<panel name="sumGroup" title="quesSum" object="questionA" type="Hidden" multiple="Y">
+				<control name="sum" title="quessum" property="sum" type="TextBox" edit="N" required="" format="" width="" height="" column="" />
+			</panel>
+			
+			<panel name="quesGroup" title="quesGroup" object="quesAnOptions" type="Hidden" multiple="Y">
+				<control name="questionId" title="问题id" property="questionId" type="Hidden" edit="Y" required=""
+						 format="" width="100" height="1" column=""/>
+			</panel>
+			
+			<panel name="pTable" title="查询结果" object="quesAnOptions" type="Grid" multiple="">
+				<control name="ctlAdd" title="新增选项" property="" type="Button" edit="" required="" format="" width=""
+						 height="" column=""/>
+				<control name="ctlDel" title="删除选项" property="" type="Button" edit="" required="" format="" width=""
+						 height="" column=""/>
+				<control name="id" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="100"
+						 height="1" initial="0" column=""/>
+				<control name="questionId" title="questionId" property="questionId" type="Hidden" edit="Y" required="" 
+						 format="" width="100" height="1" column=""/>
+				<control name="content" title="选项内容" property="content" type="TextBox" edit="Y" required="" format=""
+						 width="500" height="1" column=""/>
+				<control name="correctFlag" title="是否正确答案(请填写0-是或1-否)" property="correctFlag" type="TextBox" edit="Y" required=""
+						 format="" width="200" height="1" column=""/>
+			    <control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" 
+			    		 target="CurrentTime()" format="" width="1" height="1" column="1"  />
+		        <control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" 
+		        		 target="session.userInfo.empId" format="" width="1" height="1" column="1"  />		
+				<control name="createTime" title="创建日期" property="createTime" type="Hidden" edit="Y" required="N" 
+						 target="CurrentTime()" format="" width="1" height="1" column="1"  />
+				<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" 
+						 target="session.userInfo.empId" format="" width="1" height="1" column="1"  />
+			</panel>
+			
+			<panel name="pformDown" title="pform" object="" type="Toolbar">
+				<control name="ctlSave" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+				<control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+			</panel>
+
+
+			<!-- 页面逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+ 				<procedure name="clear"  logic="Clear" ifyes="jsdecodeid" ifno="">
+           			<param name="Out" value="addGroup"></param>
+     			</procedure> 
+     			<procedure name="jsdecodeid" server="" logic="DecodeId" ifyes="j3" ifno="">
+			        <param name="Out" value="addGroup.questionClassifyId"></param>
+			      </procedure>
+     				
+		        <procedure name="j3"  logic="List" ifyes="j4" ifno="">
+   					<param name="Out" value="addGroup.questionClassifyId"/>
+  					<param name="Sql" value="QryPidList"/> 
+  				</procedure>
+  				<procedure name="j4"  logic="List" ifyes="j5" ifno="">
+   					<param name="Out" value="addGroup.questionType"/>
+  					<param name="Sql" value="QryQuesTypeList"/> 
+  				</procedure>
+  				<procedure name="j5"  logic="List" ifyes="j6" ifno="">
+   					<param name="Out" value="addGroup.difficultyLevel"/>
+  					<param name="Sql" value="QryQuesDiffList"/> 
+  				</procedure>
+  				<procedure name="j6"  logic="List" ifyes="j7" ifno="">
+   					<param name="Out" value="addGroup.enableStatus"/>
+  					<param name="Sql" value="QryQuesStatueList"/> 
+  				</procedure>
+  				
+			</flow>
+			
+			<!-- addRow -->
+			<flow trigger="pTable.ctlAdd" event="OnClick" filter="">
+				<procedure name="addRow" server="" logic="AddRow" ifyes="" ifno="">
+					<param name="Out" value="pTable"/>
+				</procedure>
+			</flow>
+			<!-- remove -->
+			<flow trigger="pTable.ctlDel" event="OnClick" filter="">
+				<procedure name="removeRow" server="" logic="RemoveRow" ifyes="" ifno="">
+					<param name="In" value="pTable"/>
+				</procedure>
+			</flow>
+
+			<!-- 确认 -->
+			<flow trigger="pformDown.ctlSave" event="OnClick" filter="" defaultEnter="Y">
+				<procedure name="queryTable"  logic="Query" ifyes="jBranch" ifno="">
+		        	<param name="In" value="addGroup"></param>
+		        	<param name="Out" value="sumGroup"></param>
+		        	<param name="Sql" value="khAdmin/question/QryQuestionSum"></param>
+		        </procedure>
+		        <procedure name="jBranch" logic="Branch" ifyes="jssave" ifno="InfoMsg">
+					<param name="In" value="(getPanelControlValue('sumGroup.sum')=='0')"></param>
+				</procedure>
+				<procedure name="InfoMsg" logic="InfoMsg" ifyes="" ifno="">
+					<param name="Msg" value="已存在相同类型和题型一样的试题！"></param>
+				</procedure>  
+				<procedure name="jssave" logic="Save" ifyes="jsclose" ifno="">
+                    <param name="In" value="addGroup,pTable.questionId"></param>
+                    <param name="Plugin" value="SaveQuestionOptions" />
+                    <param name="Msg" value="已保存"></param> 
+                </procedure>
+                <!-- <procedure name="jQuery"  logic="Query" ifyes="SaveCustom" ifno="">
+		        	<param name="In" value="addGroup"></param>
+		        	<param name="Out" value="quesGroup"></param>
+		        	<param name="Sql" value="khAdmin/question/QryQuestionId"></param>
+		        </procedure>
+                <procedure name="SaveCustom" logic="SaveCustom" ifyes="jsclose" ifno="">
+                    <param name="Plugin" value="SaveQuestionOptions" />
+                    <param name="In" value="pTable,quesGroup.questionId"></param>
+                    <param name="Sql" value="khAdmin/question/QryQuestionEdit"/>
+                    <param name="Msg" value="已保存"></param> 
+                </procedure> -->
+                
+                <procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="true"></param>
+				</procedure>
+			</flow>
+
+			<!-- 取消 -->
+			<flow trigger="pformDown.ctlCancel" event="OnClick" filter="">
+				<procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="false"></param>
+				</procedure>
+			</flow>
+
+			<layout>
+				<region location="Center" scale="">
+					<subregion panel="addGroup" location="North" scale="" />
+					<subregion panel="pTable" location="Center" scale=""/>
+				</region>
+				<region location="North" scale="">
+					<subregion panel="pformDown" location="North" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

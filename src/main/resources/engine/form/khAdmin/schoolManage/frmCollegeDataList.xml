@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+			
+<ui_layer>
+  <ui name="frmCollegeDataList" title="院校数据">
+	<panel name="hiddenPanel" title="hidden" object="college" type="Hidden">
+		<control name="eq_schoolId" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="pnlGroupPop" title="tab1" object="college" type="Group">
+		
+		<control name="id" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="1" height="" column="1"/>
+	
+		<control name="name" title="学校名称" property="name" type="Label" edit="N" required="N" format="" width="3" height="1" column="5"/>
+	</panel>
+	<panel name="pnlDown" title="pnlDown" object="" type="Toolbar">
+		<control name="ctlSave" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="studentManage" title="学生管理" object="college" type="Grid"  multiple="">
+		<control name="ctlAddStd" title="新增详情" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="ctlDelStd" title="删除详情" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="teacherManage" title="教师管理" object="college" type="Grid"  multiple="">
+		<control name="ctlAddTea" title="新增附件" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="ctlDelTea" title="删除附件" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="classManage" title="班级管理" object="college" type="Grid"  multiple="">
+		<control name="ctlAddCla" title="新增附件" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="ctlDelCla" title="删除附件" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="curriculumManage" title="课表管理" object="college" type="Grid"  multiple="">
+		<control name="ctlAddCur" title="新增附件" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="ctlDelCur" title="删除附件" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	
+    <flow trigger="" event="OnLoad" filter="" >
+    
+      <procedure name="j1" server="" logic="DecodeId" ifyes="j2" ifno="">
+        <param name="Out" value="pnlGroupPop.id" />
+      </procedure>
+      <procedure name="j2" server="" logic="EncodeId" ifyes="j3" ifno="">
+        <param name="In" value="pnlGroupPop.id" />
+      </procedure>
+      <procedure name="j3" server="" logic="DecodeId" ifyes="qid" ifno="">
+        <param name="Out" value="hiddenPanel.eq_schoolId" />
+      </procedure>
+      <procedure name="qid"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pnlGroupPop" />
+        <param name="Out" value="pnlGroupPop" />
+        <param name="Sql" value="college/Qrycollege" />
+      </procedure> 
+    </flow>
+    
+    <flow trigger="pnlDown.ctlSave" event="OnClick" filter="Mode!='' &amp;&amp; Mode!='Readonly'" >
+      <procedure name="jssave"  logic="Save" ifyes="jsclose" ifno="">
+        <param name="In" value="pnlGroupPop,meetDetail.meetingId,meetFile.meetingId"></param>
+         <param name="Msg" value="'信息已被保存'"></param>
+      </procedure>
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>
+    <flow trigger="pnlDown.ctlCancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="false"></param>
+      </procedure>
+    </flow>
+	<flow trigger="meetFile.ctlAdd" event="OnClick" filter="" >
+      <procedure name="addRow" server="" logic="AddRow" ifyes="" ifno="">
+        <param name="Out" value="meetFile"></param>
+      </procedure>
+    </flow>
+   	<flow trigger="meetFile.ctlDel" event="OnClick" filter="" >
+      <procedure name="removeRow" server="" logic="RemoveRow" ifyes="" ifno="">
+        <param name="In" value="meetFile"></param>
+      </procedure>
+    </flow>
+    	<flow trigger="meetDetail.ctlAdd" event="OnClick" filter="" >
+      <procedure name="addRow" server="" logic="AddRow" ifyes="" ifno="">
+        <param name="Out" value="meetDetail"></param>
+      </procedure>
+    </flow>
+   	<flow trigger="meetDetail.ctlDel" event="OnClick" filter="" >
+      <procedure name="removeRow" server="" logic="RemoveRow" ifyes="" ifno="">
+        <param name="In" value="meetDetail"></param>
+      </procedure>
+    </flow>
+   	<flow trigger="meetDetail.issueName" event="OnClick" filter="" >
+      <procedure name="find"  logic="Find" ifyes="" ifno="">
+        <param name="Out" value="meetDetail"></param>
+        <param name="Sql" value="IssueForMeet"></param>
+        <param name="Title" value="选择工作项"></param>
+        <param name="Columns" value="id,id,issueId|title,工作项标题,issueName|assignee,处理人,assignee|reporter,发起人,reporter|creatTime,发起人,issueCreatTime"></param>
+      </procedure>
+    </flow>
+   	<flow trigger="pnlGroupPop.projectName" event="OnClick" filter="" >
+       <procedure name="sprint"  logic="Find" ifyes="" ifno="">
+       <param name="In" value=""></param>
+        <param name="Out" value="pnlGroupPop"></param>
+        <param name="Sql" value="pro"></param>
+        <param name="Title" value="项目选择"></param>
+        <param name="Columns" value="id,id,eq_projectId|name,项目名,projectName"></param>
+      </procedure>
+    </flow>
+   	<flow trigger="pnlGroupPop.writeByName" event="OnClick" filter="" >
+      <procedure name="find"  logic="Find" ifyes="" ifno="">
+        <param name="Out" value="pnlGroupPop"></param>
+        <param name="Sql" value="emp"></param>
+        <param name="Title" value="人员选择"></param>
+        <param name="Columns" value="id,编码,eq_writeBy|name,姓名,writeByName|email,邮箱"></param>
+      </procedure>
+    </flow>
+     <flow trigger="meetFile.fileName" event="OnClick" filter="">
+      <procedure name="fileUpload" server="" logic="Upload" ifyes="" ifno="">
+        <param name="Size" value="1000"></param>
+        <param name="Type" value="jpg,txt,pdf"></param>
+        <param name="Bucket" value="public"></param>
+        <param name="Out" value="meetFile.fileId"></param>
+      </procedure>
+    </flow>
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="pnlDown" location="South" scale="" />
+      </region>
+      <region location ="North" scale="">
+        <subregion panel="pnlGroupPop" location="North" scale="" />
+      </region>
+      <region location ="Center" scale="">
+        <subregion panel="curriculumManage" location="Center" scale="" />
+        <subregion panel="classManage" location="Center" scale="" />
+        <subregion panel="teacherManage" location="Center" scale="" />
+        <subregion panel="studentManage" location="Center" scale="" />
+      </region>
+      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

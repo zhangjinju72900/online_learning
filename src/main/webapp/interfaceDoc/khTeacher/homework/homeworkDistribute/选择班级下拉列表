@@ -1,0 +1,31 @@
+UI名称		作业分发-选择班级（frmHomeworkList）
+
+tokenKey	 OnLoad__frmHomeworkList_classList
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{}
+
+返回示例
+"data":		{
+		"text":"汽修1班",  --班级名
+		"value":1047	   --班级id
+		}
+
+UI名称		作业分发-分发新作业-选择班级（frmDistribute）
+tokenKey	 OnLoad__frmDistribute_classList
+接口地址	/api/list
+
+接口类型	POST
+参数示例
+"data": 	{}
+
+返回示例
+"data":		{
+		"text":"汽修1班",  --班级名
+		"value":1047	   --班级id
+		}
+

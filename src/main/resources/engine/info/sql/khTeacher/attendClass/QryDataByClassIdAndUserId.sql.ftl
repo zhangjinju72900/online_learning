@@ -1,0 +1,2 @@
+select c.id from t_customer_user_class c join t_customer_user_role r on c.customer_user_id = r.customer_user_id where 
+c.class_id = (select class_id from t_attend_class_record where id = #{data.attendClassRecordId}) and r.role_id = 10 and c.customer_user_id = #{data.studentId}

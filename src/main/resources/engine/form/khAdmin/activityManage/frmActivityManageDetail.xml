@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmActivityDetail" title="活动管理详情">
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="pForm" title="活动管理详情" object="activityManage"  type="Group" multiple="">
+		<control name="eq_id" title="ID" property="id" type="Hidden" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="title" title="标题" property="title" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="file" title="上传首图" property="file" type="TextBox" edit="" required="" format="" width="1" height="1" column="2"/>
+	  	<control name="fileId" title="视频编号" property="fileId" type="Hidden" edit="" required="" format="" width="3" height="1" column=""/>
+		<control name="releaseName" title="是否发布" property="releaseName" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="integral" title="参加送分" property="integral" type="TextBox" edit="" required="" format="" width="1" height="1" column="2"/>
+		<control name="joinIntegral" title="活动积分" property="joinIntegral" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="site" title="活动地点" property="site" type="TextBox" edit="" required="" format="" width="1" height="1" column="2"/>
+		<control name="typeName" title="类型" property="typeName" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="address" title="详细地址" property="address" type="TextBox" edit="" required="" format="" width="1" height="1" column="2"/>
+		
+		<control name="eq_role" title="参与角色" property="role" type="ComboBox" edit="N" multiple="Y" required="" format="" width="1" height="1" column=""/>
+		<control name="eq_region" title="参与地区" property="region" type="ComboBox" edit="N" multiple="Y" required="" format="" width="1" height="1" column="2"/>
+		
+		<control name="eq_schoolName" title="参与学校" property="schoolName" type="TextBox" edit="N" multiple="Y" required="" format="" width="1" height="1" column=""/>
+		<control name="eq_className" title="参与班级" property="className" type="TextBox" edit="N" multiple="Y" required="" format="" width="1" height="1" column="2"/>
+		
+		<control name="startTime" title="活动开始时间" property="startTime" type="TextBox" edit="" required=""  format="" width="1" height="1" column=""  />
+		<control name="endTime" title="活动结束时间" property="endTime" type="TextBox" edit="" required="" format="" width="1" height="1" column="2"/>
+
+		<!-- <control name="name" title="发布人" property="name" type="TextBox" edit="" required="" format="" width="1" height="1" column="2"/>
+		<control name="originTime" title="发布时间" property="originTime" type="TextBox" edit="" required=""  format="" width="1" height="1" column="2"  />
+  		<control name="topFlag" title="是否置顶" property="topFlag" type="TextBox" edit="" required=""  format="" width="1" height="1" column=""  />
+		<control name="recommendFlag" title="是否推荐" property="recommendFlag" type="TextBox" edit="" required=""  format="" width="1" height="1" column="2"  /> -->
+		<control name="content" title="内容" property="content" type="UEditor" edit="" required="" format="" width="20" height="13" column="1"/>
+  	</panel>
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="j1" server="" logic="DecodeId" ifyes="List3" ifno="">
+        <param name="Out" value="pForm.eq_id"></param>
+      </procedure> 
+      <procedure name="List3"  logic="List" ifyes="List4" ifno="" sync="Y">
+         <param name="Out" value="pForm.eq_role"></param>
+         <param name="Sql" value="khAdmin/activityManage/ListActivityManageRole"></param>
+         <param name="Options" value="YorN,[全选/取消]"/>
+      </procedure>
+      <procedure name="List4"  logic="List" ifyes="je" ifno="" sync="Y">
+         <param name="Out" value="pForm.eq_region"></param>
+         <param name="Sql" value="khAdmin/activityManage/ListActivityManageRegion"></param>
+         <param name="Options" value="YorN,[全选/取消]"/>
+      </procedure>
+      <procedure name="je"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khAdmin/activityManage/QryActivityManageList"></param>
+      </procedure> 
+       
+    </flow>
+   
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmActivityList" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmActivityList"></param>
+       </procedure>
+      </flow>
+    <layout>
+       <region location ="Center" scale="">
+       <subregion panel="pToolbar" location="North" scale=""/>
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region>
+      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

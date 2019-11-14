@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmHomeworkAnswerDtl" title="试题详情">
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+  		<control name="btnQry" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+  		<control name="btnSave" title="保存" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+  		<control name="btnSubmit" title="提交" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	
+	<panel name="pForm" title="作业详情" object="appHomeworkDetailAnswer"  type="Group" multiple="">
+		<control name="homeworkAnswerId" title="作业回复ID" property="homeworkAnswerId" type="TextBox" edit="Y" required="" format="" width="1" height="" column=""/>
+		<control name="type" title="上一题/下一题" property="type" type="TextBox" edit="Y" required="" format="" width="1" height="" column=""/>
+		<control name="id" title="试题ID" property="id" type="TextBox" edit="Y" required="" format="" width="1" height="" column=""/>
+		<control name="content" title="题干" property="content" type="TextBox" edit="Y" required="" format="" width="1" height="1" column="3"/>
+	</panel>
+	
+	
+	<panel name="pList" title="查询结果" object="appHomeworkDetailAnswer" type="Group">
+		<control name="userId" title="用户Id" property="userId" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+        <control name="id" title="试题ID" property="id" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+        <control name="homeworkDetailId" title="作业明细ID" property="homeworkDetailId" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+        <control name="homeworkAnswerId" title="作业回复ID" property="homeworkAnswerId" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+        <control name="homeworkDetailAnswerId" title="作业回复明细ID" property="homeworkDetailAnswerId" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+        
+        <control name="content" title="内容" property="content" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+        <control name="fileIds" title="主观题文件id" property="fileIds" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+
+    </panel>
+  	
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="j1" server="" logic="DecodeId" ifyes="je" ifno="">
+        <param name="Out" value="pForm.homeworkAnswerId"></param>
+      </procedure> 
+      <procedure name="je"  logic="SaveCustom" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+        <param name="Plugin" value="questionDetailPlugin" />
+      </procedure> 
+       
+    </flow>
+    
+    <flow trigger="pToolbar.btnSave" event="OnClick" filter="">
+    	<procedure name="je"  logic="SaveCustom" ifyes="" ifno="">
+	        <param name="In" value="pList"></param>
+	        <param name="Out" value="pList"></param>
+	        <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+	        <param name="Plugin" value="saveHomeworkAnswerDetailPlugin" />
+      </procedure> 
+    </flow>
+    
+    <flow trigger="pToolbar.btnSubmit" event="OnClick" filter="">
+    	<procedure name="je"  logic="SaveCustom" ifyes="" ifno="">
+	        <param name="In" value="pList"></param>
+	        <param name="Out" value="pList"></param>
+	        <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+	        <param name="Plugin" value="submitHomeworkAnswerPlugin" />
+      </procedure> 
+    </flow>
+    
+    <flow trigger="pToolbar.btnQry" event="OnClick" filter="">
+       <procedure name="je"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+        <param name="Plugin" value="questionDetailPlugin" />
+      </procedure> 
+   </flow>
+
+   
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmHomeworkAnswer" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmHomeworkAnswer"></param>
+       </procedure>
+      </flow>
+    <layout>
+    	<region location="North" scale="">
+            <subregion panel="pToolbar" location="North" scale=""/>
+        </region>
+        <region location ="Center" scale="">
+        	<subregion panel="pForm" location="North" scale=""/>
+			<subregion panel="pList" location="Center" scale=""/>
+      	</region>
+      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

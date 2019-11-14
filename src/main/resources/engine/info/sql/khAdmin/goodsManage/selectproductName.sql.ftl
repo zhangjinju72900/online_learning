@@ -1,0 +1,1 @@
+select name from t_goods where valid_flag='0';

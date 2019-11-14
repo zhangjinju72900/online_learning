@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <model_layer>
+        <object name="projectEmp" table="t_proj_emp" primary="id" unique="id"  order="">
+            <property name="id" type="Long" length="32" initial="" field="id"/>
+            <property name="proId" type="Long" length="32" initial="" field="proj_id"/>
+            <property name="empId" type="Long" length="32" initial="" field="emp_id"/>
+            <property name="empName" type="String"  length="" validate="" field=""/>
+            <property name="proName" type="String" length="" validate="" field=""/>
+            <property name="empCode" type="String" length="" validate="" field=""/>
+            <property name="orgName" type="String"  length="" validate="" field=""/>
+            <property name="mobile" type="String"  length="" validate="" field=""/>
+            <property name="email" type="String"  length="" validate="" field=""/>
+            <property name="joinTime" type="String"  length="" validate="" field="create_time"/>
+            <property name="joinByName" type="String"  length="" validate="" field=""/>
+            <property name="description" type="String"  length="" validate="" field=""/>
+            <property name="updateBy" type="Long" length="10" validate="" field="update_by"/>
+            <property name="updateByName" type="String" length="50" validate="" field=""/>
+            <property name="createBy" type="Long" length="10" validate="" field="create_by"/>
+            <property name="createByName" type="String" validate="" field=""/>
+            <property name="updateTime" type="Date" length="" validate="" field="update_time"/>
+            <property name="createTime" type="Date" length="" validate="" field="create_time"/>
+
+        </object>
+    </model_layer>
+    <ui_layer>
+        <ui name="frmProjectView" title="项目详情">
+            <panel name="pnlToolbar" title="工具条" object="" type="Toolbar">
+                <control name="ctlEdit" title="编辑项目" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlDelete" title="删除项目" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlForbidden" title="禁用项目" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlRestore" title="恢复项目" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlAddEmp" title="加入成员" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlBack" title="返回" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+            </panel>
+            <panel name="pnlChooseEmp" title="EmpID" type="Group" object="projectEmp">
+                <control name="eq_proId" title="项目ID" property="proId" type="Hidden" initial="" edit="" required="" format=""
+                         width="1" height="" column=""/>
+                <control name="ctlEmpId" title="EmpID" property="empId" type="Hidden" initial="" edit="" required="" format=""
+                         width="1" height="" column=""/>
+                <control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column=""  />
+                <control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />
+                <control name="createTime" title="创建日期" property="createTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column=""  />
+                <control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />
+            </panel>
+            <panel name="pnlInfo" title="详情" object="project" type="Group">
+                <control name="ctlId" title="项目ID" property="id" type="Hidden" initial="" edit="" required="" format=""
+                         width="1" height="" column=""/>
+                <control name="ctlProName" title="项目名称" property="name" type="TextBox" edit="N" required="N" format=""
+                         width="1" height="1" column=""/>
+                <control name="statusName" title="状态" property="statusName" type="TextBox" edit="N" required="N" format=""
+                         width="1" height="1" column=""/>
+                <control name="status" title="状态" property="status" type="Hidden" edit="N" required="N" format=""
+                         width="1" height="1" column=""/>
+                <control name="createByName" title="创建人" property="createByName" type="TextBox" edit="N" required="N" format=""
+                         width="1" height="1" column="3"/>
+                <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="N" required="N" format=""
+                                                                  width="1" height="1" column=""/>
+                <control name="updateByName" title="最后修改人" property="updateByName" type="TextBox" edit="N" required="N" format=""
+                         width="1" height="1" column=""/>
+                <control name="updateTime" title="最后修改时间" property="updateTime" type="TextBox" edit="N" required="N" format=""
+                         width="1" height="1" column="3"/>
+                <control name="updateBy" title="最后修改人ID" property="updateBy" target="session.userInfo.empId" type="Hidden" edit="N" required="N" format=""
+                         width="1" height="1" column=""/>
+                <control name="description" title="描述" property="description" type="TextBox" edit="N" required="N" format=""
+                         width="3" height="3" column="3"/>
+                <control name="createBy" title="创建人ID" property="createBy" type="Hidden" edit="N" required="N" format=""
+                         width="1" height="1" column=""/>
+
+
+            </panel>
+
+            <panel name="pnlList" title="查询结果" object="projectEmp" type="Grid">
+                <control name="ctlRemoveLink" title="移除成员" property="" type="Link" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlId" title="主键Id" property="id" type="Hidden" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlName" title="主键Id" property="proName" type="Hidden" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlEmpName" title="人员姓名" property="empName" type="TextBox" edit="" required="" format=""
+                         width="140" height="" column=""/>
+                <control name="ctlEmpCode" title="人员编码" property="empCode" type="TextBox" edit="" required="" format=""
+                         width="120" height="" column=""/>
+                <control name="ctlOrgName" title="所属部门" property="orgName" type="TextBox" edit="" required="N"
+                         format="" width="140" height="1" column=""/>
+                <control name="ctlMobile" title="移动电话" property="mobile" type="TextBox" edit="" required="N"
+                         format="" width="120" height="1" column=""/>
+                <control name="ctlEmail" title="电子邮件" property="email" type="TextBox" edit="" required="N"
+                         format="" width="180" height="1" column=""/>
+                <control name="ctlJoinTime" title="加入时间" property="joinTime" type="TextBox" edit="" required="N"
+                         format="" width="150" height="1" column=""/>
+                <control name="ctlJoinByName" title="加入人" property="joinByName" type="TextBox" edit="" required="N"
+                         format="" width="120" height="1" column=""/>
+            </panel>
+                <flow trigger="" event="OnLoad" filter="">
+                    <procedure name="procDecodeId" server="" logic="DecodeId" ifyes="procEncodeId" ifno="procQbi">
+                        <param name="Out" value="pnlInfo.ctlId"></param>
+                    </procedure>
+                    <procedure name="procEncodeId" server="" logic="EncodeId" ifyes="procDecodeId1" ifno="">
+                        <param name="In" value="pnlInfo.ctlId"></param>
+                    </procedure>
+                    <procedure name="procDecodeId1" server="" logic="DecodeId" ifyes="procQbi" ifno="procQbi">
+                        <param name="Out" value="pnlChooseEmp.eq_proId"></param>
+                    </procedure>
+                    <procedure name="procQbi" logic="QueryById" ifyes="procQuery" ifno=""><!-- procQuery -->
+                        <param name="In" value="pnlInfo"></param>
+                        <param name="Out" value="pnlInfo"></param>
+                        <param name="Sql" value="QryProjectInfo"></param>
+                    </procedure>
+                     <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                         <param name="In" value="pnlChooseEmp"></param>
+                         <param name="Out" value="pnlList"></param>
+                         <param name="Sql" value="QryProjectEmp"></param>
+                     </procedure>
+                </flow>
+
+            <flow trigger="pnlToolbar.ctlEdit" event="OnClick" filter="">
+                <procedure name="procEncodeId" server="" logic="EncodeId" ifyes="procPopup" ifno="">
+                    <param name="In" value="pnlInfo.ctlId"></param>
+                </procedure>
+                <procedure name="procPopup" logic="Popup" ifyes="procQbi" ifno="">
+                    <param name="To" value="frmProjectEdit"></param>
+                    <param name="Mode" value="Edit"></param>
+                    <param name="Window" value="Medium"></param>
+                </procedure>
+
+                <!--保存成功之后，刷新页面-->
+                <procedure name="procQbi" logic="QueryById" ifyes="procQuery" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Out" value="pnlInfo"></param>
+                    <param name="Sql" value="QryProjectInfo"></param>
+                </procedure>
+                <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlChooseEmp"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjectEmp"></param>
+                </procedure>
+
+            </flow>
+            <flow trigger="pnlToolbar.ctlDelete" event="OnClick" filter="model.pnlInfo.status=='close'">
+                <procedure name="procConfirm" server="" logic="ConfirmMsg" ifyes="procDelete" ifno="">
+                    <param name="Title" value="删除项目"></param>
+                    <param name="Msg" value="确认删除当前记录吗?"></param>
+                </procedure>
+                <procedure name="procDelete" logic="Delete" ifyes="proTransition" ifno="">
+                    <param name="In" value="pnlInfo"/>
+                    <param name="Constraints"
+                           value="t_proj_emp.proj_id|项目中还有成员不能删除" />
+                    <param name="Cascade" value="t_proj_emp.proj_id" />
+                    <param name="Msg" value="model.name+'已删除'"/>
+                </procedure>
+                <procedure name="proTransition" server="/frmProjectList" logic="Back" ifyes="" ifno="">
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlForbidden" event="OnClick" filter="model.pnlInfo.status=='open'">
+                <procedure name="procConfirm" server="" logic="ConfirmMsg" ifyes="procSave" ifno="">
+                    <param name="Title" value="提示信息"></param>
+                    <param name="Msg" value="确认禁用当前项目吗?"></param>
+                </procedure>
+                <procedure name="procSave" logic="SaveCustom" ifyes="procQbi" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Msg" value="当前项目状态已改为关闭"></param>
+                    <param name="Sql" value="updateProjectStatus_Close"></param>
+                </procedure>
+                <procedure name="procQbi" logic="QueryById" ifyes="procQuery" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Out" value="pnlInfo"></param>
+                    <param name="Sql" value="QryProjectInfo"></param>
+                </procedure>
+                 <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                     <param name="In" value="pnlChooseEmp"></param>
+                     <param name="Out" value="pnlList"></param>
+                     <param name="Sql" value="QryProjectEmp"></param>
+                 </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlRestore" event="OnClick" filter="model.pnlInfo.status=='close'">
+                <procedure name="procConfirm" server="" logic="ConfirmMsg" ifyes="procSave" ifno="">
+                    <param name="Title" value="提示信息"></param>
+                    <param name="Msg" value="确认恢复当前项目吗?"></param>
+                </procedure>
+                <procedure name="procSave" logic="SaveCustom" ifyes="procQbi" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Msg" value="当前项目状态已改为打开"></param>
+                    <param name="Sql" value="updateProjectStatus_Open"></param>
+                </procedure>
+                <procedure name="procQbi" logic="QueryById" ifyes="procQuery" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Out" value="pnlInfo"></param>
+                    <param name="Sql" value="QryProjectInfo"></param>
+                </procedure>
+                <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlChooseEmp"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjectEmp"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlToolbar.ctlAddEmp" event="OnClick" filter="">
+                <procedure name="procEncodeId" server="" logic="EncodeId" ifyes="procDecodeId" ifno="">
+                    <param name="In" value="pnlInfo.ctlId"></param>
+                </procedure>
+                <procedure name="procDecodeId" server="" logic="DecodeId" ifyes="procSearchEmp" ifno="">
+                    <param name="Out" value="pnlChooseEmp.eq_proId"></param>
+                </procedure>
+                <procedure name="procSearchEmp"  logic="Find" ifyes="procSave" ifno="">
+                    <param name="In" value="pnlChooseEmp.eq_proId"></param>
+                    <param name="Out" value="pnlChooseEmp"></param>
+                        <param name="Sql" value="ProjectEmp"></param>
+                        <param name="Title" value="选择项目人员"></param>
+                        <param name="Columns" value="id,人员姓名,ctlEmpId,0|name,人员姓名,ctrlEmpName|code,人员编码,ctlEmpCode|orgName,所属部门,ctlOrgName1"></param>
+                        <param name="Window" value="Medium"></param>
+                </procedure>
+                <procedure name="procSave"  logic="Save" ifyes="procEncodeId1" ifno="">
+                    <param name="In" value="pnlChooseEmp"></param>
+                    <param name="Msg" value="选择的人员已保存"></param>
+                </procedure>
+                <procedure name="procEncodeId1" server="" logic="EncodeId" ifyes="procDecodeId2" ifno="">
+                    <param name="In" value="pnlInfo.ctlId"></param>
+                </procedure>
+                <procedure name="procDecodeId2" server="" logic="DecodeId" ifyes="procRefresh" ifno="">
+                    <param name="Out" value="pnlChooseEmp.eq_proId"></param>
+                </procedure>
+                <procedure name="procRefresh" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlChooseEmp"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjectEmp"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlBack" event="OnClick" filter="">
+                <procedure name="proTransition" server="/frmProjectList" logic="Back" ifyes="" ifno="">
+                    <param name="To" value="frmProjectList"></param>
+                </procedure>
+
+            </flow>
+
+            <flow trigger="pnlList.ctlRemoveLink" event="OnClick" filter="">
+                <procedure name="procConfirm" server="" logic="ConfirmMsg" ifyes="proEncodeId" ifno="">
+                    <param name="Title" value="删除人员"></param>
+                    <param name="Msg" value="确认移除当前人员吗?"></param>
+                </procedure>
+                <procedure name="proEncodeId" server="" logic="EncodeId" ifyes="procDelete" ifno="">
+                    <param name="In" value="pnlList.id"></param>
+                </procedure>
+                <procedure name="procDelete" logic="Delete" ifyes="procRefresh" ifno="">
+                    <param name="In" value="pnlList"/>
+                    <param name="Msg" value="已移除人员"/>
+                </procedure>
+                <procedure name="procRefresh" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlChooseEmp"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjectEmp"></param>
+                </procedure>
+            </flow>
+
+
+
+            <layout>
+                <region location="North" scale="">
+                    <subregion panel="pnlToolbar" location="North" scale=""/>
+                    <subregion panel="pnlChooseEmp" location="Center" scale=""/>
+                </region>
+                <region location="Center" scale="">
+                    <subregion panel="pnlInfo" location="North" scale=""/>
+                    <subregion panel="pnlList" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

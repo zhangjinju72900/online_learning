@@ -1,0 +1,30 @@
+INSERT INTO `t_file_index` (
+	`uuid`,
+	`filename`,
+	`file_type`,
+	`length`,
+	`storage_type`,
+	`access_type`,
+	`source`,
+	`url`,
+	`path`,
+	`description`,
+	`create_time`,
+	`create_by`
+)
+VALUES
+	(
+		#{data.uuid},
+		#{data.filename},
+		#{data.filetype},
+		#{data.length},
+		'local',
+		'public',
+		'public',
+		#{data.url},
+		#{data.path},
+		'',
+		now(),
+		#{data.session.userInfo.userId}
+	);
+

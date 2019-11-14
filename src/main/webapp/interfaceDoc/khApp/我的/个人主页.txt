@@ -1,0 +1,28 @@
+UI名称		我的关注列表（frmPersonalHomePage）
+
+tokenKey：OnClick_pCondition_btnSearch_frmPersonalHomePage_jsQuery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":  {viewUserId: "29835",  --被查看的用户Id
+		userId: "2"             --当前登陆用户
+		}
+
+返回示例
+"data": {
+		
+			"focusType":"0",    --是否关注 0未关注， 1已关注
+			"focusOnCount":"3", --关注人数
+			"userExplain":"测试123456",  --签名
+			"nickName":"测试",    --昵称
+			"name":"小伟",        --姓名
+			"fansCount":"1",      --粉丝数
+			"likeCount":"2",      --点赞数
+			"id":"29835"          --被查看用户ID
+			"sex":0               --性别0男 1女
+			"fileId"              --头像ID 
+			
+	},

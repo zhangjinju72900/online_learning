@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmSugFeedbackEdit" title="建议反馈编辑">
+			<panel name="pCondition" title="tab1" object="tFeedback" type="Group">
+				<control name="key" title="意见ID" property="id" type="Hidden"
+					edit="Y" required="" format="" width="1" height="1" column="" />
+				<control name="feedBack" title="意见反馈内容" property="feedback"
+					type="TextBox" edit="Y" required="" format="" width="1" height="9"
+					column="1" />
+				<control name="id" title="提出意见的人ID" property="feedbackBy"
+					type="Hidden" edit="Y" required="" format="" width="1" height="1"
+					initial="session.userInfo.userId" column="" />
+				<control name="feedbackTime" title="提出意见的时间" property="feedbackTime"
+					type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():nil"
+					format="" width="1" height="1" column="" />
+				<control name="updateBy" title="更新人" property="updateBy"
+					type="Hidden" edit="Y" required="N" target="session.userInfo.userId"
+					format="" width="1" height="1" column="" />
+				<control name="createTime" title="创建日期" property="createTime"
+					type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():nil"
+					format="" width="1" height="1" column="" />
+				<control name="createBy" title="创建人" property="createBy"
+					type="Hidden" edit="Y" required="N"
+					target="editMode=='Add'?session.userInfo.userId:nil" format=""
+					width="1" height="1" column="" />
+				<control name="updateTime" title="创建日期" property="updateTime"
+					type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():nil"
+					format="" width="1" height="1" column="" />	
+			</panel>
+
+			<panel name="feedbackDown" title="pnlDown" object="" type="Toolbar">
+				<control name="ctlSave" title="确认" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="ctlCancel" title="取消" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+
+			<!-- 页面逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="c1" logic="Clear" ifyes="j2" ifno="">
+					<param name="Out" value="pCondition" />
+				</procedure>
+			</flow>
+
+			<!-- 确认 -->
+			<flow trigger="feedbackDown.ctlSave" event="OnClick" filter="">
+				<procedure name="jssave" logic="Save" ifyes="jsclose"
+					ifno="">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pCondition.id"></param>
+					<param name="Msg" value="'建议反馈信息已被保存,详情请查看操作日志'"></param>
+				</procedure>
+				<procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="true"></param>
+				</procedure>
+			</flow>
+
+			<!-- 取消 -->
+			<flow trigger="feedbackDown.ctlCancel" event="OnClick" filter="">
+				<procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="false"></param>
+				</procedure>
+			</flow>
+
+			<layout>
+				<region location="South" scale="">
+					<subregion panel="feedbackDown" location="South" scale="" />
+				</region>
+				<region location="North" scale="">
+					<subregion panel="pCondition" location="Center"
+						scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<object name="tCustomerResources" table="t_customer_resources" primary="id" unique="" order="">
+		<property name="id" type="Long" length="20" initial="" field="id"/>
+		<property name="name" type="String" length="50" initial="" field="name"/>
+		<property name="text" type="String" length="50" initial="" field="name"/>
+		<property name="fileType" type="String" length="20" field="file_type"/>
+		<property name="filePath" type="String" length="500" field="file_path"/>
+		<property name="parentId" type="Long" length="20" field="parent_id"/>
+		<property name="backupType" type="Long" length="20" field="backup_type"/>
+		<property name="backupId" type="Long" length="18" field="backup_id"/>
+		<property name="versionCode" type="String" length="20" field="version_code"/>
+		<property name="resourcesType" type="Long" length="20" field="resources_type"/>
+		<property name="fileId" type="Long" length="20" field="file_id"/>
+		<property name="createTime" type="Date" length="" validate=""  field="create_time" />		
+		<property name="createBy" type="Long" length="10" validate=""  field="create_by" />
+		<property name="updateTime" type="Date" length="" validate=""  field="update_time" />
+		<property name="updateBy" type="Long" length="10" validate=""  field="update_by" />
+		<property name="updateCount" type="Long" length="10" validate=""  field="update_count" />
+		
+		<property name="ossUrl" type="String" length="200" field=""/>
+		<property name="ossKey" type="String" length="200" field=""/>
+		<property name="resourcesTypeName" type="String" length="20" field=""/>
+ 	</object>  
+ 	
+ 	<object name="tCustomerResourcesP" table="t_customer_resources" primary="parent_id" unique="" order="">
+		<property name="parentId" type="Long" length="20" initial="" field="parent_id"/>
+ 	</object>
+</model_layer>
+</tsoftware>

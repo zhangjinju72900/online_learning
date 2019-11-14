@@ -1,0 +1,2 @@
+INSERT INTO t_course_label(course_id,label_id,create_time,create_by,update_by,update_time) 
+VALUES (#{data.courseorsectionId},#{data.label},#{data.createTime},#{data.createBy},#{data.updateBy},#{data.updateTime})

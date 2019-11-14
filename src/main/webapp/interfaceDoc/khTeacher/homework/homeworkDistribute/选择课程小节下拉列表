@@ -1,0 +1,32 @@
+UI名称		作业分发-选择课程小节（frmHomeworkList）
+
+tokenKey	 OnSelect_pCondition_eq_courseId_frmHomeworkList_j1
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{eq_courseId:40}
+
+返回示例
+"data":		{"text":"任务一",	--课程小节名
+
+			 "value":2}		--课程小节id
+			 
+		
+UI名称		作业分发-分发新作业-选择课程小节（frmDistribute）
+
+tokenKey	 OnSelect_pCondition_courseId_frmDistribute_j1
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{courseId:40}
+
+返回示例
+"data":		{"text":"任务一",	--课程小节名
+
+			 "value":2}		--课程小节id

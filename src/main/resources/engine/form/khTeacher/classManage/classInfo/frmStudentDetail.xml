@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmClassManStudentDetail" title="学生详情">
+  	<panel name="pToolbar" title="学生详情" object="" type="Toolbar">
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="pForm" title="学生详情" object="classDetails"  type="Group" multiple="">
+		<control name="customerUserId" title="学生ID" property="customerUserId" type="Hidden" edit="" required="Y" format="" width="1" height="" column=""/>
+  		<control name="fileId" title="头像ID" property="fileId" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+  		<control name="stuName" title="学生姓名" property="stuName" type="TextBox" edit="" required="" format="" width="1" height="1" column="3"/>
+  		<control name="sex" title="性别" property="sex" type="Hidden" edit="" required="" format="" width="1" height="1" column=""/>
+  		<control name="sexName" title="性别" property="sexName" type="TextBox" edit="" required="" format="" width="1" height="1" column="3"/>
+  		<control name="lastLoginTime" title="上一次登录时间" property="lastLoginTime" type="TextBox" edit="" required="" format="" width="150" height="" column="3"/>
+  </panel>
+	
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="j1" server="" logic="DecodeId" ifyes="je" ifno="">
+        <param name="Out" value="pForm.customerUserId"></param>
+      </procedure> 
+      <procedure name="je"  logic="Query" ifyes="j3" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khTeacher/classManage/classInfo/QryStuDetail"></param>
+        <param name="Plugin" value="getStudentOtherInfoPlugin"/>
+      </procedure>
+     
+     
+    </flow>
+    
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmClassManageList"></param>
+       </procedure>
+      </flow>
+      
+     
+      
+    <layout>
+       <region location ="North" scale="">
+       <subregion panel="pToolbar" location="North" scale=""/>
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

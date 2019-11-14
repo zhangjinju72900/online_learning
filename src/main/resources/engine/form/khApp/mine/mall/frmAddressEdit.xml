@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmAddressEdit" title="地址编辑"> 
+	<panel name="pForm" title="地址编辑" object="consignAddress" type="Group" multiple="N" >
+	    <control name="id" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="1" height="" column="2"/>
+	    <control name="userId" title="用户id" property="userId" type="TextBox" edit="Y" required="Y" format="" width="1" height="" column="2"/>
+		<control name="name" title="收货人名称" property="name" type="TextBox" edit="Y" required="Y" format="" width="1" height="" column="2"/>
+		<control name="tel" title="联系电话" property="tel" type="TextBox" edit="Y" required="Y" format="" width="1" height="" column="2"/>
+		<control name="address" title="收货地址" property="address" type="TextBox" edit="Y" required="Y" format="" width="1" height="" column="2"/>
+		<control name="addressDetail" title="详细收货地址" property="addressDetail" type="TextBox" edit="Y" required="Y" format="" width="1" height="" column="2"/>
+		<control name="longitude" title="经度" property="longitude" type="TextBox" edit="Y" required="" format="" width="1" height="" column="2"/>
+		<control name="latitude" title="纬度" property="latitude" type="TextBox" edit="Y" required="" format="" width="1" height="" column="2"/>
+	
+	<!-- 	<control name="isDefault" title="是否默认地址" property="isDefault" type="TextBox" edit="Y" required="" format="" width="1" height="" column="2"/> -->
+		
+		<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="" required="" target="editMode=='Add'?CurrentTime():nil"
+		format="" width="200" height="" column=""/>
+		<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="" required="" target="editMode=='Add'?session.userInfo.empId:nil"
+		format="" width="200" height="" column=""/>
+		<control name="updateTime" title="更新时间" property="updateTime" type="Hidden" edit="" required="" target="editMode=='Edit'?CurrentTime():nil"
+		format="" width="200" height="" column=""/>
+		<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="" required="" target="editMode=='Edit'?session.userInfo.empId:nil"
+		format="" width="200" height="" column=""/>
+		
+	</panel>
+	<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+		<control name="save" title="确定" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+		<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+	</panel>
+	<!-- 初始加载 -->
+    <flow trigger="" event="OnLoad" filter="">   
+      <procedure name="jClear"  logic="Clear" ifyes="jBranch" ifno="" sync="Y">
+           <param name="Out" value="pForm"></param>
+      </procedure> 
+         <procedure name="jBranch" server="" logic="Branch" ifyes="jDecodeId" ifno="jQuery">
+      <param name="In" value="getEditMode()=='Edit'"></param>
+     </procedure>
+       <procedure name="jDecodeId" server="" logic="DecodeId" ifyes="jQuery" ifno="">
+        <param name="Out" value="pForm.id" />
+      </procedure>
+        <procedure name="jQuery"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khApp/mine/mall/QryAddress"></param>
+      </procedure>      
+    </flow>
+  <!-- 确定-->
+  <flow trigger="pButton.save" event="OnClick" filter="">
+      <procedure name="jsSave" logic="Save" ifyes="jsclose" ifno="">
+        <param name="In" value="pForm" />  
+        <param name="Msg" value="'成功'" />
+      </procedure>
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>
+    
+    <!-- 取消 -->
+      <flow trigger="pButton.cancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="false"></param>
+      </procedure>
+    </flow>
+    <!-- 布局 -->
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="pButton" location="South" scale="" />
+      </region>
+	  <region location ="Center" scale="">
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui> 
+</ui_layer>
+</tsoftware>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmTeacherSign" title="教师签到"> 
+	<panel name="pTable" title="查询结果" object="customerUser" type="Grid" multiple="N" >
+	    <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="name" title="教师姓名" property="name" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="integral" title="当前积分" property="integral" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="ctlSign" title="签到" property="" type="Link" edit="" required="" format="" width="200" height="" column=""/>
+	</panel>
+	<!-- 初始加载 -->
+    <flow trigger="" event="OnLoad" filter="">  
+      <procedure name="jQuery"  logic="Query" ifyes="" ifno="">
+        <param name="Out" value="pTable"></param>
+        <param name="Sql" value="khTeacher/homePage/QryTeacherSign"></param>
+      </procedure>    
+    </flow>	
+    
+
+	<!-- 签到 -->
+    <flow trigger="pTable.ctlSign" event="OnClick" filter="">
+       <procedure name="jEncodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
+        <param name="In" value="pTable.id"></param>
+      </procedure>
+       <procedure name="jspopup" logic="Popup" ifyes="jQuery" ifno="">
+        <param name="To" value="frmAppSignEdit" />
+        <param name="Mode" value="Add" />
+        <param name="Window" value="Medium" />
+        <param name="Title" value="签到" />
+      </procedure>
+        <procedure name="jQuery"  logic="Query" ifyes="" ifno="">
+        <param name="Out" value="pTable"></param>
+        <param name="Sql" value="khTeacher/homePage/QryTeacherSign"></param>
+      </procedure>   
+    </flow>
+    <!-- 布局 -->
+    <layout>
+	  <region location ="Center" scale="">
+		<subregion panel="pTable" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui> 
+</ui_layer>
+</tsoftware>

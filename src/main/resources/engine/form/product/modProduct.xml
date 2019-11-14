@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+			
+	<model_layer>
+		<object name="product" table="t_goods" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>	
+			<property name="goodId" type="Long" length="20" initial="" field=""/>
+			<property name="name" type="String" length="1000" initial="" field="name"/>
+			<property name="quantity" type="Long" length="10" initial="" field="quantity"/>
+			<property name="saleStatus" type="Long" length="1" field=""/>
+			<property name="saleS" type="Long" length="1" field="sale_status"/>
+			<property name="content" type="String" length="" field="content"/>
+			<property name="picId" type="Long" length="20" field=""/>
+			<property name="amount" type="Double" length="20" validate=""  field="" />
+			<property name="integral" type="Long" length="10" validate=""  field="" />
+			<property name="code" type="String" length="50" validate=""  field="code" />
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+		</object>  
+		<object name="productDetail" table="t_goods_pay_detail" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>	
+			<property name="goodId" type="Long" length="20" initial="" field="good_id"/>
+			<property name="amount" type="Double" length="22.2" validate=""  field="amount" />
+			<property name="integral" type="Long" length="10" validate=""  field="integral" />
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+		</object> 
+		<object name="productPicture" table="t_goods_pic" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>	
+			<property name="goodId" type="Long" length="20" initial="" field="good_id"/>
+			<property name="name" type="String" length="1000" initial="" field=""/>
+			<property name="picId" type="Long" length="20" field="pic_id"/>
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+			<property name="remark" type="String" length="20" field=""/>
+		</object>      
+	</model_layer>
+</tsoftware>

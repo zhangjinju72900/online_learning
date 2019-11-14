@@ -1,0 +1,88 @@
+UI名称		客观题作业人员得分列表（frmObjectAnswer）  与作业成绩客观题 共用
+
+tokenKey	OnLoad__frmObjectAnswer_qAnswer
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "10"		--作业id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{"total":24,"rows":[{
+		fileId: 2920					--用户头像文件id,优先使用 头像url
+		finishTime: null				--作业完成时间
+		id: 4							--作业回答id
+		objectiveRealScore: 0			--得分值--客观题
+		ossUrl: ""						--头像url
+		status: 3						--作业回答状态 0-已分发；1-已回答；2-已提交；3-已批改
+		statusName: "已批改"
+		studentId: 2					--学生id
+		studentName: "管理员"			--学生名称
+		commitFlag: 0					--作业提交标识:0-已提交，1-未提交
+		}]}
+		
+		
+		
+		
+		
+UI名称		客观题作业回答详情（frmObjectDetail）与作业成绩客观题人员答题详情共用
+
+tokenKey	OnLoad__frmObjectDetail_qDetail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkAnswerId: "4"			--作业回答id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{"total":1,"rows":[{
+		answerOption: "B,C"				--学生回答选项
+		content: "今天星期几"			--题干
+		correctFlag: 1					--学生回答正确标识(0-正确，1-错误)
+		correctTitle: "A,C,D"			--该题正确答案选项
+		homeworkAnswerId: 4				-作业回答id
+		id: 4							-作业回答详情id
+		objectiveRealScore: 0			--客观题得分
+		questionId: 122					--题目id
+		}]}
+		
+		
+		
+
+UI名称		客观题作业回答详情-试题详情（frmObjQuestDetail）
+
+tokenKey	OnLoad__frmObjQuestDetail_qQuestionDeTail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		questionId: "122"				--试题id
+		}
+
+返回示例
+"data":		{
+		answerThought: "先想想昨天是星期几了"		--回答思路/答案解析
+		content: "今天星期几"					--题干	
+		correctTitle: "C,D"						--正确答案
+		id: "122"								--试题id
+		"optionContent":[											--客观题试题选项 -
+			{"correctFlag":1,"id":59,"title":"B","content":"SDFW1"},		--title为选项名如:A,B,C,D,√,×
+			{"correctFlag":1,"id":60,"title":"A","content":"SDFW"},			--content为选项内容 此例中A选项内容为SDFW
+			{"correctFlag":0,"id":61,"title":"C","content":"SDFW3"}			--correctFlag 该选项是否为正确选项标识 0-是正确答案 1-否
+			]						
+		}

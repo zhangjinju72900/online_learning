@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<!-- 人员model -->
+		<object name="tMessageRecord" table="t_message_record" primary="id"
+			unique="" order="">
+			<property name="id" type="String" length="200" initial=""
+			    field="id"/>
+			<property name="receiverId" type="Long" length="20" initial=""
+				field="receiver_id" />
+			<property name="senderId" type="Long" length="20" initial=""
+				field="sender_id" />
+			<property name="senderType" type="Long" length="20" initial=""
+				field="sender_type" />
+			<property name="senderTime" type="Date" length="" initial=""
+				field="sende_time" />
+			<property name="ufileId" type="Long" length="20" initial=""
+				field="" />
+			<property name="nickname" type="Long" length="20" initial=""
+			field="" />
+			<property name="content" type="Long" length="20" initial=""
+			field="" />
+			<property name="remark" type="String" length="100" initial=""
+				field="remark" />
+			<property name="createTime" type="Date" length="" validate=""
+				field="create_time" />
+			<property name="createBy" type="Long" length="20" validate=""
+				field="create_by" />
+			<property name="updateTime" type="Date" length="" validate=""
+				field="update_time" />
+			<property name="updateBy" type="Long" length="20" validate=""
+				field="update_by" />
+			<property name="readFlag" type="Long" length="2" validate=""
+				field="read_flag" />
+			<property name="readFlagName" type="String" length="20" validate=""
+				field="" />
+
+			<!-- 新增 -->
+			<property name="createByName" type="String" length="50"
+				initial="" field="" />
+			<property name="updateByName" type="String" length="50"
+				initial="" field="" /> 
+			<property name="relationId" type="Long" length="20" initial=""
+				field="" />
+			<property name="listType" type="Long" length="1"
+					  initial="" field=""/>
+		</object>
+	</model_layer>
+</tsoftware>

@@ -1,0 +1,5 @@
+update t_live_review set top_flag=1, top_time=now(), top_by=#{data.session.userInfo.userId} where #{data.type}='live_review' and id = #{data.id} and check_status = 1;
+update t_information set top_flag=1, top_time=now(), top_by=#{data.session.userInfo.userId} where #{data.type}='info' and id = #{data.id} and check_status = 1;
+update t_information_review set top_flag=1, top_time=now(), top_by=#{data.session.userInfo.userId} where #{data.type}='info_review' and id = #{data.id} and check_status = 1;
+update t_information set top_flag=1, top_time=now(), top_by=#{data.session.userInfo.userId} where #{data.type}='ac_join_pic' and id = #{data.id} and check_status = 1;
+update t_information_review set top_flag=1, top_time=now(), top_by=#{data.session.userInfo.userId} where #{data.type}='info_review_review' and id = #{data.id} and check_status = 1;

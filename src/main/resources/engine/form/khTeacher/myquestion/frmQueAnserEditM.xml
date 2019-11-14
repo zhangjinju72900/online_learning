@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+		<ui name="frmQueAnserEditM" title="编辑试题">
+			<panel name="addGroup" title="table" object="questionA" type="Group">
+				<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column="" />
+				<control name="aid" title="答案id" property="aid" type="Hidden" edit="" required="" format="" width="" height="" column="" />
+				<control name="eq_questionClassifyId" title="题库分类" property="questionClassifyId" type="Hidden" edit="Y"  required="" format="" width="1" height="" column="" />
+				<control name="questionClassifyName" title="题库分类" property="questionClassifyName" type="PopupBox" edit="Y"  
+						 required="" format="" width="1" height="" column="" />
+				<control name="questionType" title="试题类型" property="questionType" type="ComboBox" edit="Y" required="Y" format="" width="1" height="1" column="2" />
+				<control name="difficultyLevel" title="试题难度" property="difficultyLevel" type="ComboBox" edit="Y" required="Y" format="" width="1" height="1" column="" />
+				<control name="enableStatus" title="启用状态" property="enableStatus" type="ComboBox" edit="Y" required="Y" format="" width="1" height="1" column="2" />
+				<control name="content" title="试题题干内容" property="content" type="KindEditor" edit="Y" required="Y" format="" width="18" height="1" column="1" />
+				<control name="answerThought" title="回答思路" property="answerThought" type="KindEditor" edit="Y" required="N" format="" width="18" height="1" column="1" />
+               
+               <control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column="1"  />
+		        <control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column="1"  />		
+				<control name="createTime" title="创建日期" property="createTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column="1"  />
+				<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column="1"  />
+               
+                
+				<control name="title1" title="选项1" property="atitle" type="TextBox" edit="Y" required="Y" format="" width="1" height="" column="" />	
+				<control name="correctFlag1" title="是否正确答案" property="acorrectFlag" type="ComboBox" edit="Y" required="Y" format="" width="1" height="" column="2" />
+				<control name="content1" title="试题选项内容" property="acontent" type="KindEditor" edit="Y" required="Y" format="" width="18" height="" column="1" />	
+				
+				<control name="title2" title="选项2" property="btitle" type="TextBox" edit="Y" required="N" format="" width="1" height="" column="" />	
+				<control name="correctFlag2" title="是否正确答案" property="bcorrectFlag" type="ComboBox" edit="Y" required="N" format="" width="1" height="" column="2" />
+				<control name="content2" title="试题选项内容" property="bcontent" type="KindEditor" edit="Y" required="N" format="" width="18" height="" column="1" />
+				
+				<control name="title3" title="选项3" property="ctitle" type="TextBox" edit="Y" required="N" format="" width="1" height="" column="" />	
+				<control name="correctFlag3" title="是否正确答案" property="ccorrectFlag" type="ComboBox" edit="Y" required="N" format="" width="1" height="" column="2" />
+				<control name="content3" title="试题选项内容" property="ccontent" type="KindEditor" edit="Y" required="N" format="" width="18" height="" column="1" />
+				
+				<control name="title4" title="选项4" property="dtitle" type="TextBox" edit="Y" required="N" format="" width="1" height="" column="" />	
+				<control name="correctFlag4" title="是否正确答案" property="dcorrectFlag" type="ComboBox" edit="Y" required="N" format="" width="1" height="" column="2" />
+				<control name="content4" title="试题选项内容" property="dcontent" type="KindEditor" edit="Y" required="N" format="" width="18" height="" column="1" />
+			
+				<control name="title5" title="选项5" property="etitle" type="TextBox" edit="Y" required="N" format="" width="1" height="" column="" />	
+				<control name="correctFlag5" title="是否正确答案" property="ecorrectFlag" type="ComboBox" edit="Y" required="N" format="" width="1" height="" column="2" />
+				<control name="content5" title="试题选项内容" property="econtent" type="KindEditor" edit="Y" required="N" format="" width="18" height="" column="1" />
+				
+				<control name="title6" title="选项6" property="ftitle" type="TextBox" edit="Y" required="N" format="" width="1" height="" column="" />	
+				<control name="correctFlag6" title="是否正确答案" property="fcorrectFlag" type="ComboBox" edit="Y" required="N" format="" width="1" height="" column="2" />			
+				<control name="content6" title="试题选项内容" property="fcontent" type="KindEditor" edit="Y" required="N" format="" width="18" height="" column="1" />
+			</panel>
+			
+
+
+			<panel name="pformDown" title="pform" object="" type="Toolbar">
+				<control name="ctlSave" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+				<control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+			</panel>
+
+
+			<!-- 页面逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+ 				<procedure name="clear"  logic="Clear" ifyes="jsdecodeid" ifno="">
+           			<param name="Out" value="addGroup"></param>
+     			</procedure> 
+     			<procedure name="jsdecodeid" server="" logic="DecodeId" ifyes="j4" ifno="">
+			        <param name="Out" value="addGroup.id"></param>
+			    </procedure>  			     			    			
+		        <!-- <procedure name="j3"  logic="List" ifyes="j4" ifno="">
+   					<param name="Out" value="addGroup.questionClassifyId"/>
+  					<param name="Sql" value="khTeacher/myquestion/QryquestionClassifyNameList"/> 
+  				</procedure> -->
+  				<procedure name="j4"  logic="List" ifyes="j5" ifno="">
+   					<param name="Out" value="addGroup.questionType"/>
+  					<param name="Sql" value="QryQuesTypeList"/> 
+  				</procedure>
+  				<procedure name="j5"  logic="List" ifyes="j6" ifno="">
+   					<param name="Out" value="addGroup.difficultyLevel"/>
+  					<param name="Sql" value="QryQuesDiffList"/> 
+  				</procedure>
+  				<procedure name="j6"  logic="List" ifyes="j7" ifno="">
+   					<param name="Out" value="addGroup.enableStatus"/>
+  					<param name="Sql" value="QryQuesStatueList"/> 
+  				</procedure>
+  				<procedure name="j7"  logic="List" ifyes="j8" ifno="">
+   					<param name="Out" value="addGroup.correctFlag1"/>
+  					<param name="Sql" value="QryQuesCorrList"/> 
+  				</procedure>
+  				<procedure name="j8"  logic="List" ifyes="j9" ifno="">
+   					<param name="Out" value="addGroup.correctFlag2"/>
+  					<param name="Sql" value="QryQuesCorrList"/> 
+  				</procedure>
+  				<procedure name="j9"  logic="List" ifyes="j10" ifno="">
+   					<param name="Out" value="addGroup.correctFlag3"/>
+  					<param name="Sql" value="QryQuesCorrList"/> 
+  				</procedure>
+  				<procedure name="j10"  logic="List" ifyes="j11" ifno="">
+   					<param name="Out" value="addGroup.correctFlag4"/>
+  					<param name="Sql" value="QryQuesCorrList"/> 
+  				</procedure>
+  				<procedure name="j11"  logic="List" ifyes="j12" ifno="">
+   					<param name="Out" value="addGroup.correctFlag5"/>
+  					<param name="Sql" value="QryQuesCorrList"/> 
+  				</procedure>
+  				<procedure name="j12"  logic="List" ifyes="queryTableQues" ifno="">
+   					<param name="Out" value="addGroup.correctFlag6"/>
+  					<param name="Sql" value="QryQuesCorrList"/> 
+  				</procedure>
+      			<procedure name="queryTableQues"  logic="QueryById" ifyes="queryTableAns" ifno="">
+        			<param name="In" value="addGroup"></param>
+        			<param name="Out" value="addGroup"></param>
+       				<param name="Sql" value="khTeacher/myquestion/QryQuesDetalM"></param>
+      			</procedure>
+  				<procedure name="queryTableAns"  logic="Query" ifyes="" ifno="">
+        			<param name="In" value="addGroup"></param>
+        			<param name="Out" value="addGroup"></param>
+        			<param name="Plugin" value="QryQuestionAns" />
+       				<param name="Sql" value="khTeacher/myquestion/QryQuesDetalM"></param>
+      			</procedure>
+			</flow>
+			
+			<!-- 题库分类点击事件 -->
+			<flow trigger="addGroup.questionClassifyName" event="OnClick" filter="">
+				<procedure name="jspopup" server="" logic="Popup" ifyes="" ifno="">
+					<param name="To" value="frmQuestionTreeM"></param>
+					<param name="Mode" value="Add"></param>
+					<!-- <param name="Sql" value="khTeacher/question/QryClassifyTree"/>	 -->
+					<param name="Window" value="Medium" />
+					<param name="Title" value="选择题库分类"></param>
+			  </procedure>
+			</flow>
+
+			<!-- 确认 -->
+			<flow trigger="pformDown.ctlSave" event="OnClick" filter="" defaultEnter="Y">
+			    
+				<procedure name="jssave" logic="Save" ifyes="jssavelist" ifno="">
+                    <!-- <param name="Plugin" value="SaveQuestion1" /> -->
+                    <!-- <param name="Plugin" value="com.tedu.plugin.question.SaveQuestion" /> -->
+                    <param name="In" value="addGroup"></param>
+                    <param name="Msg" value="已保存"></param>
+                </procedure>
+                <procedure name="jssavelist" logic="SaveCustom" ifyes="jsclose" ifno="">
+                    <param name="Plugin" value="SaveQuestionAns" />
+                    <param name="In" value="addGroup"></param>
+                    <param name="Sql" value="khAdmin/question/QryQuestionEdit"/> 
+                </procedure>
+                <procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="true"></param>
+				</procedure>
+			</flow>
+
+			<!-- 取消 -->
+			<flow trigger="pformDown.ctlCancel" event="OnClick" filter="">
+				<procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="false"></param>
+				</procedure>
+			</flow>
+
+			<layout>
+				<region location="Center" scale="">
+					<subregion panel="addGroup" location="Center" scale="" />
+				</region>
+				<region location="North" scale="">
+					<subregion panel="pformDown" location="North" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

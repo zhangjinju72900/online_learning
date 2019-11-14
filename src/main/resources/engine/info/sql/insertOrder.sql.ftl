@@ -1,0 +1,2 @@
+insert into t_order (user_id,code,order_time,integral,amount,pay_method,consign_address_id,logistic_amount,logistic,create_time,create_by,update_time,update_by)
+values (#{data.userid},#{data.code},now(),#{data.Integral},#{data.Amount},#{data.payMethod},#{data.consignAddressId},#{data.logisticAmount},#{data.logistic},now(),#{data.userid},now(),#{data.userid})

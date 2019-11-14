@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmWrongQuesCollect" title="错题集">
+        	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		  		<control name="btnQry" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+        	<panel name="pCondition" title="查询条件" object="wrongQuestionSet"  type="Group" multiple="">
+        		<control name="userId" title="用户id" property="userId" type="TextBox" edit="Y" required="" format="" width="1" height="" column="4"/>
+			</panel>
+            <panel name="pTable1" title="全部题目" object="wrongQuestionSet" type="Grid" multiple="N" >
+                <control name="id" title="id" property="id" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="homeworkId" title="作业id" property="homeworkId" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="homeworkDetailId" title="作业明细id" property="homeworkDetailId" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="schoolId" title="学校id" property="schoolId" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="classId" title="班级id" property="classId" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="courseId" title="课程id" property="courseId" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="sectionId" title="小节id" property="sectionId" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="questionId" title="试题id" property="questionId" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="teacherId" title="教师id" property="teacherId" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="studentId" title="学生id" property="studentId" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="validFlag" title="标识" property="validFlag" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="createBy" title="创建人" property="createBy" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="updateTime" title="更新时间" property="updateTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="updateBy" title="更新人" property="updateBy" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+            </panel>
+            
+            <panel name="pTable2" title="错题分类" object="wrongQuestionSet" type="Grid" multiple="N" >
+            	<control name="ctlDetail" title="查看详情" property="" type="Link" edit="" required="" format="" width="150" height="1" column=""/>
+                <control name="courseName" title="课程名" property="courseName" type="TextBox" edit="N" required="" format="" width="200" height="1" column=""/>
+                <control name="number" title="数量" property="number" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+            	<control name="courseId" title="课程id" property="courseId" type="Hidden" edit="N" required="" format="" width="200" height="1" column=""/>
+            	<control name="studentId" title="学生id" property="studentId" type="Hidden" edit="N" required="" format="" width="200" height="1" column=""/>
+            </panel>
+            
+           
+            
+            <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		      <procedure name="clear" logic="Clear" ifyes="" ifno="">
+		         <param name="Out" value="pCondition"></param>
+		      </procedure>
+		    </flow>
+		    
+		     <!-- 查询当前学生错题集 -->
+		    <flow trigger="pToolbar.btnQry" event="OnClick" filter="" >
+      		  <procedure name="MisQuestionQuery" logic="Query" ifyes="MisQuestionQuery1" ifno="">
+      		  	 <param name="In" value="pCondition"></param>
+		         <param name="Out" value="pTable1"></param>
+		         <param name="Sql" value="khApp/study/misques/QryMisAllQues"></param>
+		      </procedure>
+		      <procedure name="MisQuestionQuery1" logic="Query" ifyes="" ifno="">
+		      	 <param name="In" value="pCondition"></param>
+		      	 <param name="Plugin" value="SumQuesNum"></param>
+		         <param name="Out" value="pTable2"></param>
+		         <param name="Sql" value="khApp/study/misques/QryMisQues"></param>
+		      </procedure>
+   			</flow>
+		    
+		    <!-- 查看错题详情 -->
+		    <flow trigger="pTable2.ctlDetail" event="OnClick" filter="" >
+      		 <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="transAnswer" ifno="">
+        		<param name="In" value="pTable2.studentId"></param>
+      		 </procedure>
+      		 <procedure name="transAnswer"  logic="Transition" ifyes="" ifno="">
+		        <param name="To" value="frmWrongSetDetails"></param>
+		        <param name="Mode" value="Edit"></param>
+		      </procedure> 
+   			</flow>
+		    
+
+
+		    
+            <!-- 布局 -->
+            <layout>
+              <region location ="North" scale="">
+                    <subregion panel="pToolbar" location ="North" scale=""/>
+              </region>
+              <region location ="Center" scale="">
+                    <subregion panel="pCondition" location="North" scale="30%"/>
+                    <subregion panel="pTable1" location="Center" scale="70%"/>
+                    <subregion panel="pTable2" location ="Center" scale="70%"/>
+              </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

@@ -1,0 +1,49 @@
+更多评论接口：
+	UI名称		 咨讯专题详情列表-评论列表-更多（informationView）
+	
+	tokenKey：	OnClick_pReviewList_ctlLike_informationView_jInsert
+	
+
+	接口地址：   	api/query
+	接口类型：	POST
+
+	参数示例:
+			"data": {
+			id:"83"			--资讯id
+			reviewId:"70"		--评论的id
+			page:1,
+			rows:50,
+			}
+
+	返回示例:	
+			
+
+
+		"data":{
+		"total":3,
+		"rows":[
+			{
+			"reviewBy":7,				--评论人id
+			"checkBy":7,			
+			"infoId":83,				--资讯ID
+			"validFlag":0,
+			"likeValidName":"未点赞",		--有"已点赞"和"未点赞"	分别对应likeValid 的值1 和0
+			"topFlag":1,		
+			"updateTime":"2018-09-17 10:37:15",
+			"uFileId":0,
+			"topTime":null,
+			"content":"你在哪",			--评论内容
+			"checkStatus":1,			--审核状态;0:未审核,1:审核通过,2:审核不通过
+			"createBy":7,
+			"checkTime":"2018-09-17 10:37:34",
+			"createTime":"2018-09-17 10:37:15",
+			"updateBy":7,
+			"topBy":0,
+			"id":40,				--二级评论的id
+			"reviewName":"duan@duan.com.1455440292",
+			"reviewId":70,				 --‘评论ID，回复资讯时为0，回复评论时为具体ID'
+			"likeValid":"0",			 --点赞标识 1为已点赞 0为未点赞
+			"reviewTime":"2018-09-17 10:37:15"	 --评论时间
+			},		
+		        {...}
+		       ]

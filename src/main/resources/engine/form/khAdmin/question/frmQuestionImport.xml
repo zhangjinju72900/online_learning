@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+		<ui name="frmQuestionImport" title="导入试题">
+			<panel name="pGroup" title="试题导入" object="questionA" type="Group" multiple="">
+				<control name="questionClassifyId" title="课程分类" property="" type="Hidden" edit="" required="" format="" width=""
+						 height="" column=""/>
+				<control name="ctlName1" title="支持格式" property="" type="Label" edit="N" required="" format="" tip="当前支持单个文件上传(xls,xlsx)" width="1" height="1" column="1"/>
+				<control name="fileId" title="文件ID" property="" type="Hidden" edit="" required="" format="" width="1"
+						 height="1" column=""/>
+				<control name="fileName" title="选择文件" property="" type="FileBox" edit="Y" required="" format="" width="1"
+						 height="1" column="1"/>
+			</panel>
+
+			<panel name="pformDown" title="pform" object="" type="Toolbar">
+				<control name="downloadModule" title="模板下载" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+				<control name="ctlSave" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+				<control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+			</panel>
+
+
+
+			 <flow trigger="" event="OnLoad" filter="">
+				  <procedure name="j2" server="" logic="DecodeId" ifyes="queryTable" ifno="">
+			         <param name="Out" value="pGroup.questionClassifyId"></param>
+			       </procedure>
+   		    </flow>
+			
+			 <flow trigger="pGroup.fileName" event="OnClick" filter="">
+				 <procedure name="fileUpload" server="" logic="Upload" ifyes="" ifno="">
+			      	<param name="In" value="pnlHidden"></param>
+			        <param name="Size" value="10000000"></param>
+			        <param name="Type" value="xls,xlsx"></param>
+			        <param name="Bucket" value="public"></param>
+			        <param name="Out" value="pGroup.fileId"></param>
+	     		 </procedure>
+    		  </flow>
+				<!-- 模板下载 -->
+			<flow trigger="pformDown.downloadModule" event="OnClick" filter="" defaultEnter="Y">
+				<procedure name="branch" logic="Branch" ifyes="" ifno="">
+                    <param name="In" value="downloadModule('mo.xls')"></param>
+                </procedure>
+			</flow>
+
+			<!-- 确认 -->
+			<flow trigger="pformDown.ctlSave" event="OnClick" filter="" defaultEnter="Y">
+				<procedure name="jssave" logic="SaveCustom" ifyes="jsclose" ifno="">
+                    <param name="In" value="pGroup"></param>
+                    <param name="Plugin" value="ImportQuestionPlugin" />
+                    <param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+                </procedure>
+                <!-- <procedure name="jssavelist" logic="SaveCustom" ifyes="jsclose" ifno="">
+                    <param name="Plugin" value="SaveQuestionAns2" />
+                    <param name="In" value="pTable"></param>
+                    <param name="Msg" value="已保存"></param> 
+                </procedure> -->
+                <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+					<param name="Refresh" value="true"></param>
+				</procedure>
+			</flow>
+
+			<!-- 取消 -->
+			<flow trigger="pformDown.ctlCancel" event="OnClick" filter="">
+                <procedure name="jssavelist" logic="SaveCustom" ifyes="jsclose" ifno="">
+                    <param name="In" value="addGroup2"></param>
+                    <param name="Plugin" value="UpdateQuesAns" />
+                    <param name="Sql" value="khAdmin/question/QryQuestionEdit"></param>             
+                </procedure>
+				<procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="false"></param>
+				</procedure>
+			</flow>
+
+			<layout>
+				<region location="Center" scale="">
+					<subregion panel="pGroup" location="Center" scale=""/>
+				</region>
+				<region location="North" scale="">
+					<subregion panel="pformDown" location="North" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

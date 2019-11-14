@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmSelecRresource" title="选择资源">
+<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		    <control name="ctlOk" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		    <control name="ctlClose" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		  </panel>
+		<panel name="resourceTree" object="tree"  type="Tree" multiple="">
+		    <control name="id" title="树id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+		    <control name="pid" title="树父id" property="pid" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+		    <control name="name" title="树节点" property="name" type="DataLink" edit="" required="" format="" width="" height="" column=""/>
+		 </panel>
+		  <panel name="resourceGroup" title="查询条件" object="tCustomerResources" type="Hidden"  multiple="Y">
+		    <control name="id" title="id" property="id" type="TextBox" edit="" required="" format="" width="1" height="1" column="1"/>
+		    <control name="name" title="目录名称" property="name" type="TextBox" edit="" required="" format="" width="1" height="1" column="1"/>
+		  </panel>
+			<!-- 加载 -->
+		<flow trigger="" event="OnLoad" filter="">
+	      <procedure name="tree"  logic="Query" ifyes="queryTable" ifno="">
+	        <param name="In" value=""></param>
+	        <param name="Out" value="resourceTree"></param>
+	        <param name="Sql" value="khAdmin/resourcesManage/QryResourcesListClose"></param>
+	      </procedure>
+	     </flow>
+
+  
+			
+		    <!-- 树点击事件 -->
+		    <flow trigger="resourceTree" event="OnClick" filter="" >
+		      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="j2" ifno="">
+		        <param name="In" value="resourceTree.id"></param>
+		      </procedure>
+		      <procedure name="j2" server="" logic="DecodeId" ifyes="jsencodeid1" ifno="">
+		        <param name="Out" value="resourceGroup.id"></param>
+		      </procedure>
+		       <procedure name="jsencodeid1" server="" logic="EncodeId" ifyes="j21" ifno="">
+		        <param name="In" value="resourceTree.id"></param>
+		      </procedure>
+		      <procedure name="j21" server="" logic="Query" ifyes="" ifno="">
+		        <param name="In" value="resourceGroup"></param>
+		        <param name="Sql" value="QryResourceById"></param>
+		        <param name="Out" value="resourceGroup"></param>
+		      </procedure>
+		    </flow>
+
+			<!-- 返回 -->
+			<flow trigger="pToolbar.ctlClose" event="OnClick" filter="">
+				<procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+                    <param name="Refresh" value="true"></param>
+                </procedure>
+			</flow>
+			<!-- 确认 -->
+			<flow trigger="pToolbar.ctlOk" event="OnClick" filter="">
+				 
+				   <procedure name="branch" server="" logic="Branch" ifyes="getMsg" ifno="okJs">
+			        <param name="In" value="getPanelControlValue('resourceGroup.id')==''"></param>
+			      </procedure>
+			      <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
+			       <param name="Msg" value="请选择资源目录"></param>
+			      </procedure> 
+				  <procedure name="okJs" server="" logic="Branch" ifyes="" ifno="">
+                   <param name="In" value="okSelect('resourceGroup.id|parentId','resourceGroup.name|parentName')"></param>
+                  </procedure>
+			</flow>
+
+
+			<!-- 布局 -->
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale="" />
+				</region>
+
+				<region location="Center" scale="">
+					<subregion panel="resourceTree" location="Center" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

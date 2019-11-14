@@ -1,0 +1,1 @@
+update t_information set recommend_flag=0 where #{data.tableName}='t_information' and id=#{data.id};

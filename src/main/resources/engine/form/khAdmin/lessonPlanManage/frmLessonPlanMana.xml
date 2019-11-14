@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+      xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmLessonPlanMana" title="教案管理">
+  <panel name="pToolbar" title="教案" object="" type="Toolbar">
+    <control name="btnSearch" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+  <!--   <control name="btnAdd" title="新增教案" property="" type="Button" edit="" required="" format="" width="" height="" column=""/> -->
+    <control name="btnClear" title="清空条件" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+  </panel>
+  <panel name="pCondition" title="查询条件" object="modLessonPlan" type="Group"  multiple="">
+  	<control name="lk_name" title="教案名称" property="name" type="TextBox" edit="Y" required="" format="" width="1" height="1" column=""/>
+  	<control name="ge_createDate" title="创建开始时间：" property="createDate" type="DateBox" edit="Y" required="" format="" width="1" height="1" column=""/>
+  	<control name="le_createDate" title="创建结束时间：" property="createDate" type="DateBox" edit="Y" required="" format="" width="1" height="1" column="3"/>
+  	<control name="lk_className" title="班级" property="className" type="TextBox" edit="Y" required="" format="" width="1" height="1" column=""/>
+  	<control name="lk_courseName" title="课程" property="courseName" type="TextBox" edit="Y" required="" format="" width="1" height="1" column=""/>
+  	<control name="lk_sectionName" title="课程小节" property="sectionName" type="TextBox" edit="Y" required="" format="" width="1" height="1" column="3"/>
+	<control name="eq_regionName" title="大区" property="regionName" type="Hidden"  edit="Y" required="N" format="" width="1" height="1" column="" />
+	
+  	<!-- <control name="eq_teacherId" title="老师id" property="teacherId" type="Hidden" edit="Y" required="" format="" width="1" height="1" initial="session.userInfo.userId" column=""/>
+ -->  
+ </panel>
+  <panel name="pTable" title="列表" object="modLessonPlan" type="Grid"  multiple="">
+  	<!-- <control name="edit" title="编辑" property="" type="Link" edit="" required="" format="" width="120" height="" column=""/>
+  	<control name="delete" title="删除" property="" type="Link" edit="" required="" format="" width="120" height="" column=""/> -->
+    <control name="export" title="导出" property="" type="Link" edit="" required="" format="" width="120" height="" column=""/>
+    <control name="id" title="教案编号" property="id" type="TextBox" edit="" required="" format="" width="80" height="" column=""/>
+  	<control name="name" title="教案名称" property="name" type="DataLink" edit="" required="" format="" width="150" height="" column=""/>
+    <control name="className" title="所属班级" property="className" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+    <control name="courseName" title="对应课程" property="courseName" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+    <control name="sectionName" title="对应小节" property="sectionName" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+    <control name="createBy" title="创建人" property="createBy" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+    <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="" required="" format="" width="300" height="" column=""/>
+	<control name="regionName" title="大区" property="regionName" type="TextBox"  edit="N" required="N" format="" width="120" height="1" column="3" />
+	
+  </panel>
+  
+  
+   <!-- 逻辑加载 -->
+    <flow trigger="" event="OnLoad" filter="">
+      <procedure name="jClear"  logic="Clear" ifyes="jQuery" ifno="">
+         <param name="Out" value="pCondition"></param>
+      </procedure>
+    <!--  <procedure name="Query1" logic="Query" ifyes="jclassList" ifno="" sync="Y">
+		 <param name="In" value="pCondition"></param>
+         <param name="Out" value="pCondition"></param>
+         <param name="Sql" value="college/QryRegionName"></param>
+	</procedure>  -->
+      <!--  <procedure name="jclassList" logic="List" ifyes="jQuery" ifno="">
+      	<param name="In" value="pCondition"/>
+      	<param name="Out" value="pCondition.eq_classId"/>
+      	<param name="Sql" value="teacherClassName"/>
+      </procedure>  -->
+      <procedure name="jQuery"  logic="Query" ifyes="" ifno="">
+       <param name="In" value="pCondition"></param>
+        <param name="Out" value="pTable"></param>
+        <param name="Sql" value="khTeacher/lessonPlan/QryLessonPlanListAdmin"></param>
+      </procedure>
+    </flow>
+    <!-- 搜索 -->
+    <flow trigger="pToolbar.btnSearch" event="OnClick" filter="">  
+      <procedure name="Query"  logic="Query" ifyes="" ifno="" sync="Y">
+    	<param name="In" value="pCondition"></param>
+    	<param name="Out" value="pTable"></param>
+    	<param name="Sql" value="khTeacher/lessonPlan/QryLessonPlanListAdmin"></param>
+      </procedure> 
+    </flow>
+    <!-- 新增 -->
+    <flow trigger="pToolbar.btnAdd" event="OnClick" filter="">
+      <procedure name="j1"  logic="Popup" ifyes="jsQuery" ifno="" >
+		<param name="To" value="frmLessonPlanManaAdd"></param>
+		<param name="Mode" value="Add"></param>
+		<param name="Window" value="Medium"/>
+		<param name="Title" value="新增教案"/>
+      </procedure>              
+      <procedure name="jsQuery" logic="Query" ifyes="" ifno="">
+      	<param name="In" value="pCondition"></param>
+        <param name="Out" value="pTable"></param>
+        <param name="Sql" value="khTeacher/lessonPlan/QryLessonPlanListAdmin"></param>
+      </procedure>
+    </flow>
+    
+
+    <!-- 编辑 -->
+    <flow trigger="pTable.edit" event="OnClick" filter="">
+      <procedure name="EncodeId" logic="EncodeId"  ifyes="j1" ifno="" >
+		<param name="In" value="pTable.id"></param>
+	  </procedure>
+	   <procedure name="j1"  logic="Popup" ifyes="jsQuery" ifno="" >
+		<param name="To" value="frmLessonPlanManaEdit"></param>
+		<param name="Mode" value="Edit"></param>
+		<param name="Window" value="Large"/>
+		<param name="Title" value="编辑教案"/>
+      </procedure>              
+      <procedure name="jsQuery" logic="Query" ifyes="" ifno="">
+      	<param name="In" value="pCondition"></param>
+        <param name="Out" value="pTable"></param>
+        <param name="Sql" value="khTeacher/lessonPlan/QryLessonPlanListAdmin"></param>
+      </procedure>      
+    </flow>
+    <!-- 删除 -->
+    <flow trigger="pTable.delete" event="OnClick" filter="">  
+    	<procedure name="j0" server="" logic="ConfirmMsg" ifyes="j1" ifno="">
+    		<param name="Title" value="删除提示"/>
+    		<param name="Msg" value="确认删除吗?"/>
+    	</procedure>
+    	<procedure name="j1"  logic="SaveCustom" ifyes="j2" ifno="">
+        	<param name="In" value="pTable" />
+       	    <param name="Sql" value="khTeacher/lessonPlan/UpdateLessonListById"/>
+        	<param name="Msg" value="'已删除'" />
+      </procedure>
+      <procedure name="j2"  logic="Query" ifyes="" ifno="">
+       		 <param name="In" value="pCondition" />
+       		 <param name="Out" value="pTable" />
+        	<param name="Sql" value="khTeacher/lessonPlan/QryLessonPlanListAdmin"></param>
+      </procedure>  
+    </flow>
+    
+    <!-- 导出 -->
+    <flow trigger="pTable.export" event="OnClick" filter="">
+    <!-- 	<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="j2" ifno="">
+    		<param name="In" value="pTable.id"/>
+    	</procedure> -->
+    	<procedure name="j0" server="" logic="ConfirmMsg" ifyes="jbranch" ifno="">
+    		<param name="Title" value="导出提示"/>
+    		<param name="Msg" value="确认导出吗?"/>
+    	</procedure>
+    	
+    	
+    	<procedure name="jbranch" server="" logic="Branch" ifyes="" ifno="">
+    		<param name="In" value="toController('lesson/exportLesson1','pTable.id.lessonId')"/>
+    	</procedure>
+    </flow>	
+    <!-- 点击标题 -->
+    <flow trigger="pTable.name" event="OnClick" filter="">
+    	<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="j2" ifno="">
+    		<param name="In" value="pTable.id"/>
+    	</procedure>
+    	<procedure name="j2" logic="Transition" ifyes="" ifno="">
+    		<param name="To" value="frmLessonPlanManaDetails"/>
+    		<param name="Mode" value="Readonly"/>
+    	 </procedure>
+    </flow>
+    <!-- 联动 -->
+    <!-- <flow trigger="pCondition.eq_classId" event="OnSelect" filter="">
+    	<procedure name="j1" logic="List" ifyes="" ifno="">
+    		<param name="In" value="pCondition"/>
+    		<param name="Out" value="pCondition.eq_courseId"/>
+    		<param name="Sql" value="QryCourseNameList"/>
+    	</procedure>
+    </flow>
+    <flow trigger="pCondition.eq_courseId" event="OnSelect" filter="">
+    	<procedure name="j1" logic="List" ifyes="" ifno="">
+    		<param name="In" value="pCondition"/>
+    		<param name="Out" value="pCondition.eq_sectionId"/>
+    		<param name="Sql" value="QrySectionNameList"/>
+    	</procedure>
+    </flow> -->
+    <!-- 清空条件 -->
+    <flow trigger="pToolbar.btnClear" event="OnClick" filter="">
+    	<procedure name="jClear" logic="Clear" ifyes="Query1" ifno="">
+    		<param name="Out" value="pCondition"/>
+    	</procedure>
+    	 <procedure name="Query1" logic="Query" ifyes="jclassList" ifno="" sync="Y">
+		 <param name="In" value="pCondition"></param>
+         <param name="Out" value="pCondition"></param>
+         <param name="Sql" value="college/QryRegionName"></param>
+	</procedure>
+    </flow>
+    <!-- 布局 --> 
+    <layout>
+      <region location ="North" scale="">
+        <subregion panel="pToolbar" location ="North" scale=""/>
+        <subregion panel="pCondition" location="Center" scale=""/>
+      </region>
+	  <region location ="Center" scale="">
+    	<subregion panel="pTable" location="Center" scale="" />
+      </region>
+    </layout>
+  </ui>
+  </ui_layer>
+</tsoftware>

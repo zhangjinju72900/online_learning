@@ -1,0 +1,1 @@
+select id from t_keyword where valid_flag = 0 and #{data.title} like CONCAT('%', word, '%')

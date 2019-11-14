@@ -1,0 +1,1 @@
+select GROUP_CONCAT(question_id) as questionId from t_homework_detail where homework_id = #{data.homeworkId} GROUP BY homework_id

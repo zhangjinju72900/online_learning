@@ -1,0 +1,263 @@
+UI名称		课程接口-专业列表（frmProfessionCourse）
+
+tokenKey	OnLoad__frmProfessionCourse_list
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data":{}
+
+返回示例
+"data":[{"text":"专业数据", --专业名称
+"value":1   --专业id
+}]
+
+UI名称		课程接口-根绝专业取课程列表（frmProfessionCourse）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmProfessionCourse_QueryCourse
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+"professionalId":"1"--专业id
+}
+
+返回示例
+"data":{"total":6,--总数
+"rows":[{
+"courseCount":0.00, --课时
+"difficultyLevel":5,    --课程难度
+"name":"语文",    --课程名称
+"id":4, --课程id
+"professionalId":1  --专业id
+}]}
+
+UI名称		课程接口-课程详情树（到小节）（frmCourseDetail）
+
+tokenKey	OnLoad__frmCourseDetail_tree1
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"courseId":"4"}--课程id
+
+返回示例
+"data":{
+"courseCount":"0.00",   --课时
+"difficultyLevel":"5",  --课程难度
+"name":"语文",        --课程名称
+"remark":"课程简介测试",  --简介
+"id":4,     --课程id
+"professionalId":1  --专业id
+}
+
+UI名称		课程接口-课程概要（frmCourseDetail）
+
+tokenKey	OnLoad__frmCourseDetail_queryDetail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"courseId":"4"}--课程id
+
+返回示例
+"data":{"total":2,
+"rows":[{
+"concat(pid, id)":"course-4", --父id加id
+"csrId":0,  --资源id
+"children":[...],
+"typeName":"课程", --类型名称
+"pid":"", --父id
+"remark":"课程简介测试", -- 简介
+"id":"course-4", -- id
+"text":"语文", -- 名称
+"type":"course", --类型
+"fileType":"" --文件类型
+}]}
+
+UI名称		课程接口-小节资源详情树（frmSectionDetail）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmSectionDetail_QueryTree
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"sectionId":"17"}--小节id
+
+返回示例
+"data":{"total":9,
+"rows":[{
+"concat(pid, id)":"cou-section-17", --父id加id
+"csrId":0,  -- 资源id
+"children":[...],--子
+"typeName":"课程-小节", --类型名称
+"pid":"", --父id
+"remark":"覅杰尔夫不哇哦柯基呢哦积分和覅U浩丰科技\r\n覅杰尔夫不哇哦柯基呢哦积分和覅U浩丰科技\r\n覅杰尔夫不哇哦柯基呢哦积分和覅U浩丰科技\r\n覅杰尔夫不哇哦柯基呢哦积分和覅U浩丰科技\r\n覅杰尔夫不哇哦柯基呢哦积分和覅U浩丰科技\r\n覅杰尔夫不哇哦柯基呢哦积分和覅U浩丰科技",-- 简介
+"id":"cou-section-17", --ID
+"text":"dfas",  --名称
+"type":"course-section",    --类型
+"fileType":""   --文件类型
+}]}
+
+
+UI名称		课程接口-课程标签资源树（frmCourseResource）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmCourseResource_QueryTree
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"courseId":"4"}--课程id
+
+返回示例
+"data":{"total":13,
+"rows":[{
+"concat(pid, id)":"course-4", --父id加id
+"csrId":0,  --资源id
+"children":[...],--子
+"typeName":"课程", --类型名称
+"pid":"", --父id
+"remark":"课程简介测试", -- 简介
+"id":"course-4", -- id
+"text":"语文", -- 名称
+"type":"course", --类型
+"fileType":"" --文件类型
+}]}
+
+UI名称		课程接口-我的资料树（frmMyResource）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmMyResource_QueryTree
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"professionalId":"1",--专业id
+"courseId":"4",--课程id
+"sectionId":"52",--小节id
+"teacherId":"2"--用户id
+}
+
+返回示例
+"data":{"total":4,
+"rows":[{"concat(pid, id)":"0",--父id加id
+"ttaId":1,--资源id
+"children":null,--子
+"typeName":"专业-课程-小节-教师-资料",--类型名称
+"pid":"",--父id
+"remark":"",-- 简介
+"id":0,-- id
+"text":"测试数据1",-- 名称
+"type":"pro-cou-sec-teacher-teaching_assist",--类型
+"fileType":""--文件类型
+}
+
+UI名称		课程接口-资源纠错-纠错列表（frmResourcesError）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmResourcesError_QueryError
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"eq_courseId":"4",--课程id
+"eq_sectionId":"",--小节id
+"eq_customerResourcesId":"",--用户资源id
+"eq_teacherId":""--用户id
+}
+
+返回示例
+"data":{"total":2,
+"rows":[{"teacherId":2, --用户id
+"labelId":3, --标签id
+"customerResourcesId":0,--资源id
+"courseResourcesName": test,    --资源名称
+"ossUrl":"1", --文件路径
+"validFlag":0,  --是否存在
+"schoolId":22,  --学校id
+"id":1, --纠错id
+"sectionId":3, --小节id
+"courseId":4,--课程id
+"content":"测试一号", 纠错内容
+"status":0--状态
+}]}
+
+UI名称		课程接口-资源纠错-新增纠错（frmResErrorEdit）
+
+tokenKey	OnClick_pButton_save_frmResErrorEdit_jssave
+
+接口地址	/api/SaveCustom
+
+接口类型	POST
+
+参数示例
+"data":{"id":"",--纠错id
+"courseSectionResourcesId":"1",--课程小节资源id
+"teacherId":"1",--用户id
+"fileId":"1" --文件id
+"content":"1",--纠错内容
+}
+
+返回示例
+"data":{
+"valid_flag":0,--是否存在
+"content":"1",--纠错内容
+"labelId":1,--标签id
+"schoolId":1,--学校id
+"id":5,--纠错id
+"courseId":1,
+"sectionId":1,--小节id
+"courseResourcesName":"1",--资源名称
+"teacherId":1,--用户id
+"customerResourcesId":1,--资源id
+"status":0--状态
+}
+
+UI名称		课程页面-我的资料查询条件+查询资料（frmCourseList）
+
+tokenKey	OnClick_pToolbar_btnQueryMa_frmProfessionCourse_jsquery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+	"eq_courseId":"4",    --课程id
+	"eq_sectionId":"52",    --小节id
+}
+
+返回示例
+"data":{
+	"total":3,
+	"rows":[
+		{
+				bucketName: "shdfsfsdfsbKkj"   --bucketName
+				courseId: 4					   --课程id
+				createBy: 0					   --创建人
+				createTime: null			   --创建时间
+				fileId: 0					   --文件id
+				id: 1						   --教辅资料id
+				name: "测试数据1"				   --名称
+				ossKey: ""					   --OSS KEY
+				professionalId: 1              --专业id
+				sectionId: 52				   --小节id
+				"updateBy": “0”，			   --更新人
+				"updateTime": null，			   --更新时间
+		}
+	]}

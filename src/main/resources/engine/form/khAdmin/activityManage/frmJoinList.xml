@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmJoinList" title="参加列表">
+            <panel name="pCondition" title="查询条件" object="JoinList" type="Hidden">
+                <control name="activityId" title="activityId" property="activityId" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+            </panel>
+            <panel name="pTable" title="查询结果" object="JoinList" type="Grid" multiple="">
+                <control name="id" title="ID" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+                <control name="name" title="姓名" property="name" type="TextBox" edit="" required="" format="" width="" height="" column=""/>
+                <control name="nickname" title="昵称" property="nickname" type="TextBox" edit="" required="" format="" width="" height="" column=""/>
+                <control name="sex" title="性别" property="sex" type="TextBox" edit="" required="" format="" width="" height="" column=""/>
+                <control name="school" title="学校" property="school" type="TextBox" edit="" required="" format="" width="" height="" column=""/>
+                <control name="class" title="班级" property="class" type="TextBox" edit="" required="" format="" width="" height="" column=""/>
+                <control name="role" title="角色" property="role" type="TextBox" edit="" required="" format="" width="" height="" column=""/>
+            </panel>
+
+            <!-- 逻辑加载 -->
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="jClear"  logic="Clear" ifyes="j1" ifno="" sync="Y">
+                    <param name="Out" value="pCondition"/>
+                </procedure>
+                <procedure name="j1" logic="DecodeId" ifyes="Query" ifno="">
+                    <param name="Out" value="pCondition.activityId" />
+                </procedure>
+                <procedure name="Query" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pCondition"/>
+                    <param name="Out" value="pTable"/>
+                    <param name="Sql" value="khAdmin/activityManage/QryJoinList"/>
+                </procedure>
+            </flow>
+
+            <!-- 布局 -->
+            <layout>
+                <region location ="Center" scale="">
+                    <subregion panel="pTable" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

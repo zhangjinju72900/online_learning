@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="feedbackDetail" title="内容详情">
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="pForm" title="内容详情" object="feedback"  type="Group" multiple="">
+			 <control name="id" title="id" property="id" type="Hidden" edit="N" required="" format="" width="2" height="" column=""/>
+             <control name="feedback" title="内容" property="feedback" type="TextBox" edit="N" required="" format=""
+                     width="1" height="10" column="1"/>
+              
+                
+	</panel>
+	<!-- 逻辑加载 -->
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="j1" server="" logic="DecodeId" ifyes="je" ifno="">
+        <param name="Out" value="pForm.id"></param>
+      </procedure> 
+      <procedure name="je"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="QryCustomContentById"></param>
+      </procedure> 
+    </flow>
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmFeedbackList" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmFeedbackList"></param>
+       </procedure>
+      </flow>
+      <!-- 布局 -->
+    <layout>
+    	<region location ="North" scale="60%">
+       <subregion panel="pToolbar" location="North" scale=""/>
+		<subregion panel="pForm" location="Center" scale=""/> 
+      </region>
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

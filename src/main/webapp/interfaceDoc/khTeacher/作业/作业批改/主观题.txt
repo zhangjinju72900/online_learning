@@ -1,0 +1,158 @@
+UI名称		主观题批改、主观题成绩-作业回答-学生列表（frmAnswerHomework）   与作业成绩详情共用
+
+tokenKey	OnLoad__frmAnswerHomework_qAnswer
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "1"		--作业id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{"total":0,"rows":[{
+		ctlAnswerDetail: "查看回答详情"			
+		fileId: 0							--用户头像id
+		ossUrl: null						--用户头像文件oss地址
+		finishTime: "2019-01-05 16:46:55"	--完成时间
+		id: 1								--作业回答id
+		status: 3							--作业回答状态 0-已分发；1-已回答；2-已提交；3-已批改
+		statusName: "已批改"					--作业回答状态对应字典项名
+		studentId: 1						--学生id
+		studentName: " 访客用户"				--学生姓名name	
+		subjectiveLevelName: "优"			--得分等级名
+		subjectiveScoreLevel: 0				--得分等级--主观题 0-优；1-良；2-中；3-差
+		commitFlag: 0						--作业提交标识:0-已提交，1-未提交
+		},
+		{
+		commitFlag: 1
+		ctlAnswerDetail: "查看回答详情"
+		fileId: 0
+		finishTime: "2019-01-04 11:42:04"
+		id: 3
+		ossUrl: null
+		status: 1
+		statusName: "已回答"
+		studentId: 3
+		studentName: "张静雨"
+		subjectiveLevelName: "未批改"		--批改状态为已批改时显示得分等级，不是已批改状态显示未批改
+		subjectiveScoreLevel: 2
+		commitFlag: 0
+		}]}
+		
+		
+		
+
+
+
+UI名称		主观题作业回答详情（frmAnswerDetail）
+
+tokenKey	OnLoad__frmAnswerDetail_qDetail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkAnswerId: "1"	--作业回答id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data": {
+	"total": 2,
+	"rows": [{
+		"questionContent": "今天星期几",
+		"questionId": 122,
+		"ansOssUrls": ["http://know-how001.oss-cn-beijing.aliyuncs.com/52a6a0bf2eaf47ba8787a3e917d7e5c8201901040559162.pdf", "http://know-how001.oss-cn-beijing.aliyuncs.com/52a6a0bf2eaf47ba8787a3e917d7e5c8201901040559162.pdf"],
+		"questionFileArray": ["http://know-how.oss-cn-beijing.aliyuncs.com/52a6a0bf2eaf47ba8787a3e917d7e5c8201901040559162.pdf?Expires=1547805580&OSSAccessKeyId=LTAIHRCquNMasmCH&Signature=n16StkfDnaTyLWh2ocyHAeuxJ38%3D", "http://know-how.oss-cn-beijing.aliyuncs.com/3468195bd7f84a22a9ad2c791619ac22201901040759192.pdf?Expires=1547805580&OSSAccessKeyId=LTAIHRCquNMasmCH&Signature=Ljw%2FK7dHqhHgDO9jsyatR3IHtVI%3D"],
+		"questionOssKeys": ["52a6a0bf2eaf47ba8787a3e917d7e5c8201901040559162.pdf", "3468195bd7f84a22a9ad2c791619ac22201901040759192.pdf"],
+		"ansOssKeys": ["52a6a0bf2eaf47ba8787a3e917d7e5c8201901040559162.pdf", "52a6a0bf2eaf47ba8787a3e917d7e5c8201901040559162.pdf"],
+		"id": 10,
+		"homeworkAnswerId": 36,
+		"content": "10"
+	}, {
+		"questionContent": "今天是几月份啊",       --试题内容
+		"questionId": 123,                        --试题ID
+		"ansOssUrls": ["http://know-how001.oss-cn-beijing.aliyuncs.com/52a6a0bf2eaf47ba8787a3e917d7e5c8201901040559162.pdf"],
+		"questionFileArray": ["http://know-how.oss-cn-beijing.aliyuncs.com/52a6a0bf2eaf47ba8787a3e917d7e5c8201901040559162.pdf?Expires=1547805580&OSSAccessKeyId=LTAIHRCquNMasmCH&Signature=n16StkfDnaTyLWh2ocyHAeuxJ38%3D"],
+		"questionOssKeys": ["52a6a0bf2eaf47ba8787a3e917d7e5c8201901040559162.pdf"],
+		"ansOssKeys": ["52a6a0bf2eaf47ba8787a3e917d7e5c8201901040559162.pdf"],
+		"id": 11,                        --作业回答明细ID
+		"homeworkAnswerId": 36,  		 --作业回答ID
+		"content": "11"                  --回答内容
+	}]
+}
+
+
+
+
+UI名称		主观作业评分-值评下拉（frmSubjectCorrect）
+
+tokenKey	OnLoad__frmSubjectCorrect_scoreLevel
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		}
+
+返回示例
+"data":		{
+		text: "优"		
+		value: "0"		--得分等级--主观题 0-优；1-良；2-中；3-差',
+		}
+		
+
+
+
+
+UI名称		主观作业评分（frmSubjectCorrect）
+
+tokenKey	OnClick_pToolbar_btnSave_frmSubjectCorrect_jssave2
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkAnswerId: "29"		--作业回答id
+		remark: "你真是很棒棒哦哦哦"		--教师评语
+		subjectiveScoreLevel: "2"		--得分等级--主观题 0-优；1-良；2-中；3-差
+		}
+
+返回示例
+"data":		{
+		class_id: 308
+		course_id: 1
+		create_by: 0
+		create_time: "2019-01-07 19:16:57"
+		finish_time: null
+		homework_id: 15					--作业id
+		homework_type: 0
+		id: 29							--作业回答id
+		objective_real_score: 0
+		objective_score: 0
+		remark: "你真是很棒棒哦哦哦"
+		school_id: 49
+		section_id: 2
+		status: 3
+		student_id: 17
+		subjectiveScoreLevel: 2
+		subjective_score_level: 2
+		teacher_id: 2
+		update_by: 0
+		update_time: "2019-01-07 20:39:00"
+		valid_flag: 0
+		}
+
+

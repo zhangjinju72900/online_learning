@@ -1,0 +1,344 @@
+UI名称		课程-专业下拉列表（frmProfessionCourse）
+
+tokenKey	OnLoad__frmProfessionCourse_list
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data":{}
+
+返回示例
+"data":[{
+		"text":"专业数据",   --专业名称
+		"value":1   		--专业id
+		}]
+
+
+
+
+
+UI名称		课程-根据专业取课程列表（frmProfessionCourse）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmProfessionCourse_QueryCourse
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+		"professionalId":"1"--专业id
+}
+
+返回示例
+"data":{"total":6,--总数
+"rows":[{
+		"courseCount":0.00, --课时
+		"difficultyLevel":5,    --课程难度
+		"name":"语文",    --课程名称
+		"id":4, --课程id
+		"professionalId":1  --专业id
+		"fileCDNUrl":""     --课程封面cdn-url
+	}]}
+
+
+
+
+
+UI名称		课程接口-课程小节树（frmCourseDetail）
+
+tokenKey	OnLoad__frmCourseDetail_tree1
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"courseId":"4"         --课程id
+		"sectionName":"name"   --小节名称模糊搜索
+		}
+
+返回示例
+"data": {
+	"total": 4,
+	"rows": [{
+		"concat(pid, id)": "course-5",
+		"csrId": 0,
+		"children": [{
+			"concat(pid, id)": "course-5cou-section-71",
+			"csrId": 0,
+			"typeName": "课程-小节",           
+			"pid": "5",                                             --课程ID                     
+			"remark": "",
+			"id": "71",                                             --小节ID
+			"text": "1",                                            --小节名称
+			"type": "course-section",                               --类型，course-课程，course-section-小节
+			"fileType": ""
+		}],
+		"typeName": "课程",
+		"pid": "",
+		"remark": "",
+		"id": "5",                                                  --课程ID
+		"text": "数学",												--课程名称
+		"type": "course",                                           --类型，course-课程，course-section-小节
+		"fileType": ""
+	}]
+}
+
+
+
+
+UI名称		课程接口-课程概要（frmCourseDetail）
+
+tokenKey	OnLoad__frmCourseDetail_queryDetail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"courseId":"4"}--课程id
+
+返回示例
+"data":{"courseCount":"0.00",     --课时数
+		"difficultyLevel":"5",    --难度等级 
+		"name":"数学",            --课程名称
+		"remark":"",              --备注
+		"id":5,                   --课程ID
+		"professionalId":2        --专业ID
+		}
+
+
+
+
+
+
+UI名称		课程接口-小节描述（frmSectionDetail）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmSectionDetail_QueryDetail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"sectionId":"17"}--小节id
+
+返回示例
+"data":{
+		"remark":"覅杰尔夫不哇哦柯基呢哦积分和覅"  --小节描述
+		}
+
+
+
+
+
+UI名称		课程接口-小节资源详情树（frmSectionDetail）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmSectionDetail_QueryTree
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"sectionId":"17"}--小节id
+
+返回示例
+"data": {
+	"total": 8,
+	"rows": [{
+		"bucketName": "",
+		"ossKey": "",
+		"concat(pid, id)": "cou-section-label-17-13",
+		"csrId": 0,
+		"children": null,                                   标签下无资源
+		"typeName": "课程-小节-标签",
+		"pid": "",
+		"remark": "",
+		"id": "cou-section-label-17-13",                    cou-section-label-小节ID-标签ID
+		"text": "工作页",									标签名称
+		"type": "label",                                    类型  type：标签
+		"fileType": ""
+	}, 
+	{
+		"bucketName": "",
+		"ossKey": "",
+		"concat(pid, id)": "cou-section-label-17-3",
+		"csrId": 0,
+		"children": [{
+			"bucketName": "know-how",
+			"ossKey": "fc29d01a81d246a5a4ea537815e5a2bd201809201151347.txt",
+			"concat(pid, id)": "cou-section-label-17-342",
+			"csrId": 42,                                     资源绑定ID-纠错时传
+			"ossUrl": "http://know-how.oss-cn-beijing.aliyuncs.com/fc29d01a81d246a5a4ea537815e5a2bd201809201151347.txt?Expires=1547620428&OSSAccessKeyId=LTAIHRCquNMasmCH&Signature=xrtvfUlxLiq1yH%2BAT%2F9QQCykTsI%3D",
+			"typeName": "课程-小节-标签-资源",
+			"pid": "cou-section-label-17-3",
+			"remark": "",
+			"id": "42",                          			  资源ID            
+			"text": "ABC",									  资源名称
+			"type": "resource",                              类型  type：资源
+			"fileType": "txt"                                资源类型
+			"resourcesType": 14                              0-普通资源，14scorm资源，15PPT转H5资源
+		}],
+		"typeName": "课程-小节-标签",
+		"pid": "",
+		"remark": "",
+		"id": "cou-section-label-17-3",
+		"text": "小结标签",
+		"type": "label",
+		"fileType": ""
+	}]
+}
+
+
+
+
+UI名称		课程接口-课程标签资源树（frmCourseResource）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmCourseResource_QueryTree
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"courseId":"4"}--课程id
+
+返回示例
+"data": {
+	"total": 12,
+	"rows": [{
+		"bucketName": "",
+		"ossKey": "",
+		"concat(pid, id)": "cou-label-5",
+		"csrId": 0,
+		"children": null,
+		"typeName": "课程-标签",
+		"pid": "",
+		"remark": "",
+		"id": "cou-label-5",
+		"text": "erfw e",
+		"type": "course-label",
+		"fileType": ""
+		"resourcesType":0
+	}, 
+	{
+		"bucketName": "",
+		"ossKey": "",
+		"concat(pid, id)": "cou-label-8",
+		"csrId": 0,
+		"children": [{
+			"bucketName": "know-how",
+			"ossKey": "b611e113f94947b9922ea66e935e5797201809050627227.flv",    --osskey
+			"concat(pid, id)": "cou-label-8138",
+			"csrId": 51,                                           --资源绑定ID-纠错时传
+			"ossUrl": "http://know-how.oss-cn-beijing.aliyuncs.com/b611e113f94947b9922ea66e935e5797201809050627227.flv?Expires=1547632695&OSSAccessKeyId=LTAIHRCquNMasmCH&Signature=1czqEu1gqDiT7qgebrlL7VJmYD8%3D",
+			"typeName": "课程-标签-资源",
+			"pid": "cou-label-8",
+			"remark": "",
+			"id": "138",                                     	   --资源ID     
+			"text": "发动机分解视频",                               --资源名称
+			"type": "course-label-resource",                       --课程标签资源
+			"fileType": "flv"									   --资源类型
+			"resourcesType": 14                                    --0-普通资源，14scorm资源，15PPT转H5资源
+		}],
+		"typeName": "课程-标签",         
+		"pid": "",
+		"remark": "",
+		"id": "cou-label-8",                                      
+		"text": "12",                                              --标签名称                                
+		"type": "course-label",
+		"fileType": ""
+		"resourcesType":0
+	}]
+}
+
+
+
+
+
+UI名称		课程接口-我的资料树（frmMyResource）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmMyResource_QueryTree
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"professionalId":"1",--专业id
+		"courseId":"4",--课程id
+		"sectionId":"52",--小节id
+		"teacherId":"2"--用户id
+}
+
+返回示例
+"data": {
+	"total": 5,
+	"rows": [{
+		"bucketName": "",
+		"ossKey": "",
+		"concat(pid, id)": "1",
+		"ttaId": 1,
+		"children": [{
+			"bucketName": "",
+			"ossKey": "",                             --资源key
+			"concat(pid, id)": "10",
+			"ttaId": 2,
+			"ossUrl": "",                             --资源url
+			"typeName": "专业-课程-小节-教师-资料",
+			"pid": "1",
+			"remark": "",
+			"id": 0,
+			"text": "测试数据2",                      --资源名称
+			"type": "teachingAssist",                --教辅资料
+			"fileType": ""                           --资源类型 
+		}],
+		"typeName": "专业-课程-小节-教师-资料",
+		"pid": "",
+		"remark": "",
+		"id": 1,
+		"text": "我的资料",                          --标签名称
+		"type": "label",                            --类型
+		"fileType": ""
+	}]
+}
+
+
+
+
+
+UI名称		课程接口-资源纠错-新增纠错（frmResErrorEdit）
+
+tokenKey	OnClick_pButton_save_frmResErrorEdit_jssave
+
+接口地址	/api/SaveCustom
+
+接口类型	POST
+
+参数示例
+"data":{
+		"courseSectionResourcesId":"1",--课程小节资源id,上面接口中的csrId
+		"teacherId":"1",--用户id
+		"fileId":"1" --文件id
+		"content":"1",--纠错内容
+}
+
+返回示例
+"data":{
+	"valid_flag":0,--是否存在
+	"content":"1",--纠错内容
+	"labelId":1,--标签id
+	"schoolId":1,--学校id
+	"id":5,--纠错id
+	"courseId":1,
+	"sectionId":1,--小节id
+	"courseResourcesName":"1",--资源名称
+	"teacherId":1,--用户id
+	"customerResourcesId":1,--资源id
+	"status":0--状态
+}
+

@@ -1,0 +1,1 @@
+select i.oss_url as ossUrl from t_banner b left join t_file_index i on b.pic_id = i.id where b.banner_type = #{data.bannerType} and b.valid_flag = 0 order by b.show_order limit 6

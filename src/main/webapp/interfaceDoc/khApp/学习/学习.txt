@@ -1,0 +1,51 @@
+﻿UI名称		保存课程小结点击记录（frmAppRecordEdit）
+
+tokenKey	OnClick_pButton_save_frmAppRecordEdit_jssave
+
+接口地址	/api/save
+
+接口类型	POST
+
+参数示例
+"data": {
+		"courseid":"2",  --课程ID
+		"sectionid":"2",  --小结ID
+		"labelid":"2",  --标签ID
+		"resourceid":"2"  --资源ID
+		,"Mode":"Add"}  --模式
+
+返回示例
+"data":{"course_id":2,"resourceid":2,"createtime":"2018-09-26 14:11:20","create_time":"2018-09-26 14:11:20","sectionid":2,"create_by":7,"update_time":"2018-09-26 14:11:20","createby":7,"section_id":2,"labelid":2,"updateby":7,"resource_id":2,"id":5,"customer_user_id":0,"update_by":7,"updatetime":"2018-09-26 14:11:20","courseid":2,"label_id":2}   --学校名称
+
+
+
+
+
+UI名称  我的学习列表接口，用于查询当前用户最后一次打开该课程的哪个小节（frmAppRecordList）
+
+tokenKey OnLoad__frmOrderList_j2
+
+接口地址 /api/query
+
+接口类型 POST
+
+参数示例
+"data": {courseid: "2",  --课程ID
+	page: 1, rows: 1,   --只查最后一条
+	sort: "id", order: "desc"}
+  
+
+返回示例
+"data":{"resourceid":5,  --资源ID
+		"createtime":"2018-09-27 17:53:01",
+		"createby":5, --
+		"labelid":3,  --标签ID
+		"updateby":5,
+		"id":3,  
+		"sectionid":4,  --小节ID
+		"customeruserid":5, --用户ID
+		"updatetime":"2018-09-27 17:53:01",
+		"courseid":2}  --课程ID
+		
+		
+

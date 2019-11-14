@@ -1,0 +1,265 @@
+UI名称		作业成绩列表（frmHomeworkScore）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmHomeworkScore_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		eq_classId: ""			--班级id
+		eq_courseId: ""			--课程id
+		eq_homeworkType: ""		--标识（0-客观题；1-主观题）
+		eq_sectionId: ""		--课程小节id
+		lk_name: ""				--作业名称
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":	{"total": 2,
+	"rows": [{
+		avgScore: "80.00"						--平均成绩(已批改状态时主观题显示优良中差，客观题显示平均分，已分发，已分发，已截止状态显示待批改)
+		classId: 308
+		className: "汽修1班"                       --班级名称
+		courseId: 1
+		courseName: null                           --课程名称
+		createTime: "2019-01-07 19:18:37"			
+		distributeTime: "2019-01-07 19:18:37"		--分发时间
+		endTime: "2019-01-07 00:00:00"				--截止时间
+		homeworkType: 0                              --（0-客观题；1-主观题）
+		homeworkTypeName: "客观题"                   --题型名称
+		id: 16                                      --作业编号
+		name: "测试执行分发学生"                     --作业名称
+		schoolId: 49
+		sectionName: "任务一"                        --小节名称
+		sectionid: 2
+		}]}
+
+
+
+
+
+UI名称		作业基本信息查询 主观/客观（frmHomeworkView）   与作业成绩 主观/客观 共用
+
+tokenKey	OnLoad__frmHomeworkView_qQuestionDeTail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "1" --作业id
+		}
+
+返回示例
+"data":		{
+		classCount: "25"	--共计人数
+		className: "汽修1班"		--班级名称
+		commitCount: "2"		--提交人数
+		difficultyLevelName: "简单"		--作业难度
+		distributeTime: "2019-01-02 16:27:09.0"		--作业分发时间
+		endTime: "2019-01-03 15:27:17.0"			--作业截止时间
+		homeworkTypeName: "客观题"			--作业类型
+		id: "1"								作业id
+		name: "漆工进修钣金喷漆"				作业名称
+		}
+
+
+
+
+
+UI名称		主观题批改、主观题成绩-作业回答-学生列表（frmAnswerHomework）   与作业批改-主观题显示共用
+
+tokenKey	OnLoad__frmAnswerHomework_qAnswer
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "1"		--作业id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{"total":0,"rows":[{
+		ctlAnswerDetail: "查看回答详情"			
+		fileId: 0							--用户头像id
+		ossUrl: null						--用户头像文件oss地址
+		finishTime: "2019-01-05 16:46:55"	--完成时间
+		id: 1								--作业回答id
+		status: 3							--作业回答状态 0-已分发；1-已回答；2-已提交；3-已批改
+		statusName: "已批改"					--作业回答状态对应字典项名
+		studentId: 1						--学生id
+		studentName: " 访客用户"				--学生姓名name	
+		subjectiveLevelName: "优"			--得分等级名
+		subjectiveScoreLevel: 0				--得分等级--主观题 0-优；1-良；2-中；3-差
+		commitFlag: 0						--作业提交标识:0-已提交，1-未提交
+		},
+		{
+		commitFlag: 1
+		ctlAnswerDetail: "查看回答详情"
+		fileId: 0
+		finishTime: "2019-01-04 11:42:04"
+		id: 3
+		ossUrl: null
+		status: 1
+		statusName: "已回答"
+		studentId: 3
+		studentName: "张静雨"
+		subjectiveLevelName: "未批改"		--批改状态为已批改时显示得分等级，不是已批改状态显示未批改
+		subjectiveScoreLevel: 2
+		commitFlag: 0
+		}]}
+
+
+
+
+
+UI名称		客观作业试题错误率柱状图参数（frmObjectScore）
+
+tokenKey	OnClick_pToolbar_btnHistogram_frmObjectScore_qHistogram
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "10"		--客观作业id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		{"seriesData":[100.0,100.0,0.0,50.0],			--y轴错误率(100.0即错误率为100%,50.0即错误率为50%)
+		"xAxisData":["120","122","123","124"]}			--x轴试题id
+		}
+
+
+
+
+
+
+UI名称		客观题作业成绩列表（frmObjectScore）
+
+tokenKey	OnLoad__frmObjectScore_qAnswer
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "10"		--客观作业id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		correctTitle: "A"					--题目答案
+		countCommit: 2						--已批改人数
+		countWrong: 1						--错误人数
+		questionContent: "今天是几月份"		--题干
+		questionId: 123						--题目id
+		wrongRate: "50.00%"					--该题已提交学生的错误率
+		}
+		
+		
+		
+
+UI名称		客观题作业-试题的回答错误人员列表（frmObjectScore）
+
+tokenKey	OnClick_pToolbar_btnSearch_frmObjectScore_qQuesAnswer
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "10"					--作业id
+		questionId: "124"					--试题id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		correctFlagName: "错误"				--是否正确
+		studentId: 3						--学生id
+		studentName: "张静雨"				--学生名
+		}		
+
+
+
+
+
+
+UI名称		客观题作业人员得分列表（frmObjectAnswer）与作业批改客观题共用
+
+tokenKey	OnLoad__frmObjectAnswer_qAnswer
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "10"		--作业id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{"total":24,"rows":[{
+		fileId: 2920					--用户头像文件id,优先使用 头像url
+		finishTime: null				--作业完成时间
+		id: 4							--作业回答id
+		objectiveRealScore: 0			--得分值--客观题
+		ossUrl: ""						--头像url
+		status: 3						--作业回答状态 0-已分发；1-已回答；2-已提交；3-已批改
+		statusName: "已批改"
+		studentId: 2					--学生id
+		studentName: "管理员"			--学生名称
+		commitFlag: 0					--作业提交标识:0-已提交，1-未提交
+		}]}
+
+		
+		
+		
+
+
+UI名称		客观题作业回答详情（frmObjectDetail）与作业批改客观题人员答题详情共用
+
+tokenKey	OnLoad__frmObjectDetail_qDetail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkAnswerId: "4"			--作业回答id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{"total":1,"rows":[{
+		answerOption: "B,C"				--学生回答选项
+		content: "今天星期几"			--题干
+		correctFlag: 1					--学生回答正确标识(0-正确，1-错误)
+		correctTitle: "A,C,D"			--该题正确答案选项
+		homeworkAnswerId: 4				-作业回答id
+		id: 4							-作业回答详情id
+		objectiveRealScore: 0			--客观题得分
+		questionId: 122					--题目id
+		}]}		

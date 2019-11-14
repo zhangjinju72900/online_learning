@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+			
+	<model_layer>
+		<object name="operateLog" table="t_operate_log" primary="id" unique="" order="" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>	
+			<property name="customerUserId" type="Long" length="20" initial="" field="customer_user_id"/>
+			<property name="customerUserName" type="Long" length="20" initial="" field=""/>
+			<property name="eventType" type="String" length="50" initial="" field="event_type"/>
+			<property name="eventTypeName" type="String" length="50" initial="" field=""/>
+			<property name="assemblyType" type="Long" length="20" initial="" field="assembly_type"/>
+			<property name="assemblyTypeName" type="String" length="50" initial="" field=""/>
+			<property name="eventDesc" type="String" length="1000" initial="" field="event_desc"/>
+			<property name="platformType" type="Long" length="20" initial="" field="platform_type"/>
+			<property name="platformTypeName" type="String" length="50" initial="" field=""/>
+			<property name="sourceIp" type="String" length="10" initial="" field="source_ip"/>
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+			<property name="countTimes" type="Long" length="20" field=""/>
+			<property name="hours" type="Date" length="" field=""/> 
+		</object>  
+	</model_layer>
+</tsoftware>

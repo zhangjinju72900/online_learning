@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="absenteeismInfo" title="咨讯专题详情列表">
+			<panel name="pToolbar" title="缺勤详情" object="" type="Toolbar">
+				<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+            <panel name="pCondition" title="查询条件" object="modAttendance" type="Group">
+                <control name="id" title="id" property="id" type="TextBox" edit="N" required="N" format="" width="2" height="1" column="2"/>
+            </panel>
+            
+            <panel name="pReviewList" title="评论列表" object="absenteeismInfo" type="Grid">
+            	<control name="studentId" title="ID" property="studentId" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="name" title="姓名" property="name" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="title" title="内容" property="title" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+            </panel>
+            
+
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="j1" logic="DecodeId" ifyes="qid" ifno="">
+                    <param name="Out" value="pCondition.id"></param>
+                </procedure>
+                <procedure name="qid" logic="Query" ifyes="j3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pReviewList"></param>
+                    <param name="Sql" value="khTeacher/attendanceManage/QryAbsenteeism"></param>
+                </procedure>
+
+            </flow>
+
+            <!--返回-->
+            <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+                <procedure name="proTransition" server="/frmAttendanceManage" logic="Back" ifyes="" ifno="">
+                    <param name="To" value="frmAttendanceManage"></param>
+                </procedure>
+            </flow>
+
+            <layout>
+            	<region location ="North" scale="">
+	        		<subregion panel="pToolbar" location ="North" scale=""/>
+	    		</region>
+                <region location="Center" scale="">
+                    <subregion panel="pCondition" location="North" scale=""/>
+                    <subregion panel="pReviewList" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

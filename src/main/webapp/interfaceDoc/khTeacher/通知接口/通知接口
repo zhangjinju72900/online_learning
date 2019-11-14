@@ -1,0 +1,96 @@
+.xml-教师端接口-系统通知
+
+UI名称      系统接口-查询接口(frmNoticeList1)
+tokenKey    OnClick_pToolbar_btnQuery_frmNoticeList1_Query
+接口地址  /api/query
+接口类型 POS
+参数示例 
+	"data":{
+    	"lk_title":"" --标题
+	}
+返回示例 
+"data":{ 
+		area: "华东一区,华东二区,华南大区,西北大区,西南大区,中东大区,东北大区,华北一区,华北二区"  --地区
+		context: "1122"   --通知内容
+		id: 41           --通知id 
+		readFlag: 1      --已读数量
+		regionId: "23,24,25,26,27,28,29,30,31"
+		releaseBy: 2
+		releaseByna: "管理员"   
+		releaseStatus: "已发布"
+		releaseStatusNo: "1"
+		releaseTime: "2019-05-27 13:04:19"
+		role: "教师"
+		roleId: "11"
+		title: "122"      --标题
+		unreadFlag: 6     --未读数量
+		updateBy: 2
+		updateByna: "管理员"   
+		updateTime: "2019-05-27 13:04:19"
+}
+
+UI名称  系统接口-查看详情(frmNoticeDetail1)
+tokenKey  OnClick_pTable_lk_title_frmNoticeList1_j1
+接口地址  /api/querybyid
+接口类型 POST
+参数示例 
+	"data":{
+    	"eq_id":"46"   --通知id
+	}
+返回示例 
+"data":{ 
+	context: "1111"  --内容
+	eq_id: 46       --id
+	fileId: null
+	title: "1111"    --标题
+}
+
+
+
+
+UI名称		系统接口-----发布通知(frmNoticeAdd1)
+
+tokenKey    OnClick_pToolbar_btnCreate_frmNoticeList1_jspopup
+
+接口地址    /api/save
+
+参数示例
+"data": 	{
+   		 Mode: "Add"  
+		classId: "11"  --班级id
+		context: "1111"  --内容
+		createBy: ""   
+		createTime: ""
+		fileId: "1"     --附件id
+		releaseBy: ""
+		releaseTime: ""
+		title: "1111"    --标题
+		updateBy: ""
+		updateTime: ""
+}
+
+返回实例
+"data":	{
+		classId: null    --班级id
+		context: "1111"   --内容
+		createBy: 2
+		createTime: "2019-05-27 13:45:04"
+		create_by: 2   
+		create_time: "2019-05-27 13:45:04"
+		fileId: null   
+		id: 46        --通知id
+		releaseBy: 2
+		releaseTime: "2019-05-27 13:45:04"
+		release_by: 2
+		release_status: 0
+		release_time: "2019-05-27 13:45:04"
+		school_id: 0
+		source: 0
+		title: "1111"   --标题
+		updateBy: 2
+		updateTime: "2019-05-27 13:45:04"
+		update_by: 2
+		update_time: "2019-05-27 13:45:04"
+		valid_flag: 0
+
+}

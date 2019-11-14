@@ -1,0 +1,1 @@
+delete from t_question_file where question_id = #{data.id}

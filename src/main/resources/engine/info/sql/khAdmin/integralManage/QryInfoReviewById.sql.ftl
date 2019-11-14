@@ -1,0 +1,1 @@
+select id, review_by from t_information_review where id = #{data.id}

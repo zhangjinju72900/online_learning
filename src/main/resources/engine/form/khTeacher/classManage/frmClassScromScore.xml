@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+      xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmClassScromScore" title="scrom成绩列表">
+  <panel name="pToolbar" title="工具条" object="" type="Toolbar">
+    <control name="btnSearch" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+  </panel>
+  <panel name="pCondition" title="查询条件" object="resourceScore" type="Group"  multiple="">
+  	<control name="classId" title="班级id" property="classId" type="TextBox" edit="Y" required="" format="" width="1" height="1" column=""/>
+    <control name="courseId" title="请选择课程：" property="courseId" type="ComboBox" edit="Y" required="" format="" width="1" height="" column="3"/>
+  </panel>
+  <panel name="pTable" title="列表" object="resourceScore" type="Grid"  multiple="">
+  	<control name="customerUserId" title="用户id" property="customerUserId" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+  	<control name="customerUserName" title="用户名" property="customerUserName" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+  	<control name="fileId" title="用户头像id" property="fileId" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+  	<control name="ossUrl" title="用户头像url" property="ossUrl" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+  	<control name="customerResourcesIds" title="资源id" property="customerResourcesIds" type="TextBox" edit="" required="" format="" width="500" height="" column=""/>
+    <control name="resourceNames" title="资源名" property="resourceNames" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+    <control name="scores" title="得分" property="scores" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+    <!-- <control name="passScores" title="通过分数" property="passScores" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+    <control name="percentScores" title="分数百分比" property="percentScores" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+    <control name="passPercents" title="通过百分比" property="passPercents" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+    <control name="avgScores" title="平均分" property="avgScores" type="TextBox" edit="" required="" format="" width="200" height="" column=""/> -->
+    <control name="avgScoreShow" title="平均分" property="avgScoreShow" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+  </panel>
+  
+   <!-- 逻辑加载 -->
+    <flow trigger="" event="OnLoad" filter="">
+      <procedure name="jClear"  logic="Clear" ifyes="jQuery" ifno="" sync="Y">
+         <param name="Out" value="pCondition"></param>
+      </procedure>
+      <procedure name="jQuery"  logic="List" ifyes="getSection" ifno="">
+		<param name="In" value="pCondition"></param>
+		<param name="Out" value="pCondition.courseId"></param>
+		<param name="Sql" value="courseIdByClass"></param>
+	  </procedure>
+    </flow>
+    <!-- 搜索 -->
+    <flow trigger="pToolbar.btnSearch" event="OnClick" filter="">  
+    	<procedure name="jQuery"  logic="List" ifyes="Query" ifno="">
+		<param name="In" value="pCondition"></param>
+		<param name="Out" value="pCondition.courseId"></param>
+		<param name="Sql" value="courseIdByClass"></param>
+	  </procedure>
+      <procedure name="Query"  logic="Query" ifyes="" ifno="" sync="Y">
+    	<param name="In" value="pCondition"></param>
+    	<param name="Out" value="pTable"></param>
+    	<param name="Plugin" value="scormResourceAvgScorePlugin"/>
+    	<param name="Sql" value="khTeacher/classManage/QryClassScromScore"></param>
+      </procedure> 
+    </flow>
+    <!-- 布局 --> 
+    <layout>
+      <region location ="North" scale="">
+        <subregion panel="pToolbar" location ="North" scale=""/>
+        <subregion panel="pCondition" location="Center" scale=""/>
+      </region>
+	  <region location ="Center" scale="">
+    	<subregion panel="pTable" location="Center" scale="" />
+      </region>
+    </layout>
+  </ui>
+  </ui_layer>
+</tsoftware>

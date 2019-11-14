@@ -1,0 +1,1 @@
+delete from `t_goods_collect` WHERE collect_by = #{data.session.userInfo.userId} and good_id = #{data.eq_goodId} and collect_count = 1

@@ -1,0 +1,54 @@
+UI名称		班级管理-scrom成绩查看（frmClassScromScore）
+
+tokenKey	OnClick_pToolbar_btnSearch_frmClassScromScore_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		classId: "308"			--班级id
+		courseId: "20"			--课程id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{total: 25,
+			rows: [{
+				avgScoreShow: "70.00"							--该用户的平均分
+				avgScores: 70									--用户平均分
+				customerResourcesIds: "223,340,343,368,396"		--scrom资源id(用,隔开)
+				customerUserId: 1								--用户id
+				customerUserName: " 访客用户"					--用户名
+				fileId: 0										--用户头像id
+				ossUrl: null									--用户头像url
+				resourceNames: "task one ,Task two ,task three ,Task four ,Task five " --scrom资源名(用,隔开与scrom资源id对应)
+				scores: "-,80.00,60.00,-,-"						--用户每个scrom资源的得分(没有得分时显示-)
+				resourceAvgScore: "30.00,60.00,50.00,20.00,30.00"  --资源平均分,只在结果集的第一行有
+				
+			}]
+
+
+
+
+
+
+UI名称		班级管理-scrom成绩查看-根据班级ID查包含scorm的课程（frmClassScromScore）
+
+tokenKey	OnClick_pToolbar_btnSearch_frmClassScromScore_jQuery
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		classId: "308"			--班级id
+		}
+
+返回示例
+"data":[{"text":"测试课程勿删",                                         --课程名称
+			"value":20},                                               --课程ID
+		{"text":"测试课程2勿删","value":21}]

@@ -1,0 +1,98 @@
+UI名称		上课记录返回日历情况（frmAppAttendClassList）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmAppAttendClassList_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{startTime: "2019-01-10",    --开始时间
+		endTime: "2019-01-11",      --截止时间
+		userId: "2",                --用户ID
+		page: 1, rows: 50}
+
+返回示例
+"data":{"total":1,"rows":[{"id":67,"             --id
+			attendClassDate":"2019-01-10",       --日期
+			"status":0                           --状态 0-正常，1-异常
+			}]}
+		
+		
+		
+		
+
+UI名称		点击日历返回上课情况/签到情况（frmAppAttendClassList）
+
+tokenKey	OnClick_pToolbar_btnQuery2_frmAppAttendClassList_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"startTime":"2019-01-10",    --选择的日期
+		"userId":"2",                --当前用户ID
+		"page":1,"rows":50}
+
+返回示例
+"data":{"total":1,"rows":[{
+			"showAttendClassDetail":"查看上课详情",
+			"id":117,                                          --上课记录ID
+			"title":"已确认上课",                               --提示语
+			"attendClassDate":"17:35"                          --时间
+			}]}
+			
+		
+			
+			
+			
+UI名称		点击上课情况/签到情况 返回详情（frmAppAttendClassDtl）
+
+tokenKey	OnClick_pformDown_ctlQry_frmAppAttendClassDtl_queryTableAnser
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data":{"id":"117"                  --上课记录ID
+		"userId":"2"                --当前用户ID
+		}
+
+返回示例
+"data":{"sectionName":"qwe",            --小节ID
+		"courseName":"语文",			    --课程ID
+		"teacherName":"管理员老师",      --教师名称
+		"signStatus":"17/17",           --教师显示 签到情况
+		"signStatus2":0,                --学生显示 签到情况 0-出勤，1-未出勤
+		"className":"2016级汽修1班",     --班级
+		"id":117,                        --上课记录ID
+		"attendClassDate":"17:35"        --时间
+		}	
+		
+		
+		
+		
+		
+UI名称		教师返回缺勤明细（frmAppAttendClassDtl）
+
+tokenKey	OnClick_pformDown_ctlQry_frmAppAttendClassDtl_queryTableQues
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{id: "117"                       --上课记录ID
+		}
+
+返回示例
+"data":{"total":1,"rows":[{
+		"name":"李程程",         --学生姓名
+		"fileUrl":"",            --学生头像url(为空时使用文件ID)
+		"fileId":0               --学生头像文件ID
+		}]}		
+				
+
+  			

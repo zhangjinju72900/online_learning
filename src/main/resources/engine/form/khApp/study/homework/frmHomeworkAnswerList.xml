@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmHomeworkAnswer" title="作业分发">
+	        <panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnQuery" title="查询作业" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnQueryHomeWork" title="查询作业详情" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnDistribute" title="分发新作业" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			
+			</panel>
+        	
+            <panel name="pCondition" title="查询条件" object="homeworkAnswer" type="Group">
+                
+                <!-- <control name="eq_sectionId" title="选择课程小节" property="id" type="ComboBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/> -->
+                <control name="distributeTime" title="发布日期" property="distributeTime" type="DateBox" edit="Y" required="" format="" width="1" height="1" column="1" />
+                <control name="studentId" title="学生ID" property="studentId" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+                
+            </panel>
+            <panel name="pTable" title="查询结果" object="homeworkAnswer" type="Grid" multiple="N" >
+            	<control name="showHomeworkDetail" title="查看试题" property="" type="Link" edit="" required="" format="" width="150" height="" column=""/>
+            	<control name="showHomeworkResult" title="查看结果" property="" type="Link" edit="" required="" format="" width="150" height="" column=""/>
+                <control name="id" title="id" property="id" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="homeworkName" title="作业名称" property="homeworkName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="className" title="分发班级" property="className" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="courseName" title="分发课程" property="courseName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="sectionName" title="分发小节" property="sectionName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="homeworkTypeName" title="题型" property="homeworkTypeName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="distributeTime" title="分发时间" property="distributeTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="distributeStatusName" title="状态" property="distributeStatusName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+
+            </panel>
+            
+            <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		      <procedure name="homeworkQuery" logic="Query" ifyes="" ifno="">
+		      	 <param name="In" value="pCondition"></param>
+		         <param name="Out" value="pTable"></param>
+		         <param name="Sql" value="khApp/study/homework/QryMyHomeWork"></param>
+		      </procedure>
+		    </flow>
+		 
+			<!-- 查询点击事件 -->
+		    <flow trigger="pToolbar.btnQuery" event="OnClick" filter="">  
+		      <procedure name="Query"  logic="Query" ifyes="" ifno="" sync="Y">
+		           <param name="In" value="pCondition"></param>
+		           <param name="Out" value="pTable"></param>
+		           <param name="Sql" value="khApp/study/homework/QryMyHomeWork"></param>
+		      </procedure> 
+		    </flow>
+			<!-- 查询点击事件 -->
+		    <flow trigger="pToolbar.btnQueryHomeWork" event="OnClick" filter="">  
+		      <procedure name="Query"  logic="Query" ifyes="" ifno="" sync="Y">
+		           <param name="In" value="pCondition"></param>
+		           <param name="Out" value="pTable"></param>
+		           <param name="Sql" value="khApp/study/homework/QryMyHomeWorkById"></param>
+		      </procedure> 
+		    </flow>
+		    
+		    <!--查看试题详情 -->
+			<flow trigger="pTable.showHomeworkDetail" event="OnClick" filter="">
+				<procedure name="annEncodeId" logic="EncodeId" ifyes="j1"
+					ifno="">
+					<param name="In" value="pTable.id"></param>
+				</procedure>
+				<procedure name="j1" logic="Transition" ifyes="" ifno="">
+					<param name="To" value="frmHomeworkAnswerDtl"></param>
+					<param name="Mode" value="ReadOnly"></param>
+				</procedure>
+			</flow>
+			
+			
+			 <!--查看试题结果 -->
+			<flow trigger="pTable.showHomeworkResult" event="OnClick" filter="">
+				<procedure name="annEncodeId" logic="EncodeId" ifyes="j1"
+					ifno="">
+					<param name="In" value="pTable.id"></param>
+				</procedure>
+				<procedure name="j1" logic="Transition" ifyes="" ifno="">
+					<param name="To" value="frmHomeworkAnswerRst"></param>
+					<param name="Mode" value="ReadOnly"></param>
+				</procedure>
+			</flow>
+		    
+            <!-- 布局 -->
+            <layout>
+                <region location ="North" scale="">
+                    <subregion panel="pToolbar" location ="North" scale=""/>
+                </region>
+                <region location ="Center" scale="">
+                	<subregion panel="pCondition" location="North" scale=""/>
+                    <subregion panel="pTable" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

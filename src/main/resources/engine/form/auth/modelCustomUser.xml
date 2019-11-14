@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+  <object name="CustomerUserInfo" table="t_customer_user" primary="id" unique="tel,card_num" order="id desc">
+	<property name="id" type="Long" length="20" initial="" field="id"/>
+	<property name="tel" type="String" length="50" field="tel" validate="CheckMobile(self)"/>
+	<property name="cardNum" type="String" length="50" initial="" field="card_num" validate="CheckIdCard(self)"/>
+	<property name="password" type="String" length="100" field="password"/>
+	<property name="name" type="String" length="50" initial="" field="name"/>
+	<property name="sex" type="Long" length="1" field="sex" />
+  	<property name="provinceCode" type="String" length="20" initial="" field="province_code"/>
+	<property name="loginCount" type="Long" length="20" validate=""  field="login_count" />
+	<property name="learnTime" type="Long" length="100" validate=""  field="learn_time" />
+	<property name="lastLoginTime" type="Date" length="" validate=""   field="last_login_time" />
+	<property name="email" type="String" length="50"   field="email" />
+	<property name="userExplain" type="String" length="200" validate=""  field="user_explain" />
+	<property name="nickName" type="String" length="15" validate=""  field="nickname" />
+	<property name="updatePassword" type="String" length="50"   field="" />
+	<property name="password1" type="String" length="100" field=""/>
+	<property name="salt" type="String" length="64" validate=""  field="" />
+
+		<!-- 查询相关，关联表字段等 begin-->
+	<property name="schoolId" type="Long" length="20" validate=""  field="school_id" />
+	<property name="integral" type="Long" length="20" validate=""  field="integral" />
+	<property name="totalIntegral" type="Long" length="20" validate=""  field="total_integral" />
+	<property name="fileId" type="Long" length="50" validate=""  field="file_id" />
+	<property name="fileName" type="String" length="50" validate=""  field="" />
+	<property name="validFlag" type="Long" length="20" initial="" field="valid_flag"/>
+	
+	
+	<property name="userRole" type="String" length="50" validate=""  field="" />
+	<property name="roleId" type="String" length="200" validate=""  field="" />
+	<property name="sexName" type="String" length="50" validate=""  field="" />
+	<property name="school" type="String" length="50" validate=""  field="" />
+	<property name="grade" type="String" length="50" validate=""  field="" />
+	<property name="gradeName" type="String" length="50" validate=""  field="" />
+	<property name="className" type="String" length="50" validate=""  field="" />
+	<property name="roleName" type="String" length="50" validate=""  field="" />
+	<property name="provinceName" type="String" length="20" initial="" field=""/>
+	<!-- end -->	
+	<property name="updateBy" type="Long" length="10" validate=""  field="update_by" />
+	<property name="updateByName" type="String" length="50" validate=""  field="" />
+	<property name="createBy" type="Long" length="10" validate=""  field="create_by" />	
+	<property name="createByName" type="String" length="50" validate=""  field="" />
+	<property name="updateTime" type="Date" length="" validate=""  field="update_time" />
+	<property name="createTime" type="Date" length="" validate=""  field="create_time" />
+	<property name="testPassword" type="String" length="100" initial="" field=""/>
+	<property name="oldPassword" type="String" length="100" initial="" field=""/>
+  </object>     
+</model_layer>
+</tsoftware>

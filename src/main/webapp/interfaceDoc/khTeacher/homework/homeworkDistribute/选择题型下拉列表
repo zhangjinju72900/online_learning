@@ -1,0 +1,30 @@
+
+UI名称		作业分发-选择题型（frmHomeworkList）
+
+tokenKey	 OnLoad__frmHomeworkList_typeList
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{}
+
+返回示例
+"data":		{"text":"主观题",		--题型名称(主观题/客观题)
+			 "value":"1"}			--homeworkType
+		
+
+UI名称		作业分发-分发新作业-选择题型（frmDistribute）
+tokenKey   OnLoad__frmDistribute_typeList
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{}
+
+返回示例
+"data":		{"text":"主观题",		--题型名称(主观题/客观题)
+			 "value":"1"}			--homeworkType
+		

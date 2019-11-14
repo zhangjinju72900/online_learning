@@ -1,0 +1,1 @@
+select id from t_order where code=#{data.code}

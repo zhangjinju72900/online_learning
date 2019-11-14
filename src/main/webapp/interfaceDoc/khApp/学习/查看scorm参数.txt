@@ -1,0 +1,41 @@
+﻿UI名称		frmQueryResourceP 查看scorm请求参数
+
+tokenKey	OnClick_pButton_save_frmQueryResourceP_jssave
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		csrId: "203",  --课程小节资源ID(新加参数，课程详情时返回) 
+		createBy: "2"  --当前登录人
+		}
+
+返回示例
+"data":{"course_id":20,
+		"resourceId":"Tj9nsIdfq0I=",  --资源ID
+		"create_time":null,  
+		"pass_score":0.00,
+		"customer_resources_id":9,
+		"sectionId":"oQlKBXhZ2RM=",   --小节ID
+		"userId":"abx3HXS0pUE=",      --创建人
+		"url":"z9vVzahoB3vRW2rZh3u7zwZgU7jac0eH",    --url
+		"token":"5Eq2BCSPQc6K4S8hsECu0vyfmc+C1VRQE4q/NBUX750GMo0FyD1dLmHI77u+72hsCq8W+h9DmN2wX5mE9qTBhQGK+AvOOA+B",  --token
+		"create_by":0,
+		"score":80.00,
+		"update_time":null,
+		"section_id":0,
+		"labelId":"mTwO7S744dE=",  --标签ID
+		"customerUserId":0,
+		"id":2,
+		"customer_user_id":0,
+		"update_by":0,
+		"courseId":"24D+L9yFfsA=",  --课程ID
+		"label_id":0}
+
+
+
+
+
+http://127.0.0.1:8080/run.do?token=5Eq2BCSPQc6K4S8hsECu0sRcIs8PwOgNyllDSPLQemTAWWrSZaokDkMJOM8a96PEipVjX65rv%2B6i6vi4OUnqqwGK%2BAvOOA%2BB&url=z9vVzahoB3vRW2rZh3u7zwZgU7jac0eH&resourceId=F2poCkRde50%3D&userId=abx3HXS0pUE%3D&courseId=24D%2BL9yFfsA%3D&sectionId=7eg4j5L1iuA%3D&labelId=mTwO7S744dE%3D

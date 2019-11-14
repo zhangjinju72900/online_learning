@@ -1,0 +1,2 @@
+insert into t_notice_user_role(notice_id, role_id, create_time, create_by, update_time, update_by)
+values(#{data.noticeId}, #{data.roleId}, now(), #{data.session.userInfo.userId}, now(), #{data.session.userInfo.userId})

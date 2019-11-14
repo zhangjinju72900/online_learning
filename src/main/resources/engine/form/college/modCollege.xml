@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<object name="college" table="t_school" primary="id" order="id desc" autoinc="Y">
+	<property name="id" type="Long" length="10" initial="" field="id"/>
+	<property name="name" type="String" length="50" field="name"/>
+    <property name="regionName" type="String" length="50" field=""/>
+    <property name="regid" type="Long" length="50" validate=""  field="region_id" />
+     <property name="provinceName" type="String" length="50" validate=""  field="" />
+     <property name="provincecode" type="String" length="50" validate=""  field="province_code" />
+	  <property name="typeName" type="String" length="50" field=""/>
+	   <property name="type" type="String" length="50" field="school_type"/>
+	   <property name="createTime" type="Date" length="" validate=""  field="create_time" />
+      <property name="updateTime" type="Date" length="50" validate=""  field="update_time" />
+      <property name="empcreater" type="String" length="50" field="create_by"/>
+	 <property name="empupdater" type="String" length="50" field="update_by"/>
+	 
+	 <property name="schoolType" type="String" length="" field=""/>
+	  	<property name="numCount" type="String" length="" field=""/>
+	  	<property name="hyStudent" type="Long" length="" field=""/>
+	  	<property name="grade" type="Long" length="" field=""/>
+	<property name="newUser" type="Long" length="" field=""/>
+	 	<property name="totalCount" type="Long" length="" field=""/>
+	 	<property name="hyUser" type="Long" length="" field=""/>
+	 	<property name="kjCount" type="Long" length="" field=""/>
+	 	<property name="zxCount" type="Long" length="" field=""/>
+	  	<property name="teachCount" type="Long" length="" field=""/>
+	 
+	 <property name="studentCount" type="String" length="" field=""/>
+  		<property name="teacherCount" type="String" length="" field=""/>
+  </object>       
+</model_layer>
+</tsoftware>

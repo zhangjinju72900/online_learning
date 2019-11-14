@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmOrderEdit" title="新增订单">
+			<panel name="pForm" title="新增订单" object="order" type="Group">
+			
+				<control name="userid" title="用户id" property="userid" type="TextBox"
+						 edit="Y" required="" format="" width="2" height="" column="" />
+				<control name="goodId" title="商品id" property="goodId" type="TextBox"
+						 edit="Y" required="" format="" width="1" height="1" column="1" />
+				<control name="addressId" title="收货地址id" property="consignAddressId" type="TextBox"
+						 edit="Y" required="" format="" width="1" height="1" column="1" />
+				<control name="Quantity" title="数量" property="quantity" type="TextBox"
+						 edit="Y" required="" format="" width="1" height="1" column="1" />
+				<control name="consignAddressId" title="支付id" property="consignAddressId" type="TextBox"
+						 edit="Y" required="" format="" width="1" height="1" column="1" />
+				<control name="logistic" title="支付配送" property="logistic" type="TextBox"
+						 edit="Y" required="" format="" width="1" height="1" column="1" />
+						 
+				<control name="Integral" title="支付积分" property="Integral" type="TextBox"
+						 edit="Y" required="" format="" width="1" height="1" column="1" />
+				<control name="Amount" title="支付金额" property="Amount" type="TextBox"
+						 edit="Y" required="" format="" width="1" height="1" column="1" />
+				
+				<control name="logisticAmount" title="配送金额" property="logisticAmount" type="TextBox"
+						 edit="Y" required="" format="" width="1" height="1" column="1" />
+				<control name="payMethod" title="支付方式" property="payMethod" type="TextBox"
+						 edit="Y" required="" format="" width="1" height="1" column="1" />
+				<control name="orderTime" title="订单日期" property="orderTime" type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():nil" format="" width="1" height="1" column="1"/>
+				<control name="createTime" title="订单日期2" property="createTime" type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():nil" format="" width="1" height="1" column="1"/>
+		
+			</panel>
+			<panel name="pButton" type="Group" object="">
+				<control name="btnPass" title="生成订单" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column="" />
+			</panel>
+			<!-- 页面加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="jClear" logic="Clear" ifyes="branch"
+						   ifno="" sync="Y">
+					<param name="Out" value="pForm"></param>
+				</procedure>
+			</flow>
+			<!--  生成订单 -->
+			 <flow trigger="pButton.btnPass" event="OnClick" filter="">
+		          <procedure name="qid" logic="SaveCustom" ifyes="jssave"
+					ifno="">
+					<param name="In" value="pForm"></param>
+					<param name="Out" value="pForm"></param>
+					<param name="Plugin" value="insertOrderAndOrderdetail"/>
+					<param name="Msg" value="'订单提交成功'"></param>
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+				</procedure>
+		      </flow> 
+			<!-- 布局 -->
+			<layout>
+				<region location="South" scale="">
+					<subregion panel="pButton" location="South" scale="" />
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pForm" location="Center" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

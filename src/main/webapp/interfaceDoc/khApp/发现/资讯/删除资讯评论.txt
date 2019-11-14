@@ -1,0 +1,39 @@
+UI名称  咨讯专题详情列表（informationView）
+
+tokenKey OnClick_pReviewList_ctlDelete_informationView_jDelete
+
+接口地址  /api/SaveCustom
+
+接口类型  POST
+
+参数示例
+"data":{
+  "id":"42",  -- 评论id
+  "Mode":"ReadOnly" -- 模式
+  }
+返回示例
+"data":{
+  "information_id":35,  -- 资讯id
+  "reviewBy":93,  -- 评论人
+  "top_by":0, -- 置顶人
+  "infoId":35,  -- 资讯id
+  "create_time":"2018-09-18 14:27:35",  -- 创建时间
+  "updateTime":"2018-09-18 14:27:35", -- 更新时间
+  "valid_flag":0, -- 标识
+  "content":"摸了", -- 内容
+  "check_status":1, -- 审核状态
+  "create_by":93, -- 创建人
+  "update_time":"2018-09-18 14:27:35",  -- 更新时间
+  "createBy":93,  -- 创建人
+  "top_flag":0, -- 是否置顶
+  "check_by":113, -- 审核人
+  "createTime":"2018-09-18 14:27:35", -- 创建时间
+  "updateBy":93,  -- 更新人
+  "review_time":"2018-09-18 14:27:35",  -- 评论时间
+  "id":42,  -- 评论id
+  "top_time":null,  -- 置顶时间
+  "update_by":93, -- 更新人
+  "review_by":93, -- 评论人
+  "reviewTime":"2018-09-18 14:27:35", --评论时间
+  "check_time":"2018-10-31 15:12:38"  -- 审核时间
+  }

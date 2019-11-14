@@ -1,0 +1,136 @@
+UI名称	班级管理-年级下拉数据（frmClassManageList）
+
+tokenKey	OnLoad__frmClassManageList_list
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": {    }
+
+返回示例
+"data":[{"text":"2016级",           --年级名称
+		 "value":"2016"             --年级
+		 },
+		{"text":"2015级","value":"2015"},
+		{"text":"2017级","value":"2017"}]
+		
+
+
+
+
+
+UI名称  班级管理-根据教师ID和年级查询班级（frmClassManageList）		
+		
+tokenKey OnClick_pToolbar_btnSearch_frmClassManageList_Query
+
+接口地址  /api/query
+
+接口类型  POST
+
+参数示例
+"data":{
+	eq_grade: "2016" 	--下拉列表所选项
+	eq_teacherId: "2"	--教师ID（系统自动获取）
+	order: "desc"
+	page: 1
+	rows: 50
+	sort: "id"
+}
+
+返回示例
+"data":{"total":2,"rows":[{
+            0: {classId: 1257, 	--班级ID
+				teacherId: 2, 	--教师ID
+				grade: "2016", 	--年级
+				className: "2016级临汾职业技术学院示范班",	--班级全名
+				 id: 30682, 	
+				classType: 1}	--班级类型(0-小车侠；1-创新；2-维修；3-服务；4-新能源)
+            ]}	
+
+
+
+
+	
+
+UI名称  班级管理-查询班级基本信息（frmClassManageDetail）
+
+tokenKey OnLoad__frmClassManageDetail_je
+
+接口地址  api/query
+
+接口类型  POST
+
+参数示例
+"data":{
+	classId: "1047"     --班级ID 
+}
+
+返回示例	
+"data":{"classId":"1047",              --班级ID
+		"classRate":0.00,              --签到率
+		"monthlyRanking":1,            --上月排名
+		"classTypeName":"小车侠",      --班级类型
+		"grade":"2017",                --年级
+		"weeklyRanking":1,             --上周排名
+		"className":"2017级汽修1班",     --年级+班级
+		"id":1047,
+		"classType":1                  --班级类型
+		}
+
+
+
+
+
+
+UI名称  班级管理-查询班级成员列表（frmClassManageDetail）
+
+tokenKey OnLoad__frmClassManageDetail_j3
+
+接口地址  api/query
+
+接口类型  POST
+
+参数示例
+"data":{
+	classId: "1047"		--班级ID
+}
+
+返回示例	
+"data":{"total":25,"rows":[
+		{"classId":1047,             --班级ID
+		"ossUrl":'',                 --头像url,为空取fileId  
+		"customerUserId":24010,      --学生ID
+		"id":24010,               
+		"stuName":" 邢志浩",         --学生姓名
+		"fileId":0}]                 --头像文件ID
+}
+	
+
+
+
+UI名称  班级管理-根据学生ID查询学生信息（frmClassManStudentDetail）
+
+tokenKey OnLoad__frmClassManStudentDetail_je
+
+接口地址  api/query
+
+接口类型  POST
+
+参数示例
+"data":{
+	customerUserId: "308"		--学生ID
+}
+
+返回示例	
+"data":{"signRate":"100%",              --上月签到率
+		"lastLoginTime":"",             --最后登录时间
+		"sex":"0",                      
+		"sexName":"男",                 --性别
+		"customerUserId":"24010",       --学生ID 
+		"tel":"",                       --电话
+		"stuName":"邢志浩",             --性别
+		"fileId":"",                    --头像ID 
+		"ossUrl":""                     --头像url,为空时取fileId
+		}

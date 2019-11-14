@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmIntegralDetail" title="积分详情">
+			<panel name="hiddenPanel" title="hidden" object="Integral" type="Hidden">
+				<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width=""
+						 height="" column=""/>
+			</panel>
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width=""
+						 height="" column=""/>
+			</panel>
+			<!-- 积分详情 -->
+			<panel name="pnlGroupPop" title="积分详情" object="Integral" type="Group">
+				<control name="id" title="ID" property="id" type="Hidden" edit="Y" required="" format="" width=""
+						 height="" column=""/>
+				<control name="name" title="姓名" property="name" type="TextBox" edit="N" required="N" format=""
+						 width="120" height="1" column=""/>
+				<control name="Integral" title="当前积分" property="Integral" type="TextBox" edit="" required="" format=""
+						 width="120" height="1" column="2"/>
+				<control name="Entegral" title="当前积分" property="Entegral" type="Hidden" edit="" required="" format=""
+						 width="120" height="1" column=""/>
+				<control name="totalIntegral" title="总积分" property="totalIntegral" type="TextBox" edit="" required=""
+						 format="" width="120" height="1" column=""/>
+				<control name="aluseIntegral" title="已用积分" property="aluseIntegral" type="TextBox" edit="" required=""
+						 format="" width="120" height="1" column="2"/>
+			</panel>
+			<!-- 积分明细 -->
+			<panel name="detailPanel" title="积分明细" object="IntegralDetail" type="Grid" multiple="">
+				<control name="id" title="id" property="id" type="Hidden" edit="N" required="" format="" width=""
+						 height="" column=""/>
+				<control name="baseOrderType" title="积分类型" property="type" type="TextBox" edit="N" required="N"
+						 format="" width="200" height="1" column="1"/>
+				<control name="integral" title="积分" property="integral" type="TextBox" edit="N" required="N" format=""
+						 width="100" height="1" column="1"/>
+				<control name="changeTime" title="变动时间" property="changeTime" type="TextBox" edit="N" required="N"
+						 format="" width="200" height="1" column="1"/>
+				<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="N" required="N"
+						 format="" width="1" height="1" column="1" target="Mode=='Add'?CurrentTime():nil"/>
+				<control name="updateTime" title="最后修改时间" property="updateTime" type="Hidden" edit="N" required="N"
+						 format="" width="1" height="1" column="1" target="CurrentTime()"/>
+				<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="N" required="N"
+						 target="session.userInfo.empId" format="" width="1" height="1" column=""/>
+				<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="N" required="N"
+						 target="Mode=='Add'?session.userInfo.empId:nil" format="" width="1" height="1" column=""/>
+			</panel>
+
+			<!-- 预加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="getId" server="" logic="DecodeId" ifyes="qid" ifno="">
+					<param name="Out" value="hiddenPanel.id"/>
+				</procedure>
+				<procedure name="qid" logic="QueryById" ifyes="jComboBox" ifno="">
+					<param name="In" value="hiddenPanel"/>
+					<param name="Out" value="pnlGroupPop"/>
+					<param name="Sql" value="khAdmin/integralManage/QryIntegral"/>
+				</procedure>
+				<procedure name="jComboBox" logic="Query" ifyes="" ifno="">
+					<param name="In" value="hiddenPanel"/>
+					<param name="Out" value="detailPanel"/>
+					<param name="Sql" value="khAdmin/integralManage/QryIntegralDetail"/>
+				</procedure>
+			</flow>
+
+			<!-- 返回 -->
+			<flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+				<procedure name="proTransition" server="/frmIntegralList" logic="Back" ifyes="" ifno="">
+					<param name="To" value="frmIntegralList"/>
+				</procedure>
+			</flow>
+
+			<!-- 布局 -->
+			<layout>
+				<region location="North" scale="60%">
+					<subregion panel="pToolbar" location="North" scale=""/>
+				</region>
+				<region location="Center" scale="40%">
+					<subregion panel="pnlGroupPop" location="North" scale=""/>
+					<subregion panel="detailPanel" location="Center" scale=""/>
+					<subregion panel="hiddenPanel" location="Center" scale=""/>
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

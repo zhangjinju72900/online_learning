@@ -1,0 +1,1 @@
+SELECT * from t_school WHERE region_id = #{data.id} and valid_flag = '0'

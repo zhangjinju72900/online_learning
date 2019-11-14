@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmAppIntegralList" title="积分查询"> 
+  	<panel name="pCondition" title="查询条件" object="integralRecord" type="Group">
+		<control name="eq_customerUserId" title="用户id" property="customerUserId" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="" initial=""/>
+		<control name="btnsearch" title="搜索" property="" type="Button" column="2"/>
+	</panel> 
+	<panel name="pTable" title="查询结果" object="integralRecord" type="Grid" multiple="N" >
+		<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="customerUserId" title="用户id" property="customerUserId" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="baseOrderId" title="上级单据ID" property="baseOrderId" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="baseOrderType" title="上级单据类型" property="baseOrderType" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="integral" title="变动积分数" property="integral" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="changeType" title="变动类型编号" property="changeType" type="Hidden" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="changeTypeName" title="变动类型" property="changeTypeName" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="changeTime" title="变动时间" property="changeTime" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		
+	</panel>
+	<!-- 初始加载 -->
+    <flow trigger="" event="OnLoad" filter="">  
+      <procedure name="jClear"  logic="Clear" ifyes="jQuery" ifno="" sync="Y">
+           <param name="Out" value="pCondition"></param>
+      </procedure> 
+      <procedure name="jQuery"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pCondition"></param>
+        <param name="Out" value="pTable"></param>
+        <param name="Sql" value="khApp/mine/QryIntegralRecord"></param>
+      </procedure>    
+    </flow>	
+
+     <!-- 搜索 -->
+    <flow trigger="pCondition.btnsearch" event="OnClick" filter="">
+      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pCondition" />
+        <param name="Out" value="pTable" />
+        <param name="Sql" value="khApp/mine/QryIntegralRecord"></param>
+      </procedure>              
+    </flow> 
+	
+    <!-- 布局 -->
+    <layout>
+  	  <region location ="North" scale="">
+        <subregion panel="pCondition" location ="North" scale=""/>
+      </region>
+	  <region location ="Center" scale="">
+		<subregion panel="pTable" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui> 
+</ui_layer>
+</tsoftware>

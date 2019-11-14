@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmKeyWordsDetail" title="关键词详情">
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="pForm" title="关键词详情" object="keyWords"  type="Group" multiple="">
+		<control name="eq_id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="" column=""/>
+		<control name="word" title="关键词" property="word" type="TextBox" edit="" required="" format="" width="1" height="1" column="3"/>
+        <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit=""  required=""   format="" width="1" height="1" column="3"  />
+	    <control name="creater" title="创建人" property="creater" type="Hidden" edit=""  required=""   format="" width="1" height="1" column="3"  />
+	    <control name="eq_updateTime" title="修改时间" property="updateTime" type="TextBox" edit="" required=""  format="" width="1" height="1" column="3" />
+	    <control name="eq_updater" title="修改人" property="updater" type="Hidden" edit="" required=""  format="" width="1" height="1" column="3"  />
+  	</panel>
+  	
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="j1" server="" logic="DecodeId" ifyes="je" ifno="">
+        <param name="Out" value="pForm.eq_id"></param>
+      </procedure> 
+      <procedure name="je"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="keyword/Qrykeyword"></param>
+      </procedure> 
+       
+    </flow>
+   
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmKeyWordsList" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmKeyWordsList"></param>
+       </procedure>
+      </flow>
+    <layout>
+       <region location ="Center" scale="">
+       <subregion panel="pToolbar" location="North" scale=""/>
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region>
+      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

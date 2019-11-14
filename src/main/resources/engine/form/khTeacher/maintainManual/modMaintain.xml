@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<object name="Maintain" table="t_maintain_manual" primary="id" unique="" order="">
+			<property name="id" type="Long" length="20" field="id"/>
+			<property name="text" type="String" length="50" field="name"/>
+			<property name="fileType" type="String" length="50" field="file_type"/>
+			<property name="filePath" type="String" length="500" field="file_path"/>
+			<property name="parentId" type="Long" length="20" field="parent_id"/>
+			<property name="ossKey" type="String" length="64" field="oss_key"/>
+			<property name="bucketName" type="String" length="100" field="bucket_name"/>
+			<property name="validFlag" type="Long" length="1" field="valid_flag"/>
+			<property name="createTime" type="Date" length="" validate=""  field="create_time" />
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" validate=""  field="update_time" />
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+
+			<property name="searchRecord" type="String" length="50"/>
+			<property name="searchRecordId" type="Long" length="50"/>
+			<property name="fileName" type="String" length="50"/>
+		</object>
+	</model_layer>
+</tsoftware>

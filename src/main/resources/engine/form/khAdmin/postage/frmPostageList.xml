@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<object name="postage" table="t_postage" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>	
+			<property name="province" type="Long" length="20" initial="" field="province"/>
+			<property name="price" type="Long" length="20" initial="" field="price"/>
+			<property name="freeshipping" type="Long" length="20" initial="" field="freeshipping"/>	
+			<property name="provinceName" type="String" length="100" initial="" field=""/>	
+		</object>  		
+	</model_layer>
+				
+	<ui_layer>
+		<ui name="frmPostageList" title="邮费管理">		
+			<!-- 按钮 -->
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnSearch" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnAdd" title="新增" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnClear" title="清空" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>								
+			</panel> 			
+			<!-- 搜索框 -->
+			<panel name="pCondition" title="搜索框" object="postage" type="Group">
+				<control name="eq_id" title="id" property="id" type="Hidden" edit="Y" required="N" format="" width="1" height="1" column=""/>				
+				<control name="eq_province" title="省份" property="province" type="ComboBox" edit="Y" required="N" format="" width="1" height="1" column="4"/>				
+			</panel>				
+			<!-- 查询结果 -->
+			<panel name="pTable" title="查询结果" object="postage" type="Grid">
+				<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="80" height="" column=""/>
+				<control name="edit" title="编辑" property="" type="Link" edit="N" required="" format="" width="80" height="" column=""/>
+				<control name="delete" title="删除" property="" type="Link" edit="N" required="" format="" width="80" height="" column=""/>	
+				<control name="provinceName" title="省份" property="provinceName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>	
+				<control name="province" title="省份id" property="province" type="Hidden" edit="N" required="" format="" width="200" height="1" column=""/>				
+				<control name="price" title="价格/元" property="price" type="TextBox" edit="N" required="N" format="" width="80" height="1" column=""/>				
+				<control name="freeshipping" title="免邮价格/元" property="freeshipping" type="TextBox" edit="N" required="N" format="" width="80" height="1" column=""/>				
+			</panel>			 
+		   <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		       <procedure name="jClear"  logic="Clear" ifyes="jList" ifno="" sync="Y">
+		         <param name="Out" value="pCondition"></param>     		   	 
+		       </procedure>
+		       <procedure name="jList" server="" logic="List" ifyes="j1" ifno="">
+			         <param name="Out" value="pCondition.eq_province"></param>
+			         <param name="Sql" value="khAdmin/postage/QryProvinceList"></param>
+			   </procedure>	
+		       <procedure name="j1"  logic="Query" ifyes="" ifno="" sync="Y">
+		         <param name="In" value="pCondition"></param>
+		         <param name="Out" value="pTable"></param>
+		         <param name="Sql" value="khAdmin/postage/QryPostageList"/>
+		       </procedure>		       
+		    </flow>
+		    
+		    <!-- 查询 -->
+		    <flow trigger="pToolbar.btnSearch" event="OnClick" filter="">
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition" />
+					<param name="Out" value="pTable" />
+					<param name="Sql" value="khAdmin/postage/QryPostageList" />
+				</procedure>
+			</flow>
+		    
+			<!--新增  -->
+			<flow trigger="pToolbar.btnAdd" event="OnClick" filter="">
+			      <procedure name="jspopup" logic="Popup" ifyes="jsquery" ifno="">
+			        <param name="To" value="frmPostageAdd" />
+			        <param name="Window" value="Medium"></param>
+			        <param name="Mode" value="Add" />
+			       
+			      </procedure>         
+			      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
+         			<param name="In" value="pCondition" />
+         		 	<param name="Out" value="pTable" />
+          			<param name="Sql" value="khAdmin/postage/QryPostageList"/>
+        		  </procedure>   
+			</flow>
+			
+
+		    <!-- 邮费编辑 --> 
+			<flow trigger="pTable.edit" event="OnClick" filter="">
+			      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
+			         <param name="In" value="pTable.id"></param>
+			      </procedure>
+			      <procedure name="jspopup" logic="Popup" ifyes="jList" ifno="">
+			         <param name="To" value="frmPostageEdit" />
+			         <param name="Mode" value="Edit" />
+			         <param name="Window" value="Medium"></param>
+			         <param name="Title" value="编辑邮费"></param>
+			      </procedure>
+ 			      <procedure name="jList"  logic="Query" ifyes="" ifno="" sync="Y">
+			         <param name="In" value="pCondition"></param>
+			         <param name="Out" value="pTable"></param>
+			         <param name="Sql" value="khAdmin/postage/QryPostageList"/>
+		          </procedure>          
+			</flow>
+			
+			<!--商品删除  -->
+			<flow trigger="pTable.delete" event="OnClick" filter="">
+			      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="j0" ifno="">
+			        <param name="In" value="pTable.id"></param>
+			      </procedure>
+			      <procedure name="j0" server="" logic="ConfirmMsg" ifyes="j1" ifno="">
+				       <param name="Title" value="删除商品"></param>
+				       <param name="Msg" value="确认删除当前记录吗?"></param>
+				  </procedure>
+			     <procedure name="j1" logic="Delete" ifyes="jsquery" ifno="">
+					<param name="In" value="pTable" />
+					<param name="Msg" value="'已删除'" />
+				</procedure>
+			      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
+			        <param name="In" value="pCondition" />
+			        <param name="Out" value="pTable" />
+			        <param name="Sql" value="khAdmin/postage/QryPostageList"/>
+			      </procedure>               
+			</flow>
+			
+			<!-- 清空条件 -->
+			<flow trigger="pToolbar.btnClear" event="OnClick" filter="">  
+		       <procedure name="jClear"  logic="Clear" ifyes="" ifno="" sync="Y">
+		         <param name="Out" value="pCondition"></param>     		   	 
+		       </procedure>
+		    </flow>		
+			<!-- 布局 -->
+		    <layout>
+			  	<region location ="North" scale="">
+			    		<subregion panel="pToolbar" location ="North" scale=""/>
+			    </region>
+				<region location ="Center" scale="">
+					<subregion panel="pCondition" location="North" scale=""/>
+					<subregion panel="pTable" location="Center" scale=""/>
+			    </region>
+		    </layout>
+		    
+    		</ui>
+    </ui_layer>
+</tsoftware>

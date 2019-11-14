@@ -1,0 +1,1 @@
+delete from t_notice_file where notice_id = #{data.noticeId}

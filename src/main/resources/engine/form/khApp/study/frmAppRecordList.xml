@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmAppRecordList" title="学习记录"> 
+  <panel name="pnlUp" title="工具条" object="" type="Toolbar">
+		<control name="btnAdd" title="新增" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	
+	<panel name="pCondition" title="查询条件" object="Record" type="Group">
+		 <control name="courseid" title="课程id" property="courseid" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column=""/> 
+		 <control name="btnsearch" title="搜索" property="" type="Button" column="5"/>
+	</panel> 
+	
+	<panel name="pTable" title="查询结果" object="Record" type="Grid" order="id desc">
+	    <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="customeruserid" title="用户ID" property="customeruserid" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="courseid" title="课程ID" property="courseid" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="sectionid" title="小节ID" property="sectionid" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="labelid" title="标签ID" property="labelid" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="resourceid" title="资源ID" property="resourceid" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+		
+		
+	</panel>
+	<!-- 初始加载 -->
+    <flow trigger="" event="OnLoad" filter="">   
+      <procedure name="jQuery"  logic="Query" ifyes="" ifno="">
+        <param name="Out" value="pTable"></param>
+        <param name="Sql" value="khApp/study/QryRecord"></param>
+      </procedure>    
+    </flow>	
+  <!-- 新增 -->
+    <flow trigger="pnlUp.btnAdd" event="OnClick" filter="">
+      <procedure name="jspopup" server="" logic="Popup" ifyes="query" ifno="">
+        <param name="To" value="frmAppRecordEdit"></param>
+        <param name="Mode" value="Add"></param>
+        <param name="Window" value="Large"></param>
+      </procedure>
+      <procedure name="query"  logic="Query" ifyes="" ifno="">
+       <param name="In" value="pCondition"></param>
+       <param name="Out" value="pTable"></param>
+       <param name="Sql" value="khApp/study/QryRecord"></param>
+     </procedure> 
+    </flow>
+    <!-- 搜索 -->
+    <flow trigger="pCondition.btnsearch" event="OnClick" filter="">
+      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pCondition" />
+        <param name="Out" value="pTable" />
+        <param name="Sql" value="khApp/study/QryRecord"></param>
+      </procedure>              
+    </flow> 
+
+    <!-- 布局 -->
+    <layout>
+   <region location ="North" scale="">
+        <subregion panel="pnlUp" location ="North" scale=""/>
+      </region>
+	  <region location ="Center" scale="">
+	  	<subregion panel="pCondition" location ="North" scale=""/>
+		<subregion panel="pTable" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui> 
+</ui_layer>
+</tsoftware>

@@ -1,0 +1,35 @@
+UI名称		APP-学习-当前课程-我的资料查询（frmAppCourseList）
+
+tokenKey	OnClick_pToolbar_btnQueryMa_frmAppCourseList_jsquery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+	"eq_courseId":"4",    --课程id
+	"eq_sectionId":"52",    --小节id
+}
+
+返回示例
+"data":{
+	"total":3,
+	"rows":[
+		{
+				"bucketName": "",   		   --bucketName
+				"teacherName": "管理员",   	   --教师名
+				"teacherId": "2",			   --教师id
+				courseId: 4					   --课程id
+				createBy: 0					   --创建人
+				createTime: null			   --创建时间
+				fileId: 0					   --文件id
+				id: 1						   --教辅资料id
+				name: "测试数据1"				   --名称
+				ossKey: ""					   --OSS KEY
+				professionalId: 1              --专业id
+				sectionId: 52				   --小节id
+				"updateBy": “0”，			   --更新人
+				"updateTime": null，			   --更新时间
+		}
+	]}

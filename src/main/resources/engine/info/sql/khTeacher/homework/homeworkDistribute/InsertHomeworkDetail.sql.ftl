@@ -1,0 +1,22 @@
+insert into t_homework_detail(
+	homework_id,
+	question_id,
+	objective_score,
+	source,
+	homework_template_id,
+	create_time,
+	create_by,
+	update_time,
+	update_by
+)
+values(
+	#{data.homeworkId},
+	#{data.questionId},
+	#{data.score},
+	#{data.source},
+	#{data.homeworkTemplateId},
+	now(),
+	#{data.session.userInfo.userId},
+	now(),
+	#{data.session.userInfo.userId}
+)

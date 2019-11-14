@@ -1,0 +1,1 @@
+select f.id,f.path,f.uuid,f.file_type as type,f.oss_key as osskey from t_file_index f where f.oss_key=#{data.key}

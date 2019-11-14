@@ -1,0 +1,21 @@
+UI名称		主观作业评分-值评下拉（frmSubjectCorrect）
+
+tokenKey	OnLoad__frmSubjectCorrect_scoreLevel
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		}
+
+返回示例
+"data":		{
+		text: "优"		
+		value: "0"		--得分等级--主观题 0-优；1-良；2-中；3-差',
+		}
+
+
+
+

@@ -1,0 +1,121 @@
+UI名称		上课页面-获取课程小节信息（frmCourseSectionInfo）
+
+tokenKey	OnClick_pButton_save_frmCourseSectionInfo_jssave
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+	"sectionId":"3"    --小节id
+}
+
+返回示例
+"data":{
+		"sectionName":"任务二",     --小节名称
+		"courseName":"123如3"       --课程名称
+	}
+
+
+
+
+
+UI名称		上课页面-常用标签列表+我的资源标签（frmAttendClassPage）
+
+tokenKey	OnLoad__frmAttendClassPage_queryLabel
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+	"attendClassRecordId":"121",    --记录id
+	"classId":"308",    --班级id
+	"courseId":"4",     --课程id
+	"sectionId":"52"    --小节id
+}
+
+返回示例
+"data":{
+	"total":10,
+	"rows":[
+		{
+		"defaultOrder":2,   --默认排序级别
+		"sectionId":"4",    --任务ID
+		"type":"section",   --类型 section-任务下标签,course-课程下标签,teachingAssist-“我的资料”标签
+		"showOrder":0,      --显示顺序
+		"id":8,         	--id
+		"text":"标签-12", 	--名称
+		"courseId":4        --课程id
+		}
+	]}
+	
+	
+	
+
+
+
+
+UI名称		上课页面-标签下详细资源（frmAttendClassPage）
+
+tokenKey	OnClick_pTable1_resource_frmAttendClassPage_queryLabel
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+		"id":"8",           --标签id
+		"courseId":"4"      --课程id
+		"sectionId":"52"    --小节id
+	}
+
+返回示例
+"data":{
+	"total":2,
+	"rows":[{
+			{"bucketName":"know-how",
+			"courseResName":"《汽车保险员实战》课程标准",
+			"ossKey":"6f57b59d40ae4da2b2c52bf35af5737f201809050627187.pdf",        --osskey
+			"id":39                                                                --资源id
+			"ossUrl":""ossUrl":"http://know-how.oss-cn-beijing.aliyuncs.com/6f57b59d40ae4da2b2c52bf35af5737f201809050627187.pdf?Expires=1547607622&OSSAccessKeyId=LTAIHRCquNMasmCH&Signature=FjmVMDAyy%2F3Idx0sVlNwUTC1n0g%3D"      --资源URL
+			"resourcesType": 14                                                    --0-普通资源，14scorm资源，15PPT转H5资源
+			},
+	]}	
+	
+	
+
+
+UI名称		上课页面-资源列表下拉树（frmResourcesList）
+
+tokenKey	OnLoad__frmResourcesList_queryLabel
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+	"courseId":"4"      --课程id
+	"sectionId":"52"    --小节id
+}
+
+返回示例
+"data":{
+"total":9,
+	"rows":[{
+		"courseResName":"ABC",	--课程资源名称
+		"id":38,				--标签ID
+		"text":"12"				--标签名称
+		"courseResNames":["任务二 Online—Course实操教学视频","《汽车保险员实战》课程标准"]     --资源名称数组
+		"resourcesIds":["207","137"]          --资源ID数组
+		"ossKeys":["da0b741f9fbc4585a84496334e85ec4620180928025335113.mp4","6f57b59d40ae4da2b2c52bf35af5737f201809050627187.pdf"]         --osskey数组
+		"urls":["http://know-how.oss-cn-beijing.aliyuncs.com/da0b741f9fbc4585a84496334e85ec4620180928025335113.mp4?Expires=1547615194&OSSAccessKeyId=LTAIHRCquNMasmCH&Signature=frpEHfhBE2wb5HufTLqFQdE%2Fq7A%3D",
+				"http://know-how.oss-cn-beijing.aliyuncs.com/6f57b59d40ae4da2b2c52bf35af5737f201809050627187.pdf?Expires=1547615194&OSSAccessKeyId=LTAIHRCquNMasmCH&Signature=Cmv7YsdyHoPmDwX5cS1mDDYkZ4o%3D"]
+										      --url数组
+		"resourcesTypes": [0,14]                                    --0-普通资源，14scorm资源，15PPT转H5资源								      
+	}
+]}	

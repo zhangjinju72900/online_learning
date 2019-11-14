@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmUnattendant" title="院校详情">
+	<panel name="pForm" title="缺勤数" object="classAttendance"  type="Group" multiple="">
+		<control name="unattendant" title="缺勤人数" property="unattendant" type="TextBox" edit="" required="" format="" width="200" height="" column="1"/>
+		<control name="id" title="id" property="id" type="Hidden" edit="" required="Y" format="" width="200" height="1" column="2"/>
+  	</panel>
+  	
+    <flow trigger="" event="OnLoad" filter="" >
+    	<procedure name="je" server="" logic="DecodeId" ifyes="je1" ifno="">
+	       		<param name="Out" value="pForm.id"></param>
+	      </procedure>
+      <procedure name="je1"  logic="Query" ifyes="" ifno="">
+      	<param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="college/QryUnattendant"></param>
+      </procedure> 
+    </flow>
+    
+    <layout>
+       <region location ="Center" scale="">
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region>
+      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

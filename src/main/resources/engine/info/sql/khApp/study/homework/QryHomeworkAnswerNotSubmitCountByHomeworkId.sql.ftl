@@ -1,0 +1,1 @@
+select count(1) as homeworkAnswerNotSubmitCount from t_homework_answer where homework_id = #{data.homeworkId} and (status = '0' or status = '1') 

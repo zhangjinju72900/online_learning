@@ -1,0 +1,1 @@
+select s.name as sectionName, c.name as courseName from t_section s left join t_course c on s.course_id = c.id where s.id = #{data.sectionId}

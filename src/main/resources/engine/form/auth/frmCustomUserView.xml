@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmCustomUserView" title="客户账号详情">
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	
+	<panel name="pForm" title="资讯详情" object="CustomerUser"  type="Group" multiple="">
+				<control name="id" title="id" property="id" type="Hidden" edit="N" required="" format="" width="2"
+                         height="" column=""/>
+                 <control name="tel" title="手机号" property="tel" type="TextBox" edit="Y" required="N" format=""
+                         width="1" height="1" column=""/>
+                 <control name="ctlNewPassword" title="登录口令" property="password" type="PasswordBox" edit="Y" required="Y"
+                         format="" width="1" height="1" column=""/>
+                <control name="name" title="用户姓名" property="name" type="TextBox" edit="Y" required="Y" format=""
+                         width="1" height="1" column=""/>
+                <control name="sexName" title="性别" property="sexName" type="TextBox" edit="Y" required="N" format=""
+                         width="1" height="1" column="4"/>
+              	<control name="cardNum" title="身份证号" property="cardNum" type="TextBox" edit="Y" required="N" format=""
+                         width="1" height="1" column=""/>
+                <control name="email" title="邮箱" property="email" type="TextBox" edit="Y" required="N" format=""
+                         width="1" height="1" column=""/>
+                <control name="school" title="学校" property="school" type="TextBox" edit="Y" required="N" format=""
+                         width="1" height="1" column=""/>
+                <control name="nickName" title="昵称" property="nickName" type="TextBox" edit="Y" required="N" format=""
+                         width="1" height="1" column="4"/>
+                <control name="grade" title="年级" property="grade" type="TextBox" edit="Y" required="N" format=""
+                         width="1" height="1" column=""/>   
+                <control name="className" title="班级" property="className" type="TextBox" edit="Y" required="N" format=""
+                         width="1" height="1" column=""/>     
+                <control name="roleName" title="所属角色" property="roleName" type="TextBox" edit="Y" required="N" format=""
+                         width="1" height="1" column=""/>
+                <control name="provinceName" title="地区" property="provinceName" type="TextBox" format="" 
+                		 width="1" height="1" column="4"/>
+                <control name="fileName" title="头像" property="fileName" type="TextBox" edit="Y" required="N" format=""
+                         width="1" height="1" column="4" />
+                <control name="userExplain" title="个性签名" property="userExplain" type="TextBox" edit="Y" required="N" format=""
+                         width="2" height="4" column="4"/>
+                <control name="createByName" title="创建人" property="createByName" type="TextBox" edit="Y" required="N"
+                         target="" format="" width="1" height="1" column=""/>
+                <control name="createTime" title="创建日期" property="createTime" type="TextBox" edit="Y" required="N"
+                         target="" format="" width="1" height="1" column=""/>
+                <control name="updateByName" title="更新人" property="updateByName" type="TextBox" edit="Y" required="N"
+                         target="" format="" width="1" height="1" column=""/>
+                <control name="updateTime" title="更新日期" property="updateTime" type="TextBox" edit="Y" required="N"
+                         target="" format="" width="1" height="1" column="4"/>
+    </panel>
+    
+	<panel name="pCustomUserFile" title="头像文件" object="CustomerUser" type="Grid"  multiple="">
+	 			<control name="eq_id" title="用户id" property="id" type="Hidden" edit="" required="" format="" width="200" height="1" column=""/>
+				<control name="btnPreview" title="预览" property="" type="Link" edit="Y" required="Y" format="" width="200" height="" column=""/>
+				<control name="fileName" title="头像文件名" property="fileName" type="TextBox" edit="Y" required="" format="" width="200" height="" column=""/>
+	</panel>
+	
+	<panel name="pOperate" title="操作记录" object="operateLog1" type="Grid">
+				<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="80" height="" column=""/>
+				<control name="platformType" title="平台" property="platformType" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+				<control name="eq_customerUserId" title="id" property="customerUserId" type="TextBox" edit="" required="" format="" width="80" height="" column=""/>
+				<control name="customerUserName" title="操作人" property="customerUserName" type="TextBox" edit="" required="" format="" width="80" height="" column=""/>
+				<control name="assemblyType" title="组件类型" property="assemblyType" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+				<control name="eventType" title="事件类型" property="eventType" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+				<control name="eventDesc" title="事件描述" property="eventDesc" type="TextBox" edit="" required="" format="" width="500" height="" column=""/>
+				<control name="sourceIp" title="IP来源" property="sourceIp" type="TextBox" edit="" required="" format="" width="130" height="" column=""/>
+				<control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="" required="" format="" width="160" height="" column=""/>
+	</panel>
+	
+	<!-- 逻辑加载 -->
+    <flow trigger="" event="OnLoad" filter="" >
+      	<procedure name="j1" server="" logic="DecodeId" ifyes="je" ifno="">
+        	<param name="Out" value="pForm.id"></param>
+      	</procedure> 
+      	<procedure name="je"  logic="QueryById" ifyes="j2" ifno="">
+        	<param name="In" value="pForm"></param>
+        	<param name="Out" value="pForm"></param>
+        	<param name="Sql" value="QryCustomUserById"></param>
+      	</procedure> 
+     	<procedure name="j2"  logic="Query" ifyes="jList1" ifno="">
+        	<param name="In" value="pForm"></param>
+        	<param name="Out" value="pCustomUserFile"></param>
+        	<param name="Sql" value="QryCustomUserFile"></param>
+      	</procedure>
+      		<procedure name="jList1"  logic="Query" ifyes="" ifno="" sync="">
+		    <param name="In" value="pForm"></param>
+		    <param name="Out" value="pOperate"></param>
+		    <param name="Sql" value="auth/QryStudyList"/>
+	   	</procedure>
+       	<procedure name="jList"  logic="Query" ifyes="" ifno="" sync="">
+		    <param name="In" value="pForm"></param>
+		    <param name="Out" value="pOperate"></param>
+		    <param name="Sql" value="auth/QryStudyListTeacher"/>
+	   	</procedure>
+    </flow>
+    
+    
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+    	<procedure name="proTransition" server="/frmCustomUserList" logic="Back" ifyes="" ifno="">
+       		<param name="To" value="frmCustomUserList"></param>
+       </procedure>
+    </flow>
+    
+    <!-- 预览头像 -->
+    <flow trigger="pCustomUserFile.btnPreview" event="OnClick" filter="">
+    	<procedure name="procPreview1" logic="PreviewFile" ifyes="" ifno="">
+        	<param name="In" value="pCustomUserFile.fileId"></param>
+        </procedure>
+    </flow> 
+    
+    <!-- 布局 -->
+    <layout>
+    	<region location ="North" scale="">
+        	<subregion panel="pToolbar" location="North" scale=""/>
+			<subregion panel="pForm" location="Center" scale=""/> 
+      	</region>
+      	<region location ="Center" scale="">
+       		<subregion panel="pOperate" location="Center" scale="" />
+       		<subregion panel="pCustomUserFile" location="Center" scale="" />
+      	</region> 
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+	<ui name="frmMaintainManualPPTAdd" title="新增资料">
+		<panel name="addGroup" title="附件资料" object="maintainManual" type="Group">
+			<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="3" height="1" column="1" />
+			<control name="parentId" title="父节点" property="parentId" type="Hidden" edit="" required="" format="" width="3" height="1" column="1" />
+			<control name="ctlName1" title="支持格式" property="" type="Label" edit="N" required="" format="" tip="当前支持单个ppt文件上传(zip)" width="80" height="1" column="5"/>
+			<control name="fileName" title="上传文件" property="fileName" type="FileBox" edit="Y" required="" format="" width="3" height="1" column="1" />
+			<control name="ctlCoding" title="编码格式" property="" type="ComboBox" edit="Y" required="Y" format="" width="1" height="1" column="1"/>
+			<control name="fileId" title="文件Id" property="fileId" type="Hidden" edit="Y" required="" format="" width="3" height="1" column="1" />
+			<control name="fileType" title="文件类型" property="fileType" type="Hidden" edit="Y" required="" format="" width="3" height="1" column="1" />
+			<control name="filePath" title="文件路径" property="filePath" type="Hidden" edit="Y" required="" format="" width="3" height="1" column="1" />
+			<control name="ossKey" title="ossKey" property="ossKey" type="Hidden" edit="Y" required="" format="" width="3" height="1" column="1" />
+			<control name="ossUrl" title="ossUrl" property="ossUrl" type="Hidden" edit="Y" required="" format="" width="3" height="1" column="1" />
+			<control name="dataFlag" title="数据标识" property="dataFlag" type="Hidden" edit="Y" required="" format="" target="1" width="3" height="1" column="1" />
+			<control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column="1"  />
+	        <control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.userId" format="" width="1" height="1" column="1"  />		
+			<control name="createTime" title="创建日期" property="createTime" type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():" format="" width="1" height="1" column="1"  />
+			<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="editMode=='Add'?session.userInfo.userId:" format="" width="1" height="1" column="1"  />
+		</panel>
+		<panel name="pformDown" title="pform" object="" type="Toolbar">
+			<control name="ctlSave" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+			<control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+		</panel>
+		<!-- 页面逻辑加载 -->
+		<flow trigger="" event="OnLoad" filter="">
+			<procedure name="branch"  logic="Branch" ifyes="j1" ifno="j2">  
+ 				<param name="In" value="getEditMode()=='Edit'"></param>
+			</procedure>
+			<procedure name="j1" server="" logic="DecodeId" ifyes="getEmptype" ifno="">
+				<param name="Out" value="addGroup.id"></param>
+			</procedure>
+			<procedure name="j2" server="" logic="DecodeId" ifyes="getEmptype" ifno="">
+				<param name="Out" value="addGroup.parentId"></param>
+			</procedure>
+			<procedure name="getEmptype"  logic="List" ifyes="qbi" ifno="">
+		        <param name="Out" value="addGroup.ctlCoding"></param>
+		        <param name="Sql" value="khAdmin/resourcesManage/QryResourcesCoding"></param>
+		      </procedure>
+			<procedure name="qbi" server="" logic="Query" ifyes="" ifno="">  
+				<param name="In" value="addGroup"></param>
+				<param name="Out" value="addGroup"></param>
+				<param name="Sql" value="khAdmin/maintainManual/QryManualFileDetail"></param>
+			</procedure>
+		</flow>
+		<!-- 附件上传 -->
+		<flow trigger="addGroup.fileName" event="OnClick" filter="" defaultEnter="Y">
+			<procedure name="fileupload" logic="Upload" ifyes="" ifno="">
+				<param name="Size" value="9999999"></param>
+				<param name="Type" value="zip"></param>
+				<param name="Bucket" value="public"></param>
+				<param name="Out" value="addGroup.fileId"></param>
+			</procedure>
+		</flow>
+		<!-- 保存 -->
+		<flow trigger="pformDown.ctlSave" event="OnClick" filter="" defaultEnter="Y">
+			<procedure name="branch"  logic="Branch" ifyes="jsMsg" ifno="jSave">
+ 				<param name="In" value="getPanelControlValue('addGroup.fileId')==''"></param>
+			</procedure>
+			<procedure name="jsMsg"  logic="InfoMsg" ifyes="" ifno="jSave">
+				<param name="Msg" value="上传文件失败，请重新上传"></param>
+			</procedure>
+			<procedure name="jSave" logic="SaveCustom" ifyes="jsclose" ifno="">
+				<param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+				<param name="In" value="addGroup"></param>
+				<param name="Plugin" value="insertManualPPTData"></param>
+				<param name="Msg" value="'文件已被保存'"></param>
+			</procedure>
+			<procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+				<param name="Refresh" value="true"></param>
+			</procedure>
+		</flow>
+		<!-- 取消 -->
+		<flow trigger="pformDown.ctlCancel" event="OnClick" filter="">
+			<procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+				<param name="Refresh" value="false"></param>
+			</procedure>
+		</flow>
+		<layout>
+			<region location="Center" scale="">
+				<subregion panel="addGroup" location="Center" scale="" />
+			</region>
+			<region location="South" scale="">
+				<subregion panel="pformDown" location="South" scale="" />
+			</region>
+		</layout>
+	</ui>
+</ui_layer>
+</tsoftware>

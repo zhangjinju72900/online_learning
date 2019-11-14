@@ -1,0 +1,20 @@
+UI名称		上次打开scorm成绩记录（frmQueryScormRecord）
+
+tokenKey	OnClick_pButton_save_frmQueryScormRecord_jssave
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data":{csrId: "204",                     --课程资源绑定ID，课程详情接口返回
+		 userId: "2"                      --用户ID
+		}
+
+返回示例
+"data":{"count":1,                     --已经尝试的次数
+		"percentScore":0.00			   --尝试的得分
+		}		
+				
+
+  			

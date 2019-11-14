@@ -1,0 +1,1 @@
+select homework_id as homeworkId from t_homework_answer where id=#{data.homeworkAnswerId};

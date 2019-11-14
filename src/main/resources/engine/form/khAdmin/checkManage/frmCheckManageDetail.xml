@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmCheckManageDetail" title="审核管理详情">
+  	<!-- <panel name="pfile" title="图片" object="" type="Image">
+	  <control name="picture" title="附件" property="" type="ImageView" edit="" required="" format="" width="" height="" column="2"/>
+	</panel> -->
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		<control name="check" title="通过审核" property="" type="Button" edit="" required="" format="" width="115" height="" column=""/>
+		<control name="notCheck" title="驳回审核" property="" type="Button" edit="" required="" format="" width="115" height="" column=""/>
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="pForm" title="审核管理详情" object="checkManage"  type="Group" multiple="">
+		<control name="eq_id" title="ID" property="id" type="Hidden" edit="" required="" format="" width="180" height="" column=""/>
+		<control name="content" title="内容" property="content" type="Label" edit="" required="" format="" width="2" height="3" column="3"/>
+	 	<control name="informationId" title="图片编号" property="informationId" type="Hidden" edit="" required="" format="" width="3" height="1" column=""/>
+		<control name="checkType" title="类别" property="checkType" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="reviewName" title="添加人" property="reviewName" type="TextBox" edit="" required="" format="" width="1" height="1" column="2"/>
+		<control name="title" title="来源" property="title" type="TextBox" edit="" required=""  format="" width="1" height="1" column=""  />
+		<control name="reviewTime" title="发布时间" property="reviewTime" type="TextBox" edit="" required=""  format="" width="1" height="1" column="2"  />
+		<control name="checkStatus" title="状态" property="checkStatus" type="Hidden" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="status" title="审核状态" property="status" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+  		<control name="recommendFlag" title="是否推荐" property="recommendFlag" type="TextBox" edit="" required=""  format="" width="1" height="1" column="2"/>
+  		<control name="topFlagName" title="是否置顶" property="topFlagName" type="TextBox" edit="" required=""  format="" width="1" height="1" column="2"/>
+  	</panel>
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="j1" server="" logic="DecodeId" ifyes="je" ifno="">
+        <param name="Out" value="pForm.eq_id"></param>
+      </procedure> 
+      <procedure name="je"  logic="QueryById" ifyes="jImage" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khAdmin/checkManage/QryCheckManageDetail"></param>
+        <param name="Plugin" value="informationCheckBorderPlugin"/>
+      </procedure> 
+      <!-- <procedure name="jImage" server="" logic="Image" ifyes="" ifno="">
+        <param name="In" value="pForm.informationId"></param>
+        <param name="Out" value="pfile.picture"></param>
+      </procedure> -->
+    </flow>
+   
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmCheckManageList" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmCheckManageList"></param>
+       </procedure>
+    </flow>
+
+
+	  <!-- 通过审核 -->
+	  <flow trigger="pToolbar.check" event="OnClick" filter="model.pForm.status=='审核不通过' || model.pForm.status=='未审核'">
+		  <procedure name="jssave" logic="SaveCustom" ifyes="je" ifno="">
+			  <param name="In" value="pForm"/>
+			  <param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+			  <param name="Plugin" value="informationCheckSuccessPlugin"/>
+			  <param name="Msg" value="'已通过审核'"/>
+		  </procedure>
+		  <procedure name="je"  logic="QueryById" ifyes="" ifno="">
+			  <param name="In" value="pForm"></param>
+			  <param name="Out" value="pForm"></param>
+			  <param name="Sql" value="khAdmin/checkManage/QryCheckManageDetail"></param>
+		  </procedure>
+	  </flow>
+
+	  <!-- 驳回审核 -->
+	  <flow trigger="pToolbar.notCheck" event="OnClick" filter="model.pForm.status=='审核通过' || model.pForm.status=='未审核'">
+		  <procedure name="jssave" logic="SaveCustom" ifyes="je" ifno="">
+			  <param name="In" value="pForm"/>
+			  <param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+			  <param name="Plugin" value="informationCheckPlugin"/>
+			  <param name="Msg" value="'已驳回审核'"/>
+		  </procedure>
+		  <procedure name="je"  logic="QueryById" ifyes="jImage" ifno="">
+			  <param name="In" value="pForm"></param>
+			  <param name="Out" value="pForm"></param>
+			  <param name="Sql" value="khAdmin/checkManage/QryCheckManageDetail"></param>
+		  </procedure>
+	  </flow>
+
+
+	  <layout>
+		<region location="North" scale="">
+			<subregion panel="pToolbar" location="North" scale="" />
+		</region>
+		<region location="Center" scale="">
+			<subregion panel="pForm" location="Center" scale="" />
+			<!-- <subregion panel="pfile" location="Center" scale="" /> -->
+		</region>
+	</layout>
+  </ui>
+</ui_layer>
+</tsoftware>

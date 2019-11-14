@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmbannerDetail1" title="文件详情">
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	
+	<panel name="pForm" title="文件详情" object="Banner"  type="Group" multiple="">
+		<control name="eq_id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="" column=""/>
+		<control name="filename" title="文件名称" property="filename" type="TextBox" edit="" required="" format="" width="1" height="1" column="3"/>
+		<control name="typeName" title="类型" property="typeName" type="TextBox" edit="" required="" format="" width="1" height="1" column="3"/>
+	
+		<control name="showorder" title="显示顺序" property="showorder" type="TextBox" edit="" required="" format="" width="1" height="1" column="3"/>
+	<control name="aLink" title="链接" property="aLink" type="TextBox" edit="" required="" format="" width="1" height="1" column="3"/>
+		</panel>
+  	
+  	
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="j1" server="" logic="DecodeId" ifyes="je" ifno="">
+        <param name="Out" value="pForm.eq_id"></param>
+      </procedure> 
+      <procedure name="je"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khAdmin/lableManage/banner/banner"></param>
+      </procedure> 
+       
+    </flow>
+   
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmbannerList" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmbannerList"></param>
+       </procedure>
+      </flow>
+    <layout>
+       <region location ="Center" scale="">
+       <subregion panel="pToolbar" location="North" scale=""/>
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region>
+      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

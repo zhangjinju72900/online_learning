@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmHomeworkView" title="作业基本信息">
+	 		<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnreturn" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+			<panel name="pHidden" title="隐藏条件" object="homework" type="Group">
+			 	<control name="homeworkId" title="作业id" property="id" type="Hidden" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+			</panel>
+            <panel name="pCondition" title="查询条件" object="homework" type="Group">
+                <control name="id" title="作业id" property="id" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column=""/>
+            	<control name="name" title="作业名称" property="name" type="TextBox" edit="N" required="" format="" width="1" height="1" column=""/>
+            	<control name="className" title="班级名称" property="className" type="TextBox" edit="N" required="" format="" width="1" height="1" column="4"/>
+                <control name="distributeTime" title="作业日期" property="distributeTime" type="TextBox" edit="N" required="" format="" width="1" height="1" column=""/>
+                <control name="endTime" title="截止日期" property="endTime" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+                <control name="homeworkTypeName" title="题型" property="homeworkTypeName" type="TextBox" edit="N" required="" format="" width="1" height="1" column=""/>
+                <control name="difficultyLevelName" title="难度" property="difficultyLevelName" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+            	<control name="classCount" title="总人数" property="classCount" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column=""/>
+            	<control name="commitCount" title="提交人数" property="commitCount" type="TextBox" edit="N" required="" format="" width="1" height="1" column="4"/>
+            	</panel>
+            <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		        <procedure name="annDecodeId" logic="DecodeId"  ifyes="qQuestionDeTail" ifno="" >
+			    	<param name="Out" value="pHidden.homeworkId"></param>
+			   	  </procedure>
+		      <procedure name="qQuestionDeTail" logic="Query" ifyes="" ifno="">
+		      	 <param name="In" value="pHidden"></param>
+		         <param name="Out" value="pCondition"></param>
+		         <param name="Sql" value="khTeacher/homework/homeworkCorrect/QryHomeworkBasic"></param>
+		      </procedure>
+		    </flow>
+		 
+   			<!--返回-->
+		    <flow trigger="pToolbar.btnreturn" event="OnClick" filter="">
+		       <procedure name="proTransition" server="/frmHomeworkCorrect" logic="Back" ifyes="" ifno="">
+		         <param name="To" value="frmHomeworkCorrect"></param>
+		       </procedure>
+		    </flow>
+            <!-- 布局 -->
+            <layout>
+                <region location ="North" scale="">
+                    <subregion panel="pToolbar" location="North" scale=""/>
+                </region>
+                <region location ="Center" scale="">
+                	<subregion panel="pHidden" location="North" scale=""/>
+                	<subregion panel="pCondition" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

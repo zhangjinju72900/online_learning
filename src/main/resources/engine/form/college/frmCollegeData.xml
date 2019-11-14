@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmCollegeData" title="院校详情">
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="btnQuery" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="btn1" title="导出授课详情" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="btn2" title="导出作业详情" property="" type="Button" edit="" required="" format="" width="" height="" column="5"/>
+	</panel>
+	<panel name="pCondition" title="工具条" object="ncount" type="Group">
+				<control name="createTime" title="选择时间" property="" initial=""
+						 type="DateBox"  edit="Y" required=""  format="" width="1" height="1" column="" />
+				<control name="id" title="id" property="id" initial=""
+						 type="Hidden"  edit="Y" required=""  format="" width="1" height="1" column="" />
+				 <control name="startTime" title="数据开始时间" property="" initial=""
+						 type="DateBox"  edit="Y" required=""  format="" width="1" height="1" column="" />
+				 <control name="endTime" title="结束时间" property="" initial=""
+						 type="DateBox"  edit="Y" required=""  format="" width="1" height="1" column="3" />
+	</panel>
+	<!-- 生成饼图 -->
+		<panel name="tt" title="汇总" object="college" type="PieChart" multiple="">
+				<control name="grade" title="年级" property="grade"
+					type="DataLink"></control>
+				<control name="hyStudent" title="人数" type="DataLink"
+					property="hyStudent"></control>
+		</panel>   
+		
+	<panel name="pTable" title="汇总" object="college"  type="Group" multiple="">
+		 <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="" column="1"/>
+		   <control name="teachCount" title="授课次数" property="teachCount" type="TextBox" edit="N" required="N" format="" width="200" height="" column="1"/>  
+		 <control name="hyUser" title="活跃用户" property="hyUser" type="TextBox" edit="N" required="N" format="" width="200" height="1" column="1"/> 
+	 	 <control name="totalCount" title="活跃次数" property="totalCount" type="TextBox" edit="N" required="N" format="" width="200" height="1" column="1"/>
+	    <control name="kjCount" title="浏览课件个数" property="kjCount" type="TextBox" edit="N" required="N" format="" width="200" height="1" column="1"/>
+	 	<control name="zxCount" title="浏览咨询个数" property="zxCount" type="TextBox" edit="N" required="" format="" width="200" height="1" column="1"/> 
+  	</panel> 
+  	
+  	<panel name="pTable1" title="授课详情" object="classAttendance"  type="Grid" multiple="">
+		 <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="" column="1"/>
+		 <control name="classId" title="班级id" property="classId" type="Hidden" edit="" required="Y" format="" width="150" height="1" column="1"/>
+		   <control name="className" title="班级名称" property="className" type="TextBox" edit="N" required="N" format="" width="200" height="1" column="1"/>  
+		 <control name="courseName" title="课程名称" property="courseName" type="TextBox" edit="N" required="N" format="" width="200" height="1" column="1"/> 
+	 	 <control name="sectionName" title="任务名称" property="sectionName" type="TextBox" edit="N" required="N" format="" width="200" height="1" column="1"/>
+	    <control name="startTime" title="授课时间" property="startTime" type="TextBox" edit="N" required="N" format="" width="200" height="1" column="1"/>
+	 	<control name="teacherName" title="授课教师" property="teacherName" type="TextBox" edit="N" required="" format="" width="200" height="1" column="1"/> 
+	 	<control name="attendance" title="出勤人数" property="attendance" type="DataLink" edit="N" required="Y" format="" width="200" height="1" column="1"/> 
+	 	<control name="rate" title="出勤率" property="rate" type="TextBox" edit="N" required="" format="" width="200" height="1" column="1"/> 
+  	</panel> 
+  	
+  	<panel name="pTable2" title="作业详情" object="homework" type="Grid">
+		<control name="id" title="作业编号" property="id" type="Hidden" edit="" required="" format="" width="50" height="" column=""/>
+		<control name="className" title="班级" property="className" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="name" title="作业名称" property="name" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="courseName" title="课程名称" property="courseName" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="sectionName" title="任务名称" property="sectionName" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="homeworkTypeName" title="题型" property="homeworkTypeName" type="TextBox" edit="" required="" format="" width="50" height="" column=""/>
+		<control name="distributeTime" title="分发时间" property="distributeTime" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="endTime" title="截止时间" property="endTime" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="teacherName" title="分发教师" property="teacherName" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="avgScore" title="平均成绩" property="avgScore" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="watch" title="查看" property="" type="Link" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+  	
+    <flow trigger="" event="OnLoad" filter="" >
+     <procedure name="j1" server="" logic="DecodeId" ifyes="jq1" ifno="">
+        <param name="Out" value="pTable.id"></param>
+      </procedure> 
+      <!-- 饼图加载 -->
+       <procedure name="jq1" logic="Query" ifyes="jq2" ifno="">
+       		<param name="In" value="pTable"></param>
+			<param name="Out" value="tt"></param>
+			<param name="Sql" value="college/QryCollegePieChart1"></param>
+		</procedure> 
+		 <procedure name="jq2" logic="Query" ifyes="jq3" ifno="">
+		 	<param name="In" value="pTable"></param>
+			<param name="Out" value="pTable"></param>
+			<param name="Sql" value="college/QryCollegehyUser1"></param>
+		</procedure> 
+		<procedure name="jq3" logic="Query" ifyes="jq4" ifno="">
+		 	<param name="In" value="pTable"></param>
+			<param name="Out" value="pTable1"></param>
+			<param name="Sql" value="college/QryClassDataDetail1"></param>
+		</procedure> 
+		<procedure name="jq4" logic="Query" ifyes="annEncodeId" ifno="">
+		 	<param name="In" value="pTable"></param>
+			<param name="Out" value="pTable2"></param>
+			<param name="Sql" value="college/QryHomeworkDataDetail1"></param>
+		</procedure> 
+		<procedure name="annEncodeId" logic="EncodeId"  ifyes="je" ifno="" >
+		   		<param name="In" value="pTable.id"></param>
+		 </procedure> 
+		 <procedure name="je" server="" logic="DecodeId" ifyes="" ifno="">
+	       		<param name="Out" value="pCondition.id"></param>
+	      </procedure>
+	      
+    </flow>
+   
+   	<!-- 查询点击事件 -->
+			<flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
+				<procedure name="timeIsOut" logic="Branch" ifyes="TimeOut"  ifno="Query1">
+			     <param name="In" value="getPanelControlValue('pCondition.startTime')>getPanelControlValue('pCondition.endTime')"></param>
+			    </procedure>
+			    <procedure name="TimeOut" logic="InfoMsg" ifyes="" ifno="">
+			     <param name="Msg" value="结束时间不能早于开始时间"></param>
+			    </procedure>
+				 <procedure name="Query1" logic="Query" ifyes="Query2" ifno="" >
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable1"></param>
+					<param name="Sql" value="college/QryClassDataDetail"></param>
+				</procedure> 
+				 <procedure name="Query2" logic="Query" ifyes="Query3" ifno="" >
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable2"></param>
+					<param name="Sql" value="college/QryHomeworkDataDetail"></param>
+				</procedure>
+				 <procedure name="Query3" logic="Query" ifyes="Query4" ifno="" >
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="college/QryCollegehyUser"></param>
+				</procedure>  
+				<procedure name="Query4" logic="Query" ifyes="TimeOut1" ifno="TimeOut" >
+						 <param name="In" value="pCondition"></param> 
+						<param name="Out" value="tt"></param>
+						<param name="Sql" value="college/QryCollegePieChart"></param>
+					</procedure>
+			</flow>
+
+              <!--点击查看缺勤人数  -->
+		 <flow trigger="pTable1.attendance" event="OnClick" filter="">  
+		 	<procedure name="aaEncodeId" logic="EncodeId"  ifyes="ja" ifno="" >
+			   		<param name="In" value="pTable1.id"></param>
+			 </procedure> 
+		 	<procedure name="ja" logic="Popup" ifyes="" ifno="">
+		        <param name="To" value="frmUnattendant" />
+		        <param name="Mode" value="Edit" />
+		         <param name="Window" value="Small" />
+		      </procedure>
+		    </flow>
+		    
+		   <!-- 点击Table2的查看 -->
+	<flow trigger="pTable2.watch" event="OnClick" filter="">  
+	   <procedure name="aanEncodeId" logic="EncodeId"  ifyes="jw" ifno="" >
+	    <param name="In" value="pTable2.id"></param>
+	   </procedure>
+	      <procedure name="jw"  logic="Transition" ifyes="" ifno="" >
+	           <param name="To" value="frmHomeworkData"></param>
+	           <param name="Mode" value="Edit"></param>
+	      </procedure> 
+	   </flow>
+   
+   
+  		<!-- 导出1 -->
+       <flow trigger="pToolbar.btn1" event="OnClick" filter="">  
+                <procedure name="procExport" logic="Export" ifyes="" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Format" value="pTable1"></param>
+                    <param name="Sql" value="college/QryClassDataDetail"></param>
+                </procedure>
+     
+            </flow> 
+         <!-- 导出2 -->   
+             <flow trigger="pToolbar.btn2" event="OnClick" filter="">  
+                  <procedure name="procExport1" logic="Export" ifyes="" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Format" value="pTable2"></param>
+                    <param name="Sql" value="college/QryHomeworkDataDetail"></param>
+                </procedure> 
+            </flow>
+   
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmCollegeList" logic="Back" ifyes="" ifno="">
+         <param name="To" value="/frmCollegeList"></param>
+       </procedure>
+      </flow> 	
+    <layout>
+    	<region location="North" scale="10%">
+				<subregion panel="pToolbar" location="West" scale="" />
+		</region>
+       <region location ="Center" scale="80%">
+      			 <subregion panel="pCondition" location="North" scale="" />
+       			<subregion panel="tt" location="West" scale="35%" /> 
+       			 <subregion panel="pTable" location="Center" scale="20%" /> 
+       			 <subregion panel="pTable1" location="East" scale="45%"/>
+       			 <subregion panel="pTable2" location="East" scale="45%"/>
+       			<!-- <subregion panel="pTable" location="Center" scale="50%"/> -->
+      </region>
+    <!--  <region location ="South" scale="60%">
+       			
+      </region> -->  
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

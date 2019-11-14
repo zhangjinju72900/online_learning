@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmAnswerHomework" title="主观题作业回答/主观题作业成绩">
+	 		<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnreturn" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnCorrect" title="主观作业评分" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnsearch" title="查询有作业日期" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+			<panel name="pCondition" title="查询条件" object="answerHomework" type="Group">
+			 	<control name="homeworkId" title="作业id" property="homeworkId" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+			 	<control name="beginTime" title="开始时间" property="beginTime" type="DateBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+			 	<control name="endTime" title="截止时间" property="endTime" type="DateBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+			 	
+			</panel>
+			<panel name="pTable" title="查询结果" object="answerHomework" type="Grid" multiple="N" >
+				<control name="ctlAnswerDetail" title="查看回答详情" property="" type="Link" edit="" required="" format="" width="150" height="" column=""/>
+            	<control name="id" title="id" property="id" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="studentId" title="学生id" property="studentId" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="studentName" title="学生姓名" property="studentName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="subjectiveScoreLevel" title="得分等级" property="subjectiveScoreLevel" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="subjectiveLevelName" title="得分等级名" property="subjectiveLevelName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="status" title="作业回答状态" property="status" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="statusName" title="作业回答状态名" property="statusName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="fileId" title="用户头像文件id" property="fileId" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="ossUrl" title="头像ossurl" property="fileId" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="commitFlag" title="提交标识" property="commitFlag" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="remark" title="老师评语" property="remark" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+            </panel>
+            <panel name="pDate" title="作业日期查询结果" object="homework" type="Grid" multiple="N" >
+                 <control name="homeworkDate" title="有作业日期" property="homeworkDate" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                 <control name="ctlHomeworkByDate" title="查看当天作业" property="" type="Link" edit="" required="" format="" width="150" height="" column=""/>
+            </panel>
+            
+            <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		      <procedure name="annDecodeId" logic="DecodeId"  ifyes="qAnswer" ifno="" >
+			    	<param name="Out" value="pCondition.homeworkId"></param>
+			   	  </procedure>
+		      <procedure name="qAnswer" logic="Query" ifyes="" ifno="">
+		      	 <param name="In" value="pCondition"></param>
+		         <param name="Out" value="pTable"></param>
+		         <param name="Sql" value="khTeacher/homework/homeworkCorrect/QryHomeworkAnswer"></param>
+		      </procedure>
+		    </flow>
+		    
+		    <!-- 查看作业详情-->               
+		    <flow trigger="pTable.ctlAnswerDetail" event="OnClick" filter="">
+		   	  <procedure name="obencodeid" server="" logic="EncodeId" ifyes="tranToDateail" ifno="">
+		        <param name="In" value="pTable.id"></param>
+		      </procedure>
+		      <procedure name="tranToDateail"  logic="Transition" ifyes="" ifno="">
+		        <param name="To" value="frmAnswerDetail"></param>
+		        <param name="Mode" value="Readonly"></param>
+		      </procedure> 
+		     </flow> 
+		 
+		 	 <!-- 主观作业评分-->
+			 <flow trigger="pToolbar.btnCorrect" event="OnClick" filter="">
+			    <procedure name="jspopup" logic="Popup" ifyes="" ifno="">
+			        <param name="To" value="frmSubjectCorrect" />
+			        <param name="Mode" value="Add" />
+			        <param name="Window" value="Medium" />
+			        <param name="Title" value="主观作业评分" />
+			     </procedure>
+		 	 </flow>
+		 	 
+		 	 
+		 	 <!-- 根据开始时间和截止时间查询有作业日期-->
+			 <flow trigger="pToolbar.btnsearch" event="OnClick" filter="">
+			     <procedure name="qAnswer" logic="Query" ifyes="" ifno="">
+			      	 <param name="In" value="pCondition"></param>
+			         <param name="Out" value="pDate"></param>
+			         <param name="Sql" value="khTeacher/homework/homeworkCorrect/QryHomeworkDate"></param>
+		     	 </procedure>
+		 	 </flow>
+		 	
+		 	<!-- 查看教师当天作业-->               
+		    <flow trigger="pDate.ctlHomeworkByDate" event="OnClick" filter="">
+		   	  <procedure name="obencodeid" server="" logic="EncodeId" ifyes="tranToDateail" ifno="">
+		        <param name="In" value="pDate.homeworkDate"></param>
+		      </procedure>
+		      <procedure name="tranToDateail"  logic="Transition" ifyes="" ifno="">
+		        <param name="To" value="frmHomeworkByDate"></param>
+		        <param name="Mode" value="Readonly"></param>
+		      </procedure> 
+		     </flow> 
+		 	
+   			<!--返回-->
+		    <flow trigger="pToolbar.btnreturn" event="OnClick" filter="">
+		       <procedure name="proTransition" server="/frmHomeworkCorrect" logic="Back" ifyes="" ifno="">
+		         <param name="To" value="frmHomeworkCorrect"></param>
+		       </procedure>
+		    </flow>
+            <!-- 布局 -->
+            <layout>
+                <region location ="North" scale="">
+                    <subregion panel="pToolbar" location="North" scale=""/>
+                </region>
+                <region location ="Center" scale="">
+                	<subregion panel="pCondition" location="North" scale="30%"/>
+                	<subregion panel="pTable" location="Center" scale="70%"/>
+                	<subregion panel="pDate" location="Center" scale="70%"/>
+                	
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

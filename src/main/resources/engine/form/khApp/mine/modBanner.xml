@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+  <object name="banner" table="t_banner" primary="id" unique="" order=""> 
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="picId" type="Long" length="20" initial="" field="pic_id"/>
+   <property name="aLink" type="String" length="300" field="alink"/>
+   <property name="showOrder" type="Long" length="3" initial="" field="show_order"/>
+   <property name="bannerType" type="Long" length="1" initial="" field="banner_type"/>
+   
+   
+  </object>     
+</model_layer>
+</tsoftware>

@@ -1,0 +1,2 @@
+select id, name, parent_id as parentId, create_time as createTime, file_path as filePath,
+create_by as createBy, update_time as updateTime, update_by as updateBy from t_customer_resources where id = #{data.id};

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<!-- t_information表原有字段 -->
+	<object name="informations" table="t_information" primary="id" unique="" order="id desc" autoinc="Y">
+	<property name="id" type="String" length="200" initial="" field="id"/>
+	<property name="title" type="String" length="500" initial="" field="title"/>
+	<property name="content" type="String" length="" initial="" field="content"/>
+	<property name="videoId" type="Long" length="20" initial="" field="file_id"/>
+	<property name="collectCount" type="Long" length="10" field="collect_count"/>
+	<property name="likeCount" type="Long" length="10" field="like_count"/>
+	<property name="reviewCount" type="Long" length="10" field="review_count"/>
+	<property name="clickCount" type="Long" length="10" field="click_count"/>
+	<property name="checkStatus" type="Long" length="1" field="check_status"/>
+	<property name="checkTime" type="Date" length="" field="check_time"/>
+	<property name="checkBy" type="Long" length="20" field="check_by"/>
+	<property name="validFlag" type="Long" length="1" field="valid_flag"/>
+	<property name="source" type="Long" length="1" field="source"/>
+	<property name="recommendFlag" type="Long" length="1" field="recommend_flag"/>
+	<property name="topFlag" type="Long" length="1" field="top_flag"/>
+	<property name="topTime" type="Date" length="" field="top_time"/>
+	<property name="topBy" type="Date" length="" field="top_by"/>
+	<property name="releaseStatus" type="Long" length="1" field="release_status"/>
+	<property name="releaseTime" type="Date" length="" field="release_time"/>
+	<property name="releaseBy" type="Long" length="20" field="release_by"/>
+	<property name="releaseAddress" type="String" length="200" field="release_address"/>
+	<property name="createTime" type="Date" length="" field="create_time"/>
+	<property name="createBy" type="Long" length="20" field="create_by"/>
+	<property name="updateTime" type="Date" length="" field="update_time"/>
+	<property name="updateBy" type="Long" length="20" field="update_by"/>
+	<property name="subjectId" type="Long" length="20" field="information_label_id"/>
+	<property name="ossKey" type="String" length="64" field="oss_key"/>
+	<property name="bucketName" type="String" length="100" field="bucket_name"/>
+	
+	
+	<!-- 查询相关，关联表字段等 begin-->
+	<property name="picId" type="Long" length="20" field=""/>
+	<property name="videoName" type="String" length="20" field=""/>
+	<property name="checkName" type="String" length="20" field=""/>
+	<property name="topByName" type="String" length="20" field=""/>
+	<property name="releaseName" type="String" length="20" field=""/>
+	<property name="createName" type="String" length="20" field=""/>
+	<property name="updateName" type="String" length="20" field=""/>
+	<property name="checkStatusName" type="String" length="10" field=""/>
+	<property name="validFlagName" type="String" length="10" field=""/>
+	<property name="sourceName" type="String" length="10" field=""/>
+	<property name="recommendFlagName" type="String" length="10" field=""/>
+	<property name="topFlagName" type="String" length="10" field=""/>
+	<property name="releaseStatusName" type="String" length="10" field=""/>
+	
+	<property name="subjectName" type="String" length="20" field=""/>
+	<property name="subReleaseStatus" type="String" length="20" field=""/>
+	<property name="reFlag" type="Long" length="1" field=""/>
+	<property name="tFlag" type="Long" length="1" field=""/>
+	<property name="clickPeoCount" type="Long" length="" field=""/>
+	</object>
+  <!-- t_subject表原有字段 -->
+	<object name="subjects" table="t_subject" primary="id" unique="title" order="id desc" autoinc="Y">
+	<property name="id" type="Long" length="20" initial="" field="id"/>
+	<property name="title" type="String" length="500" initial="" field="title"/>
+	<property name="content" type="String" length="500" initial="" field="content"/>
+	<property name="reviewCount" type="Long" length="10" field="review_count"/>
+	<property name="clickCount" type="Long" length="10" field="click_count"/>
+	<property name="validFlag" type="Long" length="1" field="valid_flag"/>
+	<property name="recommendFlag" type="Long" length="1" field="recommend_flag"/>
+	<property name="topFlag" type="Long" length="1" field="top_flag"/>
+	<property name="topTime" type="Date" length="" field="top_time"/>
+	<property name="topBy" type="Date" length="" field="top_by"/>
+	<property name="releaseStatus" type="Long" length="1" field="release_status"/>
+	<property name="releaseTime" type="Date" length="" field="release_time"/>
+	<property name="releaseBy" type="Long" length="20" field="release_by"/>
+	<property name="createTime" type="Date" length="" field="create_time"/>
+	<property name="createBy" type="Long" length="20" field="create_by"/>
+	<property name="updateTime" type="Date" length="" field="update_time"/>
+	<property name="updateBy" type="Long" length="20" field="update_by"/>     
+	</object>  
+  <!-- t_information_pic表原有字段 -->
+	<object name="informationPics" table="t_information_pic" primary="id" unique="" order="id desc" autoinc="Y">
+	<property name="id" type="Long" length="20" initial="" field="id"/>
+	<property name="informationId" type="Long" length="20" initial="" field="information_id"/>
+	<property name="picId" type="Long" length="20" initial="" field="pic_id"/>
+	<property name="validFlag" type="Long" length="1" field="valid_flag"/>
+	<property name="createTime" type="Date" length="" field="create_time"/>
+	<property name="createBy" type="Long" length="20" field="create_by"/>
+	<property name="updateTime" type="Date" length="" field="update_time"/>
+	<property name="updateBy" type="Long" length="20" field="update_by"/>
+	<property name="picName" type="String" length="50" initial="" field=""/>
+	<property name="createName" type="String" length="50" field=""/>
+	<property name="updateName" type="String" length="50" field=""/>
+	<property name="remark" type="String" length="50" field=""/>
+	
+	
+	
+	</object>
+	
+	<object name="informationLabel" table="t_information_label" primary="id" unique="" order="id desc" autoinc="Y">
+		<property name="id" type="Long" length="20" initial="" field="id"/>
+		<property name="title" type="String" length="100" initial="" field="title"/>
+		<property name="remark" type="String" length="200" initial="" field="remark"/>
+		<property name="createTime" type="Date" length="" field="create_time"/>
+		<property name="createBy" type="Long" length="20" field="create_by"/>
+		<property name="updateTime" type="Date" length="" field="update_time"/>
+		<property name="updateBy" type="Long" length="20" field="update_by"/>
+	</object>  
+	
+</model_layer>
+</tsoftware>

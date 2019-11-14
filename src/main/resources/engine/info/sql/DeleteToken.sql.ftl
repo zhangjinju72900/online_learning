@@ -1,0 +1,1 @@
+delete from t_token where token=#{data.token} and user_id=#{data.userId}

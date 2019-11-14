@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmObjectScore" title="客观题作业错误率列表">
+	 		<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnreturn" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnSearch" title="查询试题错误列表" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnHistogram" title="查询错误率柱状图参数" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+			<panel name="pCondition" title="查询条件" object="answerDetail" type="Group">
+			 	<control name="homeworkId" title="作业id" property="homeworkId" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+			 	<control name="questionId" title="题目id" property="questionId" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+			
+			</panel>
+			<panel name="pTable" title="查询结果" object="answerDetail" type="Grid" multiple="N" >
+            	<control name="questionId" title="题目id" property="questionId" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="questionContent" title="题干" property="questionContent" type="TextBox" edit="N" required="" format="" width="150" height="1" column=""/>
+                <control name="correctTitle" title="题目答案" property="correctTitle" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="wrongRate" title="错误率" property="wrongRate" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+            </panel>
+            <panel name="pQuestAnswer" title="试题错误结果" object="answerDetail" type="Grid" multiple="N" >
+            	<control name="studentId" title="学生id" property="studentId" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="studentName" title="学生名" property="studentName" type="TextBox" edit="N" required="" format="" width="150" height="1" column=""/>
+                <control name="correctFlagName" title="是否正确" property="correctFlagName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+            </panel>
+            <panel name="pHistogram" title="柱状图参数结果" object="answerDetail" type="Grid" multiple="N" >
+            	<control name="xAxisData" title="x轴数据" property="xAxisData" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="seriesData" title="y轴数据" property="seriesData" type="TextBox" edit="N" required="" format="" width="150" height="1" column=""/>
+            </panel>
+            <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		      <procedure name="annDecodeId" logic="DecodeId"  ifyes="qAnswer" ifno="" >
+			    	<param name="Out" value="pCondition.homeworkId"></param>
+			   	  </procedure>
+		      <procedure name="qAnswer" logic="Query" ifyes="" ifno="">
+		      	 <param name="In" value="pCondition"></param>
+		         <param name="Out" value="pTable"></param>
+		         <param name="Sql" value="khTeacher/homework/homeworkScore/QryObjWrongRate"></param>
+		      </procedure>
+		    </flow>
+		    
+		 	 <!--查询作业中某道试题的答题情况-->
+			 <flow trigger="pToolbar.btnSearch" event="OnClick" filter="">
+			     <procedure name="qQuesAnswer" logic="Query" ifyes="" ifno="">
+			      	 <param name="In" value="pCondition"></param>
+			         <param name="Out" value="pQuestAnswer"></param>
+			         <param name="Sql" value="khTeacher/homework/homeworkScore/QryQuestionAnswer"></param>
+		     	 </procedure>
+		 	 </flow>
+		 	 
+		 	  <!--查询试题错误率柱状图参数-->
+			 <flow trigger="pToolbar.btnHistogram" event="OnClick" filter="">
+			     <procedure name="qHistogram" logic="Query" ifyes="" ifno="">
+			      	 <param name="In" value="pCondition"></param>
+			         <param name="Out" value="pHistogram"></param>
+			         <param name="Plugin" value="getHistogramPlugin"></param>
+			         <param name="Sql" value="khTeacher/homework/homeworkScore/QryHistogramData"></param>
+		     	 </procedure>
+		 	 </flow>
+		 	
+   			<!--返回-->
+		    <flow trigger="pToolbar.btnreturn" event="OnClick" filter="">
+		       <procedure name="proTransition" server="/frmHomeworkScore" logic="Back" ifyes="" ifno="">
+		         <param name="To" value="frmHomeworkScore"></param>
+		       </procedure>
+		    </flow>
+            <!-- 布局 -->
+            <layout>
+                <region location ="North" scale="">
+                    <subregion panel="pToolbar" location="North" scale=""/>
+                </region>
+                <region location ="Center" scale="">
+                	<subregion panel="pCondition" location="North" scale="30%"/>
+                	<subregion panel="pTable" location="Center" scale="70%"/>
+                	<subregion panel="pQuestAnswer" location="Center" scale="70%"/>
+                	<subregion panel="pHistogram" location="Center" scale="70%"/>
+                	
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

@@ -1,0 +1,26 @@
+UI名称		活动晒图列表（activityView）
+
+tokenKey：OnLoad__activityView_qid3
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {id: "8",   -- 活动ID
+		page: 1, 
+		rows: 50}
+
+
+返回示例
+data:{"releaseBy":5,  --发布人ID
+		"clickCount":0,  --点击数
+		"releaseTime":"2018-09-25 17:35:00",  --发布时间
+		"reviewCount":0,  --评论数
+		"collectCount":0,  --收藏数
+		"likeCount":0,  --点赞数
+		"id":50,  --晒图ID(资讯ID)
+		"title":"121212",  --标题
+		"picId":"1406",  --图片ID
+		"uFileId":"0", --头像图片ID
+		"releaseName":"role"}  --发布人昵称

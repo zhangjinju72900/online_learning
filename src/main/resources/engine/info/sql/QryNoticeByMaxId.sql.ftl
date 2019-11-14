@@ -1,0 +1,1 @@
+select n.id from t_notice n where n.id=(select MAX(i.id) from t_notice i  where i.update_by=#{data.session.userInfo.userId} and i.create_by=2)

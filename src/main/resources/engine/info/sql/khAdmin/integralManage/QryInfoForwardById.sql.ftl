@@ -1,0 +1,1 @@
+select ifr.id, ifr.forward_by from t_information_forward_record ifr left join t_information i on ifr.information_id = i.id where i.recommend_flag = 1 and ifr.id = #{data.id}

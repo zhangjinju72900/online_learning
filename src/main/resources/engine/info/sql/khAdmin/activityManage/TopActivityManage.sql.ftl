@@ -1,0 +1,1 @@
+update t_activity set top_flag = 1, top_time=now(), top_by=#{data.session.userInfo.userId} where #{data.id} = id

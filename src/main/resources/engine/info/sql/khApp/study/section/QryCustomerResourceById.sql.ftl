@@ -1,0 +1,1 @@
+select course_id as courseId, section_id as sectionId, label_id as labelId, customer_resources_id AS resourcesId from t_course_section_resources where id = #{data.csrId}

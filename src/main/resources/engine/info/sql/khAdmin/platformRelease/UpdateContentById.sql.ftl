@@ -1,0 +1,1 @@
+update t_information set content = #{data.content} where id = #{data.id}

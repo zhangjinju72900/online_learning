@@ -1,0 +1,1 @@
+select u.id from t_customer_user u where u.easemod_username = #{data.receiverId}

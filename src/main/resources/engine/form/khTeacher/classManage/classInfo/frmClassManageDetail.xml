@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmClassManageDetail" title="班级详情">
+  	<panel name="pToolbar" title="班级详情" object="" type="Toolbar">
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="pForm" title="班级详情" object="classDetails"  type="Group" multiple="">
+		<control name="classId" title="班级编号" property="classId" type="Hidden" edit="" required="Y" format="" width="1" height="" column=""/>
+  		<control name="className" title="班级名称：" property="className" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+  		<control name="classTypeName" title="班级所属专业：" property="classTypeName" type="TextBox" edit="" required="" format="" width="1" height="1" column="3"/>
+  		<control name="classRate" title="今日签到率" property="classRate" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+  		<control name="weeklyRanking" title="上周全国排名" property="weeklyRanking" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+    	<control name="monthlyRanking" title="上月全国排名" property="monthlyRanking" type="TextBox" edit="" required="" format="" width="1" height="1" column="3"/>
+  </panel>
+	<panel name="pTable" title="班级学生" object="classDetails" type="Grid">
+		<control name="id" title="编号" property="id" type="TextBox" edit="" required="" format="" width="50" height="" column=""/>
+		<control name="customerUserId" title="学生编号" property="customerUserId" type="TextBox" edit="" required="" format="" width="50" height="" column=""/>
+		<control name="fileId" title="学生头像编号" property="fileId" type="TextBox" edit="" required="" format="" width="50" height="" column=""/>
+  		<control name="stuName" title="学员姓名" property="stuName" type="DataLink" edit="" required="" format="" width="80" height="" column=""/>
+  		
+	</panel>
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="j1" server="" logic="DecodeId" ifyes="je" ifno="">
+        <param name="Out" value="pForm.classId"></param>
+      </procedure> 
+      <procedure name="je"  logic="Query" ifyes="j3" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khTeacher/classManage/classInfo/QryClassDetail"></param>
+        <param name="Plugin" value="getClassOtherInfoPlugin"/>
+      </procedure>
+     
+      <procedure name="j3"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pForm" />
+        <param name="Out" value="pTable" />
+        <param name="Sql" value="khTeacher/classManage/classInfo/QryStuList" />
+      </procedure>
+    </flow>
+    <!-- 搜索 -->
+    <flow trigger="pToolbar.btnSearch" event="OnClick" filter="">  
+      <procedure name="Query"  logic="Query" ifyes="" ifno="" sync="Y">
+    	<param name="In" value="pForm"></param>
+    	<param name="Out" value="pTable"></param>
+    	<param name="Sql" value="khTeacher/classManage/classInfo/QryStuDetail"></param>
+      </procedure> 
+    </flow>
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmClassManageList"></param>
+       </procedure>
+      </flow>
+      
+      <!-- 详情 -->
+    <flow trigger="pTable.stuName" event="OnClick" filter="">
+      <procedure name="EncodeId" logic="EncodeId"  ifyes="j1" ifno="" >
+		<param name="In" value="pTable.customerUserId"></param>
+	  </procedure>
+      <procedure name="j1"  logic="Transition" ifyes="" ifno="" >
+		<param name="To" value="frmClassManStudentDetail"></param>
+		<param name="Mode" value="ReadOnly"></param>
+      </procedure>              
+    </flow>
+      
+    <layout>
+       <region location ="North" scale="">
+       <subregion panel="pToolbar" location="North" scale=""/>
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region>
+      <region location ="Center" scale="">
+        <subregion panel="pTable" location="Center" scale="" />
+      </region>  
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

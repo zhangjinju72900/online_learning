@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/resources/dev/system.properties=UTF-8
+encoding//src/main/resources/engine/conf/base.properties=UTF-8
+encoding//src/main/resources/engine/info/sql/khApp/study/section/QryCourseViewTree.sql.ftl=UTF-8
+encoding//src/main/resources/engine/info/sql/khTeacher/course/QrySectionResourceTree.sql.ftl=UTF-8
+encoding//src/main/resources/engine/info/sql/zhongdeprofession/QryCourseList.sql.ftl=UTF-8
+encoding//src/main/resources/engine/info/sql/zhongdeprofession/QryCourseListTree.sql.ftl=UTF-8
+encoding//src/main/resources/online/system.properties=UTF-8
+encoding//src/main/resources/test/system.properties=UTF-8
+encoding//src/main/webapp/interfaceDoc/khApp/\u53D1\u73B0/\u8D44\u8BAF/\u8BC4\u8BBA\u56DE\u590D\u63A5\u53E3.txt=GBK
+encoding//src/main/webapp/view/ftl/h5/register.ftl=UTF-8
+encoding//src/main/webapp/view/ftl/h5/viewMp4.ftl=UTF-8
+encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8

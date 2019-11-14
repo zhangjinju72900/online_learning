@@ -1,0 +1,1 @@
+select count(1) as homeworkAnswerCount from t_homework_answer where homework_id = #{data.homeworkId}

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+			
+	<model_layer>
+	
+		
+		<!-- <object name="professionalCourse" table="t_professional" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>	
+			<property name="courseName" type="String" length="2000" initial="" field=""/>
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+		</object> -->
+		
+		<object name="gradeClass" table="t_class_curriculum" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="curriculumId" type="Long" length="20" initial="" field="curriculum_id"/>	
+			<property name="classId" type="Long" length="20" initial="" field="class_id"/>
+			<property name="className" type="String" length="50" initial="" field=""/>
+			<property name="gradeName" type="String" length="2000" initial="" field=""/>
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+			
+		</object>
+		
+		<object name="tcuandco" table="t_curriculum_course" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="curriculumId" type="Long" length="20" initial="" field="curriculum_id"/>	
+			<property name="courseId" type="Long" length="20" initial="" field="course_id"/>
+			<property name="courseName" type="String" length="200" initial="" field=""/>
+			<property name="curriculumName" type="String" length="200" initial="" field=""/>
+			<property name="gradeType" type="Long" length="20" initial="" field="grade_type"/>
+			<property name="gradeName" type="String" length="200" initial="" field=""/>
+			
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+			
+		</object>
+		 
+		<!-- <object name="curriculumPart" table="t_curriculum" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>	
+			<property name="curriculumName" type="String" length="2000" initial="" field="name"/>
+			<property name="executeTime" type="Date" length="" initial="" field="execute_time"/>
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+		</object> -->
+		 
+		<!-- <object name="classCourseAdd" table="t_course" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="courseId" type="Long" length="20" initial="" field="id"/>	
+			<property name="courseName" type="String" length="50" initial="" field=""/>
+			<property name="executeTime" type="Date" length="" initial="" field="execute_time"/>
+			<property name="curriculumName" type="String" length="2000" validate=""  field="name" />
+			<property name="className" type="String" length="2000" validate=""  field="" />
+			<property name="gradeName" type="String" length="2000" validate=""  field="" />
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+			<property name="professionalId" type="Long" length="20" initial="" field="professional_id"/>
+			<property name="professionalName" type="String" length="50" initial="" field=""/>
+		</object> -->
+		
+		<object name="classCurriculumAdd" table="t_curriculum" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>	
+			<property name="courseId" type="String" length="200" initial="" field=""/>
+			<property name="schoolId" type="Long" length="20" initial="" field="school_id"/>
+			<property name="courseName" type="String" length="50" initial="" field=""/>
+			<property name="executeTime" type="Date" length="" initial="" field="execute_time"/>
+			<property name="curriculumName" type="String" length="2000" validate=""  field="name" />
+			<property name="className" type="String" length="2000" validate=""  field="" />
+			<property name="gradeName" type="String" length="2000" validate=""  field="" />
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+			<property name="professionalId" type="Long" length="20" initial="" field=""/>
+			<property name="professionalName" type="String" length="50" initial="" field=""/>
+			<property name="schoolName" type="String" length="50" initial="" field=""/>
+			
+			<property name="proId" type="Long" length="50" initial="" field="professional_id"/>
+			
+			
+			<property name="courseName1" type="String" length="50" initial="" field=""/>
+			<property name="courseName2" type="String" length="50" initial="" field=""/>
+			<property name="courseName3" type="String" length="50" initial="" field=""/>
+			<property name="courseName4" type="String" length="50" initial="" field=""/>
+			<property name="courseName5" type="String" length="50" initial="" field=""/>
+			
+			<property name="courseId1" type="String" length="200" initial="" field=""/>
+			<property name="courseId2" type="String" length="200" initial="" field=""/>
+			<property name="courseId3" type="String" length="200" initial="" field=""/>
+			<property name="courseId4" type="String" length="200" initial="" field=""/>
+			<property name="courseId5" type="String" length="200" initial="" field=""/>
+			<property name="regionName" type="String" length="50" initial="" field=""/>
+		</object>
+		
+		<object name="classCurriculumImp" table="t_curriculum" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>	
+			<property name="courseId" type="String" length="200" initial="" field=""/>
+			<property name="schoolId" type="Long" length="20" initial="" field="school_id"/>
+			<property name="courseName" type="String" length="50" initial="" field=""/>
+			<property name="executeTime" type="String" length="" initial="" field="execute_time"/>
+			<property name="curriculumName" type="String" length="2000" validate=""  field="name" />
+			<property name="className" type="String" length="2000" validate=""  field="" />
+			<property name="gradeName" type="String" length="2000" validate=""  field="" />
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+			<property name="professionalId" type="Long" length="20" initial="" field=""/>
+			<property name="professionalName" type="String" length="50" initial="" field=""/>
+			<property name="schoolName" type="String" length="50" initial="" field=""/>
+			
+			<property name="proId" type="Long" length="50" initial="" field="professional_id"/>
+			
+			
+			<property name="courseName1" type="String" length="50" initial="" field=""/>
+			<property name="courseName2" type="String" length="50" initial="" field=""/>
+			<property name="courseName3" type="String" length="50" initial="" field=""/>
+			<property name="courseName4" type="String" length="50" initial="" field=""/>
+			<property name="courseName5" type="String" length="50" initial="" field=""/>
+			
+			<property name="courseId1" type="String" length="200" initial="" field=""/>
+			<property name="courseId2" type="String" length="200" initial="" field=""/>
+			<property name="courseId3" type="String" length="200" initial="" field=""/>
+			<property name="courseId4" type="String" length="200" initial="" field=""/>
+			<property name="courseId5" type="String" length="200" initial="" field=""/>
+		</object>
+		
+		<object name="classCurriculumIm" table="t_curriculum" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>	
+			<property name="courseId" type="String" length="200" initial="" field=""/>
+			<property name="courseName" type="String" length="50" initial="" field=""/>
+			<property name="executeTime" type="String" length="" initial="" field="execute_time"/>
+			<property name="curriculumName" type="String" length="2000" validate=""  field="name" />
+			<property name="className" type="String" length="2000" validate=""  field="" />
+			<property name="gradeName" type="String" length="2000" validate=""  field="" />
+			<property name="schoolName" type="String" length="2000" validate=""  field="" />
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+			<property name="professionalId" type="Long" length="20" initial="" field=""/>
+			<property name="professionalName" type="String" length="50" initial="" field=""/>
+			<property name="classId" type="Long" length="20" initial="" field=""/>
+			<property name="schoolId" type="Long" length="20" initial="" field="school_id"/>			
+		</object>
+		<object name="CurriculumImport" table="t_curriculum" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>	
+			<property name="courseId" type="String" length="200" initial="" field=""/>
+			<property name="schoolId" type="Long" length="20" initial="" field="school_id"/>
+			<property name="courseName" type="String" length="50" initial="" field=""/>
+			<property name="executeTime" type="String" length="" initial="" field="execute_time"/>
+			<property name="curriculumName" type="String" length="2000" validate=""  field="name" />
+			<property name="className" type="String" length="2000" validate=""  field="" />
+			<property name="gradeName" type="String" length="2000" validate=""  field="" />
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+			<property name="professionalId" type="Long" length="20" initial="" field=""/>
+			<property name="professionalName" type="String" length="50" initial="" field=""/>
+			<property name="schoolName" type="String" length="50" initial="" field=""/>
+			
+			<property name="proId" type="Long" length="50" initial="" field="professional_id"/>
+			
+			
+			<property name="courseName1" type="String" length="50" initial="" field=""/>
+			<property name="courseName2" type="String" length="50" initial="" field=""/>
+			<property name="courseName3" type="String" length="50" initial="" field=""/>
+			<property name="courseName4" type="String" length="50" initial="" field=""/>
+			<property name="courseName5" type="String" length="50" initial="" field=""/>
+			
+			<property name="courseId1" type="String" length="200" initial="" field=""/>
+			<property name="courseId2" type="String" length="200" initial="" field=""/>
+			<property name="courseId3" type="String" length="200" initial="" field=""/>
+			<property name="courseId4" type="String" length="200" initial="" field=""/>
+			<property name="courseId5" type="String" length="200" initial="" field=""/>	
+			<property name="ctlName1" type="String" length="20" initial="" field=""/>
+			<property name="fileId" type="String" length="20" initial="" field=""/>
+			<property name="fileName" type="String" length="20" initial="" field=""/>		
+		</object>
+		
+	</model_layer>
+</tsoftware>

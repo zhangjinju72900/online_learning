@@ -1,0 +1,129 @@
+UI名称		作业模板查询列表（frmHomeworkTemplate） 与作业分发查询列表共用接口
+
+tokenKey	OnClick_pCondition_btnsearch_frmHomeworkTemplate_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		lk_name: "1",			--作业模板名称
+		eq_homeworkType: "0"    --题型 0-客观题；1-主观题
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		createTime: null
+		difficultyLevel: 1		--难度等级
+		difficultyLevelName: "简单"	--难度等级名称
+		homeworkType: 0			--作业类型
+		homeworkTypeName: "客观题"
+		id: 1				--作业模板id
+		name: "作业模板1"		--作业模板名称
+		questionCount: 3		--作业模板中题目数量
+		schoolId: 1
+		showHomeworkTemplate: "查看详情"
+		}
+		
+		
+		
+		
+
+UI名称		作业模板详情（frmTemplateDetail）
+
+tokenKey	OnLoad__frmTemplateDetail_qQuestionDeTail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkTemplateId: "2"		--作业模板的id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		createBy: 0
+		createTime: null
+		cteDelete: "删除"
+		homeworkTemplateId: 2		--作业模板id
+		id: 7						--作业模板详情id
+		questionContent: "测试用-初中"	--试题题干
+		questionId: 79					--试题id
+		}	
+		
+		
+		
+		
+
+UI名称		作业模板删除（frmHomeworkTemplate）
+
+tokenKey	OnClick_pTable_cteDelete_frmHomeworkTemplate_dTemplate
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		 id: "11"		--要删除的模板id
+		}
+
+返回示例
+"data":		{
+		createBy: 0
+		createTime: "2019-01-04 15:23:17"
+		create_by: 2
+		create_time: "2019-01-04 15:23:17"
+		difficultyLevelName: null
+		difficulty_level: 1
+		homeworkTypeName: null
+		homework_type: 1
+		id: 11
+		name: "作业模板33"
+		questionCount: null
+		school_id: 49
+		teacher_id: 2
+		update_by: 2									-更新人
+		update_time: "2019-01-17 16:56:29"				---更新时间
+		valid_flag: 1									--标识（0-正常；1-作废）
+		}
+			
+		
+		
+		
+		
+		
+UI名称		作业模板详情删除试题（frmTemplateDetail）
+
+tokenKey	OnClick_pTable_cteDelete_frmTemplateDetail_dQuestion
+
+接口地址	/api/delete
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		 id: "6"		--要删除的模板详情id
+		}
+
+返回示例
+"data":		{
+		createBy: 0
+		createTime: null
+		create_by: 0
+		create_time: null
+		homework_template_id: 2		--作业模板id
+		id: 6						--模板详情id
+		questionContent: null
+		questionId: 78				--详情中对应的试题id
+		question_id: 78
+		update_by: 0
+		update_time: null
+		}		

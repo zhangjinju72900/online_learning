@@ -1,0 +1,52 @@
+UI名称		我的个人信息（frmPersonalInfoList）
+
+tokenKey	OnLoad__frmPersonalInfoList_j2
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {page: 1, rows: 50}
+
+返回示例
+"data":{"user_explain":"1111",  --个人
+		"sex":1,  --性别 0男 1女
+		"className":"1212,1班",  --班级名称
+		"userId":5,  --人员ID
+		"cardNum":"1245678932150",  --身份证号
+		"classId":"16,6",  --班级ID
+		"sexName":"女",  --性别
+		"schoolId":2,  --学校ID
+		"gradeName":""  --学生年级
+		"teacherClassName":""  --教师班级
+		"nickname":"666",  --昵称
+		"name":"role",  --姓名
+		"tel":"test",  --联系电话
+		"id":5,  --ID
+		"provinceName":null,  --地区
+		"schoolName":"联合大学"}   --学校名称
+		
+		
+		
+
+UI名称		我的个人信息保存接口（frmPersonalInfoEdit）
+
+tokenKey	OnClick_perInfoDown_ctlSave_frmPersonalInfoEdit_jssave
+
+接口地址	/api/save
+
+接口类型	POST
+
+参数示例
+"data": {"id":"5",  --人员ID
+		"nickname":"6661212",  --昵称
+		"userExplain":"66662",  --个人简介
+		"sex":"1",  --性别
+		"Mode":"Edit"}  --模式
+
+返回示例
+{"last_login_time":"2018-09-25 16:32:09","easemod_password":"1245678932150","valid_flag":0,"card_num":"1245678932150","create_by":0,"login_count":206,"password":"{md5}3fcd0477d25769cea2f88a9ec9b73ce21A363EBA793D4D35A5EE63F67C98597E","learn_time":0,"update_time":"2018-09-25 17:09:33","school_id":2,"userExplain":"66662","updateBy":5,"integral":155,"total_integral":155,"nickname":"6661212","tel":"test","id":5,"update_by":5,"email":"","user_explain":"66662","create_time":null,"sex":1,"updateTime":"2018-09-25 17:09:33","easemod_username":"1245678932150","grade":0,"file_id":1058,"name":"role"}	
+		
+
+

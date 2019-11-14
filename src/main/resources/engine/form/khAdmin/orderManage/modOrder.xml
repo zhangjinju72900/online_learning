@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">		
+	<model_layer>
+		<object name="productOrder" table="t_order" primary="id" unique="" order="id desc" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>	
+			<property name="userId" type="Long" length="20" initial="" field="user_id"/>
+			<property name="code" type="String" length="50" initial="" field="code"/>
+			<property name="orderTime" type="Date" length="" field="order_time"/>
+			<property name="orderStatus" type="Long" length="1" field="order_status"/>
+			<property name="integral" type="Long" length="10" field="integral"/>
+			<property name="amount" type="Double" length="15" field="amount"/>
+			<property name="realIntegral" type="Long" length="10" field="real_integral" />
+			<property name="realAmount" type="Double" length="15" field="real_amount"/>
+			<property name="payMathod" type="Long" length="2" validate=""  field="pay_mathod" />
+			<property name="consignAddressId" type="Long" length="20" validate=""  field="consign_address_id" />
+			<property name="logisticAmount" type="Double" length="15" field="logistic_amount"/>
+			<property name="logistic" type="String" length="50" validate="" field="logistic"/>
+			<property name="logisticCode" type="String" length="50" field="logistic_code"/>
+			<property name="createTime" type="Date" length="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" validate="" field="create_by"/>
+			<property name="updateTime" type="Date" length="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" validate="" field="update_by"/>
+			
+			
+			<property name="orderName" type="String" length="200" validate="" field=""/>
+			<property name="userName" type="Long" length="20" validate="" field=""/>
+			<property name="createName" type="String" length="" field=""/>
+  			<property name="updateName" type="String" length="" field=""/>
+			<property name="orderStatusName" type="String" length="" field=""/>
+			<property name="remark" type="String" length="" field="remark"/>
+			<!-- 联系人及联系方式 -->
+			<property name="name" type="String" length="" field=""/>
+			<property name="tel" type="String" length="" field="remark"/>
+			
+		</object>  
+	</model_layer> 
+</tsoftware>

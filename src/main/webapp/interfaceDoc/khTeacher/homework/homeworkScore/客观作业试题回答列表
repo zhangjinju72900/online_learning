@@ -1,0 +1,26 @@
+UI名称		客观题作业-试题的回答列表（frmObjectScore）
+
+tokenKey	OnClick_pToolbar_btnSearch_frmObjectScore_qQuesAnswer
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "10"					--作业id
+		questionId: "124"					--试题id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		correctFlagName: "错误"				--是否正确
+		studentId: 3						--学生id
+		studentName: "张静雨"				--学生名
+		}
+
+
+
+

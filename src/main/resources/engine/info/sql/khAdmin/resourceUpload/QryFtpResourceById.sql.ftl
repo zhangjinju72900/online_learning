@@ -1,0 +1,1 @@
+select id, parent_id, filename, coding_format, file_type, resource_type, execute_result from t_ftp_upload_record where id = #{data.id}

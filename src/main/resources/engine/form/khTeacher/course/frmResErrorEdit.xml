@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmResErrorEdit" title="新增">
+			<panel name="pForm" title="新增" object="ResourcesError" type="Group">
+				<control name="id" title="修改记录ID" property="id" type="Hidden"
+						 edit="N" required="N" format="" width="1" height="1" column="2"/>
+				<control name="fileId" title="文件Id" property="fileId" type="TextBox"
+						 edit="Y" required="N" format="" initial="" width="1" height="1" column=""/>
+				<control name="courseSectionResourcesId" title="课程小节资源Id" property="courseSectionResourcesId" type="TextBox"
+						 edit="Y" required="N" format="" initial="" width="1" height="1" column="2"/>
+
+				<control name="teacherId" title="教师Id" property="teacherId" type="TextBox"
+						 edit="Y" required="N" format="" initial="" width="1" height="1" column=""/>
+				<control name="content" title="纠错内容" property="content" type="TextBox"
+						 edit="Y" required="N" format="" initial="" width="1" height="1" column="1"/>
+			</panel>
+			<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+				<control name="save" title="确认" property="" type="Button" edit="" required="" format="" width=""
+						 height="" column="2"/>
+				<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width=""
+						 height="" column="2"/>
+			</panel>
+			<!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="jclear" logic="Clear" ifyes="FileTypeList"
+						   ifno="">
+					<param name="Out" value="pForm"/>
+				</procedure>
+				<procedure name="jBranch" logic="Branch" ifyes="" ifno="j1">
+					<param name="In" value="getStorage('frmResErrorEdit_EditMode')=='Add'"/>
+				</procedure>
+				<!--<procedure name="j1" server="" logic="DecodeId" ifyes="qid"-->
+						   <!--ifno="">-->
+					<!--<param name="Out" value="pTable.id"/>-->
+				<!--</procedure>-->
+				<!--<procedure name="qid" logic="QueryById" ifyes="" ifno="">-->
+					<!--<param name="In" value="pTable"/>-->
+					<!--<param name="Out" value="pTable"/>-->
+					<!--<param name="Sql" value="trainSystem/courseFileQry"/>-->
+				<!--</procedure>-->
+			</flow>
+
+			<!-- 保存 -->
+			<flow trigger="pButton.save" event="OnClick" filter="" defaultEnter="Y">
+				<procedure name="jssave" logic="SaveCustom" ifyes="jsclose" ifno="">
+					<param name="In" value="pForm"/>
+					<param name="Plugin" value="insertResourcesError"/>
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+					<param name="Msg" value="'已保存'"/>
+				</procedure>
+				<procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+					<param name="Refresh" value="true"/>
+				</procedure>
+			</flow>
+
+			<!-- 取消 -->
+			<flow trigger="pButton.cancel" event="OnClick" filter="">
+				<procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+					<param name="Refresh" value="true"/>
+				</procedure>
+			</flow>
+			<layout>
+				<region location="South" scale="">
+					<subregion panel="pButton" location="South" scale=""/>
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pForm" location="Center" scale=""/>
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

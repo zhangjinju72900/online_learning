@@ -1,0 +1,24 @@
+	insert into t_homework_template(name,
+	school_id,
+	teacher_id,
+	course_id,
+	section_id,
+	homework_type,
+	difficulty_level,
+	create_time,
+	create_by,
+	update_time,
+	update_by)
+values(
+	#{data.templateName},
+	#{data.schoolId},
+	#{data.session.userInfo.userId},
+	#{data.courseId},
+	#{data.sectionId},
+	#{data.homeworkType},
+	#{data.difficultyLevel},
+	now(),
+	#{data.session.userInfo.userId},
+	now(),
+	#{data.session.userInfo.userId}
+	)

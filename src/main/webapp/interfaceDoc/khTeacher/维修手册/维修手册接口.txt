@@ -1,0 +1,118 @@
+维修手册树
+
+UI名称		维修手册-维修手册树（frmMaintainTree）
+
+tokenKey	 OnLoad__frmMaintainTree_tree
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"lk_text":"一" --名称
+}
+
+返回示例
+"data": {
+	"total": 40,
+	"rows": [{
+		"ossUrl": "",
+		"children": [{
+			"ossUrl": "http://know-how001.oss-cn-beijing.aliyuncs.com/371fad838f654643ae3ade23afc66ae020190116031129.png",
+			"children": [{
+				"ossUrl": "",
+				"children": [{
+					"ossUrl": "",
+					"children": [{
+						"ossUrl": "",
+						"pid": "15",
+						"id": 16,
+						"text": "A4L(2018款)",
+						"fileType": null
+					}],
+					"pid": "2",
+					"id": 15,
+					"text": "A4L",
+					"fileType": null
+				}],
+				"pid": "1",
+				"id": 2,
+				"text": "一汽奥迪",
+				"fileType": null
+			}, {
+				"ossUrl": "",
+				"pid": "1",
+				"id": 3,
+				"text": "进口奥迪",
+				"fileType": null
+			}],
+			"pid": "17",
+			"id": 1,
+			"text": "奥迪",
+			"fileType": null
+		}],
+		"pid": "",
+		"id": 17,
+		"text": "A",
+		"fileType": null
+	}, {
+		"ossUrl": "",
+		"children": null,
+		"pid": "",
+		"id": 18,                             --ID
+		"text": "B",                          --显示的文字
+		"fileType": null
+	}]
+}
+
+
+
+
+搜索记录查询
+
+UI名称		维修手册-搜索记录查询（frmMaintainTree）
+
+tokenKey	 OnLoad__frmMaintainTree_searchList
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data":{}
+
+
+返回示例
+"data":
+		,"data":[
+		{"searchTime":"2019-01-11 00:46:58",
+		"text":"测试数据6",                           --搜索记录的文字
+		"value":5                                     --搜索记录ID
+		}]
+
+
+
+
+
+UI名称		  维修手册-搜索维修手册资源（frmMaintainTree）
+
+tokenKey	 OnClick_pToolbar_btnQuery_frmMaintainTree_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{"id": "5",                  --树节点ID
+			"text": "系统", 			     --模糊搜索文字
+			"searchRecordId": "15"       --搜索优先级大于 id/text
+			page: 1, rows: 50}
+
+返回示例(优先判断resourcesType,14/15时为下面的url,0时根据ossKey后缀取文件类型)
+"data":{"total":1,"rows":[{"fileName":"系统主页.txt",    --文件名称
+					"id":13								 --维修手册表ID
+					"ossUrl":"http://127.0.0.1:8080/pptRun.do?token=5Eq2BCSPQc6K4S8hsECu0kn70UkGb9Hf4dnhXe34IDXM2pWYLwu7x61jPbErcr1RTjEDzrXWzS338Din1EawfAGK%2BAvOOA%2BB&url=z9vVzahoB3vRW2rZh3u7zwZgU7jac0eH"                          
+								--url
+					"ossKey": ""
+					"resourcesType": 15                                    --0-普通资源，14scorm资源，15PPT转H5资源
+					}]}

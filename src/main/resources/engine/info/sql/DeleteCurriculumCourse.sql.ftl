@@ -1,0 +1,1 @@
+DELETE FROM t_curriculum_course WHERE curriculum_id = #{data.id}

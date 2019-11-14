@@ -1,0 +1,49 @@
+﻿UI名称		frmAppCourseList 当前课程查看班级列表（登录时返回的数据的 version 属性为该用户的角色，多个逗号隔开，包含11为教师，进入当前课程/所有课程时需要调此接口，再带上班级ID请求当前课程接口）
+
+tokenKey	OnLoad__frmAppCourseList_List1
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": {
+		}
+
+返回示例
+"data":[{text: "临汾职业技术学院示范班",  --班级名称
+		value: 1257  --班级ID
+		}, {text: "汽修1班", value: 1047}]
+
+
+
+
+
+UI名称		frmAppCourseList 当前课程查看班级列表（登录时返回的数据的 version 属性为该用户的角色，多个逗号隔开，包含11为教师。教师时需要先上面的班级列表接口，再带上班级ID请求当前课程接口。非教师可直接请求当前课程接口，不传eq_classId属性）
+
+tokenKey	OnLoad__frmAppCourseList_jQuery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {
+		{eq_classId: "1047", --班级ID (角色为教师时，需要传；非教师不传该属性，不传时查所有课程)
+		page: 1, rows: 50
+		}
+
+返回示例
+"data":[{"classId":1047,  --班级ID
+		"courseCount":36.00,  --课时数
+		"difficultyLevel":5,  --难度等级
+		"file_id":1222,  --课程封面图
+		"name":"测试课程2勿删",  --课程名称
+		"remark":"测试课程2勿删",  --课程备注
+		"className":"汽修1班",  --班级名称
+		"id":21  --课程ID
+		}]		
+		
+		
+		
+

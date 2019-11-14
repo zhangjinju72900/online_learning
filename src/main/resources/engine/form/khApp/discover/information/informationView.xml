@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="informationView" title="咨讯详情列表">
+
+            <panel name="pToolbar" title="工具条" object="" type="Toolbar">
+                <control name="like" title="点赞" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+                <control name="collect" title="收藏" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+                <control name="deleteCollect" title="取消收藏" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+                <control name="forward" title="转发" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+                <control name="review" title="评论" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+				<control name="back" title="返回" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+            </panel>
+
+            <panel name="pCondition" title="查询条件" object="activityList" type="Group">
+                <control name="reviewId" title="reviewId" property="" type="Hidden" edit="N" required="N" format="" width="2" height="1" column=""/>
+                <control name="id" title="id" property="id" type="TextBox" edit="N" required="N" format="" width="2" height="1" column="2"/>
+            </panel>
+            
+
+            <panel name="pList" title="查询结果" object="informationList" type="Group">
+                <control name="id" title="id" property="id" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="title" title="标题" property="title" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="content" title="内容" property="content" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="fileID" title="文件id" property="fileId" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <!-- <control name="likeCount" title="点赞数" property="likeCount" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/> -->
+                <!-- <control name="createBy" title="创建人" property="createBy" type="TextBox" edit="N" required="" target="session.userInfo.userId" format="" width="100" height="1" column="2"/> -->
+                <control name="updateBy" title="更新人" property="updateBy" type="TextBox" edit="N" required="N" target="session.userInfo.userId" format="" width="100" height="1" column="2"  />
+                <control name="releaseBy" title="发布人" property="releaseBy" type="TextBox" edit="N" target="session.userInfo.userId" required="" format="" width="100" height="1" column="2"/>
+                <control name="releaseTime" title="发布时间" property="releaseTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="informationLabelId" title="专题标签id" property="informationLabelId" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="reviewEdit" title="评论" property="reviewEdit" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+                <control name="forwardType" title="转发类型" property="forwardType" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+                
+                <control name="createBy" title="创建人" property="createBy" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+
+            </panel>
+
+            <panel name="pReviewList" title="评论列表" object="infoReviewList" type="Grid">
+
+                <control name="ctlDelete" title="删除" property="" type="Link" edit="" required="" format="" width="150" height="1" column=""/>
+                <control name="ctlLike" title="点赞" property="" type="Link" edit="" required="" format="" width="150" height="1" column=""/>
+                <control name="ctlComment" title="评论" property="" type="Link" edit="" required="" format="" width="150" height="1" column=""/>
+                <control name="ctlMore" title="更多" property="" type="Link" edit="" required="" format="" width="150" height="1" column=""/>
+               	<control name="id" title="id" property="id" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="infoId" title="资讯id" property="infoId" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="reviewBy" title="评论人" property="reviewBy" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="reviewTime" title="评论时间" property="reviewTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="content" title="内容" property="content" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="createBy" title="创建人" property="createBy" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="updateTime" title="更新时间" property="updateTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="updateBy" title="更新人" property="updateBy" type="TextBox" edit="N" required="N" target="session.userInfo.userId" format="" width="100" height="1" column=""  />
+                <control name="likeValidName" title="是否点赞" property="likeValidName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="likeValid" title="点赞标识" property="likeValid" type="Hidden" edit="N" required="N" format="" width="100" height="1" column=""  />
+            </panel>
+            <panel name="pMoreReviewList" title="更多评论列表" object="infoReviewList"  type="Grid">
+
+                <control name="id" title="id" property="id" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="infoId" title="资讯id" property="infoId" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="reviewBy" title="评论人" property="reviewBy" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="reviewTime" title="评论时间" property="reviewTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="content" title="内容" property="content" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="createBy" title="创建人" property="createBy" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="updateTime" title="更新时间" property="updateTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="updateBy" title="更新人" property="updateBy" type="TextBox" edit="N" required="N" target="session.userInfo.userId" format="" width="100" height="1" column=""  />
+                <control name="likeValidName" title="是否点赞" property="likeValidName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="likeValid" title="点赞标识" property="likeValid" type="Hidden" edit="N" required="N" format="" width="100" height="1" column=""  />
+            </panel>
+            
+
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="j1" logic="DecodeId" ifyes="qid" ifno="">
+                    <param name="Out" value="pCondition.id"></param>
+                </procedure>
+                <procedure name="qid" logic="Query" ifyes="qid2" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pList"></param>
+                    <param name="Plugin" value="informationViewCDN"></param>
+                    <param name="Sql" value="khApp/discover/information/QryInformationPreView"></param>
+                </procedure>
+                <procedure name="qid2" logic="Query" ifyes="j3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pReviewList"></param>
+                    <param name="Plugin" value="reviewCommentList"></param>
+                    <param name="Sql" value="khApp/discover/information/QryInformationReview"></param>
+                </procedure>
+                <procedure name="j3" logic="SaveCustom" ifyes="j4" ifno="">
+                    <param name="Sql" value="khApp/discover/information/informationClick"></param>
+                    <param name="In" value="pCondition"></param>
+                    <param name="Plugin" value="informationClick"/>
+                </procedure>
+
+            </flow>
+
+            
+            <!--删除-->
+            <flow trigger="pReviewList.ctlDelete" event="OnClick" filter="">
+                <procedure name="jDelete"  logic="SaveCustom" ifyes="jQuery" ifno="">
+                    <param name="Sql" value="khApp/discover/information/delReview"></param>
+                    <param name="In" value="pReviewList" />
+                    <param name="Msg" value="'评论已删除'" />
+                </procedure>
+                <procedure name="jQuery"  logic="Query" ifyes="j3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pReviewList"></param>
+                    <param name="Plugin" value="reviewCommentList"></param>
+                    <param name="Sql" value="khApp/discover/information/QryInformationReview"></param>
+                </procedure>
+                <procedure name="j3" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pList"></param>
+                    <param name="Sql" value="khApp/discover/information/InformationReview"></param>
+                </procedure>
+            </flow>
+            <!-- 评论点赞 -->
+            <flow trigger="pReviewList.ctlLike" event="OnClick" filter="">
+                <procedure name="jInsert"  logic="SaveCustom" ifyes="jQuery" ifno="">
+                 <param name="In" value="pReviewList" />
+                 <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+                 <param name="Plugin" value="updateReviewLike"></param>
+                 <param name="Msg" value="点赞成功" />
+                </procedure>
+               <procedure name="jQuery"  logic="Query" ifyes="j3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pReviewList"></param>
+                    <param name="Plugin" value="reviewCommentList"></param>
+                    <param name="Sql" value="khApp/discover/information/QryInformationReview"></param>
+                </procedure>
+                <procedure name="j3" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pList"></param>
+                    <param name="Sql" value="khApp/discover/information/InformationReview"></param>
+                </procedure>
+            </flow>
+
+			<!-- 评论回复 -->
+			<flow trigger="pReviewList.ctlComment" event="OnClick" filter="">
+				<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
+	       		 <param name="In" value="pReviewList.id"></param>
+	     		</procedure>
+				<procedure name="jspopup" logic="Popup" ifyes="jQuery" ifno="">
+			        <param name="To" value="frmCommentAdd" />
+			        <param name="Mode" value="Add" />
+			        <param name="Window" value="Medium" />
+			        <param name="Title" value="评论" />
+		        </procedure>
+				
+				<procedure name="jQuery"  logic="Query" ifyes="j3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pReviewList"></param>
+                    <param name="Plugin" value="reviewCommentList"></param>
+                    <param name="Sql" value="khApp/discover/information/QryInformationReview"></param>
+                </procedure>
+                <procedure name="j3" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pList"></param>
+                    <param name="Sql" value="khApp/discover/information/InformationReview"></param>
+                </procedure>
+			</flow>
+			
+			<!-- 更多评论 -->
+				<flow trigger="pReviewList.ctlMore" event="OnClick" filter="">
+					<procedure name="EncodeReviewId"  logic="EncodeId" ifyes="DecodeReviewId" ifno="">
+						<param name="In" value="pReviewList.id"></param>
+					</procedure>
+					<procedure name="DecodeReviewId"  logic="DecodeId" ifyes="jQuery" ifno="">
+						<param name="Out" value="pCondition.reviewId"></param>
+					</procedure>
+					<procedure name="jQuery"  logic="Query" ifyes="" ifno="">
+	                    <param name="In" value="pCondition"></param>
+	                    <param name="Out" value="pMoreReviewList"></param>
+	                    <param name="Sql" value="khApp/discover/information/QryMoreReviewComment"></param>
+	                </procedure> 
+				
+				</flow>
+            <!--评论资讯-->
+            <flow trigger="pToolbar.review" event="OnClick" filter="">
+                <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+                    <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+                    <param name="In" value="pList"></param>
+                    <param name="Plugin" value="updateInfoReview"></param>
+                    <param name="Msg" value="'评论成功'"></param>
+                </procedure>
+                <procedure name="j2" logic="Query" ifyes="j3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pReviewList"></param>
+                    <param name="Plugin" value="reviewCommentList"></param>
+                    <param name="Sql" value="khApp/discover/information/QryInformationReview"></param>
+                </procedure>
+
+            </flow>
+
+            <!--点赞-->
+            <flow trigger="pToolbar.like" event="OnClick" filter="">
+                <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+                    <param name="Sql" value="khApp/discover/information/InformationLike"></param>
+                    <param name="In" value="pList"></param>
+                    <param name="Plugin" value="infoLikePlugin"/>
+                    <param name="Msg" value="'点赞成功'"></param>
+                </procedure>
+                <procedure name="j2" logic="Query" ifyes="j3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pList"></param>
+                    <param name="Sql" value="khApp/discover/information/QryInformationView"></param>
+                </procedure>
+            </flow>
+
+            <!--收藏-->
+            <flow trigger="pToolbar.collect" event="OnClick" filter="">
+                <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+                    <param name="Sql" value="khApp/discover/information/InformationCollect"></param>
+                    <param name="In" value="pList"></param>
+                    <param name="Plugin" value="infoCollectPlugin"/>
+                    <param name="Msg" value="'收藏成功'"></param>
+                </procedure>
+                <procedure name="j2" logic="Query" ifyes="j3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pList"></param>
+                    <param name="Sql" value="khApp/discover/information/QryInformationView"></param>
+                </procedure>
+            </flow>
+
+            <!--取消收藏-->
+            <flow trigger="pToolbar.deleteCollect" event="OnClick" filter="">
+                <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+                    <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+                    <param name="In" value="pList"></param>
+                    <param name="Plugin" value="infoCollectDelect"/>
+                    <param name="Msg" value="'取消成功'"></param>
+                </procedure>
+                <!--<procedure name="j2" logic="Query" ifyes="j3" ifno="">-->
+                <!--<param name="In" value="pCondition"></param>-->
+                <!--<param name="Out" value="pList"></param>-->
+                <!--<param name="Sql" value="khApp/discover/information/QryInformationView"></param>-->
+                <!--</procedure>-->
+            </flow>
+            <flow trigger="pToolbar.forward" event="OnClick" filter="">
+                <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+                    <param name="Sql" value="/khApp/discover/information/inforForward"></param>
+                    <param name="In" value="pList"></param>
+                    <param name="Plugin" value="updateInfoForward"></param>
+                    <param name="Msg" value="'转发成功'"></param>
+                </procedure>
+            </flow>
+			<!--返回-->
+            <flow trigger="pToolbar.back" event="OnClick" filter="">
+                <procedure name="proTransition" server="/frmInforSubList" logic="Back" ifyes="" ifno="">
+                    <param name="To" value="frmInforSubList"></param>
+                </procedure>
+            </flow>
+			
+
+            <layout>
+                <region location="North" scale="">
+                    <subregion panel="pToolbar" location="North" scale=""/>
+                </region>
+                <region location="Center" scale="">
+                    <subregion panel="pCondition" location="North" scale=""/>
+                    <subregion panel="pList" location="Center" scale=""/>
+                    <subregion panel="pReviewList" location="Center" scale=""/>
+					<subregion panel="pMoreReviewList" location="Center" scale=""/>
+					
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

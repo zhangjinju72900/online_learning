@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmMeQuestionList" title="教师题库列表">
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnQuery" title="查询" property="" type="Button" edit="" required="" format="" width=""
+						 height="" column=""/>
+				<control name="btnClear" title="清空条件" property="" type="Button" edit="" required="" format="" width=""
+						 height="" column=""/>
+				<control name="btnAdd" title="新增" property="" type="Button" edit="" required="" format="" width=""
+						 height="" column=""/>
+
+			</panel>
+
+			<panel name="pCondition" title="查询条件" object="question" type="Group">
+				<control name="eq_id" title="试题编号" property="id" type="TextBox" edit="Y" required="N" format=""
+						 multiple="N" width="1" height="1" column=""/>
+				<control name="eq_questionClassifyId" title="题库分类" property="questionClassifyId" type="Hidden" edit="Y"  
+						 required="" format="" width="1" height="" column="" />
+				<control name="questionClassifyName" title="题库分类" property="questionClassifyName" type="PopupBox" edit="Y"  
+						 required="" format="" width="1" height="" column="" />
+				<control name="eq_questionType" title="题型" property="questionType" type="ComboBox" edit="Y" required="N"
+						 format="" multiple="N" width="1" height="1" column="4"/>
+				<control name="eq_dataFlag" title="是否公有" property="dataFlag" type="Hidden" edit="Y" required="N"
+						 format="" multiple="N" width="1" height="1" column=""/>
+				<control name="eq_difficultyLevel" title="难度" property="difficultyLevel" type="ComboBox" edit="Y"
+						 required="N" format="" multiple="N" width="1" height="1" column=""/>
+				<control name="eq_enableStatus" title="状态" property="enableStatus" type="ComboBox" edit="Y" required="N"
+						 format="" multiple="N" width="1" height="1" column=""/>
+				<control name="lk_content" title="题干" property="content" type="TextBox" edit="Y" required="N" format=""
+						 multiple="N" width="1" height="1" column="4"/>
+			</panel>
+			<panel name="pFrom" title="查询条件" object="question" type="Hidden">
+				<control name="qcName" title="分类名" property="questionClassifyName" type="TextBox" edit="Y" required="N" format=""
+						 multiple="N" width="1" height="1" column=""/>
+			</panel>
+			<panel name="pTable" title="查询结果" object="question" type="Grid" multiple="Y">
+				<control name="id" title="id" property="id" type="TextBox" edit="N" required="" format="" width="100"
+						 height="1" column=""/>
+				<control name="content" title="题干" property="content" type="TextBox" edit="N" required="" format=""
+						 width="300" height="1" column=""/>
+				<control name="dataFlagType" title="题库类型" property="dataFlagType" type="TextBox" edit="N"
+						 required="" format="" width="100" height="1" column=""/>
+				<control name="questionClassifyName" title="试题分类" property="questionClassifyName" type="TextBox" edit="N"
+						 required="" format="" width="200" height="1" column=""/>
+				<control name="questionTypeName" title="题型" property="questionTypeName" type="TextBox" edit="N"
+						 required="" format="" width="100" height="1" column=""/>
+				<control name="difficultyLevelName" title="难度" property="difficultyLevelName" type="TextBox" edit="N"
+						 required="" format="" width="100" height="1" column=""/>
+				<control name="validFlag" title="启用" property="validFlag" type="TextBox" edit="N"
+						 required="" format="" width="100" height="1" column=""/>
+				<control name="updateTime"  title="更新日期"  property="updateTime"  type="Hidden" edit="N" required="N" 
+						target="CurrentTime()" format="" width="1" height="1" column=""  />
+				<control name="updateBy"   title="更新人"  property="updateBy"  type="Hidden" edit="N" required="N" 
+						target="session.userInfo.userId" format="" width="1" height="1" column="2"  />  
+				<control name="createTime"   title="创建日期"  property="createTime"  type="Hidden" edit="N" required="N" 
+						target="editMode=='Add'?CurrentTime():nil" format="" width="1" height="1" column=""  />
+				<control name="createBy"   title="创建人"  property="createBy"  type="Hidden" edit="N" required="N" 
+						target="editMode=='Add'?session.userInfo.userId:nil" format="" width="1" height="1" column="2"  />
+				<control name="ctlEdit" title="修改" property="" type="Link" edit="" required="" format="" width="100"
+						 height="" column=""/>
+				<control name="ctlDelete" title="删除" property="" type="Link" edit="" required="" format="" width="100"
+						 height="" column=""/>
+			</panel>
+
+			<!-- 逻辑加载  -->
+			<flow trigger="" event="OnLoad" filter="">
+				<!--  <procedure name="jClear"  logic="Clear" ifyes="tree" ifno="" sync="Y">
+				   <param name="Out" value="pCondition"></param>
+				</procedure> -->
+				<!-- <procedure name="questionClassifyNameList" logic="List" ifyes="statusList" ifno="" sync="Y">
+					<param name="Out" value="pCondition.eq_questionClassifyId"/>
+					<param name="Sql" value="khTeacher/myquestion/QryquestionClassifyNameList"/>
+				</procedure> -->
+				<procedure name="statusList" logic="List" ifyes="typeList" ifno="" sync="Y">
+					<param name="Out" value="pCondition.eq_enableStatus"/>
+					<param name="Sql" value="khTeacher/question/QryEnableStatusList"/>
+				</procedure>
+				<procedure name="typeList" logic="List" ifyes="difficulty" ifno="" sync="Y">
+					<param name="Out" value="pCondition.eq_questionType"/>
+					<param name="Sql" value="khTeacher/myquestion/QryQuestionTypeList"/>
+				</procedure>
+				<procedure name="difficulty" logic="List" ifyes="questionQuery" ifno="" sync="Y">
+					<param name="Out" value="pCondition.eq_difficultyLevel"/>
+					<param name="Sql" value="khTeacher/question/QryDifficultyList"/>
+				</procedure>
+				<procedure name="questionQuery" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition"/>
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="khTeacher/myquestion/QryQuestionListM"/>
+				</procedure>
+
+			</flow>
+			
+			<!-- 题库分类点击事件 -->
+			<flow trigger="pCondition.questionClassifyName" event="OnClick" filter="">
+				<procedure name="jspopup" server="" logic="Popup" ifyes="" ifno="">
+					<param name="To" value="frmQuestionTreeM"></param>
+					<param name="Mode" value="Add"></param>
+					<!-- <param name="Sql" value="khTeacher/question/QryClassifyTree"/>	 -->
+					<param name="Window" value="Medium" />
+					<param name="Title" value="选择题库分类"></param>
+			  </procedure>
+			</flow>
+			
+			<!-- 清空点击事件 -->
+			<flow trigger="pToolbar.btnClear" event="OnClick" filter="">
+				<procedure name="jClear"  logic="Clear" ifyes="" ifno="" sync="Y">
+				   <param name="Out" value="pCondition"></param>
+				</procedure>
+			</flow>
+
+			<!-- 查询点击事件 -->
+			<flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
+				<procedure name="Query" logic="Query" ifyes="" ifno="" sync="Y">
+					<param name="In" value="pCondition"/>
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="khTeacher/myquestion/QryQuestionListM"/>
+				</procedure>
+			</flow>
+			<!-- 新增点击事件 -->
+			<flow trigger="pToolbar.btnAdd" event="OnClick" filter="">
+			  <procedure name="jspopup" server="" logic="Popup" ifyes="queryTable" ifno="">
+					<param name="To" value="frmQuestionAddM"></param>
+					<param name="Mode" value="Add"></param>
+					<param name="Window" value="Large"></param>
+					<param name="Title" value="新增试题"></param>
+			  </procedure>
+		      <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
+		        	<param name="In" value="pCondition"/>
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="khTeacher/myquestion/QryQuestionListM"/>
+		      </procedure>  
+			</flow>
+			
+			<!-- 编辑问题 -->
+			<flow trigger="pTable.ctlEdit" event="OnClick" filter="">
+				<procedure name="jsEncodeId" server="" logic="EncodeId" ifyes="jsPopup" ifno="">
+					<param name="In" value="pTable.id" />
+				</procedure>
+				<procedure name="jsPopup" server="" logic="Popup" ifyes="Query" ifno="">
+					<param name="To" value="frmQuestionAddM"/>
+					<param name="Mode" value="Edit"/>
+					<param name="Window" value="Large"></param>
+					<param name="Title" value="编辑试题"/>
+				</procedure>
+				<procedure name="Query" logic="Query" ifyes="" ifno="" sync="Y">
+					<param name="In" value="pCondition"/>
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="khTeacher/myquestion/QryQuestionListM"/>
+				</procedure>
+			</flow>
+			<!-- 删除 -->
+			<flow trigger="pTable.ctlDelete" event="OnClick" filter="">
+				<procedure name="confirm" logic="ConfirmMsg" ifyes="jsSave" ifno="">
+					<param name="Title" value="删除试题"></param>
+					<param name="Msg" value="确认删除当前试题吗?"></param>
+			  	</procedure>
+				<procedure name="jsSave" logic="SaveCustom" ifyes="jQuery" ifno="">
+					<param name="In" value="pTable"/>
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+					<param name="Plugin" value="DeleteMyQuestion"/>
+					<!-- <param name="sql" value="khTeacher/myquestion/DeleteQuestionM"/>
+					<param name="Msg" value="'已删除'"/> -->
+				</procedure>
+				<procedure name="jQuery" logic="Query" ifyes="" ifno="" sync="Y">
+					<param name="In" value="pCondition"/>
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="khTeacher/myquestion/QryQuestionListM"/>
+				</procedure>
+			</flow>
+			<!-- 布局 -->
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale=""/>
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pCondition" location="North" scale=""/>
+					<subregion panel="pTable" location="Center" scale=""/>
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

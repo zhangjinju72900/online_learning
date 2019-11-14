@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmHomeworkByDate" title="教师当天作业列表">
+	 		<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnreturn" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+			<panel name="pCondition" title="查询条件" object="homework" type="Group">
+			 	<control name="homeworkDate" title="作业日期" property="homeworkDate" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+			 	<control name="eq_createBy" title="创建人" property="" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+			</panel>
+			<panel name="pTable" title="查询结果" object="homework" type="Grid" multiple="Y" >
+            	<control name="id" title="id" property="id" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="homeworkType" title="作业类型" property="homeworkType" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="name" title="作业名" property="name" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="homeworkTypeName" title="作业类型名" property="homeworkTypeName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="className" title="班级名" property="className" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>              
+            </panel>
+            
+            <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		        <procedure name="annDecodeId" logic="DecodeId"  ifyes="qDetail" ifno="" >
+			    	<param name="Out" value="pCondition.homeworkDate"></param>
+			   	  </procedure>
+		      <procedure name="qDetail" logic="Query" ifyes="" ifno="">
+		      	 <param name="In" value="pCondition"></param>
+		         <param name="Out" value="pTable"></param>
+		         <param name="Sql" value="khTeacher/homework/homeworkCorrect/QryHomeworkByDate"></param>
+		      </procedure>
+		    </flow>
+
+   			<!--返回-->
+		    <flow trigger="pToolbar.btnreturn" event="OnClick" filter="">
+		       <procedure name="proTransition" server="/frmAnswerHomework" logic="Back" ifyes="" ifno="">
+		         <param name="To" value="frmAnswerHomework"></param>
+		       </procedure>
+		    </flow>
+            <!-- 布局 -->
+            <layout>
+                <region location ="North" scale="">
+                    <subregion panel="pToolbar" location="North" scale=""/>
+                </region>
+                <region location ="Center" scale="">
+                	<subregion panel="pCondition" location="North" scale=""/>
+                	<subregion panel="pTable" location="Center" scale=""/>
+                	
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

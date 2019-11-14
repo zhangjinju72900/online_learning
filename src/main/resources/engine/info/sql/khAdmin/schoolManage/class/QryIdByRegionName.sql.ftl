@@ -1,0 +1,1 @@
+select id from t_region where name = #{data.value} and valid_flag = 0

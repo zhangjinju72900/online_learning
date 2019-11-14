@@ -1,0 +1,41 @@
+UI名称		作业成绩列表（frmHomeworkScore）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmHomeworkScore_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		eq_classId: ""			--班级id
+		eq_courseId: ""			--课程id
+		eq_homeworkType: ""		--标识（0-客观题；1-主观题）
+		eq_sectionId: ""		--课程小节id
+		lk_name: ""				--作业名称
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		avgScore: "80.00"						--平均成绩(已批改状态时主观题显示优良中差，客观题显示平均分，已分发，已分发，已截止状态显示待批改)
+		classId: 308
+		className: "汽修1班"
+		courseId: 1
+		courseName: null
+		createTime: "2019-01-07 19:18:37"			
+		distributeTime: "2019-01-07 19:18:37"		--分发时间
+		endTime: "2019-01-07 00:00:00"				--截止时间
+		homeworkType: 0
+		homeworkTypeName: "客观题"
+		id: 16
+		name: "测试执行分发学生"
+		schoolId: 49
+		sectionName: "任务一"
+		sectionid: 2
+		}
+
+
+
+

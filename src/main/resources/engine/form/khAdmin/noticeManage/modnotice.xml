@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<object name="tNotice" table="t_notice" primary="id" unique="" order="id desc">
+		<property name="id" type="Long" length="20" initial="" field="id"/>
+		<property name="title" type="String" length="50" initial="" field="title"/>
+		<property name="role" type="String" length="50" initial="" field=""/>
+		<property name="area" type="String" length="50" initial="" field=""/>
+		<property name="schoolName" type="String" length="50" initial="" field=""/>
+		<property name="schoolId" type="String" length="50" initial="" field=""/>
+		<property name="context" type="String" length="200" field="context"/>
+		<property name="releaseBy" type="Long" length="20" field="release_by"/>
+		<property name="releaseByna" type="Long" length="20" field=""/>
+		<property name="releaseTime" type="Date" length="20" field="release_time"/>
+		<property name="releaseStatus" type="Long" length="20" field="release_status"/>
+		<property name="createBy" type="Long" length="20" field="create_by"/>
+		<property name="createTime" type="Date" length="20" field="create_time"/>
+		<property name="updateBy" type="Long" length="20" field="update_by"/>
+		<property name="updateTime" type="Date" length="20" field="update_time"/>
+		<property name="fileName" type="String" length="200" field=""/>
+
+		<!--消息已读和未读数量-->
+		<property name="readFlag" type="Long" length="20" field=""/>
+		<property name="unreadFlag" type="Long" length="20" field=""/>
+		<!--附件-->
+		<property name="fileId" type="String" length="50" field=""/>
+
+		<!--班级id-->
+		<property name="classId" type="String" length="50" field=""/>
+		
+ 	</object>  
+ 	<object name="noticeSchool" table="t_notice_school" primary="id" unique="" order="">
+		<property name="id" type="Long" length="20" initial="" field="id"/>
+		<property name="noticeId" type="Long" length="20" field="notice_id"/>
+		<property name="schoolId" type="Long" length="20" field="school_id"/>
+		<property name="schoolName" type="String" length="50" field=""></property>
+		<property name="remark" type="String" length="50" field=""></property>
+		<property name="createBy" type="Long" length="20" field="create_by"/>
+		<property name="createTime" type="Date" length="20" field="create_time"/>
+		<property name="updateBy" type="Long" length="20" field="update_by"/>
+		<property name="updateTime" type="Date" length="20" field="update_time"/>
+		
+		
+ 	</object>
+</model_layer>
+</tsoftware>

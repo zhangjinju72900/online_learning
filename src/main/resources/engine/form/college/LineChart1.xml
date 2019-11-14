@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="LineChart1" title="数据趋势图"> 
+  <panel name="pToolbar" title="工具条" object="" type="Toolbar">
+  		<control name="btn" title="导出数据明细" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+  		<control name="btnQuery" title="查询数据明细" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+ 		<control name="btnAddPeople" title="新增用户" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+   		<control name="btnLivelyPeople" title="活跃用户" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+   		<control name="btnLivelyCount" title="活跃次数" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+   		<control name="btnInformationCount" title="资讯浏览数" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+   		<control name="btnCoursewareCount" title="课件学习数" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+   	</panel>
+   	<panel name="pCondition" title="查询条件" object="operate" type="Group">
+		<control name="createTime" title="操作日期从" initial="CurrentTime()" property="createTime" type="DateBox" edit="Y" required="N"
+                         format="" width="1" height="1" column=""/>
+				<control name="createTime1" title="至" property="createTime" initial="CurrentTime()" type="DateBox" edit="Y" required="N"
+                         format="" width="1" height="1" column="4"/>
+	</panel>	
+	<panel name="pTable" title="统计时间数据" object="operate" type="LineChart" multiple="" >
+		<control name="createTime" title="时间段" property="createTime" type="DataLink" />
+        <control name="informationCount" title="数量" property="informationCount" type="TextBox" />
+	 </panel>
+	<panel name="pForm" title="统计时间数据" object="operate" type="Grid" multiple="" >
+		<control name="addUser" title="新增用户" property="addUser" type="TextBox" />
+        <control name="LivelyUser" title="活跃用户" property="LivelyUser" type="TextBox" />
+        <control name="LivelyCount" title="活跃次数" property="LivelyCount" type="TextBox" />
+        <control name="informationCount" title="资讯浏览数" property="informationCount" type="TextBox" />
+         <control name="CoursewareCount" title="课件学习数" property="CoursewareCount" type="TextBox" />
+	 </panel>
+        
+         
+       <!-- 逻辑加载 -->  
+      <flow trigger="" event="OnLoad" filter="">  
+      <procedure name="j3"  logic="Query" ifyes="QueryByType" ifno="">
+	        <param name="Out" value="pCondition"></param>
+	        <param name="Sql" value="college/QryNow"></param>
+      </procedure> 
+     </flow>
+        
+    <!-- 按钮功能实现 -->
+     <flow trigger="pToolbar.btnLivelyCount" event="OnClick" filter="">  
+       	<procedure name="QueryByType" logic="Query" ifyes="" ifno="">
+       		<param name="In" value="pCondition"></param>
+ 		     <param name="Out" value="pTable"></param>
+ 		     <param name="Sql" value="college/QryLivelyCount"></param>
+ 		  </procedure>
+     </flow>
+    <flow trigger="pToolbar.btnInformationCount" event="OnClick" filter="">  
+		<procedure name="QueryByType" logic="Query" ifyes="" ifno="">
+		   <param name="In" value="pCondition"></param>
+ 		   <param name="Out" value="pTable"></param>
+ 		   <param name="Sql" value="college/QryinformationCount"></param>
+ 	</procedure>
+    </flow>
+    <flow trigger="pToolbar.btnLivelyPeople" event="OnClick" filter="">  
+       	<procedure name="QueryByType" logic="Query" ifyes="" ifno="">
+       		<param name="In" value="pCondition"></param>
+ 		    <param name="Out" value="pTable"></param>
+ 		    <param name="Sql" value="college/QryLivelyPeople"></param>
+ 		</procedure>
+    </flow>
+  <flow trigger="pToolbar.btnCoursewareCount" event="OnClick" filter="">  
+       	<procedure name="QueryByType" logic="Query" ifyes="" ifno="">
+       		<param name="In" value="pCondition"></param>
+ 		    <param name="Out" value="pTable"></param>
+ 		    <param name="Sql" value="college/CoursewareCount"></param>
+ 		</procedure>
+    </flow>
+    <flow trigger="pToolbar.btnAddPeople" event="OnClick" filter="">  
+       	<procedure name="QueryByType" logic="Query" ifyes="" ifno="">
+       		<param name="In" value="pCondition"></param>
+ 		    <param name="Out" value="pTable"></param>
+ 		    <param name="Sql" value="college/QryAddCount"></param>
+ 		</procedure>
+    </flow>
+    
+    <flow trigger="pToolbar.btnQuery" event="OnClick" filter="">  
+       	<procedure name="QueryByType" logic="Query" ifyes="" ifno="">
+       	<param name="In" value="pCondition"></param>
+ 		     <param name="Out" value="pForm"></param>
+ 		     <param name="Sql" value="college/QryDataDetails"></param>
+ 		  </procedure>
+     </flow>
+     <!-- 导出 -->
+     <flow trigger="pToolbar.btn" event="OnClick" filter="">  
+                <procedure name="procExport" logic="Export" ifyes="" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Format" value="pForm"></param>
+                    <param name="Sql" value="college/QryDataDetails"></param>
+                </procedure>
+            </flow>
+	<!-- 布局 -->
+	<layout>
+  		<region location ="North" scale="">
+        	<subregion panel="pToolbar" location ="North" scale=""/>
+        	<subregion panel="pCondition" location ="East" scale=""/>
+      	</region>
+  		<region location ="Center" scale="">
+        	<subregion panel="pTable" location ="West" scale="70%"/>
+        	<subregion panel="pForm" location ="East" scale="30%"/>
+      	</region>
+      	
+    </layout>
+    </ui>
+    </ui_layer>
+    </tsoftware>

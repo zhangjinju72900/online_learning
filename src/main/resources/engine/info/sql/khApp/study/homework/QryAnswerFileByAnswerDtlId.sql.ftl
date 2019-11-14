@@ -1,0 +1,2 @@
+select a.id, a.oss_url as ossUrl, a.file_id as fileId, concat(f.filename,".",f.file_type) as fileName from t_homework_detail_subjective_answer_file a left join t_file_index f on a.file_id = f.id 
+where a.homework_detail_answer_id = #{data.homeworkDetailAnswerId}

@@ -1,0 +1,25 @@
+UI名称		我的收藏列表接口（frmCollectList）
+
+tokenKey	OnLoad__frmCollectList_j2
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {page: 1, rows: 50}
+
+返回示例
+"data":{"collectBy":5,   --收藏人
+		"releaseTime":"2018-08-06 09:29:17",  --发布时间
+   		"validFlag":0,  --标识
+		"collectCount":2,  --收藏数
+		"id":8,  --ID
+		"source":"0",  --资讯来源
+		"title":"咨询4",  --标题
+		"type":"info",  --类型info：资讯，good：商品
+		"fileId":1}  --图片ID
+		
+		
+
+

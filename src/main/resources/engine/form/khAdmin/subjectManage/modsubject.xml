@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<!-- t_information表原有字段 -->
+	<object name="tsub" table="t_subject" primary="id" unique="title" order="id desc" autoinc="Y">
+	<property name="id" type="String" length="20" initial="" field="id"/>
+	<property name="title" type="String" length="500" initial="" field="title"/>
+	<property name="content" type="String" length="500" initial="" field="content"/>
+	<property name="fileId" type="Long" length="20" initial="" field="file_id"/>
+	<property name="relStatus" type="Long" length="10" field="release_status"/>
+	<property name="relTime" type="Date" length="10" field="release_time"/>
+	<property name="relBy" type="String" length="50" field="release_by"/>
+	<property name="recFlag" type="Long" length="10" field="recommend_flag"/>
+	<property name="topFlag" type="Long" length="1" field="top_flag"/>
+	<property name="topTime" type="Date" length="" field="top_time"/>
+	<property name="topBy" type="String" length="" field="top_by"/>
+	
+	<property name="createTime" type="Date" length="" field="create_time"/>
+	<property name="createBy" type="Long" length="20" field="create_by"/>
+	<property name="updateTime" type="Date" length="" field="update_time"/>
+	<property name="updateBy" type="Long" length="20" field="update_by"/>
+	
+	<!-- 关联字段 -->
+	<property name="releaseStatusName" type="String" length="50" field=""/>
+	<property name="relByName" type="String" length="50" field=""/>
+	<property name="file" type="String" length="" field=""/>
+	<property name="reFlag" type="Long" length="1" field=""/>
+	<property name="tFlag" type="Long" length="1" field=""/>
+	</object>
+	
+	<object name="tsubin" table="t_subject_information" primary="id" unique="subject_id,information_id" order="id desc" autoinc="Y">
+	<property name="id" type="Long" length="20" initial="" field="id"/>
+	<property name="subId" type="Long" length="20" initial="" field="subject_id"/>
+	<property name="informationId" type="Long" length="20" initial="" field="information_id"/>
+	
+	<property name="createTime" type="Date" length="" field="create_time"/>
+	<property name="createBy" type="Long" length="20" field="create_by"/>
+	<property name="updateTime" type="Date" length="" field="update_time"/>
+	<property name="updateBy" type="Long" length="20" field="update_by"/>
+	<!-- 关联字段 -->
+	<property name="title" type="String" length="" field=""/>
+	</object>
+</model_layer>
+</tsoftware>

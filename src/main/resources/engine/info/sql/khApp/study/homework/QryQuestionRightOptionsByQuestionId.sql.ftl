@@ -1,0 +1,1 @@
+select id from t_question_answer_options where question_id = #{data.id} and correct_flag = 0

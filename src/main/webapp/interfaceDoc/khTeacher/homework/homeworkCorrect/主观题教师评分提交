@@ -1,0 +1,43 @@
+UI名称		主观作业评分（frmSubjectCorrect）
+
+tokenKey	OnClick_pToolbar_btnSave_frmSubjectCorrect_jssave2
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		id: "29"		--作业回答id
+		remark: "你真是很棒棒哦哦哦"		--教师评语
+		subjectiveScoreLevel: "2"		--得分等级--主观题 0-优；1-良；2-中；3-差
+		}
+
+返回示例
+"data":		{
+		class_id: 308
+		course_id: 1
+		create_by: 0
+		create_time: "2019-01-07 19:16:57"
+		finish_time: null
+		homework_id: 15					--作业id
+		homework_type: 0
+		id: 29							--作业回答id
+		objective_real_score: 0
+		objective_score: 0
+		remark: "你真是很棒棒哦哦哦"
+		school_id: 49
+		section_id: 2
+		status: 3
+		student_id: 17
+		subjectiveScoreLevel: 2
+		subjective_score_level: 2
+		teacher_id: 2
+		update_by: 0
+		update_time: "2019-01-07 20:39:00"
+		valid_flag: 0
+		}
+
+
+
+

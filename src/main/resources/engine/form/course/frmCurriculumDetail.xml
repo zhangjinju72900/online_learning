@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+			
+	<ui_layer>
+	  <ui name="frmCurriculumDetail" title="详情">
+		 <panel name="hiddenPanel" title="hidden" object="classCurriculumAdd" type="Hidden">
+			<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+		</panel> 
+		<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnBack" title="返回" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+		<panel name="pnlGroupPop" title="tab1" object="classCurriculumAdd" type="Group">
+			<control name="id" title="课表编号" property="id" type="Hidden" edit="N" required="" format="" width="100" height="1" column="1"/>
+			<control name="curriculumName" title="课表名称" property="curriculumName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+			<control name="schoolName" title="院校名称" property="schoolName" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+			<control name="schoolId" title="院校编号" property="schoolId" type="Hidden" edit="N" required="" format="" width="100" height="1" column="2"/>
+			<control name="executeTime" title="执行时间" property="executeTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>		
+		
+			<control name="proId" title="专业id" property="proId" type="ComboBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+			<control name="courseName1" title="一年级课程" property="courseName1" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+			<control name="courseName2" title="二年级课程" property="courseName2" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+			<control name="courseName3" title="三年级课程" property="courseName3" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+			<control name="courseName4" title="四年级课程" property="courseName4" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+			<control name="courseName5" title="五年级课程" property="courseName5" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>   
+			<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="N" required="N" format="" width="100" height="1" column="2" target="Mode=='Add'?CurrentTime():nil"/>
+			<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="N" required="N" target="Mode=='Add'?session.userInfo.empId:nil" format="" width="100" height="1" column=""  />
+			<control name="updateTime" title="最后修改时间" property="updateTime" type="Hidden" edit="N" required="N" format="" width="100" height="1" column="2" target="CurrentTime()"/>
+			<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="N" required="N" target="session.userInfo.empId" format="" width="100" height="1" column="1"  />		
+			
+			
+			<control name="courseId1" title="1" property="courseId1" type="Hidden" edit="N" required="" format="" width="5" height="1" column=""/>
+			<control name="courseId2" title="2" property="courseId2" type="Hidden" edit="N" required="" format="" width="5" height="1" column=""/>
+			<control name="courseId3" title="3" property="courseId3" type="Hidden" edit="N" required="" format="" width="5" height="1" column=""/>
+			<control name="courseId4" title="4" property="courseId4" type="Hidden" edit="N" required="" format="" width="5" height="1" column=""/>
+			<control name="courseId5" title="5" property="courseId5" type="Hidden" edit="N" required="" format="" width="5" height="1" column=""/>
+			
+			
+		</panel>
+		
+		
+	    <flow trigger="" event="OnLoad" filter="" >
+	      <procedure name="getList" server="" logic="List" ifyes="getId" ifno="">
+	        <param name="Out" value="pnlGroupPop.proId"></param>
+	        <param name="Sql" value="course/QryProfessional"></param>
+	      </procedure> 
+	      <procedure name="getId" server="" logic="DecodeId" ifyes="qCurriculumDetail" ifno="">
+	        <param name="Out" value="hiddenPanel.id"></param>
+	      </procedure> 
+	     <procedure name="qCurriculumDetail"  logic="Query" ifyes="" ifno="">
+	        <param name="In" value="hiddenPanel"></param>
+	        <param name="Out" value="pnlGroupPop"></param>
+	        <param name="Sql" value="course/QryCurriculumDetail1"></param>
+	      </procedure> 
+	      
+	    </flow>
+	    
+	    <!-- 返回 -->
+			<flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+				<procedure name="proTransition" server="/frmCurriculumList"
+					logic="Back" ifyes="" ifno="">
+					<param name="To" value="frmCurriculumList"></param>										
+				</procedure>
+				
+			</flow>
+	   	
+	    <layout>
+	      <region location ="Center" scale="">
+	        <subregion panel="pnlGroupPop" location="North" scale="" />
+	         <subregion panel="hiddenPanel" location="Center" scale="" />
+	      </region>
+	   <region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale="" />
+				</region>
+	    </layout>
+	    
+	  </ui>
+	</ui_layer>
+</tsoftware>

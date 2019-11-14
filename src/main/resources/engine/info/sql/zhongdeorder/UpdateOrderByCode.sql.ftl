@@ -1,0 +1,1 @@
+update t_order set order_status=#{data.status}  where code=#{data.code} or id = #{data.id}

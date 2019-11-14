@@ -1,0 +1,32 @@
+UI名称		客观题作业人员得分列表（frmObjectAnswer）
+
+tokenKey	OnLoad__frmObjectAnswer_qAnswer
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "10"		--作业id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{"total":24,"rows":[{
+		fileId: 2920					--用户头像文件id
+		finishTime: null				--作业完成时间
+		id: 4							--作业回答id
+		objectiveRealScore: 0			--得分值--客观题
+		ossUrl: ""						--头像url
+		status: 3						--作业回答状态 0-已分发；1-已回答；2-已提交；3-已批改
+		statusName: "已批改"
+		studentId: 2					--学生id
+		studentName: "管理员"			--学生名称
+		commitFlag: 0					--作业提交标识:0-已提交，1-未提交
+		}]}
+
+
+
+

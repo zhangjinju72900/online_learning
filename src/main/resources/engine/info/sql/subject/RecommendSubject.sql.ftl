@@ -1,0 +1,1 @@
+update t_subject set recommend_flag = 1 where #{data.id} = id

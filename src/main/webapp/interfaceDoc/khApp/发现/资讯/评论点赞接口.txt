@@ -1,0 +1,50 @@
+1.评论点赞接口：
+	UI名称		 咨讯专题详情列表-评论列表-点赞（informationView）
+	
+	tokenKey：	OnClick_pReviewList_ctlLike_informationView_jInsert
+	
+
+	接口地址：   	api/savecustom
+
+	接口类型：	POST
+
+	参数示例:
+			"data": {
+			"id":75   --二级评论的ID
+			"createBy":2  --当前登录人 
+			}
+
+	返回示例:	
+			"data":{
+			"review_id":0,  --‘评论ID，回复资讯时为0，回复评论时为具体ID'
+			"top_by":0,	--置顶人id
+			"infoId":83,	 --资讯ID
+			"review_count":0,  --评论数
+			"content":"好麻麻们",	--评论内容
+			"create_by":2,
+			"update_time":"2018-11-14 14:57:37",
+			"updateBy":2,
+			"review_time":"2018-11-1414:57:37",
+			"id":75,"top_time":null,	--t_information_review表的id
+			"update_by":2,
+			"likeValid":1,		--点赞标识 1为已点赞 0为未点赞
+			"information_id":83,		--资讯id
+			"reviewBy":2,			--评论人id
+			"like_count":1,			--该评论的点赞数
+			"create_time":"2018-11-14 14:57:37",
+			"likeValidName":"已点赞",	--有"已点赞"和"未点赞"	分别对应likeValid 的值1 和0
+			"updateTime":"2018-11-14 14:57:37",
+			"check_status":1,		--审核状态;0:未审核,1:审核通过,2:审核不通过
+			"createBy":2,
+			"top_flag":0,			--是否置顶;0:不置顶,1:置顶
+			"check_by":0,
+			"createTime":"2018-11-14  14:57:37",
+			"review_by":2,
+			"reviewTime":"2018-11-14 14:57:37",
+			"check_time":null}
+
+
+
+
+
+	

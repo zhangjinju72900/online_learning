@@ -1,0 +1,37 @@
+UI名称		关注（frmSubscribe）
+
+tokenKey：OnClick_pToolbar_focusOn_frmSubscribe_j1
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		"focusOnId": "7" --关注人ID
+	},
+
+
+返回示例
+data:{"create_by":0,"focus_on_time":null,"update_time":null,"focusOnId":7,"focus_on_id":7,"create_time":null,"id":2,"customer_user_id":5,"update_by":0}
+
+
+
+
+
+UI名称		取消关注（frmSubscribe）
+
+tokenKey：OnClick_pToolbar_cancel_frmSubscribe_j1
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		"focusOnId": "7" --取消关注人ID
+	},
+
+
+返回示例
+data:{"create_by":0,"focus_on_time":null,"update_time":null,"focusOnId":7,"focus_on_id":7,"create_time":null,"id":2,"customer_user_id":5,"update_by":0}

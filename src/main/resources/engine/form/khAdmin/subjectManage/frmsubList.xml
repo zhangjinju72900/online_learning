@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmsubList" title="专题发布管理"> 
+	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		<control name="btnQuery" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="btnClear" title="清空条件" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="btnRecommond" title="推荐" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="btnTop" title="置顶" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="btnDelete" title="批量删除" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="btnAddSubject" title="新增专题" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		
+	</panel>
+	<panel name="pCondition" title="查询条件" object="tsub" type="Group">
+		<control name="lk_title" title="专题搜索" property="" type="TextBox" edit="Y" required="N" format="" width="1" height="1" column=""/>
+		<control name="eq_relStatus" title="专题发布状态" property="relStatus" type="ComboBox"  multiple="Y" initial="'0,1'" edit="Y" required="N" format="" width="1" height="1" column=""/>
+		<control name="ge_relTime" title="发布时间" property="relTime" type="DateBox" edit="Y" required="" format="" width="1" height="1" column=""/>
+		<control name="le_relTime" title="至         " property="relTime" type="DateBox" edit="Y" required="" format="" width="1" height="1" column="4"/>
+	</panel>	
+	
+	<panel name="pTable" title="查询结果" object="tsub" type="Grid" multiple="Y">
+		<control name="btnEdit" title="编辑" property="" type="Link" edit="" required="" format="" width="170" height="" column=""/>
+		<control name="btnDelete" title="删除" property="" type="Link" edit="" required="" format="" width="170" height="" column=""/>
+		<control name="btnUntop" title="取消置顶" property="" type="Link" edit="" required="" format="" width="170" height="" column=""/>
+		<control name="btnUnrecommand" title="取消推荐" property="" type="Link" edit="" required="" format="" width="170" height="" column=""/>
+		<control name="id" title="专题id" property="id" type="Hidden" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="title" title="标题" property="title" type="DataLink" edit="" required="" format="300" width="" height="" column=""/>
+		<control name="relBy" title="发布人" property="relBy" type="Hidden" edit="" required="" format="" width="80" height="" column=""/>
+		<control name="relStatus" title="发布状态" property="relStatus" type="Hidden" edit="" required="" format="" width="80" height="" column=""/>
+		<control name="relByName" title="发布人" property="relByName" type="TextBox" edit="" required="" format="" width="80" height="" column=""/>
+		<control name="releaseStatusName" title="发布状态" property="releaseStatusName" type="TextBox" edit="" required="" format="" width="80" height="" column=""/>
+		<control name="relTime" title="发布日期" property="relTime" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="topFlag" title="是否置顶" property="topFlag" type="TextBox" edit="" required=""  format="" width="70" height="" column=""/>
+		<control name="recFlag" title="是否推荐" property="recFlag" type="TextBox" edit="" required=""  format="" width="70" height="" column=""/>
+		<control name="tFlag" title="置顶标识" property="tFlag" type="Hidden" edit="" required=""  format="" width="70" height="" column=""/>
+		<control name="reFlag" title="推荐标识" property="reFlag" type="Hidden" edit="" required=""  format="" width="70" height="" column=""/>
+	</panel>
+	
+	<!-- 逻辑加载 -->
+	<flow trigger="" event="OnLoad" filter="">  
+       <procedure name="jClear"  logic="Clear" ifyes="list" ifno="" sync="Y">
+         <param name="Out" value="pCondition"></param>
+      </procedure>
+      <procedure name="list"  logic="List" ifyes="jQuery" ifno="" sync="Y">
+         <param name="Out" value="pCondition.eq_relStatus"></param>
+         <param name="Sql" value="informations/ListReleaseStatus"></param>
+         <param name="Options" value="YorN,[全选/取消]"/>
+      </procedure> 
+      <procedure name="jQuery" logic="Query" ifyes="" ifno="">
+      	<param name="In" value="pCondition"></param>
+         <param name="Out" value="pTable"></param>
+         <param name="Sql" value="subject/QrySubject"></param>
+      </procedure>
+     </flow>
+     
+	<!-- 查询点击事件 -->
+    <flow trigger="pToolbar.btnQuery" event="OnClick" filter="">  
+      <procedure name="branch" server="" logic="Branch" ifyes="Query" ifno="getMsg">
+	        <param name="In" value="getPanelControlValue('pCondition.ge_relTime')&lt;=getPanelControlValue('pCondition.le_relTime')"></param>
+	  </procedure> 
+	  <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
+	       <param name="Msg" value="起始日期大于结束日期,请修改"></param>
+	  </procedure> 
+      <procedure name="Query"  logic="Query" ifyes="" ifno="" sync="Y">
+           <param name="In" value="pCondition"></param>
+           <param name="Out" value="pTable"></param>
+           <param name="Sql" value="subject/QrySubject"></param>
+      </procedure> 
+    </flow>
+    
+	 <!-- 清空条件 -->
+    <flow trigger="pToolbar.btnClear" event="OnClick" filter="">  
+      <procedure name="clear"  logic="Clear" ifyes="" ifno="" sync="Y">
+           <param name="Out" value="pCondition"></param>
+      </procedure> 
+    </flow>
+    
+	<!-- 推荐 -->
+	<flow trigger="pToolbar.btnRecommond" event="OnClick" filter="">
+		<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jsDecodeid" ifno="j0">
+        	<param name="In" value="pTable.id"></param>
+    	</procedure>
+         <procedure name="j0" server="" logic="InfoMsg" ifyes="" ifno="">
+       		<param name="Msg" value="请至少选择一条专题"></param>
+     	</procedure> 
+     	<procedure name="jsDecodeid" server="" logic="DecodeId" ifyes="jCMsg" ifno="">
+        	<param name="out" value="pTable.id"></param>
+      	</procedure>
+		<procedure name="jCMsg" server="" logic="ConfirmMsg" ifyes="jDelete" ifno="">
+		    <param name="Title" value="推荐提示" />
+		    <param name="Msg" value="确认推荐当前专题吗?" />
+		</procedure>
+		<procedure name="jDelete"  logic="SaveCustom" ifyes="queryInfo" ifno="">
+		    <param name="In" value="pTable" />
+		     <param name="Plugin" value="RecommendSubjectPlugin"/>
+		     <param name="sql" value="informations/DeleteEmpty"/>
+		     <param name="Msg" value="'专题已设为推荐'" />
+		</procedure>
+		<procedure name="queryInfo" logic="Query" ifyes="" ifno="">
+			<param name="In" value="pCondition"></param>
+			<param name="Out" value="pTable"></param>
+			<param name="Sql" value="subject/QrySubject"></param>
+			</procedure>           
+	 </flow>
+	<!-- 置顶 -->
+	<flow trigger="pToolbar.btnTop" event="OnClick" filter="">
+		<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jsDecodeid" ifno="j0">
+        	<param name="In" value="pTable.id"></param>
+    		</procedure>
+        <procedure name="j0" server="" logic="InfoMsg" ifyes="" ifno="">
+       		<param name="Msg" value="请至少选择一条专题"></param>
+     	</procedure> 
+     	<procedure name="jsDecodeid" server="" logic="DecodeId" ifyes="jCMsg" ifno="">
+        	<param name="out" value="pTable.id"></param>
+      	</procedure>
+		<procedure name="jCMsg" server="" logic="ConfirmMsg" ifyes="jDelete" ifno="">
+		     <param name="Title" value="置顶提示" />
+		     <param name="Msg" value="确认置顶当前专题吗?" />
+		</procedure>
+		<procedure name="jDelete"  logic="SaveCustom" ifyes="queryInfo" ifno="">
+		     <param name="In" value="pTable" />
+		     <param name="Plugin" value="TopSubjectPlugin"/>
+		     <param name="sql" value="informations/DeleteEmpty"/>
+		     <param name="Msg" value="'专题已设为置顶'" />
+		</procedure>
+		<procedure name="queryInfo" logic="Query" ifyes="" ifno="">
+			<param name="In" value="pCondition"></param>
+			<param name="Out" value="pTable"></param>
+			<param name="Sql" value="subject/QrySubject"></param>
+		</procedure>           
+	</flow>
+	<!-- 取消推荐 -->
+		<flow trigger="pTable.btnUnrecommand" event="OnClick" filter="row.reFlag == 1 ">
+			<procedure name="jCMsg" server="" logic="ConfirmMsg" ifyes="jssave" ifno="">
+		     <param name="Title" value="取消推荐提示" />
+		     <param name="Msg" value="确认取消推荐码?" />
+			</procedure>
+			<procedure name="jssave" logic="SaveCustom" ifyes="Query" ifno="">
+			<param name="In" value="pTable" />
+			<param name="Sql" value="subject/UpdateUnrecommend" />
+			<param name="Msg" value="'已取消推荐'" />
+			</procedure>
+			<procedure name="Query" logic="Query" ifyes="" ifno="">
+			<param name="In" value="pCondition"></param>
+			<param name="Out" value="pTable"></param>
+			<param name="Sql" value="subject/QrySubject"></param>
+			</procedure>
+		</flow>
+	
+	<!-- 取消置顶 -->
+		<flow trigger="pTable.btnUntop" event="OnClick" filter="row.tFlag == 1">
+			<procedure name="jCMsg" server="" logic="ConfirmMsg" ifyes="jssave" ifno="">
+		     <param name="Title" value="取消置顶提示" />
+		     <param name="Msg" value="确认取消置顶吗?" />
+			</procedure>
+			<procedure name="jssave" logic="SaveCustom" ifyes="Query" ifno="">
+			<param name="In" value="pTable" />
+			<param name="Sql" value="subject/UpdateUntop" />
+			<param name="Msg" value="'已取消置顶'" />
+			</procedure>
+			<procedure name="Query" logic="Query" ifyes="" ifno="">
+			<param name="In" value="pCondition"></param>
+			<param name="Out" value="pTable"></param>
+			<param name="Sql" value="subject/QrySubject"></param>
+			</procedure>
+		</flow>
+	<flow trigger="pToolbar.btnDelete" event="OnClick" filter="">
+		<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jsDecodeid" ifno="j0">
+        	<param name="In" value="pTable.id"></param>
+        </procedure>
+        <procedure name="j0" server="" logic="InfoMsg" ifyes="" ifno="">
+       		<param name="Msg" value="请至少选择一条专题"></param>
+     	</procedure> 
+     	<procedure name="jsDecodeid" server="" logic="DecodeId" ifyes="jCMsg" ifno="">
+        	<param name="out" value="pTable.id"></param>
+      	</procedure>
+		<procedure name="jCMsg" server="" logic="ConfirmMsg" ifyes="jDelete" ifno="">
+		    <param name="Title" value="删除提示" />
+		    <param name="Msg" value="确认删除当前专题吗?" />
+		</procedure>
+		<procedure name="jDelete"  logic="SaveCustom" ifyes="queryInfo" ifno="">
+		    <param name="In" value="pTable" />
+		    <param name="DAOPlugin" value="deleteSubjectsPlugin"/>
+		    <param name="sql" value="informations/DeleteEmpty"/>
+		    <param name="Msg" value="'专题已删除'" />
+		</procedure>
+		<procedure name="queryInfo" logic="Query" ifyes="" ifno="">
+			<param name="In" value="pCondition"></param>
+			<param name="Out" value="pTable"></param>
+			<param name="Sql" value="subject/QrySubject"></param>
+		</procedure>           
+	</flow>
+		<!-- 删除专题 -->
+		<flow trigger="pTable.btnDelete" event="OnClick" filter="">
+	      <procedure name="j0" server="" logic="ConfirmMsg" ifyes="j1" ifno="">
+	        <param name="Title" value="删除提示" />
+	        <param name="Msg" value="确认删除当前专题吗?" />
+	      </procedure>
+	      <procedure name="j1" server="" logic="EncodeId" ifyes="j2" ifno="">
+	        <param name="In" value="pTable.id" />
+	      </procedure>
+	      <procedure name="j2"  logic="SaveCustom" ifyes="j3" ifno="">
+	        <param name="In" value="pTable" />
+	        <param name="Sql" value="subject/DeleteSubject"></param>
+	        <param name="Msg" value="'专题已删除'" />
+	      </procedure>
+	      <procedure name="j3"  logic="Query" ifyes="" ifno="">
+	        <param name="In" value="pCondition" />
+	        <param name="Out" value="pTable" />
+	        <param name="Sql" value="subject/QrySubject" />
+	      </procedure>           
+	    </flow>  
+	
+		<!--点击详情 -->
+	 	<flow trigger="pTable.title" event="OnClick" filter="">  
+	   	  <procedure name="annEncodeId" logic="EncodeId"  ifyes="j1" ifno="" >
+	    	<param name="In" value="pTable.id"></param>
+	   	  </procedure>
+	      <procedure name="j1"  logic="Transition" ifyes="" ifno="" >
+	        <param name="To" value="frmSubjectDetail"></param>
+	        <param name="Window" value="Large" />
+	        <param name="Mode" value="ReadOnly"></param>
+	        <param name="Title" value="查看专题" />
+	      </procedure> 
+	    </flow>
+	    
+	    <!-- 新增 专题-->
+	 <flow trigger="pToolbar.btnAddSubject" event="OnClick" filter="">
+      <procedure name="jspopup" logic="Popup" ifyes="jsquery" ifno="">
+        <param name="To" value="frmSubjectNew" />
+        <param name="Mode" value="Add" />
+        <param name="Window" value="Medium" />
+        <param name="Title" value="新增专题" />
+      </procedure>
+      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pCondition" />
+        <param name="Out" value="pTable" />
+        <param name="Sql" value="subject/QrySubject" />
+      </procedure> 
+ 	</flow>
+ 	
+ 		<flow trigger="pTable.btnEdit" event="OnClick" filter="">
+				<procedure name="jsencodeid" server="" logic="EncodeId"
+					ifyes="jspopup" ifno="">
+					<param name="In" value="pTable.id"></param>
+				</procedure>
+				<procedure name="jspopup" logic="Popup" ifyes="jsquery"
+					ifno="">
+					<param name="To" value="frmSubjectEdit" />
+					<param name="Mode" value="Edit" />
+					<param name="Window" value="Medium" />
+					<param name="Title" value="编辑" />
+				</procedure>
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition" />
+					<param name="Out" value="pTable" />
+					<param name="Sql" value="subject/QrySubject" />
+				</procedure>
+			</flow>
+ 	
+		<!-- 布局 -->
+	    <layout>
+	  	<region location ="North" scale="">
+	        <subregion panel="pToolbar" location ="North" scale=""/>
+	    </region>
+		<region location ="Center" scale="">
+			<subregion panel="pCondition" location="North" scale=""/>
+			<subregion panel="pTable" location="Center" scale=""/>
+	    </region>
+	    </layout>
+    </ui>
+    </ui_layer>
+    </tsoftware>

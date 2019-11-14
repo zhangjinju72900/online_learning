@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmSectionDetail" title="小节资源详情树">
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnQuery" title="查询" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnSearch" title="查询资源" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+			<panel name="pCondition" title="查询条件" object="sectionDetail" type="Group">
+				<control name="sectionId" title="小节id" property="id" type="TextBox"
+						 edit="Y" required="N" format="" initial="17" width="1" height="1" column=""/>
+				<control name="ossUrl" title="ossUrl" property="" type="TextBox"
+						 edit="Y" required="N" format="" initial="17" width="1" height="1" column=""/>
+				<control name="key" title="key" property="key" type="TextBox"
+						 edit="Y" required="N" format="" initial="17" width="1" height="1" column="3"/>
+			</panel>
+			<panel name="pDetail" title="小节详情" object="sectionDetail" type="Group">
+				<control name="remark" title="小节详情" property="remark" type="TextBox"
+						 edit="N" required="N" format="" initial="" width="1" height="1" column="1"/>
+			</panel>
+			<panel name="pTree" object="tree" type="Tree" multiple="">
+				<control name="id" title="树id" property="id" type="Hidden"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="pid" title="树父id" property="pid" type="Hidden"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="name" title="树节点" property="name" type="DataLink"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="typeName" title="树节点" property="typeName" type="Hidden"
+						 edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+			<!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="jClear" logic="Clear" ifyes="list" ifno=""
+						   sync="Y">
+					<param name="Out" value="pCondition"/>
+				</procedure>
+			</flow>
+			<!-- 查找 -->
+			<flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
+				<procedure name="QueryDetail" logic="Query" ifyes="QueryTree" ifno="">
+					<param name="In" value="pCondition"/>
+					<param name="Out" value="pDetail"/>
+					<param name="Sql" value="khTeacher/course/QrySectionRemark"/>
+				</procedure>
+				<procedure name="QueryTree" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition"/>
+					<param name="Out" value="pTree"/>
+					<param name="Plugin" value="qrySectionResourceDetailPlugin"/>
+					<param name="Sql" value="khTeacher/course/QrySectionResourceTree"/>
+				</procedure>
+			</flow>
+			<!-- 查找 -->
+			<flow trigger="pToolbar.btnSearch" event="OnClick" filter="">
+				<procedure name="jsSearch" logic="Branch" ifyes="" ifno="">
+					<param name="In" value="fileToStream('fileToStream','pCondition.key||pCondition.ossUrl')"/>
+				</procedure>
+			</flow>
+			<!-- 布局 -->
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale=""/>
+					<subregion panel="pCondition" location="Center" scale=""/>
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pDetail" location="North" scale=""/>
+				</region>
+				<region location="West" scale="400px">
+					<subregion panel="pTree" location="Center" scale="400px"/>
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

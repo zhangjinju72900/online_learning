@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+
+    <ui_layer>
+        <ui name="frmEditCode" title="代码编辑器">
+            <panel name="pnlToolbar" title="工具条" object="" type="Toolbar">
+                <control name="ctlShowEditor" title="显示代码编辑器" property="" type="Button" edit="" required="" format=""
+                         width=""
+                         height="" column=""/>
+            </panel>
+            <panel name="pnlCondition" title="查询条件" object="project" type="Group">
+                <control name="lk_name" title="项目名称" property="name" type="TextBox" edit="Y" required="N" format=""
+                         width="2" height="1" column=""/>
+                <control name="path" title="地址" property="codeRepoUrl" initial="'/opt/file/model'" type="Hidden" edit="Y"  />
+
+            </panel>
+
+            <panel name="pnlList" title="查询结果" object="project" type="Grid">
+                <control name="ctlEdit" title="编辑" property="" type="Link" edit="" required="" format="" width="100"
+                         height="" column=""/>
+                <control name="ctlDelete" title="删除" property="" type="Link" edit="" required="" format="" width="100"
+                         height="" column=""/>
+                <control name="ctlForbidden" title="禁用" property="" type="Link" edit="" required="" format=""
+                         width="100" height="" column=""/>
+                <control name="ctlRestore" title="恢复" property="" type="Link" edit="" required="" format="" width="100"
+                         height="" column=""/>
+
+                <control name="ctlId" title="主键Id" property="id" type="Hidden" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlStatus" title="状态" property="status" type="Hidden" edit="" required="" format="" width=""
+                         height="" column=""/>
+
+                <control name="ctlName" title="项目名称" property="name" type="DataLink" edit="" required="" format=""
+                         width="200" height="" column=""/>
+                <control name="statusName" title="状态" property="statusName" type="TextBox" edit="" required=""
+                         format=""
+                         width="50" height="" column=""/>
+                <control name="codeRepoUrl" title="代码库URL" property="codeRepoUrl" type="TextBox" edit="" required=""
+                         format=""
+                         width="280" height="" column=""/>
+                <control name="projectManagerName" title="项目经理" property="projectManagerName" type="TextBox" edit="" required=""
+                         format=""
+                         width="80" height="" column=""/>
+                <control name="productManagerName" title="产品经理" property="productManagerName" type="TextBox" edit="" required=""
+                         format=""
+                         width="80" height="" column=""/>
+                <control name="testManagerName" title="测试经理" property="testManagerName" type="TextBox" edit="" required=""
+                         format=""
+                         width="80" height="" column=""/>
+                <control name="createBy" title="创建人" property="createByName" type="TextBox" edit="" required="N"
+                         format="" width="80" height="1" column=""/>
+                <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="" required="N"
+                         format="" width="140" height="1" column=""/>
+                <control name="updateBy" title="最后修改人" property="updateByName" type="TextBox" edit="" required="N"
+                         format="" width="80" height="1" column=""/>
+                <control name="updateTime" title="最后修改时间" property="updateTime" type="TextBox" edit="" required="N"
+                         format="" width="140" height="1" column=""/>
+
+
+            </panel>
+
+
+
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="procClear" logic="Clear" ifyes="procList" ifno="">
+                    <param name="Out" value="pnlCondition"></param>
+                </procedure>
+                <procedure name="procList" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjList"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlToolbar.ctlShowEditor" event="OnClick" filter="">
+                <procedure name="procEditCode" logic="EditCode" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition.path" ></param>
+                </procedure>
+            </flow>
+
+
+            <layout>
+                <region location="North" scale="">
+                    <subregion panel="pnlToolbar" location="North" scale=""/>
+                </region>
+                <region location="Center" scale="">
+                    <subregion panel="pnlCondition" location="North" scale=""/>
+                    <subregion panel="pnlList" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

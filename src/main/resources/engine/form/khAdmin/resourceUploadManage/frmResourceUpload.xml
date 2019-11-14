@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<object name="tFTPResources" table="t_ftp_upload_record" primary="id" unique="" order="id desc">
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="parentId" type="Long" length="50" initial="" field="parent_id"/>
+			<property name="fileName" type="String" length="50" initial="" field="filename"/>
+			<property name="parentName" type="String" length="50" initial="" field=""/>
+			<property name="codingFormat" type="Long" length="10" field="coding_format"/>
+			<property name="fileType" type="Long" length="10" field="file_type"/>
+			<property name="resourceType" type="Long" length="10" field="resource_type"/>
+			<property name="codingFormatName" type="String" length="10" field=""/>
+			<property name="fileTypeName" type="String" length="10" field=""/>
+			<property name="executeResult" type="Long" length="10" field="execute_result"/>
+			<property name="remark" type="String" length="50" initial="" field="remark"/>
+			<property name="createTime" type="Date" length="20" field="create_time"/>
+			<property name="createBy" type="Long" length="20" field="create_by"/>
+			<property name="updateTime" type="Date" length="20" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" field="update_by"/>
+			
+			<property name="resourcesTypeName" type="String" length="50" initial="" field=""/>
+	 	</object> 
+ 	 </model_layer>
+	<ui_layer>
+		<ui name="frmResourceUpload" title="FTP资源上传管理">
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				 <control name="btnQuery" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+				 <control name="btnCreate" title="新增用户资源" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+				 <control name="btnCreateManual" title="新增维修手册" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+			</panel>
+
+
+			<panel name="pCondition" title="查询条件" object="" type="Group">
+				<control name="lk_fileName" title="资源名称" property="fileName" type="TextBox"
+					edit="Y" required="N" format="" width="1" height="1" column="3" />
+			</panel>
+
+			<panel name="pTable" title="查询结果" object="tFTPResources" type="Grid">
+				<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="" column="" />
+				<control name="ctlEdit" title="编辑" property="" type="Link" edit="" required="" format="" width="100" height="" column="" />
+				<control name="ctlDelete" title="删除" property="" type="Link" edit="" required="" format="" width="100" height="" column="" />
+				<control name="ctlDeal" title="处理" property="" type="Link" edit="" required="" format="" width="100" height="" column="" />
+				<control name="fileName" title="资源名称" property="fileName" type="TextBox" edit="" required="" format="" width="200" height="" column="" />
+				<control name="codingFormatName" title="编码格式" property="codingFormatName" type="TextBox" edit="" required="" format="" width="100" height="" column="" />
+				<control name="fileTypeName" title="文件类型" property="fileTypeName" type="TextBox" edit="" required="" format="" width="100" height="" column="" />
+				<control name="resourcesTypeName" title="资源所属模块" property="resourcesTypeName" type="TextBox" edit="" required="" format="" width="100" height="" column="" />
+				<control name="remark" title="备注" property="remark" type="TextBox" edit="" required="" format="" width="200" height="" column="" />
+				<control name="executeResult" title="处理结果" property="executeResult" type="TextBox" edit="" required="" format="" width="100" height="" column="" />
+				<control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="" required="N" format="" width="180" height="1" column="" />
+				<control name="updateTime" title="修改时间" property="updateTime" type="TextBox" edit="" required="N" format="" width="180" height="1" column="" />
+				<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="" required="N" format="" width="180" height="1" column="" />
+				<control name="updateBy" title="修改人" property="updateBy" type="Hidden" edit="" required="N" format="" width="180" height="1" column="" />
+			</panel>
+
+
+			<!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="jClear" logic="Clear" ifyes="Query" ifno=""
+					sync="Y">
+					<param name="Out" value="pCondition"></param>
+				</procedure>
+				<procedure name="Query" logic="Query" ifyes="" ifno="">
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="khAdmin/resourceUpload/QryResources"></param>
+				</procedure>
+			</flow>
+
+			<!-- 查询 -->
+			<flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
+				<procedure name="Query" logic="Query" ifyes="" ifno=""
+					sync="Y">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="khAdmin/resourceUpload/QryResources"></param>
+				</procedure>
+			</flow>
+
+
+			<!-- 新增用户资源 -->
+
+			<flow trigger="pToolbar.btnCreate" event="OnClick" filter="">
+				<procedure name="jspopup" logic="Popup" ifyes="jsquery"
+					ifno="">
+					<param name="To" value="frmAddResource" />
+					<param name="Mode" value="Add" />
+					<param name="Window" value="Medium" />
+					<param name="Title" value="新增用户资源" />
+				</procedure>
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<param name="Out" value="pTable" />
+					<param name="Sql" value="khAdmin/resourceUpload/QryResources" />
+				</procedure>
+
+			</flow>
+			
+			
+			<!-- 新增维修手册 -->
+
+			<flow trigger="pToolbar.btnCreateManual" event="OnClick" filter="">
+				<procedure name="jspopup" logic="Popup" ifyes="jsquery"
+					ifno="">
+					<param name="To" value="frmAddManualResource" />
+					<param name="Mode" value="Add" />
+					<param name="Window" value="Medium" />
+					<param name="Title" value="新增维修手册资源" />
+				</procedure>
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<param name="Out" value="pTable" />
+					<param name="Sql" value="khAdmin/resourceUpload/QryResources" />
+				</procedure>
+
+			</flow>
+
+
+			<!-- 编辑 -->
+			<flow trigger="pTable.ctlEdit" event="OnClick" filter="row.executeResult=='未处理' || row.executeResult=='已出错' ">
+				<procedure name="jsencodeid" server="" logic="EncodeId"
+					ifyes="jspopup" ifno="">
+					<param name="In" value="pTable.id"></param>
+				</procedure>
+				<procedure name="jspopup" logic="Popup" ifyes="jsquery"
+					ifno="">
+					<param name="To" value="frmEditResource" />
+					<param name="Mode" value="Edit" />
+					<param name="Window" value="Medium" />
+					<param name="Title" value="编辑资源" />
+				</procedure>
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition" />
+					<param name="Out" value="pTable" />
+					<param name="Sql" value="khAdmin/resourceUpload/QryResources" />
+				</procedure>
+			</flow>
+
+			<!--删除 -->
+			<flow trigger="pTable.ctlDelete" event="OnClick" filter=" row.executeResult=='未处理' || row.executeResult=='已出错' || row.executeResult=='已完成' ">
+				<procedure name="j0" server="" logic="ConfirmMsg" ifyes="j1"
+					ifno="">
+					<param name="Title" value="删除提示" />
+					<param name="Msg" value="确认删除该资源吗?" />
+				</procedure>
+				<procedure name="j1" server="" logic="EncodeId" ifyes="j2"
+					ifno="">
+					<param name="In" value="pTable.id" />
+				</procedure>
+				<procedure name="j2" logic="SaveCustom" ifyes="j3" ifno="">
+					<param name="In" value="pTable" />
+					<param name="Sql" value="khAdmin/resourceUpload/DeleteUploads"/>
+					<param name="Msg" value="'已删除'" />
+				</procedure>
+				<procedure name="j3" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition" />
+					<param name="Out" value="pTable" />
+					<param name="Sql" value="khAdmin/resourceUpload/QryResources" />
+				</procedure>
+			</flow>
+
+			<!-- 处理 -->
+			<flow trigger="pTable.ctlDeal" event="OnClick" filter="row.executeResult=='未处理' || row.executeResult=='已出错' ">
+				<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="j2" ifno="">
+					<param name="In" value="pTable.id"></param>
+				</procedure>
+				<procedure name="j2" logic="SaveCustom" ifyes="j3" ifno="">
+					<param name="In" value="pTable" />
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+					<param name="Plugin" value="ftpResourcePlugin" ></param>
+					<param name="Msg" value="'正在处理中，请稍后'" />
+				</procedure>
+				<procedure name="j3" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition" />
+					<param name="Out" value="pTable" />
+					<param name="Sql" value="khAdmin/resourceUpload/QryResources" />
+				</procedure>
+			</flow>
+			
+			<!-- 布局 -->
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale="" />
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pCondition" location="North" scale="" />
+					<subregion panel="pTable" location="Center" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

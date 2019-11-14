@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+  <object name="Record" table="t_study_record" primary="id" unique="" order=""> 
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="startTime" type="Date" length="20" initial="" field="start_time"/>
+   <property name="endTime" type="Date" length="20" initial="" field="end_time"/>
+   <property name="customeruserid" type="Long" length="20" initial="" field="study_by"/>
+   <property name="courseid" type="Long" length="20" initial="" field="course_id"/>
+   <property name="sectionid" type="Long" length="20" initial="" field="section_id"/>
+   <property name="labelid" type="Long" length="20" initial="" field="label_id"/>
+   <property name="resourceid" type="Long" length="20" initial="" field="customer_resources_id"/>
+   <property name="createtime" type="Date" length="20" initial="" field="create_time"/>
+   <property name="createby" type="Long" length="20" initial="" field="create_by"/>
+   <property name="updatetime" type="Date" length="20" initial="" field="update_time"/>
+   <property name="updateby" type="Long" length="20" initial="" field="update_by"/>
+  
+   <property name="csrId" type="Long" length="20" initial="" field=""/>
+  </object>    
+</model_layer>
+</tsoftware>

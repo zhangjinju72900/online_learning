@@ -1,0 +1,43 @@
+UI名称		作业分发列表（frmHomeworkList）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmHomeworkList_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		eq_classId: "308"		--班级id
+		eq_courseId: "12"		--课程id
+		eq_homeworkType: "0"		--题型
+		eq_sectionId: "2"		--课程小节id
+		lk_name: "漆"			--作业名称
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		classId: 308			
+		className: "汽修1班"
+		courseId: 12
+		courseName: "123如3"
+		createTime: null
+		distributeStatus: 0		--作业分发状态
+		distributeStatusName: "未分发"	--作业分发状态名称
+		distributeTime: "2019-01-02 16:27:09"	--作业分发时间
+		endTime: "2019-01-03 15:27:17"		--作业分发截止时间
+		homeworkType: 0			--作业类型
+		homeworkTypeName: "客观题"	--作业类型名称
+		id: 1				--作业id
+		name: "漆工进修钣金喷漆"	--作业名称
+		schoolId: 1			
+		sectionName: "个人工台"		--小节名称
+		sectionid: 66
+		showHomework: "查看"
+		}
+
+
+
+

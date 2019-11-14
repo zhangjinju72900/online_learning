@@ -1,0 +1,1 @@
+SELECT * from t_class WHERE school_id = #{data.id} and valid_flag = '0'

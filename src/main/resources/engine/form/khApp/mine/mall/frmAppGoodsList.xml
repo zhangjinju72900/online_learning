@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmAppGoodsList" title="商品查询"> 
+  	<panel name="pCondition" title="查询条件" object="goods" type="Group">
+		<control name="eq_id" title="商品id" property="id" type="TextBox" edit="Y" required="N" format="" multiple="N" width="2" height="1" column=""/>
+		<control name="btnsearch" title="搜索" property="" type="Button" column="5"/>
+	</panel> 
+	<panel name="pTable" title="查询结果" object="goods" type="Grid" multiple="N" >
+	    <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="name" title="名称" property="name" type="DataLink" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="picId" title="图片id" property="picId" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="collectCount" title="收藏数" property="collectCount" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<!-- <control name="videoId" title="视频id-商品简介" property="videoId" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="content" title="图文内容" property="content" type="TextBox" edit="" required="" format="" width="200" height="" column=""/> -->
+		<control name="integral" title="商品需支付积分数" property="integral" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="amount" title="商品需支付金额数" property="amount" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="ctlCollect" title="收藏/取消收藏" property="" type="Link" edit="" required="" format="" width="200" height="" column=""/>
+	</panel>
+	<!-- 初始加载 -->
+    <flow trigger="" event="OnLoad" filter="">   
+      <procedure name="jQuery"  logic="Query" ifyes="" ifno="">
+        <!-- <param name="In" value="pCondition"></param> -->
+        <param name="Out" value="pTable"></param>
+        <param name="Sql" value="khApp/mine/mall/QryGoods"></param>
+      </procedure>    
+    </flow>	
+    
+    <!-- 详情 -->
+	<flow trigger="pTable.name" event="OnClick" filter="">
+		<procedure name="jsencodeid" server="" logic="EncodeId"
+			ifyes="j2" ifno="">
+			<param name="In" value="pTable.id" />
+		</procedure>
+		<procedure name="j2" logic="Transition" ifyes="" ifno="">
+			<param name="To" value="frmGoodView" />
+			<param name="Mode" value="Readonly" />
+		</procedure>
+	</flow>
+  
+    <!--收藏 -->
+  <flow trigger="pTable.ctlCollect" event="OnClick" filter="">
+       <procedure name="jEncodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
+        <param name="In" value="pTable.id"></param>
+      </procedure>
+       <procedure name="jspopup" logic="Popup" ifyes="jQuery" ifno="">
+        <param name="To" value="frmAppGoodsEdit" />
+        <param name="Window" value="Medium" />
+        <param name="Title" value="编辑收藏" />
+      </procedure>
+        <procedure name="jQuery"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pCondition"></param>
+        <param name="Out" value="pTable"></param>
+        <param name="Sql" value="khApp/mine/mall/QryGoods"></param>
+      </procedure>   
+    </flow>
+    <!-- 搜索 -->
+     <flow trigger="pCondition.btnsearch" event="OnClick" filter="">
+      <!--  <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
+       <param name="In" value="pCondition" />
+        <param name="Out" value="pTable" />
+        <param name="Plugin" value="pTable" />
+        <param name="Sql" value="khApp/mine/mall/QryGoods"></param> -->
+      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pCondition" />
+        <param name="Out" value="pTable" />
+        <param name="Sql" value="khApp/mine/mall/QryGoods"></param>
+      </procedure>              
+    </flow> 
+    <!-- 布局 -->
+    <layout>
+      <region location ="North" scale="">
+        <subregion panel="pCondition" location ="North" scale=""/>
+      </region>
+	  <region location ="Center" scale="">
+		<subregion panel="pTable" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui> 
+</ui_layer>
+</tsoftware>

@@ -1,0 +1,1 @@
+delete from t_notice_user_role where notice_id = #{data.noticeId}

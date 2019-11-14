@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<!-- 人员model -->
+		<object name="tInformation" table="t_information" primary="id"
+			unique="" order="">
+			<property name="id" type="Long" length="20" initial=""
+				field="id" />
+			<property name="title" type="String" length="500" initial=""
+				field="title" />
+			<property name="content" type="String" length="500" initial=""
+				field="content" />
+			<property name="videoId" type="Long" length="20" initial=""
+				field="video_id" />
+			<property name="collectCount" type="Long" length="20"
+				initial="" field="collect_count" />
+			<property name="likeCount" type="Long" length="20" initial=""
+				field="like_count" />
+			<property name="reviewCount" type="Long" length="" initial=""
+				field="review_count" />
+			<property name="clickCount" type="Long" length="20" initial=""
+				field="click_count" />	
+			<property name="checkStatus" type="Long" length="20"
+				initial="" field="check_status" />
+			<property name="checkTime" type="Long" length="20" initial=""
+				field="apply_count" />
+			<property name="checkBy" type="Long" length="10" initial=""
+				field="check_by" />
+			<property name="validFlag" type="String" length="20" initial=""
+				field="valid_flag" />
+			<property name="source" type="String" length="20" initial=""
+				field="source" />
+			<property name="recommendFlag" type="Long" length="10"
+				initial="" field="recommend_flag" />
+			<property name="topFlag" type="Long" length="10" initial=""
+				field="top_flag" />
+			<property name="topTime" type="Date" length="" initial=""
+				field="top_time" />
+			<property name="topBy" type="Long" length="20" initial=""
+				field="top_by" />
+			<property name="releaseStatus" type="Long" length="10" initial=""
+				field="release_status" />
+			<property name="releaseTime" type="Long" length="10" initial=""
+				field="release_time" />
+			<property name="releaseBy" type="Long" length="10" initial=""
+				field="release_by" />
+			<property name="releaseAddress" type="Long" length="10" initial=""
+				field="release_address" />
+			<property name="longitude" type="Double" length="30" initial=""
+				field="longitude" />
+			<property name="latitude" type="Double" length="30" initial=""
+				field="longitude" />
+			<property name="createTime" type="Date" length="" validate=""
+				field="create_time" />
+			<property name="createBy" type="Long" length="10" validate=""
+				field="create_by" />
+			<property name="updateTime" type="Date" length="" validate=""
+				field="update_time" />
+			<property name="updateBy" type="Long" length="10" validate=""
+				field="update_by" />
+
+			<!-- 新增 -->
+			<property name="createByName" type="String" length="50"
+				initial="" field="" />
+			<property name="updateByName" type="String" length="50"
+				initial="" field="" /> 
+			<property name="checkByName" type="String" length="50"
+				initial="" field="" />
+			<property name="topByName" type="String" length="50" initial=""
+				field="" />
+			<property name="releaseByName" type="String" length="50" initial=""
+				field="" />
+			<property name="collectBy" type="Long" length="20"
+				initial="" field="" /> 
+			<property name="picId" type="Long" length="20"
+				initial="" field="" /> 
+			<property name="type" type="String" length="50" initial=""
+				field="" />	
+				
+		</object>
+		
+		
+		
+		<!-- 人员教育经历model -->
+		<!-- <object name="tActivity" table="t_activity" primary="id"
+			unique="" order="">
+			<property name="id" type="Long" length="20" initial=""
+				field="id" />
+			<property name="title" type="String" length="500" initial=""
+				field="title" />
+			<property name="content" type="String" length="500" initial=""
+				field="content" />
+			<property name="originator" type="Long" length="20" initial=""
+				field="originator" />
+			<property name="originTime" type="Date" length="" initial=""
+				field="origin_time" />
+			<property name="releaseStatus" type="String" length="50"
+				initial="" field="release_status" />
+			<property name="startTime" type="Date" length="" initial=""
+				field="start_time" />
+			<property name="endTime" type="Date" length="" initial=""
+				field="end_time" />
+			<property name="site" type="String" length="50" initial=""
+				field="site" />
+			<property name="applyCount" type="Long" length="20" initial=""
+				field="apply_count" />
+			<property name="joinCount" type="Long" length="10" initial=""
+				field="join_count" />
+
+			<property name="activityType" type="Long" length="10"
+				initial="" field="activity_type" />
+			<property name="recommendFlag" type="Long" length="10"
+				initial="" field="recommend_flag" />
+			<property name="integral" type="Long" length="10" initial=""
+				field="integral" />
+			<property name="joinIntegral" type="Long" length="10"
+				initial="" field="join_integral" />
+
+			<property name="topFlag" type="Long" length="10" initial=""
+				field="top_flag" />
+			<property name="topTime" type="Date" length="" initial=""
+				field="top_time" />
+			<property name="topBy" type="String" length="20" initial=""
+				field="top_by" />
+			<property name="validFlag" type="Long" length="10" initial=""
+				field="valid_flag" />
+
+			<property name="createTime" type="Date" length="" validate=""
+				field="create_time" />
+			<property name="createBy" type="Long" length="10" validate=""
+				field="create_by" />
+			<property name="updateTime" type="Date" length="" validate=""
+				field="update_time" />
+			<property name="updateBy" type="Long" length="10" validate=""
+				field="update_by" />
+			<property name="updateCount" type="Long" length="10"
+				validate="" field="update_count" />
+
+			新增
+			<property name="originatorByName" type="String" length="50"
+				initial="" field="" />
+			<property name="createByName" type="String" length="50"
+				initial="" field="" />
+			<property name="updateByName" type="String" length="50"
+				initial="" field="" />
+		</object> -->
+	</model_layer>
+</tsoftware>

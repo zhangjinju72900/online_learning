@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<object name="questionOption" table="t_question_answer_options" primary="id" unique="" order="">
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="questionId" type="String" length="2000" initial="" field="question_id"/>
+			<property name="title" type="String" length="10" initial="" field="title"/>
+			<property name="content" type="String" length="2000" initial="" field="content"/>
+			<property name="correctFlag" type="Long" length="1" initial="" field="correct_flag"/>
+
+			<property name="createTime" type="Date" length="" initial="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+			<property name="updateTime" type="Date" length="" initial="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+		</object>
+	</model_layer>
+</tsoftware>

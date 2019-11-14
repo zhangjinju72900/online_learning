@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmUserAdd" title="用户新增">
+			<panel name="pForm" title="编辑界面" object="CustomerUserInfo" type="Group">
+				<control name="id" title="id" property="id" type="Hidden"
+					edit="N" required="" format="" width="2" height="" column="" />
+				<control name="name" title="用户姓名" property="name" type="TextBox"
+						 edit="Y" required="Y" format="" width="1" height="1" column="2" />
+				<control name="ctlNewPassword" title="登录口令" property="password1"
+					type="PasswordBox" edit="Y" required="Y" format="" width="1"
+					height="1" column="" />
+				<control name="ctlReNewPassword" title="再次输入口令" property="updatePassword"
+					type="PasswordBox" edit="Y" required="Y" format="" width="1"
+					height="1" column="2" />
+				
+			
+				<control name="cardNum" title="身份证号" property="cardNum"
+					type="TextBox" edit="Y" required="" format="" width="1" height="1"
+					column="" />
+				<control name="sex" title="性别" property="sex"
+					type="TextBox" edit="Y" required="" format="" width="1" height="1"
+					column="" />
+		
+				<control name="schoolId" title="学校ID" property="schoolId"
+					type="TextBox" edit="Y" required="Y" format="" width="1" height="1"
+					column="2" />
+			
+			
+			</panel>
+			
+			<panel name="pToolbar" title="功能按钮" object="" type="Toolbar">
+				<control name="btnSave" title="确认" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="btnClose" title="取消" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+			<!-- 逻辑加载! -->
+		  <flow trigger="" event="OnLoad" filter="">
+				<procedure name="jClear" logic="Clear" ifyes=""
+					ifno="" sync="Y">
+					<param name="Out" value="pForm"></param>
+				</procedure>
+			</flow>
+		
+			<!-- 确认保存 -->
+			<flow trigger="pToolbar.btnSave" event="OnClick"
+				filter="editMode!='' &amp;&amp; editMode!='Readonly'" defaultEnter="Y">
+				 <!-- 保存逻辑 -->
+				<procedure name="jssave" logic="SaveCustom" ifyes="jsclose"
+					ifno="">
+					<param name="In" value="pForm"></param>
+					<param name="Plugin" value="AddUserPlugin" />
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest" />
+					<param name="Msg" value="'保存成功'"></param>
+				</procedure>
+				
+				
+				<procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="true"></param>
+				</procedure>
+			</flow>
+			
+			<flow trigger="pToolbar.btnClose" event="OnClick" filter="">
+				<procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="false"></param>
+				</procedure>
+			</flow>
+			
+			<layout>
+				<region location="South" scale="">
+					<subregion panel="pToolbar" location="North" scale="" />
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pForm" location="Center" scale="80%" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

@@ -1,0 +1,1 @@
+update t_homework set distribute_status ='3' where id=#{data.homeworkId}

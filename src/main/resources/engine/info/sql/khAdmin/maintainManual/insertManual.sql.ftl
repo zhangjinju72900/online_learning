@@ -1,0 +1,2 @@
+insert into t_maintain_manual (name,file_type,file_path,parent_id,file_id,file_name,oss_key,oss_url,data_flag,create_time,create_by,update_time,update_by) 
+values(#{data.name},#{data.type},#{data.path},#{data.pid},#{data.fileId},#{data.fileName},#{data.ossKey},#{data.ossUrl},#{data.dataFlag},now(),#{data.updateBy},now(),#{data.updateBy});

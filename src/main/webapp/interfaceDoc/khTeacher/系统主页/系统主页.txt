@@ -1,0 +1,122 @@
+﻿UI名称  系统主页-查询有上课记录天数（frmHomePage）		
+		
+tokenKey OnClick_pToolbar_btnsearch1_frmHomePage_jsquery
+
+接口地址  /api/query
+
+接口类型  POST
+
+参数示例
+"data":{
+	teacherId: "2" 					--教师ID
+	startGivenDate: "2019-01-01"	--起始日期
+	endGivenDate: "2019-01-31"		--截止日期
+	page: 1
+	rows: 50
+}
+
+返回示例
+"data":{
+	"total":3,"rows":[
+	{  "givenDate":"2019-01-16",     --2019-01-16这天有课
+	   "teacherId":2,				 --教师ID
+	   "absenteeismFlag":0			 --是否缺勤 0-是，1-否
+	}]    
+	
+}
+
+
+
+
+
+
+UI名称  系统主页-查询某一天上课详情（frmHomePage）
+
+tokenKey OnClick_pToolbar_btnsearch2_frmHomePage_jsquery
+
+接口地址  /api/query
+
+接口类型  POST
+
+参数示例
+"data":{
+	teacherId: "2"				--教师ID
+	givenDate: "2019-01-02"		--想要查询详情的日期
+	page: 1
+	rows: 50
+}
+
+返回示例	
+"data":{
+	"studentCount":30,					--学生应到人数
+	"realStuCount":20,					--实际出勤数
+	"classId":37,						--班级ID
+	"teacherId":2,						--老师ID
+	"className":"2016级秋季2班",			--班级名称
+	"startDate":"2019-01-14",			--上课日期
+	"startTime":"17:50",				--上课时间
+	"id":3,								--上课记录ID
+	"absenceStuCount":10}]				--缺勤人数
+}
+	
+	
+	
+	
+
+UI名称  系统主页-教师签到查询（frmTeacherSign）
+
+tokenKey	 OnLoad__frmTeacherSign_jQuery
+
+接口地址  /api/query
+
+接口类型  POST
+
+参数示例
+"data":{
+}
+
+返回示例	
+"data":{
+	id: 2								--用户id
+	integral: 3602						--当前积分
+	name: "管理员"						--用户名
+	nickname: "ADMIN弑约染"				--用户昵称
+	signType: 0							--今天是否签到(0-未签到，1-已签到)
+	schoolName:""                       --学校名称
+}
+		
+		
+		
+		
+UI名称  系统主页-教师签到（frmAppSignEdit）
+
+tokenKey	 OnClick_pButton_save_frmAppSignEdit_jsSave
+
+接口地址  /api/save
+
+接口类型  POST
+
+参数示例
+"data":{
+		userId: "2"						--当前教师id
+}
+
+返回示例	
+"data":{
+	baseId: "241"							--签到记录id
+	continuousSignDays: 1					--连续签到天数
+	createBy: "2"	
+	createTime: "2019-01-15 13:49:03"		
+	id: ""
+	integral: "5"							--本次签到积分
+	session: {,…}
+	userInfo: {userId: 2, orgId: 0, userName: "admin", empId: 2, salt: "918E5D6EFECD41B08C8B43DE2B125FDA",…}
+	signTime: "2019-01-15 13:49:02"			--签到时间
+	updateBy: "2"
+	updateTime: "2019-01-15 13:49:03"
+	userId: "2"								--教师id
+}	
+		
+		
+
+

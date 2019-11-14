@@ -1,0 +1,24 @@
+UI名称		根据起始截止日期查询有作业日期（frmAnswerHomework）
+
+tokenKey	OnClick_pToolbar_btnsearch_frmAnswerHomework_qAnswer
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		beginTime: "2019-01-01"			--查询起始时间
+		endTime: "2019-01-09"			--查询截止时间
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+			homeworkDate: "2019-01-04"		-有作业的日期
+		}
+
+
+
+

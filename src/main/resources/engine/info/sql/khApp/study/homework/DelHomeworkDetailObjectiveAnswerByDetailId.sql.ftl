@@ -1,0 +1,1 @@
+delete from t_homework_detail_objective_answer where homework_detail_answer_id = #{data.homeworkDetailAnswerId}

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmAppSignEdit" title="签到"> 
+	<panel name="pForm" title="签到" object="signIn" type="Group" multiple="N" >
+		<control name="createBy" title="创建人" property="createBy" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+	    <control name="mes"  type="Label"  title="签到:" required="Y" width="1" height="9" tip="是否签到" column="1"/>
+		<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="integral" title="积分" property="" type="Hidden" edit="" required="" format="" width="1" height="" column="2"/>
+		<control name="userId" title="用户ID" property="userId" type="Hidden" edit="" required="" format="" width="1" height="" column="2"/>
+		<control name="signTime" title="签到时间" property="signTime" type="Hidden" edit="Y" required="" target="CurrentTime()" format="" width="" height="" column=""/>
+		<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="" required="" target="CurrentTime()"
+		format="" width="200" height="" column=""/>
+		<!-- <control name="createBy" title="创建人" property="createBy" type="Hidden" edit="" required="" target="session.userInfo.empId"
+		format="" width="200" height="" column=""/> -->
+	    <control name="updateTime" title="更新时间" property="updateTime" type="Hidden" edit="" required="" target="CurrentTime()"
+		format="" width="200" height="" column=""/>
+		<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="" required="" 
+		format="" width="200" height="" column=""/>
+	</panel>
+		
+	<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+	   <!--  <control name="search" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/> -->
+		<control name="save" title="确定" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+		<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+	</panel>
+	<!-- 初始加载 -->
+    <flow trigger="" event="OnLoad" filter="">   
+       <procedure name="jDecodeId" server="" logic="DecodeId" ifyes="jEncodeid" ifno="">
+        <param name="Out" value="pForm.userId" />
+      </procedure>   
+   <!--       <procedure name="jEncodeid" server="" logic="EncodeId" ifyes="jDecodeId1" ifno="">
+        <param name="In" value="pForm.userId"></param>
+      </procedure> 
+      <procedure name="jDecodeId1" server="" logic="DecodeId" ifyes="qid" ifno="">
+        <param name="Out" value="pHidden.customerUserId" />
+      </procedure>
+      <procedure name="qid" logic="Transform" ifyes="jEncodeid2" ifno="">
+               <param name="In" value="pForm"/>
+               <param name="Out" value="pForm"/>
+               <param name="Plugin" value="com.tedu.plugin.signIn.QuerySignInRecordPlugins"/>
+          </procedure>
+            <procedure name="jEncodeid2" server="" logic="EncodeId" ifyes="jDecodeId2" ifno="">
+        <param name="In" value="pForm.integral"></param>
+      </procedure> 
+      <procedure name="jDecodeId2" server="" logic="DecodeId" ifyes="" ifno="">
+        <param name="Out" value="pHidden.integral" />
+      </procedure> -->
+    </flow>	
+
+     <!-- 确定-->
+  <flow trigger="pButton.save" event="OnClick" filter="">
+   <!-- <procedure name="branch" server="" logic="Branch" ifyes="getMsg" ifno="jsSave">
+		<param name="In" value="getPanelControlValue('pForm.integral')==0"></param>
+	  </procedure>
+	  <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
+		<param name="Msg" value="今天已经签到过了"></param>
+	  </procedure> -->
+      <procedure name="jsSave" logic="Save" ifyes="jsclose" ifno="">
+        <param name="Plugin" value="addIntegralRecord"/>
+        <param name="In" value="pForm" />  
+        <param name="Msg" value="'成功'" />
+      </procedure>
+       
+       <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+  </flow>
+    <!-- 取消 -->
+      <flow trigger="pButton.cancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="false"></param>
+      </procedure>
+    </flow>
+	
+    <!-- 布局 -->
+   <layout>
+      <region location ="South" scale="">
+        <subregion panel="pButton" location="South" scale="" />
+      </region>
+	  <region location ="Center" scale="">
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui> 
+</ui_layer>
+</tsoftware>

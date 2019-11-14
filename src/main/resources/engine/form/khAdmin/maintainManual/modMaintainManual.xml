@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+  <object name="maintainManual" table="t_maintain_manual" primary="id" order="id desc" father="parentId"> 
+	<property name="id" type="Long" length="20" initial="" field="id"/>
+	<property name="name" type="String" length="100" initial="" field="name"/>
+	<property name="fileType" type="String" length="50" initial="" field="file_type"/>
+	<property name="resourcesType" type="String" length="50" initial="" field="resources_type"/>
+	<property name="filePath" type="String" length="500" initial="" field="file_path"/>
+	<property name="parentId" type="Long" length="100" initial="" field="parent_id"/>
+	<property name="fileId" type="Long" length="20" initial="" field="file_id"/>
+	<property name="ossKey" type="String" length="200" initial="" field="oss_key"/>
+	<property name="ossUrl" type="String" length="200" initial="" field="oss_url"/>
+	<property name="dataFlag" type="Long" length="1" initial="" field="data_flag"/>
+	<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+	<property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+	<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+	<property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+	<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+	
+	<property name="resourcesTypeName" type="String" length="50" initial="" field=""/>
+	<property name="fileName" type="String" length="100" initial="" field=""/>
+  </object> 
+</model_layer>
+</tsoftware>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<object name="activityManage" table="t_activity" primary="id" unique="" order="id desc" autoinc="Y">
+		<property name="id" type="String" length="500" initial="" field="id"/>
+		<property name="title" type="String" length="500" field="title"/>
+		<property name="activityType" type="Long" length="1" field="activity_type"/>
+		<property name="originator" type="Long" length="20" initial="" field="originator"/>
+		<property name="originatorName" type="String" length="20" initial="" field=""/>
+		<property name="originTime" type="Date" length="" field="origin_time"/>
+  		<property name="startTime" type="Date" length="" initial="" field="start_time"/>
+  		<property name="endTime" type="Date" length="" initial="" field="end_time"/>
+  		<property name="updateTime" type="Date" length="" initial="" field="update_time"/>
+  		<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+  		<property name="createTime" type="Date" length="" initial="" field="create_time"/>
+  		<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+  		<property name="releaseStatus" type="Long" length="1" initial="" field="release_status"/>
+  		<property name="site" type="String" length="50" field="site"/>
+  		<property name="recommendFlag" type="Long" length="1" initial="" field="recommend_flag"/>
+  		<property name="topFlag" type="Long" length="1" initial="" field="top_flag"/>
+  		<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+  		<property name="integral" type="Long" length="10" initial="" field="integral"/>
+  		<property name="joinIntegral" type="Long" length="10" initial="" field="join_integral"/>
+  		<property name="content" type="String" length="" field="content"/>
+  		<property name="address" type="String" length="200" field="address"/>
+  		<property name="fileId" type="Long" length="20" initial="" field="file_id"/>
+  		<property name="qrFileId" type="Long" length="20" initial="" field="qr_file_id"/>
+		<property name="applyCount" type="Long" length="10" initial="" field="apply_count"/>
+		<property name="joinCount" type="Long" length="10" initial="" field="join_count"/>
+
+  		<property name="releaseName" type="String" length="" field=""/>
+  		<property name="typeName" type="String" length="" field=""/>
+  		<property name="name" type="String" length="" field=""/>
+  		<property name="role" type="String" length="" field=""/>
+  		<property name="region" type="String" length="" field=""/>
+  		<property name="siteName" type="String" length="" field=""/>
+  		<property name="file" type="String" length="" field=""/>
+  		<property name="reFlag" type="Long" length="1" field=""/>
+		<property name="tFlag" type="Long" length="1" field=""/>
+		
+		<property name="time" type="Date" length="" field=""/>
+		<property name="schoolId" type="Long" length="" field=""/>
+		<property name="schoolName" type="String" length="" field=""/>
+		<property name="classId" type="Long" length="" field=""/>
+		<property name="className" type="String" length="" field=""/>
+		<property name="grade" type="String" length="" field=""/>
+		<property name="joinPicCount" type="String" length="" field=""/>
+  </object> 
+  
+  <object name="activityPic" table="t_activity_pic" primary="id" unique="" order="id desc" autoinc="Y">
+  		<property name="id" type="Long" length="20" initial="" field="id"/>
+  		<property name="activityId" type="Long" length="20" initial="" field="activity_id"/>
+  		<property name="picId" type="Long" length="20" initial="" field="pic_id"/>
+  		<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+  		<property name="createTime" type="Date" length="" initial="" field="create_time"/>
+  		<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+  		<property name="updateTime" type="Date" length="" initial="" field="update_time"/>
+  		<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+  		
+  		<property name="remark" type="String" length="50" initial="" field=""/>
+  		<property name="picName" type="String" length="50" initial="" field=""/>
+  </object>
+  
+  <object name="activityConfig" table="t_activity_config" primary="id" unique="" order="id desc" autoinc="Y">
+  		<property name="id" type="Long" length="20" initial="" field="id"/>
+  		<property name="activityId" type="Long" length="20" initial="" field="activity_id"/>
+  		<property name="rtmpUrl" type="String" length="500" initial="" field="rtmp_url"/>
+  		<property name="flvUrl" type="String" length="500" initial="" field="flv_url"/>
+  		<property name="muUrl" type="String" length="500" initial="" field="mu_url"/>
+  		<property name="createTime" type="Date" length="" initial="" field="create_time"/>
+  		<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+  		<property name="updateTime" type="Date" length="" initial="" field="update_time"/>
+  		<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+  </object>
+  
+        
+</model_layer>
+</tsoftware>   

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmAreaCreate" title="编辑">
+	<panel name="pForm" title="编辑" object="area" type="Group">
+	<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="1" column="2"/>
+	<control name="eq_region" title="大区名称" property="name" type="TextBox" edit="Y" required="Y" format="" width="1" height="1" column="2"/>
+    <control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="Y"  required="N" target="CurrentTime()"  format="" width="1" height="1" column="2"  />
+	<control name="eq_creater" title="创建人" property="creater" type="Hidden" edit="Y"  required="" target="session.userInfo.empId"  format="" width="1" height="1" column="2"  />
+	<control name="updateTime" title="创建时间" property="updateTime" type="Hidden" edit="Y"  required="N" target="CurrentTime()"  format="" width="1" height="1" column="2"  />
+	<control name="updater" title="创建人" property="updater" type="Hidden" edit="Y"  required="" target="session.userInfo.empId"  format="" width="1" height="1" column="2"  />
+	</panel>
+	<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+		<control name="save" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+		<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+	</panel>
+	
+	<!-- 加载 -->
+    <flow trigger="" event="OnLoad" filter="" >
+    <procedure name="jClear"  logic="Clear" ifyes="qid" ifno="" sync="Y">
+         <param name="Out" value="pForm"></param>
+    </procedure>
+      
+          <!-- list逻辑 -->
+  <!-- 
+       <procedure name="Listcreater"  logic="List" ifyes="qid" ifno="" sync="Y">
+         <param name="Out" value="pForm.eq_creater"></param>
+         <param name="Sql" value="area/Listcreater"></param>
+      </procedure> -->
+      
+       
+       <procedure name="qid"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pForm" />
+        <param name="Out" value="pForm" />
+        <param name="Sql" value="area/Qryarea" />
+      </procedure>
+      
+      
+	</flow>
+    
+
+       <!-- 保存 -->
+    <flow trigger="pButton.save" event="OnClick" filter="" defaultEnter="Y" >
+      <procedure name="jssave"  logic="Save" ifyes="jsclose" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Msg" value="'已保存'"></param>
+      </procedure>
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>	
+    
+    <!-- 取消 -->
+    <flow trigger="pButton.cancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>	
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="pButton" location="South" scale="" />
+      </region>
+      <region location ="Center" scale="">
+        <subregion panel="pForm" location="Center" scale="" />
+      </region>      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

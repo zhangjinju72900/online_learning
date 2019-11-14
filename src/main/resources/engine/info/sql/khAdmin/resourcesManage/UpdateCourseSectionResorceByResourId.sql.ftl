@@ -1,0 +1,1 @@
+update `t_course_section_resources` set customer_resources_id = #{data.customerResourcesId}, `update_time` = #{data.updateTime}, update_by = #{data.updateBy} where customer_resources_id = #{data.oldCustomerResourcesId};

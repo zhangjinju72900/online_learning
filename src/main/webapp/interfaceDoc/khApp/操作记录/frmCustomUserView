@@ -1,0 +1,25 @@
+UI名称		客户账户详情（frmCustomUserView）
+
+tokenKey	OnLoad__frmCustomUserView_jList
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{id: "33789"   --用户id
+}
+
+返回示例
+"data":{total":205,"rows":[{"eventDesc":"打开了维修手册",				--事件描述
+							"sourceIp":"1.119.13.253",				--IP来源
+							"customerUserName":"小北4",				--操作人
+							"createTime":"2019-07-30 10:45:54",		--创建事件
+							"platformType":"APP",					--平台
+							"assemblyType":"系统",					--组件类型
+							"customerUserId":33789,					--用户ID
+							"id":1247,"								--操作记录ID
+							eventType":"查看了维修手册模块"}			--事件类型
+		
+		
+		

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmDistributeEdit" title="编辑分发新作业">
+	        <panel name="pToolbar" title="工具条" object="" type="Toolbar">
+	        	<control name="btnAddObjQuestion" title="手动增加主观题" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnDistribute" title="执行作业分发" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnreturn" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+            <panel name="pCondition" title="查询条件" object="homework" type="Group">
+            	<control name="name" title="作业名称" property="name" type="TextBox" edit="Y" required="" format="" multiple="N" width="2" height="1" column="5"/>
+            	<control name="classId" title="选择班级" property="classId" type="ComboBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column=""/>
+                <control name="courseId" title="选择课程" property="courseId" type="ComboBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column=""/>
+                <control name="sectionId" title="选择课程小节" property="sectionId" type="ComboBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="5"/>
+                <control name="homeworkType" title="题型" property="homeworkType" type="ComboBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column=""/>
+       			<control name="difficultyLevel" title="难度" property="difficultyLevel" type="ComboBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column=""/>
+       			<control name="endTime" title="提交截止时间" property="endTime" type="DateTimeBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="5"/>
+       			<control name="templateName" title="作业模板名称" property="templateName" type="TextBox" edit="Y" required="N" format="" multiple="N" width="2" height="1" column="5"/>
+             	<control name="questionIds" title="题目id" property="questionIds" type="TextBox" edit="Y" required="N" format="" multiple="N" width="2" height="1" column="5"/>
+             	<control name="questionIdScore" title="题目id-分数" property="questionIdScore" type="TextBox" edit="Y" required="N" format="" multiple="N" width="2" height="1" column="5"/>
+            	<control name="source" title="题目来源" property="source" type="TextBox" edit="Y" required="N" format="" multiple="N" width="2" height="1" column="5"/>
+            	<control name="homeworkTemplateId" title="模板id" property="homeworkTemplateId" type="TextBox" edit="Y" required="N" format="" multiple="N" width="2" height="1" column="5"/>
+            	<control name="currentTime" title="当前时间" property="" type="Hidden" edit="Y" required="N" initial="CurrentTime()" format="" width="1" height="1" column=""  />
+            </panel>
+            <panel name="pTable" title="查询结果" object="question" type="Grid" multiple="Y" >
+            	<control name="btnEditObjQuestion" title="编辑" property="" type="Link" edit="" required="" format="" width="150" height="" column=""/>
+            	<control name="questionId" title="questionId" property="questionId" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="content" title="题干" property="content" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="questionClassifyId" title="试题分类" property="questionClassifyId" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="questionTypeName" title="题型" property="questionTypeName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="difficultyLevelName" title="难度" property="difficultyLevelName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+           </panel>
+            
+            <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		       <procedure name="jClear"  logic="Clear" ifyes="classList" ifno="" sync="Y">
+		         <param name="Out" value="pCondition"></param>
+		      </procedure>
+		       <procedure name="classList"  logic="List" ifyes="typeList" ifno="" sync="Y">
+		         <param name="Out" value="pCondition.classId"></param>
+		         <param name="Sql" value="khTeacher/homework/homeworkDistribute/QryHomeworkClassList"></param>
+		      </procedure>
+		      <!-- <procedure name="courseList"  logic="List" ifyes="sectionList" ifno="" sync="Y">
+		         <param name="Out" value="pCondition.courseId"></param>
+		         <param name="Sql" value="khTeacher/homework/homeworkDistribute/QryHomeworkCourseName"></param>
+		      </procedure> -->
+		     <!--  <procedure name="sectionList"  logic="List" ifyes="typeList" ifno="" sync="Y">
+		         <param name="Out" value="pCondition.sectionId"></param>
+		         <param name="Sql" value="khTeacher/homework/homeworkDistribute/QryHomeworkSectionName"></param>
+		      </procedure> -->
+		      <procedure name="typeList"  logic="List" ifyes="difficuty" ifno="" sync="Y">
+		         <param name="Out" value="pCondition.homeworkType"></param>
+		         <param name="Sql" value="khTeacher/homework/homeworkDistribute/QryHomeworkTypeList"></param>
+		      </procedure>
+		       <procedure name="difficuty"  logic="List" ifyes="questionQuery" ifno="" sync="Y">
+		         <param name="Out" value="pCondition.difficultyLevel"></param>
+		         <param name="Sql" value="khTeacher/question/QryDifficultyList"></param>
+		      </procedure>
+		      <procedure name="questionQuery" logic="Query" ifyes="" ifno="">
+		         <param name="Out" value="pTable"></param>
+		         <param name="Sql" value="khTeacher/question/QryQuestionList"></param>
+		      </procedure>
+		    </flow>
+		 	
+		 	<!-- 增加主观题-->
+			 <flow trigger="pToolbar.btnAddObjQuestion" event="OnClick" filter="">
+		      <procedure name="jspopup" logic="Popup" ifyes="" ifno="">
+		        <param name="To" value="frmAddObjQuestion" />
+		        <param name="Mode" value="Add" />
+		        <param name="Window" value="Medium" />
+		        <param name="Title" value="手动增加主观题" />
+		      </procedure>
+		  	</flow>
+		  	<!--根据班级id找到对应的课程  -->
+		  	<flow trigger="pCondition.classId" event="OnSelect" filter="">
+		    	<procedure name="j1" logic="List" ifyes="" ifno="">
+		    		<param name="In" value="pCondition"/>
+		    		<param name="Out" value="pCondition.courseId"/>
+		    		<param name="Sql" value="khTeacher/homework/homeworkDistribute/QryHomeworkCourseList1"/>
+		    	</procedure>
+		    </flow>
+		  	<!--根据课程id找到对应的小节  -->
+		  	<flow trigger="pCondition.courseId" event="OnSelect" filter="">
+		    	<procedure name="j1" logic="List" ifyes="" ifno="">
+		    		<param name="In" value="pCondition"/>
+		    		<param name="Out" value="pCondition.sectionId"/>
+		    		<param name="Sql" value="khTeacher/homework/homeworkDistribute/QryHomeworkSectionList1"/>
+		    	</procedure>
+		    </flow>
+		  	
+		  	<!-- 编辑主观题-->
+			 <flow trigger="pTable.btnEditObjQuestion" event="OnClick" filter="">
+			 	<procedure name="annEncodeId" logic="EncodeId"  ifyes="jspopup" ifno="" >
+		    		<param name="In" value="pTable.questionId"></param>
+		   		</procedure>
+		      <procedure name="jspopup" logic="Popup" ifyes="" ifno="">
+		        <param name="To" value="frmEditObjQuestion" />
+		        <param name="Mode" value="Edit" />
+		        <param name="Window" value="Medium" />
+		        <param name="Title" value="编辑主观题" />
+		      </procedure>
+		  	</flow>
+		  	
+		 	
+			<!--保存为作业模板 -->
+		    <flow trigger="pToolbar.btnSaveTemplate" event="OnClick" filter="">
+		      <procedure name="saveTemplate"  logic="SaveCustom" ifyes="" ifno="" sync="Y">
+		           <param name="In" value="pCondition"></param>
+		           <param name="DAOPlugin" value="saveTemplatePlugin"/>
+		    		<param name="sql" value="khTeacher/homework/homeworkDistribute/InsertHomeworkTemplate"/>
+		    		<param name="Msg" value="'已将当前作业题置为作业模板'" />
+		      </procedure> 
+		    </flow>
+		    
+		    <!--保存为草稿 -->
+		    <flow trigger="pToolbar.btnSaveDraft" event="OnClick" filter="">
+		      <procedure name="saveDraft"  logic="SaveCustom" ifyes="" ifno="" sync="Y">
+		           <param name="In" value="pCondition"></param>
+		           <param name="DAOPlugin" value="saveDraftPlugin"/>
+		    		<param name="sql" value="khTeacher/homework/homeworkDistribute/InsertHomeworkDraft"/>
+		    		<param name="Msg" value="'已保存为草稿'" />
+		      </procedure> 
+		    </flow>
+		    
+		     <!--执行分发-->
+		    <flow trigger="pToolbar.btnDistribute" event="OnClick" filter="">
+		    <procedure name="timeIsOut" logic="Branch" ifyes="TimeOut"  ifno="distribute">
+				<param name="In"  value="getPanelControlValue('pCondition.currentTime') &gt; getPanelControlValue('pCondition.endTime')"></param>
+			</procedure>
+			<procedure name="TimeOut" logic="InfoMsg" ifyes="" ifno="">
+				<param name="Msg" value="执行时间不能早于开始时间,请修改"></param>
+			</procedure> 
+		      <procedure name="distribute"  logic="SaveCustom" ifyes="" ifno="" sync="Y">
+		           <param name="In" value="pCondition"></param>
+		           <param name="DAOPlugin" value="saveHomeworkPlugin"/>
+		    	   <param name="sql" value="khTeacher/homework/homeworkDistribute/InsertHomework"/>
+		    	   <param name="Msg" value="'作业已分发'" />
+		      </procedure> 
+		    </flow>
+		     
+		     <!--返回-->
+		    <flow trigger="pToolbar.btnreturn" event="OnClick" filter="">
+		       <procedure name="proTransition" server="/frmHomeworkList" logic="Back" ifyes="" ifno="">
+		         <param name="To" value="frmHomeworkList"></param>
+		       </procedure>
+		    </flow>
+		    
+		    
+		     
+            <!-- 布局 -->
+            <layout>
+                <region location ="North" scale="">
+                    <subregion panel="pToolbar" location ="North" scale=""/>
+                </region>
+                <region location ="Center" scale="">
+                	<subregion panel="pTable" location="Center" scale="70%"/>
+                    <subregion panel="pCondition" location ="North" scale="30%"/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

@@ -1,0 +1,1 @@
+delete from t_customer_user_class where customer_user_id = #{data.customerId}

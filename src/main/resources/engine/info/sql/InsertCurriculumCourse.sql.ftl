@@ -1,0 +1,2 @@
+INSERT INTO t_curriculum_course (curriculum_id,course_id,school_id,update_time,update_by,create_time,create_by) 
+VALUES (#{data.curriculum_id},#{data.course_id},#{data.school_id},now(),#{data.session.userInfo.userId},now(),#{data.session.userInfo.userId})

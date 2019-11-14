@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+ <model_layer>
+  <object name="homework" table="t_homework" primary="id" unique="" order="">
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="name" type="String" length="50" initial="" field="name"/>
+   <property name="schoolId" type="Long" length="20" initial="" field="school_id"/>
+   <property name="classId" type="Long" length="20" initial="" field="class_id"/>
+   <property name="courseId" type="Long" length="20" initial="" field="course_id"/>
+   <property name="sectionId" type="Long" length="20" initial="" field="section_id"/>
+   <property name="homeworkType" type="Long" length="1" initial="" field="homework_type"/>
+   <property name="distributeTime" type="Date" length="" initial="" field="distribute_time"/>
+   <property name="endTime" type="Date" length="" initial="" field="end_time"/>
+   <property name="distributeStatus" type="Long" length="1" initial="" field="distribute_status"/>
+   <property name="difficultyLevel" type="Long" length="1" initial="" field="difficulty_level"/>
+   <property name="score" type="Double" length="12" initial="" field="score"/>
+   <property name="avgScore" type="String" length="20" initial="" field="avg_score"/>
+   <property name="teacherId" type="Long" length="20" initial="" field="teacher_id"/>
+   <property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+   <property name="createTime" type="Date" length="" initial="" field="create_time"/>
+   <property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+   <property name="updateTime" type="Date" length="" initial="" field="update_time"/>
+   <property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+   
+   <!-- 关联表字段 -->
+   <property name="className" type="String" length="100" initial="" field=""/>
+   <property name="courseName" type="String" length="100" initial="" field=""/>
+   <property name="sectionName" type="String" length="100" initial="" field=""/>
+   <property name="homeworkTypeName" type="String" length="20" initial="" field=""/>
+   <property name="distributeStatusName" type="String" length="20" initial="" field=""/>
+   <property name="difficultyLevelName" type="String" length="20" initial="" field=""/>
+   <property name="teacherName" type="String" length="20" initial="" field=""/>
+   <property name="templateName" type="String" length="50" initial="" field=""/>
+   <property name="questionIds" type="String" length="1000" initial="" field=""/>
+   <property name="source" type="Long" length="2" initial="" field=""/>
+   <property name="homeworkTemplateId" type="Long" length="20" initial="" field=""/>
+   <property name="questionIdScore" type="String" length="1000" initial="" field=""/>
+   <property name="classCount" type="Long" length="10" initial="" field=""/>
+   <property name="commitCount" type="Long" length="10" initial="" field=""/>
+   <property name="homeworkDate" type="String" length="50" initial="" field=""/>
+   
+   
+  </object>
+  <object name="answerHomework" table="t_homework_answer" primary="id" unique="" order="">
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="homeworkId" type="Long" length="20" initial="" field="homework_id"/>
+   <property name="schoolId" type="Long" length="20" initial="" field="school_id"/>
+   <property name="classId" type="Long" length="20" initial="" field="class_id"/>
+   <property name="courseId" type="Long" length="20" initial="" field="course_id"/>
+   <property name="sectionId" type="Long" length="20" initial="" field="section_id"/>
+   <property name="homeworkType" type="Long" length="1" initial="" field="homework_type"/>
+   <property name="finishTime" type="Date" length="" initial="" field="finish_time"/>
+   <property name="objectiveScore" type="Double" length="12" initial="" field="objective_score"/>
+   <property name="objectiveRealScore" type="Double" length="12" initial="" field="objective_real_score"/>
+   <property name="subjectiveScoreLevel" type="Long" length="1" initial="" field="subjective_score_level"/>
+   <property name="remark" type="String" length="500" initial="" field="remark"/>
+   <property name="status" type="Long" length="1" initial="" field="status"/>
+    <property name="studentId" type="Long" length="20" initial="" field="student_id"/>
+   <property name="teacherId" type="Long" length="20" initial="" field="teacher_id"/>
+   <property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+   <property name="createTime" type="Date" length="" initial="" field="create_time"/>
+   <property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+   <property name="updateTime" type="Date" length="" initial="" field="update_time"/>
+   <property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+   
+    <!-- 关联表字段 -->
+   <property name="className" type="String" length="100" initial="" field=""/>
+   <property name="courseName" type="String" length="100" initial="" field=""/>
+   <property name="sectionName" type="String" length="100" initial="" field=""/>
+   <property name="homeworkTypeName" type="String" length="20" initial="" field=""/>
+   <property name="studentName" type="String" length="50" initial="" field=""/>
+   <property name="teacherName" type="String" length="50" initial="" field=""/>
+   <property name="subjectiveLevelName" type="String" length="10" initial="" field=""/>
+   <property name="statusName" type="String" length="10" initial="" field=""/>
+   <property name="fileId" type="Long" length="10" initial="" field=""/>
+   <property name="ossUrl" type="String" length="200" initial="" field=""/>
+   <property name="beginTime" type="Date" length="" initial="" field=""/>
+   <property name="endTime" type="Date" length="" initial="" field=""/>
+   <property name="commitFlag" type="Long" length="10" initial="" field=""/>
+   <property name="homeworkAnswerId" type="Long" length="20" initial="" field=""/>
+   
+  </object>
+  
+  <object name="answerDetail" table="t_homework_detail_answer" primary="id" unique="" order="">
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="homeworkId" type="Long" length="20" initial="" field="homework_id"/>
+   <property name="homeworkDetailId" type="Long" length="20" initial="" field="homework_detail_id"/>
+   <property name="homeworkAnswerId" type="Long" length="20" initial="" field="homework_answer_id"/>
+   <property name="questionId" type="Long" length="20" initial="" field="question_id"/>
+   <property name="objectiveScore" type="Double" length="12" initial="" field="objective_score"/>
+   <property name="objectiveRealScore" type="Double" length="12" initial="" field="objective_real_score"/>
+   <property name="subjectiveScoreLevel" type="Long" length="1" initial="" field="subjective_score_level"/>
+   <property name="content" type="String" length="2000" initial="" field="content"/>
+   <property name="status" type="Long" length="1" initial="" field="status"/>
+    <property name="studentId" type="Long" length="20" initial="" field="student_id"/>
+   <property name="teacherId" type="Long" length="20" initial="" field="teacher_id"/>
+   <property name="createTime" type="Date" length="" initial="" field="create_time"/>
+   <property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+   <property name="updateTime" type="Date" length="" initial="" field="update_time"/>
+   <property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+
+   <!-- 关联表字段 -->
+   <property name="questionContent" type="String" length="2000" initial="" field=""/>
+   <property name="studentName" type="String" length="50" initial="" field=""/>
+   <property name="teacherName" type="String" length="50" initial="" field=""/>
+   <property name="fileUrl" type="String" length="2000" initial="" field=""/>
+   <property name="ossKeys" type="String" length="2000" initial="" field=""/>
+   <property name="correctTitle" type="String" length="20" initial="" field=""/>
+   <property name="correctFlag" type="Long" length="1" initial="" field=""/>
+   <property name="correctFlagName" type="Long" length="1" initial="" field=""/>
+   <property name="answerOption" type="String" length="20" initial="" field=""/>
+   <property name="countCommit" type="Long" length="10" initial="" field=""/>
+   <property name="countWrong" type="Long" length="10" initial="" field=""/>
+   <property name="wrongRate" type="String" length="20" initial="" field=""/> 
+   <property name="xAxisData" type="String" length="500" initial="" field=""/>
+   <property name="seriesData" type="String" length="500" initial="" field=""/>
+  </object>
+  
+ </model_layer>
+</tsoftware>

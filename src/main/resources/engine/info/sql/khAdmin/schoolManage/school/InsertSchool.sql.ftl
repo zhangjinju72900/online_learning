@@ -1,0 +1,2 @@
+insert into t_school (name,school_type,region_id,province_code,create_time,create_by,update_time,update_by) values 
+(#{data.collegeName} ,#{data.collegeType} ,#{data.regionType},#{data.provinceType},now(),#{data.session.userInfo.userId},now(),#{data.session.userInfo.userId}) 

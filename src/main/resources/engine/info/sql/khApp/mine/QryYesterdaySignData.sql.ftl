@@ -1,0 +1,1 @@
+select id from t_sign_in_record where user_id = #{data.userId} and valid_flag = 0 and DATEDIFF(sign_time,NOW())=-1

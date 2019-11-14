@@ -1,0 +1,134 @@
+﻿UI名称	系统主页接口（frmHomePage）
+
+tokenKey	OnLoad__frmHomePage_jClear
+
+接口地址	/api/clear
+
+接口类型	POST
+
+参数示例
+"data": {    }
+
+返回示例
+"data":{     eq_teacherId: ""
+	ge_givenDate: ""
+	givenDate: ""
+	le_givenDate: ""
+}
+		
+UI名称  系统主页-查询上课记录（frmHomePage）		
+		
+tokenKey OnClick_pToolbar_btnsearch1_frmHomePage_jsquery
+
+接口地址  /api/query
+
+接口类型  POST
+
+参数示例
+"data":{
+	eq_teacherId: "2" 		--教师ID
+	ge_givenDate: "2019-01-01"	--起始日期
+	le_givenDate: "2019-01-31"	--截止日期
+	page: 1
+	rows: 50
+}
+
+返回示例
+"data":{
+	"total":3,"rows":[
+	{"givenDate":"2019-01-16"},    --2019-01-16这天有课
+	{"givenDate":"2019-01-02"},    --2019-01-02这天有课
+	{"givenDate":"2019-01-23"}     --2019-01-23这天有课
+}
+
+
+
+
+
+UI名称  系统主页-查询上课详情（frmHomePage）
+
+tokenKey OnClick_pToolbar_btnsearch2_frmHomePage_jsquery
+
+接口地址  /api/query
+
+接口类型  POST
+
+参数示例
+"data":{
+	eq_teacherId: "2"		--教师ID
+	ge_givenDate: "2019-01-01"	--起始日期
+	givenDate: "2019-01-02"	--想要查询详情的日期
+	le_givenDate: "2019-01-31"	--截至日期(是上一个接口遗留的信息)
+	page: 1
+	rows: 50
+}
+
+返回示例	
+"data":{
+	"studentCount":30,			--学生应到人数
+	"realStuCount":20,			--实际出勤数
+	"classId":37,			--班级ID
+	"teacherId":2,			--老师ID
+	"validFlag":0,			--标识
+	"className":"2016级秋季2班",		--班级名称
+	"startTime":"2019-01-02 17:50:09",	--上课时间
+	"id":3,				--记录ID
+	"absenceStuCount":10}]		--缺勤人数
+}
+	
+	
+	
+UI名称  系统主页-教师签到查询（frmTeacherSign）
+
+tokenKey	 OnLoad__frmTeacherSign_jQuery
+
+接口地址  /api/query
+
+接口类型  POST
+
+参数示例
+"data":{
+}
+
+返回示例	
+"data":{
+	id: 2								--用户id
+	integral: 3602						--当前积分
+	name: "管理员"						--用户名
+	nickname: "ADMIN弑约染"				--用户昵称
+	signType: 0							--今天是否签到(0-未签到，1-已签到)
+}
+		
+		
+		
+		
+UI名称  系统主页-教师签到（frmAppSignEdit）
+
+tokenKey	 OnClick_pButton_save_frmAppSignEdit_jsSave
+
+接口地址  /api/save
+
+接口类型  POST
+
+参数示例
+"data":{
+		userId: "2"						--当前教师id
+}
+
+返回示例	
+"data":{
+	baseId: "241"							--签到记录id
+	continuousSignDays: 1					--连续签到天数
+	createBy: "2"	
+	createTime: "2019-01-15 13:49:03"		
+	id: ""
+	integral: "5"							--本次签到积分
+	session: {,…}
+	userInfo: {userId: 2, orgId: 0, userName: "admin", empId: 2, salt: "918E5D6EFECD41B08C8B43DE2B125FDA",…}
+	signTime: "2019-01-15 13:49:02"			--签到时间
+	updateBy: "2"
+	updateTime: "2019-01-15 13:49:03"
+	userId: "2"								--教师id
+}
+
+

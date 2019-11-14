@@ -1,0 +1,1 @@
+select id, title, content, correct_flag as correctFlag from t_question_answer_options where question_id = #{data.id}

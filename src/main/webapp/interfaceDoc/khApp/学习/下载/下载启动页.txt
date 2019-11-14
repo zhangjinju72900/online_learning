@@ -1,0 +1,11 @@
+http://127.0.0.1:8081/updateAppFile
+
+{"app":"","ver":"","cid":"","uid":"","wid":"","pid":"","time":"2019-01-23 10:14:14",
+	"data":{"type":"0",                             -- 0启动页，1-引导图
+			"versionCode":"1"}
+,"hmac":""}
+
+{"code":"0","msg":"","data":{
+					"updateFlag":0,        			-- 是否需要更新 0-是，1-否
+					"versionId":100                 -- 最新版本号
+					"urlList":["http://know-how001.oss-cn-beijing.aliyuncs.com/3f22ce25e50241acbfcb18fa53dcb4cd201901231114512.jpg","http://know-how001.oss-cn-beijing.aliyuncs.com/86d7be1d27ff4f7887e599da8b5eab69201901231113482.jpg"]},"hmac":"d3b1ae7177622a495274bc03397a6195"}

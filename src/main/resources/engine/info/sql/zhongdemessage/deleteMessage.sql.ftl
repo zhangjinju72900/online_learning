@@ -1,0 +1,1 @@
+UPDATE t_message_record SET valid_flag = 1 , update_time = now(), update_by = #{data.session.userInfo.empId} WHERE id = #{data.id}

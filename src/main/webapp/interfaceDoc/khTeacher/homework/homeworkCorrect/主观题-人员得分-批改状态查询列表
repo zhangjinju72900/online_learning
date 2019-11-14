@@ -1,0 +1,51 @@
+UI名称		主观题批改、主观题成绩-作业回答（frmAnswerHomework）
+
+tokenKey	OnLoad__frmAnswerHomework_qAnswer
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "1"		--作业id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		ctlAnswerDetail: "查看回答详情"			
+		fileId: 0							--用户头像id
+		ossUrl: null						--用户头像文件oss地址
+		finishTime: "2019-01-05 16:46:55"	--完成时间
+		id: 1								--作业回答id
+		status: 3							--作业回答状态 0-已分发；1-已回答；2-已提交；3-已批改
+		statusName: "已批改"					--作业回答状态对应字典项名
+		studentId: 1						--学生id
+		studentName: " 访客用户"				--学生姓名name	
+		subjectiveLevelName: "优"			--得分等级名
+		subjectiveScoreLevel: 0				--得分等级--主观题 0-优；1-良；2-中；3-差
+		commitFlag: 0						--作业提交标识:0-已提交，1-未提交
+		}
+		{
+		commitFlag: 1
+		ctlAnswerDetail: "查看回答详情"
+		fileId: 0
+		finishTime: "2019-01-04 11:42:04"
+		id: 3
+		ossUrl: null
+		remark: ""
+		status: 1
+		statusName: "已回答"
+		studentId: 3
+		studentName: "张静雨"
+		subjectiveLevelName: "未批改"		--批改状态为已批改时显示得分等级，不是已批改状态显示未批改
+		subjectiveScoreLevel: 2
+		commitFlag: 0
+		}
+		
+
+
+
+

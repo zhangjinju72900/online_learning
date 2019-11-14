@@ -1,0 +1,15 @@
+UI名称		作业成绩-选择课程（frmHomeworkScore）
+
+tokenKey	 OnSelect_pCondition_eq_classId_frmHomeworkScore_j1
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{eq_classId:1439}
+
+返回示例
+"data":		{
+		"text":"123如3",	--课程名
+		"value":12}		--课程id

@@ -1,0 +1,2 @@
+insert into t_message_record (receiver_id,sender_id,send_type,send_time,base_id,create_time,create_by,update_time,update_by) 
+values(#{data.receiverId},#{data.senderId},'30',now(),#{data.baseId},now(),#{data.senderId},now(),#{data.senderId});

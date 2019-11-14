@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="activityView" title="活动直播详情列表">
+            <panel name="pToolbar" title="工具条" object="" type="Toolbar">
+                <control name="apply" title="报名" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+                <control name="review" title="评论" property="" type="Button" edit="Y" required="" format="" width="1" height="1" column=""/>
+                <control name="ctlAdd" title="晒图" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+                <control name="forward" title="转发" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+
+                <control name="query" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+
+                <control name="like" title="点赞" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+                <control name="back" title="返回" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+            </panel>
+            <panel name="pCondition" title="查询条件" object="activityList" type="Group">
+                <control name="id" title="id" property="id" type="TextBox" edit="N" required="N" format="" width="2" height="1" column="1"/>
+                <!-- <control name="applyBy" title="登陆人" property="applyBy" type="TextBox" edit="Y" required="" format="" target="data.session.userInfo.userId" width="100" height="1" column="2"/> -->
+
+            </panel>
+            <panel name="pList" title="查询结果" object="activityList" type="Group">
+                <control name="id" title="id" property="id" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="title" title="标题" property="title" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="integral" title="增加积分" property="integral" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="joinIntegral" title="报名扣分" property="joinIntegral" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="originator" title="发起人" property="originator" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="originTime" title="发起时间" property="originTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="startTime" title="活动时间" property="startTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="site" title="活动地点" property="site" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="content" title="内容" property="content" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="address" title="详细地址" property="address" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="fileId" title="文件id" property="fileId" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="applyCount" title="报名人数" property="applyCount" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="updateBy" title="更新人" property="updateBy" type="TextBox" edit="N" required="N" target="session.userInfo.userId" format="" width="100" height="1" column="2"  />
+                <control name="likeCount" title="点赞人数" property="likeCount" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="reviewEdit" title="评论" property="reviewEdit" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+                <control name="uName" title="姓名" property="uName" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="uFileId" title="头像" property="uFileId" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="reviewCount" title="评论数" property="reviewCount" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="roleId" title="角色id" property="roleId" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="forwardType" title="转发类型" property="forwardType" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+                
+                <control name="createBy" title="创建人" property="createBy" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+
+            </panel>
+
+            <panel name="pReviewList" title="评论列表" object="liveReviewList" type="Grid">
+
+                <control name="ctlDelete" title="删除" property="" type="Link" edit="" required="" format="" width="50" height="" column=""/>
+                <control name="id" title="id" property="id" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="liveId" title="直播id" property="liveId" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="reviewBy" title="评论人" property="reviewBy" type="Hidden" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="reviewTime" title="评论时间" property="reviewTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="content" title="内容" property="content" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="createBy" title="创建人" property="createBy" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="updateTime" title="更新时间" property="updateTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="updateBy" title="更新人" property="updateBy" type="TextBox" edit="N" required="N" target="session.userInfo.userId" format="" width="100" height="1" column="2"  />
+            </panel>
+            <panel name="pPicList" title="晒图列表" object="informationList" type="Grid">
+
+               <control name="id" title="id" property="id" type="Hidden" edit="N" required="" format="" width="100" height="1" column="2"/>
+                <control name="title" title="晒图标题" property="title" type="TextBox" edit="N" required="" format="" width="200" height="1" column=""/>
+                <control name="content" title="内容" property="content" type="TextBox" edit="N" required="" format="" width="300" height="1" column=""/>
+                <control name="picId" title="图片ID" property="picId" type="TextBox" edit="N" required="" format="" width="200" height="1" column=""/>
+                <control name="clickCount" title="点击数" property="clickCount" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="likeCount" title="点赞数" property="likeCount" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="collectCount" title="收藏数" property="collectCount" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="reviewCount" title="评论数" property="reviewCount" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="createName" title="晒图人" property="createName" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="createTime" title="晒图时间" property="createTime" type="TextBox" edit="N" required="" format="" width="200" height="1" column=""/>
+                </panel>
+
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="j1" logic="DecodeId" ifyes="qid" ifno="">
+                    <param name="Out" value="pCondition.id"></param>
+                </procedure>
+                <procedure name="qid" logic="Query" ifyes="qid2" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pList"></param>
+                    <param name="Plugin" value="informationViewCDN"></param>
+                    <param name="Sql" value="khApp/discover/activity/QryActivityView"></param>
+                </procedure>
+                <procedure name="qid2" logic="Query" ifyes="qid3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pReviewList"></param>
+                    <param name="Plugin" value="activityInfoCDN"></param>
+                    <param name="Sql" value="khApp/discover/activity/QryActivityReview"></param>
+                </procedure>
+                <procedure name="qid3" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pPicList"></param>
+                    <param name="Plugin" value="activityInfoCDN"></param>
+                    <param name="Sql" value="khApp/discover/activity/QryActivityPic"></param>
+                </procedure>
+            </flow>
+
+            <!--返回-->
+            <flow trigger="pToolbar.back" event="OnClick" filter="">
+                <procedure name="proTransition" server="/frmAppActivityList" logic="Back" ifyes="" ifno="">
+                    <param name="To" value="frmAppActivityList"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pToolbar.query" event="OnClick" filter="">
+                <procedure name="qid" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pList"></param>
+                    <param name="Sql" value="khApp/discover/activity/QryActivityView"></param>
+                </procedure>
+            </flow>
+            <!--报名-->
+            <flow trigger="pToolbar.apply" event="OnClick" filter="">
+                <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+                    <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+                    <param name="In" value="pList"></param>
+                    <param name="Plugin" value="ActivityApplyPlugin"/>
+                    <param name="Msg" value="'报名成功'"></param>
+                </procedure>
+                <!-- 活动预览接口 -->
+                <procedure name="j2" logic="Query" ifyes="j3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pList"></param>
+                    <param name="Sql" value="khApp/discover/activity/QryActivityPreView"></param>
+                </procedure>
+            </flow>
+
+            <!--点赞-->
+            <flow trigger="pToolbar.like" event="OnClick" filter="">
+                <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+                    <param name="Sql" value="khApp/discover/activity/ActivityLike"></param>
+                    <param name="In" value="pList"></param>
+                    <param name="Plugin" value="ActivityLikePlugin"/>
+                    <param name="Msg" value="'点赞成功'"></param>
+                </procedure>
+                <procedure name="j2" logic="Query" ifyes="j3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pList"></param>
+                    <param name="Sql" value="khApp/discover/activity/QryActivityView"></param>
+                </procedure>
+            </flow>
+
+            <!--评论-->
+            <flow trigger="pToolbar.review" event="OnClick" filter="">
+                <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+                    <param name="Sql" value="khApp/discover/activity/ActReview"/>
+                    <param name="In" value="pList"></param>
+                    <param name="Plugin" value="updateActReview"></param>
+                    <param name="Msg" value="'评论成功'"></param>
+                </procedure>
+                <procedure name="j2" logic="Query" ifyes="j3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pList"></param>
+                    <param name="Sql" value="khApp/discover/activity/QryActivityView"></param>
+                </procedure>
+                <procedure name="j3" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pReviewList"></param>
+                    <param name="Sql" value="khApp/discover/activity/QryActivityReview"></param>
+                </procedure>
+
+            </flow>
+
+            <!-- 删除 -->
+            <flow trigger="pReviewList.ctlDelete" event="OnClick" filter="">
+                <procedure name="jDelete"  logic="SaveCustom" ifyes="jQuery" ifno="">
+                    <param name="Sql" value="khApp/discover/activity/delReview"></param>
+                    <param name="In" value="pReviewList" />
+                    <param name="Msg" value="'评论已删除'" />
+                </procedure>
+                <procedure name="jQuery"  logic="Query" ifyes="j3" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pReviewList"></param>
+                    <param name="Sql" value="khApp/discover/activity/QryActivityReview"></param>
+                </procedure>
+                <procedure name="j3" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Out" value="pList"></param>
+                    <param name="Sql" value="khApp/discover/activity/liveReview"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pToolbar.ctlAdd" event="OnClick" filter="">
+                <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
+                    <param name="In" value="pCondition.id"></param>
+                </procedure>
+                <procedure name="jspopup" logic="Popup" ifno="" ifyes="">
+                    <param name="To" value="addActivityFile"></param>
+                    <param name="Mode" value="Add"></param>
+                    <param name="Window" value="Medium"></param>
+                    <param name="Title" value="新增晒图"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pToolbar.forward" event="OnClick" filter="">
+            <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+                <param name="Sql" value="khApp/discover/activity/ActivityForward"></param>
+                <param name="In" value="pList"></param>
+                <param name="Plugin" value="updateActReview"></param>
+                <param name="Msg" value="'转发成功'"></param>
+            </procedure>
+            </flow>
+
+
+            <layout>
+                <region location="North" scale="">
+                    <subregion panel="pToolbar" location="North" scale=""/>
+                </region>
+                <region location="Center" scale="">
+                    <subregion panel="pCondition" location="North" scale=""/>
+                    <subregion panel="pList" location="Center" scale=""/>
+                    <subregion panel="pReviewList" location="Center" scale=""/>
+					 <subregion panel="pPicList" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

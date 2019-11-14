@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmCommentAdd" title="评论">
+            <panel name="pToolbar" title="工具条" object="" type="Toolbar">
+                <control name="back" title="取消" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+
+
+                <control name="save" title="确认" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+
+            </panel>
+
+
+
+            <panel name="pTable" title="评论区" object="infoReviewList" type="Group" multiple="N" >
+           		<control name="reviewId" title="被评论的评论id" property="reviewId" type="Hidden" edit="N" required="" format="" width="100" height="1" column="2"/>
+           		
+           		<control name="createBy" title="创建人" property="createBy" type="TextBox" edit="Y" required="" format="" width="100" height="1" column="2"/>
+           		
+                <control name="content" title="评论" property="content" type="TextBox" edit="Y" required="" format="" width="2" height="3" column="3"/>
+            </panel>
+            <!-- 初始加载 -->
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="j1" logic="DecodeId" ifyes="" ifno="">
+                    <param name="Out" value="pTable.reviewId"></param>
+                </procedure>
+
+            </flow>
+            <!--确认-->
+            <flow trigger="pToolbar.save" event="OnClick" filter="">
+            	<procedure name="commentbranch" logic="Branch" ifyes="nullcomment" ifno="jInsert">
+				<param name="In" value="(getPanelControlValue('pTable.comment')=='')"></param>
+				</procedure>
+				<procedure name="nullcomment" logic="InfoMsg" ifyes="" ifno="">
+					<param name="Msg" value="回复内容为空"></param>
+				</procedure>
+				
+				<procedure name="jInsert"  logic="SaveCustom" ifyes="jsclose" ifno="">
+                 <param name="In" value="pTable" />
+                 <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+                 <param name="Plugin" value="updateReviewComment"></param>
+                 <param name="Msg" value="评论成功" />
+                </procedure>
+                <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        		<param name="Refresh" value="true"></param>
+      			</procedure>
+             </flow>
+             
+             <!-- 取消 -->
+            <flow trigger="pToolbar.back" event="OnClick" filter="">
+            	<procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        		<param name="Refresh" value="true"></param>
+      			</procedure>
+            </flow>
+			
+      		
+
+
+            <!-- 布局 -->
+            <layout>
+                <region location ="South" scale="">
+                    <subregion panel="pToolbar" location="Center" scale=""/>
+                </region>
+                <region location ="Center" scale="">
+                    <subregion panel="pTable" location="Center" scale=""/>
+                </region>
+
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

@@ -1,0 +1,1 @@
+update t_course SET professional_id=#{data.professionId} WHERE id=#{data.courseId}

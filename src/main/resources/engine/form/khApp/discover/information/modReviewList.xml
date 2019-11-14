@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+  <object name="infoReviewList" table="t_information_review" primary="id" unique="" order="">
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+
+   <property name="content" type="String" length="200" initial="" field="content"/>
+   <property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+   <property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+   <property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+   <property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+   <property name="infoId" type="Long" length="20" initial="" field="information_id"/>
+   <property name="reviewBy" type="Long" length="20" initial="" field="review_by"/>
+   <property name="reviewId" type="Long" length="20" initial="" field="review_id"/>
+   <property name="reviewTime" type="Date" length="20" initial="" field="review_time"/>
+   <property name="checkStatus" type="String" length="200" initial="" field="check_status"/>
+   <property name="checkTime" type="Date" length="20" initial="" field="check_time"/>
+   <property name="reviewEdit" type="String" length="200" initial="" field=""/>
+
+   <property name="checkBy" type="Long" length="20" initial="" field="check_by"/>
+   <property name="topFlag" type="Long" length="10" initial="" field="top_flag"/>
+   <property name="topTime" type="Date" length="20" initial="" field="topTime"/>
+   <property name="topBy" type="Long" length="20" initial="" field="top_by"/>
+   <property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+   <property name="comment" type="String" length="200" initial="" field=""/>
+   <property name="likeValidName" type="String" length="20" initial="" field=""/>
+   <property name="likeValid" type="String" length="20" initial="" field=""/>
+   
+
+
+
+  </object>
+</model_layer>
+</tsoftware>

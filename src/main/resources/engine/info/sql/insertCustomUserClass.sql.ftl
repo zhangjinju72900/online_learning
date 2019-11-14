@@ -1,0 +1,2 @@
+insert into t_customer_user_class (customer_user_id,class_id,update_time,update_by,create_time,create_by) values 
+(#{data.userId} ,#{data.classId} ,now(),#{data.session.userInfo.userId},now(),#{data.session.userInfo.userId}) 

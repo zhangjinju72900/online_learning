@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmStudentList" title="学生列表">
+
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnQuery" title="查询" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="btnCreate" title="新增学生" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="btnImport" title="导入" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+			<panel name="pCondition" title="查询条件" object="tStudent" type="Group"
+				multiple="Y">
+				<control name="name" title="学生姓名" property="name"
+						 type="TextBox" edit="Y" required="" format="" width="1" height="1"
+						 column="" />
+				<control name="school" title="学校名称" property="school"
+						 type="TextBox" edit="Y" required="" format="" width="1" height="1"
+						 column="" />
+				<control name="ge_createTime" title="创建时间从" property="createTime"
+						 type="DateBox" edit="Y" required="" format="" width="1" height="1"
+						 column="" />
+				<control name="le_createTime" title="至" property=""
+						 type="DateBox" edit="Y" required="" format="" width="1" height="1"
+						 column="4" initial=""/>
+				<control name="id" title="id" property="id"
+						 type="Hidden" edit="N" required="" format="" width="" height=""
+						 column="" />
+				<control name="lk_tel" title="手机号" property="tel" type="TextBox"
+					edit="Y" required="" format="" width="1" height="1" column="" />
+				<control name="lk_cardNum" title="身份证号" property="cardNum"
+					type="TextBox" edit="Y" required="" format="" width="1" height="1"
+					column="4" />	
+				<control name="eq_regionName" title="大区" property="regionName" type="Hidden"  edit="Y" required="N" format="" width="1" height="1" column="3" />
+		 
+			</panel>
+			<panel name="pTable" title="查询结果列表" object="tStudent" type="Grid"
+				multiple="">
+				<control name="id" title="id" property="id" type="Hidden" edit="N" required="" format="" width="" height="" column="" />
+				<control name="ctlEdit" title="编辑" property="" type="Link" edit="" required="" format="" width="80" height="" column="" />
+				<control name="ctlDel" title="删除" property="" type="Link" edit="" required="" format="" width="80" height="" column="" />
+				<control name="lk_name" title="姓名" property="name" type="DataLink"
+					edit="N" required="N" format="" width="80" height="1" column="" />
+				<control name="cardNum" title="身份证号" property="cardNum"
+					type="TextBox" edit="N" required="N" format="" width="150" height="1"
+					column="" />
+				<control name="sex" title="性别" property="sex" type="Hidden"
+					edit="N" required="N" format="" width="60" height="1" column="2" />
+				<control name="sexName" title="性别" property="sexName" type="TextBox"
+					edit="" required="" format="" width="40" height="" column="" />
+				<control name="tel" title="电话" property="tel" type="TextBox"
+					edit="N" required="N" format="" width="100" height="1" column="" />
+				<control name="school" title="学校" property="school" type="TextBox"
+					edit="N" required="N" format="" width="100" height="1" column="2" />
+				<control name="className" title="班级" property="className"
+					type="TextBox" edit="N" required="" format="" width="60" height=""
+					column="2" />
+				<control name="gradeName" title="年级" property="gradeName" type="TextBox"
+					edit="N" required="N" format="" width="60" height="1" column="2" />
+				<control name="loginCount" title="登录次数" property="loginCount"
+					type="TextBox" edit="N" required="" format="" width="60" height=""
+					column="2" />
+				<control name="lastLoginTime" title="最后登录时间" property="lastLoginTime"
+					type="TextBox" edit="N" required="" target="CurrentTime()" format=""
+					width="150" height="1" column="2" />
+				<control name="learnTime" title="学习时长" property="learnTime"
+					type="TextBox" edit="N" required="" format="" width="80" height=""
+					column="2" />
+				<control name="regionName" title="大区" property="regionName"
+					type="TextBox" edit="N" required="" format="" width="80" height=""
+					column="2" />
+				<!-- <control name="userExplain" title="个性签名" property="userExplain"
+					type="TextBox" edit="N" required="Y" format="" width="60" height="1"
+					column="2" /> -->
+			</panel>
+
+			<!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="jClear" logic="Clear" ifyes="Query1" ifno=""
+					sync="Y">
+					<param name="Out" value="pCondition"></param>
+				</procedure>
+			<!-- 	<procedure name="QueryDate" logic="Query" ifyes="jClear2" ifno="" sync="">
+					<param name="Out" value="pCondition"/>
+					<param name="Sql" value="khAdmin/schoolManage/student/QryDate"/>
+				</procedure>
+				<procedure name="jClear2" logic="Clear" ifyes="Query1" ifno=""
+						   sync="Y">
+					<param name="Out" value="pCondition|le_createTime"/>
+				</procedure> -->
+				<procedure name="Query1" logic="Query" ifyes="Query" ifno="">
+		         <param name="In" value="pCondition"></param>
+		         <param name="Out" value="pCondition"></param>
+		       
+		         <param name="Sql" value="college/QryRegionName"></param>
+		  		 </procedure>    
+				<procedure name="Query" logic="Query" ifyes="" ifno=""
+					sync="Y">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="khAdmin/schoolManage/student/QryStudent"></param>
+				</procedure>
+
+			</flow>
+
+			<!-- 查询点击事件 -->
+			<flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
+				<procedure name="jBranch1" logic="Branch" ifyes="Query" ifno="jBranch">
+					<param name="In" value="getPanelControlValue('pCondition.le_createTime')==''"></param>
+				</procedure>
+				<procedure name="jBranch" logic="Branch" ifyes="Query" ifno="InfoMsg">
+					<param name="In" value="getPanelControlValue('pCondition.ge_createTime')&lt;getPanelControlValue('pCondition.le_createTime')"></param>
+				</procedure>
+				<procedure name="Query" logic="Query" ifyes="" ifno=""
+					sync="Y">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="khAdmin/schoolManage/student/QryStudent"></param>
+				</procedure>
+				<procedure name="InfoMsg" logic="InfoMsg" ifyes="" ifno="">
+ 					<param name="Msg" value="创建时间的最早时间应大于最晚时间,请修改"></param>
+ 				</procedure> 
+			</flow>
+			<!-- 新增学生 -->
+			<flow trigger="pToolbar.btnCreate" event="OnClick" filter="">
+				<procedure name="jsgoto" logic="Popup" ifyes="jsquery"
+					ifno="">
+					<param name="To" value="frmStudentNew"></param>
+					<param name="Mode" value="Add"></param>
+					<param name="Window" value="Medium"></param>
+					<param name="Title" value="新增学生" />
+				</procedure>
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition" />
+					<param name="Out" value="pTable" />
+					<param name="Sql" value="khAdmin/schoolManage/student/QryStudent" />
+				</procedure>
+			</flow>
+			<!-- 导入 -->
+			<flow trigger="pToolbar.btnImport" event="OnClick" filter="">
+				<!-- <procedure name="importbat" logic="BatchImport" ifyes=""
+					ifno="">
+					<param name="In" value="frmStudentImport.pForm"></param>
+					<param name="DAOPlugin" value="importStudentRolePlugin" />
+					<param name="Title" value="批量导入学生"></param>
+					<param name="Foreign" value="schoolId|t_school.name|school"></param>
+					<param name="Dict" value="eq_sex|ListDictSex,gradeName|ListDictGrade"></param>
+					<param name="Window" value="Large"></param>
+				</procedure> -->
+				 <procedure name="jspopup" server="" logic="Popup" ifyes="jsquery" ifno="">
+						<param name="To" value="frmStudentImportA"></param>
+						<param name="Mode" value="Add"></param>
+						<param name="Window" value="Large"></param>
+						<param name="Title" value="批量导入学生"></param>
+				  </procedure>
+			     <procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition" />
+					<param name="Out" value="pTable" />
+					<param name="Sql" value="khAdmin/schoolManage/student/QryStudent" />
+				</procedure>
+			</flow>
+			<!-- 编辑 -->
+			<flow trigger="pTable.ctlEdit" event="OnClick" filter="">
+				<procedure name="jsencodeid" server="" logic="EncodeId"
+					ifyes="jspopup" ifno="">
+					<param name="In" value="pTable.id"></param>
+				</procedure>
+				<procedure name="jspopup" logic="Popup" ifyes="jsquery"
+					ifno="">
+					<param name="To" value="frmStudentNew" />
+					<param name="Mode" value="Edit" />
+					<param name="Window" value="Medium" />
+					<param name="Title" value="编辑" />
+				</procedure>
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition" />
+					<param name="Out" value="pTable" />
+					<param name="Sql" value="khAdmin/schoolManage/student/QryStudent" />
+				</procedure>
+			</flow>
+
+			<!--删除 -->
+			<flow trigger="pTable.ctlDel" event="OnClick" filter="">
+				<procedure name="j0" server="" logic="ConfirmMsg" ifyes="j1"
+					ifno="">
+					<param name="Title" value="删除提示" />
+					<param name="Msg" value="确认删除当前学生吗?" />
+				</procedure>
+				<procedure name="j1" server="" logic="EncodeId" ifyes="j2"
+					ifno="">
+					<param name="In" value="pTable.id" />
+				</procedure>
+				<procedure name="j2" logic="SaveCustom" ifyes="j3" ifno="">
+					<param name="In" value="pTable" />
+					<param name="Plugin" value="deleteStudentService" />
+					<param name="Sql" value="khAdmin/schoolManage/student/DelStudent"/>
+					<param name="Msg" value="'已删除'" />
+				</procedure>
+				<procedure name="j3" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition" />
+					<param name="Out" value="pTable" />
+					<param name="Sql" value="khAdmin/schoolManage/student/QryStudent" />
+				</procedure>
+			</flow>
+			<!--点击详情 -->
+			<flow trigger="pTable.lk_name" event="OnClick" filter="">
+				<procedure name="annEncodeId" logic="EncodeId" ifyes="j1"
+					ifno="">
+					<param name="In" value="pTable.id"></param>
+				</procedure>
+				<procedure name="j1" logic="Transition" ifyes="" ifno="">
+					<param name="To" value="frmStudentDetail"></param>
+					<param name="Mode" value="ReadOnly"></param>
+				</procedure>
+			</flow>
+			<!-- 布局 -->
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale="" />
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pCondition" location="North" scale="" />
+					<subregion panel="pTable" location="Center" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

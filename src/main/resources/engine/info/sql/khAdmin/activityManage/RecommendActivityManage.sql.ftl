@@ -1,0 +1,1 @@
+update t_activity set recommend_flag = 1 where #{data.id} = id

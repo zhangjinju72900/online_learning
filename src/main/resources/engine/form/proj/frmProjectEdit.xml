@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmProjectEdit" title="项目编辑">
+            <panel name="pnlInfo" title="项目信息" object="project" type="Group">
+                <control name="id" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+                <control name="name" title="项目名称" property="name" type="TextBox" edit="Y" required="Y" format="" width="1" height="1" column="1"/>
+                <control name="codeRepoUrl" title="代码库URL" property="codeRepoUrl" type="TextBox"  edit="Y" format="" width="1" height="2" column="1"/>
+                <control name="description" title="描述" property="description" type="TextBox"  edit="Y" format="" width="1" height="5" column="1"/>
+                <control name="projectManagerName" title="开发经理" property="projectManagerName" type="PopupBox"  edit="Y" required="Y" format="" width="1" height="1" column="1"/>
+                <control name="projectManager" title="开发经理Id" property="projectManager" type="Hidden"  edit="Y" format="" width="1" height="1" column="1"/>
+                <control name="productManagerName" title="产品经理" property="productManagerName" type="PopupBox"  edit="Y" format="" width="1" height="1" column="1"/>
+                <control name="productManager" title="产品经理Id" property="productManager" type="Hidden"  edit="Y" format="" width="1" height="1" column="1"/>
+                <control name="testManagerName" title="测试经理" property="testManagerName" type="PopupBox"  edit="Y" required="Y" format="" width="1" height="1" column="1"/>
+                <control name="testManager" title="测试经理Id" property="testManager" type="Hidden"  edit="Y" format="" width="1" height="1" column="1"/>
+
+                <control name="status" title="状态" property="status" type="Hidden" target="editMode=='Add'?'open':nil"  edit="Y" format="" width="1" height="1" column=""/>
+                <control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column=""  />
+                <control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />
+                <control name="createTime" title="创建日期" property="createTime" type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():nil" format="" width="1" height="1" column=""  />
+                <control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="editMode=='Add'?session.userInfo.empId:nil" format="" width="1" height="1" column=""  />
+            </panel>
+
+            <panel name="pnlToolbar" title="工具条" object="" type="Toolbar">
+                <control name="ctlSave" title="确认" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+            </panel>
+
+            <flow trigger="" event="OnLoad" filter="" >
+                <procedure name="procBranch" server="" logic="Branch" ifyes="procDecodeId" ifno="">
+                    <param name="In" value="getEditMode()=='Edit'"></param>
+                </procedure>
+                <procedure name="procDecodeId" server="" logic="DecodeId" ifyes="proQid" ifno="">
+                    <param name="Out" value="pnlInfo.id"></param>
+                </procedure>
+                <procedure name="proQid"  logic="QueryById" ifyes="" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Out" value="pnlInfo"></param>
+                    <param name="Sql" value="QryProjList"></param>
+                </procedure>
+
+            </flow>
+
+            <flow trigger="pnlToolbar.ctlSave" event="OnClick" filter="" >
+                <procedure name="procSave"  logic="Save" ifyes="procClose" ifno="">
+                    <param name="In" value="pnlInfo"></param>
+                    <param name="Msg" value="'项目'+model.name+'的信息已被保存，详情请查看操作日志'"></param>
+                </procedure>
+                <procedure name="procClose" server="" logic="Close" ifyes="" ifno="">
+                    <param name="Refresh" value="true"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlCancel" event="OnClick" filter="">
+                <procedure name="procClose" server="" logic="Close" ifyes="" ifno="">
+                    <param name="Refresh" value="false"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlInfo.productManagerName" event="OnClick" filter="">
+                <procedure name="procPMFind"  logic="Find" ifyes="" ifno="">
+                    <param name="Out" value="pnlInfo"></param>
+                    <param name="Sql" value="ProjectEmp"></param>
+                    <param name="Title" value="选择产品经理"></param>
+                    <param name="Options" value="$RESET,重置"/>
+                    <param name="Columns" value="id,人员姓名,productManager,0|name,人员姓名,productManagerName|code,人员编码,ctlEmpCode|orgName,所属部门,ctlOrgName1"></param>
+                    <param name="Window" value="Large"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlInfo.projectManagerName" event="OnClick" filter="">
+                <procedure name="procPMFind"  logic="Find" ifyes="" ifno="">
+                    <param name="Out" value="pnlInfo"></param>
+                    <param name="Sql" value="ProjectEmp"></param>
+                    <param name="Title" value="选择开发经理"></param>
+                    <param name="Options" value="$RESET,重置"/>
+                    <param name="Columns" value="id,人员姓名,projectManager,0|name,人员姓名,projectManagerName|code,人员编码,ctlEmpCode|orgName,所属部门,ctlOrgName1"></param>
+                    <param name="Window" value="Large"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlInfo.testManagerName" event="OnClick" filter="">
+                <procedure name="procPMFind"  logic="Find" ifyes="" ifno="">
+                    <param name="Out" value="pnlInfo"></param>
+                    <param name="Sql" value="ProjectEmp"></param>
+                    <param name="Title" value="选择测试经理"></param>
+                    <param name="Options" value="$RESET,重置"/>
+                    <param name="Columns" value="id,人员姓名,testManager,0|name,人员姓名,testManagerName|code,人员编码,ctlEmpCode|orgName,所属部门,ctlOrgName1"></param>
+                    <param name="Window" value="Large"></param>
+                </procedure>
+            </flow>
+
+        <layout>
+            <region location ="Center" scale="">
+                <subregion panel="pnlInfo" location="Center" scale="" />
+            </region>
+            <region location ="South" scale="">
+                <subregion panel="pnlToolbar" location="South" scale="" />
+            </region>
+        </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

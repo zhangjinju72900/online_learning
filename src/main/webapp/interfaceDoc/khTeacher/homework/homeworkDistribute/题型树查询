@@ -1,0 +1,17 @@
+UI名称		从题库选择-题型树查询（frmQuestionList）
+
+tokenKey	 OnLoad__frmQuestionList_tree
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{}
+
+返回示例
+"data":		
+		{"pid":"36",		--题型父id
+		"id":39,		--题型id
+		"text":"小学语文"}	--题型名称
+		

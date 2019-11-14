@@ -1,0 +1,1 @@
+select role_id as roleId from t_customer_user_role where customer_user_id = #{data.userId}

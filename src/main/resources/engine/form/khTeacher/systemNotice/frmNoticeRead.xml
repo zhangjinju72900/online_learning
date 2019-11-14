@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmNoticeRead" title="查看通知">
+	<panel name="pForm" title="编辑" object="notice" type="Group">
+		<control name="eq_id" title="通知id" property="id" type="Hidden" edit="" required="" format="" width="1" height="1" column="2"/>
+		<control name="title" title="标题" property="title" type="TextBox" edit="N" required="N" format="" width="2" height="1" column="2"/>
+   		<control name="context" title="内容" property="context" type="TextBox" edit="N"  required="N" format="" width="2" height="3" column="2"  />
+		<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="N"  required="N" target=""  format="" width="1" height="1" column="2"  />
+		<control name="fileId" title="附件ID" property="fileId" type="TextBox" edit="N"  required="N" format="" width="1" height="1" column="2"  />
+		<control name="headPic" title="headPic" property="headPic" type="TextBox" edit="N"  required="N" format="" width="1" height="1" column="2"  />
+		<control name="releaseName" title="releaseName" property="releaseName" type="TextBox" edit="N"  required="N" format="" width="1" height="1" column="2"  />
+		<control name="releaseTime" title="releaseTime" property="releaseTime" type="TextBox" edit="N"  required="N" format="" width="1" height="1" column="2"  />
+		<control name="fileName" title="附件名称" property="fileName" type="TextBox" edit="N"  required="N" format="" width="1" height="1" column="2"  />
+		<control name="ossKey" title="osskey" property="ossKey" type="TextBox" edit="N"  required="N" format="" width="1" height="1" column="2"  />
+		<control name="bucketName" title="bucketName" property="bucketName" type="TextBox" edit="N"  required="N" format="" width="1" height="1" column="2"  />
+		<control name="className" title="班级名称" property="className" type="TextBox" edit="N"  required="N" format="" width="1" height="1" column="2"  />
+		<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="N"  required="" initial="" target=""  format="" width="1" height="1" column="2"  />
+		<control name="updateTime" title="更新时间" property="updateTime" type="Hidden" edit="N"  required="N" target=""  format="" width="1" height="1" column="2"  />
+		<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="N"  required="N" target=""  format="" width="1" height="1" column="2"  />
+	</panel>
+	<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+		<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+	</panel>
+	
+	<!-- 加载 -->
+    <flow trigger="" event="OnLoad" filter="" >
+    	<procedure name="jClear"  logic="Clear" ifyes="j1" ifno="" sync="Y">
+        	<param name="Out" value="pForm"></param>
+    	</procedure>
+        <procedure name="j1" logic="DecodeId" ifyes="qid" ifno="">
+			<param name="Out" value="pForm.eq_id" />
+		</procedure> 
+		<procedure name="qid"  logic="QueryById" ifyes="" ifno="">
+			<param name="In" value="pForm" />
+			<param name="Out" value="pForm" />
+			<param name="Sql" value="khTeacher/systemNotice/QryNoticeDetails" />
+		</procedure>
+	</flow>
+    <!-- 取消 -->
+    <flow trigger="pButton.cancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>	
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="pButton" location="South" scale="" />
+      </region>
+      <region location ="Center" scale="">
+        <subregion panel="pForm" location="Center" scale="" />
+      </region>      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

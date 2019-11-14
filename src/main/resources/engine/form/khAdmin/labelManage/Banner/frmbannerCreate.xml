@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmbannerCreate" title="新增">
+	<panel name="pForm" title="新增" object="Banner" type="Group">
+	<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="1" column="2"/>
+		<control name="fileId" title="文件ID" property="fileId" type="Hidden" edit="" required="" format="" width="1" height="1" column="2"/>
+			<control name="file" title="文件名称" property="filename" type="FileBox" edit="" required="Y" format="" width="1" height="1" column="2"/>
+        <control name="type" title="类型" property="type" type="ComboBox" edit="Y" required="" format="" width="1" height="1" column="2"/>
+		 <control name="showorder" title="显示顺序" property="showorder" type="TextBox" edit="Y" required="" format="" width="1" height="1" column="2"/>
+	     <control name="aLink" title="链接" property="aLink" type="TextBox" edit="Y" required="" format="" width="1" height="3" column="2"/>
+	      <control name="createTime" title="创建时间" property="createTime" type="Hidden" edit=""  required="N"  target="CurrentTime()" format="" width="1" height="1" column="2"  />
+	    <control name="createby" title="创建人" property="createby" type="Hidden" edit=""  required="N" target="session.userInfo.empId"  format="" width="1" height="1" column="2"  />
+	    <control name="updateTime" title="修改时间" property="updateTime" type="Hidden" edit=""  required="N"  target="CurrentTime()" format="" width="1" height="1" column="2"  />
+	    <control name="updateby" title="修改人" property="updateby" type="Hidden" edit=""  required="N" target="session.userInfo.empId"  format="" width="1" height="1" column="2"  />
+	</panel>
+	<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+		<control name="save" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+		<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+	</panel>
+	
+	<!-- 加载 -->
+    <flow trigger="" event="OnLoad" filter="" >
+    <procedure name="jClear"  logic="Clear" ifyes="Listtype" ifno="" sync="Y">
+         <param name="Out" value="pForm"></param>
+    </procedure>
+      
+          <!-- list逻辑 -->
+
+       <procedure name="Listtype"  logic="List" ifyes="" ifno="" sync="Y">
+         <param name="Out" value="pForm.type"></param>
+         <param name="Sql" value="khAdmin/lableManage/banner/Listbannertype"></param>
+     </procedure>  
+       
+     
+   
+      
+      
+	</flow>
+    
+    <flow trigger="pForm.file" event="OnClick" filter="">
+      <procedure name="fileUpload" server="" logic="Upload" ifyes="" ifno="">
+        <param name="Size" value="1000000"></param>
+        <param name="Type" value="png"></param>
+        <param name="Bucket" value="public"></param>
+        <param name="Out" value="pForm.fileId"></param>
+          </procedure>
+    </flow>
+    
+
+       <!-- 保存 -->
+    <flow trigger="pButton.save" event="OnClick" filter="" defaultEnter="Y">
+      <procedure name="jssave"  logic="Save" ifyes="jsclose" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Msg" value="'已保存'"></param>
+        <param name="Plugin" value="insertAppUpdateVersionPlugin"/>
+      </procedure>
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>	
+    
+    <!-- 取消 -->
+    <flow trigger="pButton.cancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>	
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="pButton" location="South" scale="" />
+      </region>
+      <region location ="Center" scale="">
+        <subregion panel="pForm" location="Center" scale="" />
+      </region>      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

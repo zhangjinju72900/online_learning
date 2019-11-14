@@ -1,0 +1,26 @@
+insert into t_lesson_step
+(
+lesson_plan_id,
+name,
+teaching_count,
+teaching_content,
+teaching_assist,
+teaching_method,
+create_time,
+create_by,
+update_time,
+update_by
+)
+values
+(
+#{data.planId},
+#{data.bzname},
+#{data.teachingCount},
+#{data.steachingContent},
+#{data.teachingAssist},
+#{data.teachingMethod},
+now(),
+#{data.session.userInfo.userId},
+now(),
+#{data.session.userInfo.userId}
+)

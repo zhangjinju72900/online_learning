@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmAttendClassPage" title="标签页面">
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="resourcesList" title="资源列表" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="back" title="返回" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+
+			<panel name="pCondition" title="查询条件" object="attendClass" type="Group">
+				<control name="attendClassRecordId" title="attendClassRecordId" property="attendClassRecordId"
+						 type="Hidden"
+						 edit="N" required="N" format="" width="1" height="1" column=""/>
+				<control name="schoolId" title="学校" property="schoolId" type="Hidden"
+						 edit="N" required="N" format="" width="1" height="1" column=""/>
+				<control name="classId" title="选择班级" property="classId" type="TextBox"
+						 edit="N" required="N" format=""  width="1" height="1" column=""/>
+				<control name="courseId" title="选择课程" property="courseId" type="TextBox"
+						 edit="N" required="N" format=""  width="1" height="1" column=""/>
+				<control name="sectionId" title="选择课程任务" property="sectionId" type="TextBox"
+						 edit="N" required="N" format="" width="1" height="1" column="3"/>
+			</panel>
+			<panel name="pHidden" title="查询条件" object="LabelList" type="Hidden">
+				<control name="id" title="labelId" property="id" type="Hidden"
+						 edit="" required="" format="" width="1" height="" column=""/>
+				<control name="courseId" title="课程id" property="courseId" type="Hidden"
+						 edit="N" required="N" format=""  width="1" height="1" column=""/>
+						 
+				<control name="sectionId" title="任务id" property="sectionId" type="Hidden"
+						 edit="N" required="N" format=""  width="1" height="1" column=""/>		 
+			</panel>
+			<panel name="pTable1" title="查询结果" object="LabelList" type="Grid">
+				<control name="id" title="labelId" property="id" type="Hidden"
+						 edit="" required="" format="" width="1" height="" column=""/>
+				<control name="courseId" title="课程id" property="courseId" type="Hidden"
+						 edit="N" required="N" format=""  width="1" height="1" column=""/>
+				<control name="sectionId" title="任务id" property="sectionId" type="Hidden"
+						 edit="N" required="N" format=""  width="1" height="1" column=""/>		 
+						 
+				<control name="resource" title="查看资源" property="" type="Link"
+						 edit="" required="" format="" width="100" height="" column=""/>
+				<control name="text" title="标签名称" property="text" type="TextBox"
+						 edit="" required="" format="" width="100" height="" column=""/>
+				<control name="showOrder" title="显示顺序" property="showOrder" type="TextBox"
+						 edit="" required="" format="" width="100" height="" column=""/>
+				<control name="defaultOrder" title="显示顺序" property="defaultOrder" type="TextBox"
+						 edit="" required="" format="" width="100" height="" column=""/>
+			</panel>
+			<panel name="pTable2" title="查询结果" object="LabelList" type="Grid">
+				<control name="id" title="labelId" property="resourcesId" type="Hidden"
+						 edit="" required="" format="" width="1" height="" column=""/>
+				<control name="courseResName" title="资源名称" property="courseResName" type="TextBox"
+						 edit="" required="" format="" width="100" height="" column=""/>
+			</panel>
+
+			<!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="jClear" logic="Clear" ifyes="j1" ifno=""
+						   sync="Y">
+					<param name="Out" value="pCondition"/>
+				</procedure>
+				<procedure name="j1" server="" logic="DecodeId" ifyes="queryClassId" ifno="">
+					<param name="Out" value="pCondition.attendClassRecordId"/>
+				</procedure>
+				<procedure name="queryClassId" logic="Query" ifyes="queryLabel" ifno="">
+					<param name="In" value="pCondition"/>
+					<param name="Out" value="pCondition"/>
+					<param name="Sql" value="khTeacher/attendClass/QryClassId"/>
+				</procedure>
+
+				<procedure name="queryLabel" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition"/>
+					<param name="Out" value="pTable1"/>
+					<param name="Sql" value="khTeacher/attendClass/QryLabelList"/>
+				</procedure>
+			</flow>
+
+			<flow trigger="pTable1.resource" event="OnClick" filter="">
+				<procedure name="js" server="" logic="EncodeId" ifno="" ifyes="j1" sync="Y">
+					<param name="In" value="pTable1.id"/>
+				</procedure>
+				<procedure name="j1" server="" logic="DecodeId" ifyes="js1" ifno="">
+					<param name="Out" value="pHidden.id"/>
+				</procedure>
+				<procedure name="js1" server="" logic="EncodeId" ifno="" ifyes="j2" sync="Y">
+					<param name="In" value="pTable1.courseId"/>
+				</procedure>
+				<procedure name="j2" server="" logic="DecodeId" ifyes="j3" ifno="">
+					<param name="Out" value="pHidden.courseId"/>
+				</procedure>
+				
+				<procedure name="j3" server="" logic="EncodeId" ifno="" ifyes="j4" sync="Y">
+					<param name="In" value="pTable1.sectionId"/>
+				</procedure>
+				<procedure name="j4" server="" logic="DecodeId" ifyes="queryLabel" ifno="">
+					<param name="Out" value="pHidden.sectionId"/>
+				</procedure>
+				
+				<procedure name="queryLabel" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pHidden"/>
+					<param name="Out" value="pTable2"/>
+					<param name="Plugin" value="qryResourceDetailPlugin"/>
+					<param name="Sql" value="khTeacher/attendClass/QryResourcesList"/>
+				</procedure>
+			</flow>
+
+			<!-- 资源列表 -->
+			<flow trigger="pToolbar.resourcesList" event="OnClick" filter="">
+				<procedure name="jsencodeid" server="" logic="EncodeId"
+						   ifyes="jspopup" ifno="">
+					<param name="In" value="pCondition.courseId"></param>
+				</procedure>
+				<procedure name="jspopup" logic="Popup" ifyes="jsquery"
+						   ifno="">
+					<param name="To" value="frmResourcesList" />
+					<param name="Mode" value="ReadOnly" />
+					<param name="Window" value="Medium" />
+					<param name="Title" value="资源列表" />
+				</procedure>
+			</flow>
+
+			<!-- 返回 -->
+			<flow trigger="pToolbar.back" event="OnClick" filter="">
+				<procedure name="proTransition" server="/frmAttendClass" logic="Back" ifyes="" ifno="">
+					<param name="To" value="frmAttendClass"/>
+				</procedure>
+			</flow>
+
+
+			<!-- 布局 -->
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale=""/>
+					<subregion panel="pHidden" location="Center" scale=""/>
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pCondition" location="North" scale=""/>
+					<subregion panel="pTable1" location="Center" scale="30%"/>
+					<subregion panel="pTable2" location="East" scale="70%"/>
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <model_layer>
+        <object name="changeApply" table="t_change_apply" primary="id" unique="id" order="">
+            <property name="id" type="Long" length="20" initial="" field="id"/>
+            <property name="title" type="String" length="200" initial="" field="title"/>
+            <property name="projId" type="Long" length="20" initial="" field="proj_id"/>
+            <property name="projectName" type="String" length="20" initial="" field=""/>
+            <property name="applicant" type="String" length="20" initial="" field="applicant"/>
+            <property name="applyDate" type="Date" initial="" field="apply_date"/>
+            <property name="completeDate" type="Date" initial="" field="complete_date"/>
+            <property name="issueCount" type="Long" initial="" field=""/>
+            <property name="fileCount" type="Long" initial="" field=""/>
+
+            <property name="changeReason" type="String" length="200" initial="" field="change_reason"/>
+            <property name="changeContent" type="String" length="500" initial="" field="change_content"/>
+            <property name="changePlan" type="String" length="500" initial="" field="change_plan"/>
+            <property name="updateBy" type="Long" length="10" validate="" field="update_by"/>
+            <property name="updateByName" type="String" length="50" validate="" field=""/>
+            <property name="createBy" type="Long" length="10" validate="" field="create_by"/>
+            <property name="createByName" type="String" validate="" field=""/>
+            <property name="updateTime" type="Date" length="" validate="" field="update_time"/>
+            <property name="createTime" type="Date" length="" validate="" field="create_time"/>
+            <property name="auditResult" type="String" length="200" initial="" field="audit_Result"/>
+
+        </object>
+        <object name="changeFile" table="t_change_apply_file" primary="id" unique="id" order="">
+            <property name="id" type="Long" length="20" initial="" field="id"/>
+            <property name="changeId" type="Long" length="20" initial="" field="change_id"/>
+            <property name="fileName" type="String" length="" field=""/>
+            <property name="fileId" type="Long" length="20" initial="" field="file_Id"/>
+            <property name="remark" type="String" length="200" validate="" field="remark"/>
+            <property name="updateBy" type="Long" length="10" validate="" field="update_by"/>
+            <property name="updateByName" type="String" length="50" validate="" field=""/>
+            <property name="createBy" type="Long" length="10" validate="" field="create_by"/>
+            <property name="createByName" type="String" validate="" field=""/>
+            <property name="updateTime" type="Date" length="" validate="" field="update_time"/>
+            <property name="createTime" type="Date" length="" validate="" field="create_time"/>
+        </object>
+        <object name="changeIssue" table="t_change_apply_issue" primary="id" unique="id" order="">
+            <property name="id" type="Long" length="20" initial="" field="id"/>
+            <property name="changeId" type="Long" length="20" initial="" field="change_id"/>
+            <property name="issueId" type="Long" length="20" initial="" field="issue_Id"/>
+            <property name="issueName" type="String" length="" initial="" field=""/>
+            <property name="assignee" type="String" length="" initial="" field=""/>
+            <property name="reporter" type="String" length="" initial="" field=""/>
+            <property name="updateBy" type="Long" length="10" validate="" field="update_by"/>
+            <property name="updateByName" type="String" length="50" validate="" field=""/>
+            <property name="createBy" type="Long" length="10" validate="" field="create_by"/>
+            <property name="createByName" type="String" validate="" field=""/>
+            <property name="updateTime" type="Date" length="" validate="" field="update_time"/>
+            <property name="createTime" type="Date" length="" validate="" field="create_time"/>
+        </object>
+         <object name="changeView" table="t_module" primary="id" unique="id" order="">
+             <property name="id" type="Long" length="20" initial="" field="id"/>
+             <property name="changeId" type="Long" length="20" initial="" field=""/>
+             <property name="name" type="String" length="50" initial="" field="name"/>
+	
+             <property name="createTime" type="Date" length="" validate="" field="createTime"/>
+         	<property name="createBy" type="Long" length="50" validate="" field="createBy"/>
+         	<property name="updateTime" type="Date" length="" validate="" field="updateTime"/>
+         	<property name="updateBy" type="Long" length="50" validate="" field="updateBy"/>
+         	<property name="remark" type="String" length="4000" initial="" field="remark"/>
+         </object>
+    </model_layer>
+    <ui_layer>
+        <ui name="frmChangeApplyList" title="变更申请表列表">
+            <panel name="pnlToolbar" title="工具条" object="" type="Toolbar">
+                <control name="ctlSearch" title="查询" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlClear" title="清空条件" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlAdd" title="新增变更申请表" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+
+                <control name="ctlExport" title="导出清单" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+            </panel>
+            <panel name="pnlCondition" title="查询条件" object="changeApply" type="Group">
+                <control name="eq_projId" title="项目Id" property="projId" type="Hidden" edit="N" required="N" format=""
+                         width="1" height="1" column=""/>
+                <control name="projName" title="项目" property="projectName" type="PopupBox" edit="Y" required=""
+                         format=""
+                         width="1" height="1" column=""/>
+
+                <control name="lk_applicant" title="申请人" property="applicant" type="TextBox" edit="Y" required="N"
+                         format=""
+                         width="1" height="1" column=""/>
+                <control name="lk_title" title="标题" property="title" type="TextBox" edit="Y" required=""
+                         format=""
+                         width="2" height="1" column="4"/>
+                <control name="ge_applyDate" title="申请日期从" initial="" property="applyDate" type="DateBox"
+                         edit="Y" required="N"
+                         format="" width="1" height="1" column=""/>
+                <control name="dl_applyDate" title="至" property="applyDate" initial="" type="DateBox"
+                         edit="Y" required="N"
+                         format="" width="1" height="1" column=""/>
+                <control name="ge_completeDate" title="完成日期从" initial="" property="completeDate"
+                         type="DateBox" edit="Y" required="N"
+                         format="" width="1" height="1" column=""/>
+                <control name="dl_completeDate" title="至" property="completeDate" initial="" type="DateBox"
+                         edit="Y" required="N"
+                         format="" width="1" height="1" column="4"/>
+            </panel>
+            <panel name="pnlList" title="查询结果" object="changeApply" type="Grid">
+                <control name="ctlEdit" title="编辑" property="" type="Link" edit="" required="" format="" width="70"
+                         height="" column=""/>
+                <control name="ctlDelete" title="删除" property="" type="Link" edit="" required="" format="" width="70"
+                         height="" column=""/>
+                <control name="ctlId" title="编号" property="id" type="DataLink" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlName" title="项目名称" property="projectName" type="TextBox" edit="" required=""
+                         format=""
+                         width="200" height="" column=""/>
+                <control name="ctlApplicant" title="申请人" property="applicant" type="TextBox" edit="" required=""
+                         format=""
+                         width="60" height="" column=""/>
+                <control name="ctlApplyDate" title="申请时间" property="applyDate" type="TextBox" edit="" required="N"
+                         format="" width="100" height="1" column=""/>
+                <control name="ctlCompleteDate" title="要求完成时间" property="completeDate" type="TextBox" edit=""
+                         required="N"
+                         format="" width="100" height="1" column=""/>
+                <control name="ctlTitle" title="标题" property="title" type="TextBox" edit="" required=""
+                         format=""
+                         width="200" height="" column=""/>
+                <control name="ctlAuditResult" title="审批结果" property="auditResult" type="TextBox" edit="" required=""
+                         format=""
+                         width="80" height="" column=""/>
+                <control name="ctlFileCount" title="相关附件记录数" property="fileCount" type="TextBox" edit="" required="" format="" width="120" height="" column=""/>
+                <control name="ctlIssueCount" title="相关附件记录数" property="issueCount" type="TextBox" edit="" required="" format="" width="120" height="" column=""/>
+
+
+                <control name="createBy" title="创建人" property="createByName" type="TextBox" edit="" required="N"
+                         format="" width="100" height="1" column=""/>
+                <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="" required="N"
+                         format="" width="140" height="1" column=""/>
+                <control name="updateBy" title="最后修改人" property="updateByName" type="TextBox" edit="" required="N"
+                         format="" width="100" height="1" column=""/>
+                <control name="updateTime" title="最后修改时间" property="updateTime" type="TextBox" edit="" required="N"
+                         format="" width="140" height="1" column=""/>
+            </panel>
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="procClear" logic="Clear" ifyes="procQuery" ifno="" sync="Y">
+                    <param name="Out" value="pnlCondition"></param>
+                </procedure>
+                <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="proj/QryChangeApplyList"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlSearch" event="OnClick" filter="">
+                <procedure name="proQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="proj/QryChangeApplyList"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlClear" event="OnClick" filter="">
+                <procedure name="procClear" logic="Clear" ifyes="" ifno="">
+                    <param name="Out" value="pnlCondition"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlExport" event="OnClick" filter="">
+
+                <procedure name="procExport" logic="Export" ifyes="" ifno="">
+                    <param name="Format" value="pnlList"></param>
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Sql" value="proj/QryChangeApplyList"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlAdd" event="OnClick" filter="">
+                <procedure name="procPopup" logic="Popup" ifyes="procQuery" ifno="">
+                    <param name="To" value="frmChangeApplyEdit"></param>
+                    <param name="Mode" value="Add"></param>
+                    <param name="Window" value="Large"></param>
+                    <param name="Title" value="新增变更"></param>
+                </procedure>
+                <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="proj/QryChangeApplyList"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlList.ctlEdit" event="OnClick" filter="WorkflowState('frmChangeApplyView_'+row.id,'NotStart')">
+                <procedure name="procEncodeId" server="" logic="EncodeId" ifyes="procPopup" ifno="">
+                    <param name="In" value="pnlList.id"></param>
+                    <param name="Mode" value="onClick"></param>
+                </procedure>
+                <procedure name="procPopup" logic="Popup" ifyes="procQuery" ifno="">
+                    <param name="To" value="frmChangeApplyEdit"></param>
+                    <param name="Mode" value="Edit"></param>
+                    <param name="Window" value="Large"></param>
+                    <param name="Title" value="编辑变更申请"></param>
+                </procedure>
+                <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="proj/QryChangeApplyList"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.ctlDelete" event="OnClick" filter="WorkflowState('frmChangeApplyView_'+row.id,'NotStart')">
+                <procedure name="procConfirm" server="" logic="ConfirmMsg" ifyes="procDelete" ifno="">
+                    <param name="Title" value="删除变更"></param>
+                    <param name="Msg" value="确认删除当前记录吗?"></param>
+                </procedure>
+                <procedure name="procDelete" logic="Delete" ifyes="procQuery" ifno="">
+                    <param name="In" value="pnlList"/>
+                    <param name="Cascade" value="t_change_apply_file.change_id;t_change_apply_issue.change_id" />
+                    <param name="Msg" value="变更申请表已删除"/>
+                </procedure>
+                <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="proj/QryChangeApplyList"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.ctlId" event="OnClick" filter="">
+                <procedure name="procEncodeId" server="" logic="EncodeId" ifyes="procTransition" ifno="">
+                    <param name="In" value="pnlList.id"></param>
+                    <param name="Mode" value="onClick"></param>
+                </procedure>
+                <procedure name="procTransition" logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmChangeApplyView"></param>
+                    <param name="Mode" value="Readonly"></param>
+                </procedure>
+
+            </flow>
+            <!--查询项目-->
+            <flow trigger="pnlCondition.projName" event="OnClick" filter="">
+                <procedure name="procProjectFind" logic="Find" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition.eq_projId"></param>
+                    <param name="Out" value="pnlCondition"></param>
+                    <param name="Sql" value="Project"></param>
+                    <param name="Title" value="项目选择"></param>
+                    <param name="Columns" value="id,编码,eq_projId|name,项目名称,projName"></param>
+                    <param name="Window" value="Large"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.ctlName" event="OnClick" filter="">
+                <procedure name="procEncodeId" server="" logic="EncodeId" ifyes="procTransition" ifno="">
+                    <param name="In" value="pnlList.id"></param>
+                    <param name="Mode" value="onClick"></param>
+                </procedure>
+                <procedure name="procTransition" server="/frmChangeApplyView" logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmProjectView"></param>
+                    <param name="Mode" value="Readonly"></param>
+                </procedure>
+            </flow>
+
+            <layout>
+                <region location="North" scale="">
+                    <subregion panel="pnlToolbar" location="North" scale=""/>
+                </region>
+                <region location="Center" scale="">
+                    <subregion panel="pnlCondition" location="North" scale=""/>
+                    <subregion panel="pnlList" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

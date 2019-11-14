@@ -1,0 +1,124 @@
+.xml-教师端接口-系统通知
+
+UI名称      系统通知-查询接口(frmSysNotice)
+tokenKey    OnClick_pToolbar_btnSearch1_frmSysNotice_jsquery
+接口地址 api/query
+接口类型 POS
+参数示例 
+	"data":{
+    	"lk_title":"" --标题
+	}
+返回示例 
+"data":{ 
+	baseId: 8				--baseId
+	context: "测试系统通知sql"		--内容
+	id: 284            			--id
+	readFlag: 1			--已读数量
+	receiverId: 2			--接受者id
+	releaseTime: "2019-01-04 09:15:51"   	--发布时间
+	sendTime: "2019-01-04 09:14:47"	--发送时间
+	sendType: 20		--发送类型
+	senderId: 2	              --发送者id
+	title: "系统通知测试"		--标题
+	validFlag: 0    
+}
+
+UI名称  系统通知-查看详情(frmNoticeRead)
+tokenKey  OnClick_pTable1_title_frmSysNotice_jspop
+接口地址 api/querybyid
+接口类型 POST
+参数示例 
+	"data":{
+    	"eq_id":"8"   --通知id
+	}
+返回示例 
+"data":{ 
+	context: "测试系统通知sql"	--内容
+	eq_id: 8		--id
+	fileId: null	      	
+	title: "系统通知测试"     --标题
+}
+
+
+UI名称		系统通知-查询我发布的通知接口（frmSysNotice）
+tokenKey  	OnClick_pToolbar_btnSearch3_frmSysNotice_jsquery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+    "lk_title":"" --标题
+}
+
+返回示例
+
+data: {
+	total: 23, -总数
+	rows: [
+		baseId: 11      ------baseId           
+		className: "2018级互联网+"   ----班级名
+		context: "plugin测试2"      ----通知内容
+		id: 292   ---- t_message_record的id
+		readFlag: 0   --已读数量
+		receiverId: 24965    -----receiverId
+		releaseTime: "2019-01-04 17:36:32"   --发布时间
+		sendTime: "2019-01-04 17:36:32" 
+		sendType: 30   
+		senderId: 2
+		title: "plugin测试2"   -----通知标题  
+	]}
+		
+UI名称		系统通知--查询详情(frmNoticeRead)
+
+tokenKey   OnClick_pTable3_title_frmSysNotice_jspop
+
+接口地址	/api/querybyid
+
+接口类型	POST
+
+参数示例
+"data": 	{
+    "eq_id":"11"    --通知id
+}
+	
+	
+返回实例
+	"data":	{
+	    context: "plugin测试2" ----通知内容
+		eq_id: 11   ----通知id
+		fileId: null   ----附件id
+		title: "plugin测试2"   ---通知标题
+}	
+
+UI名称		系统通知-----发布通知(frmNoticeCreate)
+
+tokenKey    OnClick_pToolbar_btnCreate_frmSysNotice_jsquery
+
+接口地址    /api/savecustom
+
+参数示例
+"data": 	{
+    "base_id":"21"    --通知id
+}
+
+返回实例
+"data":	{
+		base_id: 21      ----通知id
+		create_by: 2
+		create_time: "2018-10-12 15:29:23"
+		id: 29          ------t_message_record的id
+		read_flag: 0    ----已读数量
+		receiver_id: 7   -----receiverId
+		send_time: "2018-10-12 15:29:23"
+		send_type: 0
+		sender_id: 2
+		title: null
+		updateBy: 2
+		updateTime: "2018-10-12 15:29:23"
+		update_by: 2
+		update_time: "2018-10-12 15:29:23"
+		valid_flag: 0	
+
+}

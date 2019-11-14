@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmHomeworkAnswerRst" title="作业结果">
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	
+	<panel name="pForm" title="作业详情" object="homeworkAnswer"  type="Group" multiple="">
+		<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="" column=""/>
+		<control name="answerResult" title="作业成绩" property="answerResult" type="TextBox" edit="" required="" format="" width="1" height="1" column="3"/>
+		<control name="remark" title="教师评语" property="remark" type="TextBox" edit="" required="" format="" width="1" height="1" column="3"/>
+		<control name="finishSpeed" title="完成速度" property="finishSpeed" type="TextBox" edit="" required="" format="" width="1" height="1" column="3"/>
+	</panel>
+  	
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="j1" server="" logic="DecodeId" ifyes="je" ifno="">
+        <param name="Out" value="pForm.id"></param>
+      </procedure> 
+      <procedure name="je"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khApp/study/homework/QryMyHomeWorkResult"></param>
+      </procedure> 
+       
+    </flow>
+   
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmHomeworkAnswer" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmHomeworkAnswer"></param>
+       </procedure>
+      </flow>
+    <layout>
+       <region location ="Center" scale="">
+       <subregion panel="pToolbar" location="North" scale=""/>
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region>
+      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

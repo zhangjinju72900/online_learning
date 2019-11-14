@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+
+	<ui_layer>
+		<ui name="frmPersonalInfoList" title="个人信息">
+			<!-- 工具栏 pToolbar.btnQuery -->
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnQuery" title="查询" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="btnQueryBySchool" title="学校查询" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="btnAddUser" title="学生新增" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+
+			<!-- 查询条件 -->
+			<panel name="pCondition" title="查询条件" object="tCustomerUser"
+				type="Hidden">
+				<control name="eq_userId" title="用户ID" property="id" type="TextBox"
+					edit="Y" required="N" format="" width="1" height="1"
+					initial="session.userInfo.userId" column="" />
+			</panel>
+			
+			<!-- 查询条件 -->
+			<panel name="pConditionSchool" title="查询" object="tCustomerUser" type="Group"
+				multiple="Y">
+				<control name="lk_schoolName" title="学校名称" property="schoolName" type="TextBox"
+					edit="Y" required="N" format="" width="1" height="1"
+					initial="" column="1" />
+			</panel>
+
+
+			<!-- 查询结果 pTable -->
+			<panel name="pTable" title="查询结果" object="tCustomerUser" type="Grid"
+				order="id desc">
+				<control name="ctlEdit" title="编辑" property="" type="Link"
+					edit="" required="" format="" width="80" height="" column="" />
+				<control name="id" title="用户ID" property="id" type="Hidden"
+					edit="" required="" format="" width="80" height="" column="" />
+
+				<control name="name" title="用户" property="name" type="TextBox"
+					edit="" required="" format="" width="80" height="" column="" />
+				<control name="cardNum" title="身份证号码" property="cardNum"
+					type="TextBox" edit="" required="" format="" width="150" height=""
+					column="" />
+				<control name="tel" title="联系方式" property="tel" type="TextBox"
+					edit="" required="" format="" width="150" height="" column="" />
+				<control name="sex" title="性别" property="sex" type="Hidden"
+					edit="" required="" format="" width="80" height="" column="" />
+				<control name="sexName" title="性别" property="sexName" type="TextBox"
+					edit="" required="" format="" width="80" height="" column="" />
+				<control name="schoolId" title="学校ID" property="schoolId"
+					type="Hidden" edit="" required="" format="" width="80" height=""
+					column="" />
+				<control name="schoolName" title="学校名称" property="schoolName"
+					type="TextBox" edit="" required="" format="" width="150" height=""
+					column="" />
+				<control name="classId" title="班级ID" property="classId"
+					type="Hidden" edit="" required="" format="" width="80" height=""
+					column="" />
+				<control name="className" title="班级名称" property="className"
+					type="TextBox" edit="" required="" format="" width="150" height=""
+					column="" />
+			</panel>
+
+			<!--页面逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="j2" logic="Query" ifyes="" ifno="">
+					<!-- <param name="In" value="pCondition"></param> -->
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="zhongdepersonalinfo/QryPersonalInfoList"></param>
+				</procedure>
+			</flow>
+
+			<!-- 查询按钮 pToolbar.btnQuery -->
+			<flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="zhongdepersonalinfo/QryPersonalInfoList"></param>
+				</procedure>
+			</flow>
+			
+			<!-- 查询按钮 pToolbar.btnQueryBySchool -->
+			<flow trigger="pToolbar.btnQueryBySchool" event="OnClick" filter="">
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pConditionSchool"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="zhongdepersonalinfo/QryPersonalInfoByschool"></param>
+				</procedure>
+			</flow>
+
+			<!-- 接口按钮 pToolbar.btnAddUser -->
+    		<flow trigger="pToolbar.btnAddUser" event="OnClick" filter="">
+      			<procedure name="jspopup" logic="Popup" ifyes="" ifno="">
+        			<param name="To" value="frmUserAdd"></param>
+        			<param name="Mode" value="Add"></param>
+        			<param name="Window" value="Medium"></param>
+      			</procedure>
+			</flow>
+
+			<!-- 编辑 -->
+			<flow trigger="pTable.ctlEdit" event="OnClick" filter="">
+				<procedure name="jsencodeid" server="" logic="EncodeId"
+					ifyes="jspopup" ifno="">
+					<param name="In" value="pTable.id"></param>
+				</procedure>
+				<procedure name="jspopup" logic="Popup" ifyes="jsquery"
+					ifno="">
+					<param name="To" value="frmPersonalInfoEdit"></param>
+					<param name="Mode" value="Edit"></param>
+					<param name="Window" value="Large"></param>
+				</procedure>
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="zhongdepersonalinfo/QryPersonalInfoList"></param>
+				</procedure>
+			</flow>
+
+
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale="" />
+					<subregion panel="pConditionSchool" location="South" scale="" />
+					
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pCondition" location="North" scale="" />
+					<subregion panel="pTable" location="Center" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

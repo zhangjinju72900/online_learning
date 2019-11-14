@@ -1,0 +1,1 @@
+update t_ftp_upload_record set execute_result = #{data.result} where id = #{data.id}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<object name="modClassScoreCount" table="t_homework_detail_answer" primary="id" unique="" order="" autoinc="Y">
+		
+		<property name="id" type="String" length="500" initial="" field=""/>
+		<property name="homeworkId" type="String" length="200" initial="" field=""/>
+		<property name="studentId" type="Long" length="20" initial="" field="student_id"/>
+		<property name="homeworkType" type="Long" length="20" initial="" field="homework_type"/>
+		<property name="objectiveScore" type="Long" length="20" initial="" field="objective_score"/>
+		<property name="objectiveRealScore" type="Long" length="20" initial="" field="objective_real_score"/>
+		<property name="subjectiveScoreLevel" type="Long" length="20" initial="" field="subjective_score_level"/>
+	
+		<property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+		<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+		<property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+		<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+		<property name="createDate" type="Long" length="100" initial="" field=""/>
+
+		<property name="homeworkName" type="String" length="100" initial="" field=""/>
+		<property name="classId" type="String" length="100" initial="" field="class_id"/>
+		<property name="score" type="String" length="200" initial="" field=""/>
+		<property name="studentName" type="String" length="100" initial="" field=""/>
+		<property name="distributeTime" type="Date" length="20" initial="" field=""/>
+		
+		
+		</object>
+	
+	
+</model_layer>
+</tsoftware>

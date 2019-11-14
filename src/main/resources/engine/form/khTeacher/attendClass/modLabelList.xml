@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<object name="LabelList" table="t_label" primary="id" unique="" order="">
+
+
+			<property name="id" type="Long" length="20" field="id"/>
+			<property name="name" type="String" length="50" field="name"/>
+			<property name="labelType" type="Long" length="1" field="label_Type"/>
+			<property name="validFlag" type="Long" length="1" field="valid_flag"/>
+			<property name="showOrder" type="Long" length="1" field="show_order"/>
+
+			<property name="defaultOrder" type="Long" length="1"/>
+
+			<property name="text" type="String" length="50" field=""/>
+
+			<property name="courseId" type="Long" length="20"/>
+			<property name="sectionId" type="Long" length="20"/>
+			<property name="resourcesId" type="Long" length="20"/>
+			<property name="courseResName" type="String" length="50" field=""/>
+			<property name="createTime" type="Date" length="" validate=""  field="" />
+			<property name="createBy" type="Long" length="20" field=""/>
+			<property name="updateTime" type="Date" length="" validate=""  field="" />
+			<property name="updateBy" type="Long" length="20" field=""/>
+		</object>
+	</model_layer>
+</tsoftware>

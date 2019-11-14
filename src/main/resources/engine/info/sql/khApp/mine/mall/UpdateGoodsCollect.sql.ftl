@@ -1,0 +1,2 @@
+UPDATE t_goods_collect SET collect_time=now(),collect_count=#{data.collectCount},update_time=now(),update_by=#{data.session.userInfo.userId}
+ WHERE id=#{data.id} and collect_by = #{data.session.userInfo.userId}

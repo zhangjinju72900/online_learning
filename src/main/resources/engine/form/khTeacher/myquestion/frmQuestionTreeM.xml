@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmQuestionTreeM" title="题库分类列表">
+			<panel name="questionTree" object="tree"  type="Tree" multiple="">
+			    <control name="id" title="树id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+			    <control name="pid" title="树父id" property="pid" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+			    <control name="name" title="树节点" property="name" type="DataLink" edit="" required="" format="" width="" height="" column=""/>
+			  </panel>
+			  
+			  <panel name="questionGroup" title="select" object="quesClassify" type="Hidden"  multiple="Y">
+			    <control name="id" title="课程id" property="id" type="Hidden" edit="N" required="" format="" width="1" height="1" column="1"/>
+			    <control name="name" title="课程id" property="name" type="Hidden" edit="N" required="" format="" width="1" height="1" column="1"/>	
+			  </panel>
+			  
+
+			  <panel name="questionTool" title="工具条" object="quesClassify" type="Toolbar">
+			    <control name="save" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column="2" />
+				<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="2" />
+			  </panel>
+			   <!-- 逻辑加载 -->
+			    <flow trigger="" event="OnLoad" filter="">
+			      <procedure name="tree"  logic="Query" ifyes="" ifno="">
+			        <param name="In" value=""></param>
+			        <param name="Out" value="questionTree"></param>
+			        <param name="Sql" value="khTeacher/question/QryClassifyTree"></param>
+			      </procedure>
+			   </flow>
+			   <!-- 樹点击 -->
+			    <flow trigger="questionTree" event="OnClick" filter="" >
+			      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jsdecodeid" ifno="">
+			        <param name="In" value="questionTree.id"></param>
+			      </procedure>
+			      <procedure name="jsdecodeid" server="" logic="DecodeId" ifyes="queryTableQues" ifno="">
+			        <param name="Out" value="questionGroup.id"></param>
+			      </procedure>
+			      <procedure name="queryTableQues" logic="Query" ifyes="" ifno="">
+					<param name="In" value="questionGroup"/>
+					<param name="Out" value="questionGroup"/>
+					<param name="Sql" value="khTeacher/myquestion/QryQuesclaName"/>
+				  </procedure>    	
+			    </flow>
+			    
+			    <!-- 确认 -->
+				<flow trigger="questionTool.save" event="OnClick" filter="" defaultEnter="Y">
+					<procedure name="jBranch" logic="Branch" ifyes="jsclose" ifno="">
+						<param name="In" value="treeSelectOk('questionGroup.id|eq_questionClassifyId','questionGroup.name|questionClassifyName')"/>
+					</procedure>
+	                <procedure name="jsclose" server="" logic="Close" ifyes=""
+						ifno="">
+						<param name="Refresh" value="true"></param>
+					</procedure>
+				</flow>   
+			    
+			    <!-- 取消 -->
+				<flow trigger="questionTool.cancel" event="OnClick" filter="">
+					<procedure name="jsclose" server="" logic="Close" ifyes=""
+						ifno="">
+						<param name="Refresh" value="true"></param>
+					</procedure>
+				</flow>
+			 	
+			    <!-- 布局 --> 
+			    <layout>
+			      <region location ="North" scale="">
+			      	<subregion panel="questionTool" location ="North" scale=""/>
+			      </region>
+			      <region location ="Center" scale="">
+			        <subregion panel="questionTree" location ="Center" scale=""/>
+			      </region>
+			    </layout>
+					</ui>
+				</ui_layer>
+</tsoftware>

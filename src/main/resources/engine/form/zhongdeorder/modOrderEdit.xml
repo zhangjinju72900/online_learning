@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<!-- 订单生成对象 -->
+	<object name="order" table="t_order" primary="id" unique="id" order="id desc" autoinc="Y">
+	    <property name="id" type="Long" length="20" initial="" field="id"/>
+	    <property name="userid" type="Long" length="20" field="user_id"/>
+	    <property name="orderTime" type="Date" length="" initial="" field="order_time"/>
+	    <property name="code" type="String" length="50" initial="" field="code"/>
+	    <property name="Integral" type="Long" length="20" initial="" field="integral"/>
+	    <property name="Amount" type="Double" length="12" initial="" field="amount"/>
+	    <property name="realIntegral" type="Long" length="20" initial="" field="real_integral"/>
+	    <property name="realAmount" type="Double" length="12" initial="" field="real_amount"/>
+		<property name="payMethod" type="String" length="200" initial="" field="pay_method"/>
+        <property name="consignAddressId" type="Long" length="20" initial="" field="consign_address_id"/>
+        <property name="logisticAmount" type="Double" length="12" initial="" field="logistic_amount"/>
+        <property name="logistic" type="String" length="50" initial="" field="logistic"/>
+        <property name="logisticCode" type="String" length="50" initial="" field="logistic_code"/>
+        
+        <property name="goodId" type="Long" length="20" initial="" field=""/>
+        <property name="goodName" type="String" length="100" initial="" field=""/>
+        <property name="specification" type="String" length="200" initial="" field=""/>
+        <property name="quantity" type="Long" length="10" initial="" field=""/>
+        <property name="createTime" type="Date" length="" initial="" field=""/>
+    </object> 
+   
+</model_layer>
+</tsoftware>

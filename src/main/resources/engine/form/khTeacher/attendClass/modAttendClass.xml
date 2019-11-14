@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<object name="attendClass" table="t_attend_class_record" primary="id" unique="" order="" autoinc="Y">
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="schoolId" type="Long" length="20" field="school_id"/>
+			<property name="classId" type="Long" length="20" field="class_id"/>
+			<property name="courseId" type="Long" length="20" field="course_id"/>
+			<property name="sectionId" type="Long" length="20" field="section_id"/>
+			<property name="signQrFileId" type="Long" length="20" field="sign_qr_file_id"/>
+			<property name="signQrOssKey" type="String" length="64" field="sign_qr_oss_key"/>
+			<property name="signQrOssUrl" type="String" length="200" field="sign_qr_oss_url"/>
+			<property name="startTime" type="Date" field="start_time"/>
+			<property name="endTime" type="Date" field="end_time"/>
+			<property name="studentCount" type="Long" length="10" field="student_count"/>
+			<property name="realStudentCount" type="Long" length="10" field="real_student_count"/>
+			<property name="teacherId" type="Long" length="20" field="teacher_id"/>
+
+			<!--学生签到相关数据-->
+			<property name="studentRecordId" type="Long" length="20"/>
+			<property name="attendClassRecordId" type="Long" length="20"/>
+			<property name="studentId" type="Long" length="20"/>
+			<property name="signTime" type="Date" />
+			<property name="signType" type="Long" length="1"/>
+			<property name="validFlag" type="Long" length="1"/>
+			<property name="name" type="String" length="50" field=""/>
+
+			<property name="createTime" type="Date" length="" validate=""  field="" />
+			<property name="createBy" type="Long" length="20" field=""/>
+			<property name="updateTime" type="Date" length="" validate=""  field="" />
+			<property name="updateBy" type="Long" length="20" field=""/>
+			
+			
+			<property name="userId" type="Long" length="20"/>
+			<property name="attendClassDate" type="Date" />
+			<property name="status" type="String" length="50" field=""/>
+			<property name="title" type="String" length="50" field=""/>
+			
+			<property name="courseName" type="String" length="50" field=""/>
+			<property name="sectionName" type="String" length="50" field=""/>
+			<property name="teacherName" type="String" length="50" field=""/>
+			<property name="className" type="String" length="50" field=""/>
+			<property name="signStatus" type="String" length="50" field=""/>
+			<property name="signStatus2" type="String" length="50" field=""/>
+		</object>
+	</model_layer>
+</tsoftware>

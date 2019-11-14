@@ -1,0 +1,22 @@
+INSERT INTO t_course_section_resources
+(
+	customer_resources_id,
+	course_id,
+	section_id,
+	label_id,
+	create_time,
+	create_by,
+	update_time,
+	update_by
+)
+values
+( 
+	#{data.customer_resources_id},
+	#{data.course_id},
+	#{data.section_id},
+	#{data.label_id},
+	NOW(),
+	#{data.session.userInfo.userId},
+	NOW(),
+	#{data.session.userInfo.userId} 
+)

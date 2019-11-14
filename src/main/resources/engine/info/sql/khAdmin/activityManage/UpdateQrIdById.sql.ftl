@@ -1,0 +1,1 @@
+update t_activity set qr_file_id = #{data.qrFileId} where id = #{data.id}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<object name="feedback" table="t_feedback" primary="id" unique="" order="id desc" autoinc="Y">
+	<property name="id" type="Long" length="20" initial="" field="id"/>
+	<property name="feedback" type="String" length="500" field="feedback"/>
+	<property name="feedbackBy" type="Long" length="20" field="feedback_by"/>
+	<property name="feedbackTime" type="Time" length="" field="feedback_time"/>
+	<property name="updateBy" type="Long" length="20" validate=""  field="update_by" />
+	<property name="createBy" type="Long" length="20" validate=""  field="create_by" />	
+	<property name="updateTime" type="Date" length="" validate=""  field="update_time" />
+	<property name="createTime" type="Date" length="" validate=""  field="create_time" />
+	
+	<property name="feedbackName" type="String" length="20" field=""/>
+	<property name="schoolName" type="String" length="20" field=""/>
+  </object>       
+</model_layer>
+</tsoftware>

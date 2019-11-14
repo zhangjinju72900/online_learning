@@ -1,0 +1,261 @@
+UI名称		上课签到-选择班级（frmAttendClass）
+
+tokenKey	OnLoad__frmAttendClass_list1
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data":{}
+
+返回示例
+"data":{
+    "text":"汽修1班",
+    "value":308
+    }
+
+UI名称		上课签到-选择课程（frmAttendClass）
+
+tokenKey	OnLoad__frmAttendClass_list2
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data":{
+    "classId":"308", --班级id
+    }
+
+返回示例
+"data":{
+    "text":"123如3",
+    "value":12
+    }
+
+
+UI名称		上课签到-选择课程任务（frmAttendClass）
+
+tokenKey	OnLoad__frmAttendClass_list3
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data":{
+    "classId":"308", --班级id
+    "courseId":"12",    --课程id
+    }
+
+返回示例
+"data":{
+    "text":"任务一",
+    "value":2
+    }
+
+
+UI名称		上课签到-获取学生列表-生成记录（frmAttendClass）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmAttendClass_jSave
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+"classId":"308",    --班级id
+"courseId":"4",     --课程id
+"sectionId":"52"    --小节id
+}
+
+返回示例
+"data":{
+"attendClassRecordId":121,  --记录id
+"schoolId":74               --学校id
+}
+
+UI名称		上课签到-获取学生列表（frmAttendClass）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmAttendClass_QueryStudent
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+    "attendClassRecordId":"121" --记录id
+    }
+
+返回示例
+"data":{
+"total":17,     --总数
+"rows":[
+{
+"studentId":2,  --学生id
+"ossUrl":"http://know-how001.oss-cn-beijing.aliyuncs.com/99024af95fbb40c1956d5665f316c7ae20190110042516.jpg",   --头像url
+"validFlag":1,  --是否签到
+"name":"管理员",   --姓名
+"id":811,       --签到记录id
+"fileId":3429   --头像文件id
+}]
+}
+
+UI名称		上课签到-开始上课（frmAttendClass）
+
+tokenKey	OnClick_pToolbar_btnStart_frmAttendClass_jSave
+
+接口地址	/api/SaveCustom
+
+接口类型	POST
+
+参数示例
+"data":{
+"total":17,--总数
+"rows":[{"studentId":2,"ossUrl":"http://know-how001.oss-cn-beijing.aliyuncs.com/99024af95fbb40c1956d5665f316c7ae20190110042516.jpg","attendClassRecordId":121,"validFlag":1,"edit":"手动签到","validFlagName":"未签到","name":"管理员","id":811,"fileId":3429}],
+--学生们的信息，通过这里的条数判断人数
+"id":"811,812,813,814,815,816,817,818,819,820,821,822,823,824,825,826,827"  --手动签到的ids
+}
+
+返回示例
+"data":{"total":17,--总数
+"rows":[
+{"studentId":2,"ossUrl":"http://know-how001.oss-cn-beijing.aliyuncs.com/99024af95fbb40c1956d5665f316c7ae20190110042516.jpg","attendClassRecordId":121,"validFlag":1,"edit":"手动签到","validFlagName":"未签到","name":"管理员","id":811,"fileId":3429}]--学生信息
+"attendClassRecordId":121, --记录id
+"studentCount":17,     --学生总数
+"realStudentCount":17   --签到人数
+}
+
+UI名称		上课签到-常用标签列表+我的资源标签（frmAttendClassPage）
+
+tokenKey	OnLoad__frmAttendClassPage_queryLabel
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+"attendClassRecordId":"121",    --记录id
+"schoolId":"74",    --学校id
+"classId":"308",    --班级id
+"courseId":"4",     --课程id
+"sectionId":"52"    --小节id
+}
+
+返回示例
+"data":{
+"total":10,
+"rows":[
+{
+"defaultOrder":2,   --默认排序级别
+"pid":"cou-4",      --父id
+"showOrder":0,      --显示顺序
+"id":8,         --id
+"text":"标签-12", --名称
+"courseId":4        --课程id
+}
+]}
+
+UI名称		上课签到-标签下详细资源（frmAttendClassPage）
+
+tokenKey	OnClick_pTable1_resource_frmAttendClassPage_queryLabel
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+"id":"8",       --标签id
+"courseId":"4"      --课程id
+}
+
+返回示例
+"data":{
+"total":2,
+"rows":[{
+"courseResName":"ABC",--课程资源名称
+"id":38},--课程资源id
+]}
+
+UI名称		上课签到-资源列表下拉树（frmResourcesList）
+
+tokenKey	OnLoad__frmResourcesList_queryLabel
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+"courseId":"4"      --课程id
+}
+
+返回示例
+"data":{
+"total":9,
+"rows":[{
+"courseResName":"ABC",--课程资源名称
+"id":38,--课程资源id
+"text":"12"--标签名称
+}
+]}
+
+UI名称		上课签到-结束上课（frmResourcesList）
+
+tokenKey	OnClick_pToolbar_btnEnd_frmAttendClass_jSave
+
+接口地址	/api/SaveCustom
+
+接口类型	POST
+
+参数示例
+"data":{
+"attendClassRecordId":"223" -- 记录id
+}
+
+返回示例
+"data":{
+"end_time":"2019-01-16 20:26:18", --结束时间
+"update_time":"2019-01-28 09:39:37", --更新时间
+"update_by":22518   --更新人
+}
+
+
+UI名称		上课页面-我的资料查询条件+查询资料（frmAttendClass）
+
+tokenKey	OnClick_pToolbar_btnQueryMa_frmAttendClass_jsquery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+	"eq_courseId":"4",    --课程id
+	"eq_sectionId":"52",    --小节id
+}
+
+返回示例
+"data":{
+	"total":3,
+	"rows":[
+		{
+				bucketName: "shdfsfsdfsbKkj"   --bucketName
+				courseId: 4					   --课程id
+				createBy: 0					   --创建人
+				createTime: null			   --创建时间
+				fileId: 0					   --文件id
+				id: 1						   --教辅资料id
+				name: "测试数据1"				   --名称
+				ossKey: ""					   --OSS KEY
+				professionalId: 1              --专业id
+				sectionId: 52				   --小节id
+				"updateBy": “0”，			   --更新人
+				"updateTime": null，			   --更新时间
+		}
+	]}

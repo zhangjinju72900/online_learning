@@ -1,0 +1,24 @@
+INSERT INTO t_section
+(
+	name,
+	remark,
+	course_id,
+	show_order,
+	valid_flag,
+	create_time,
+	create_by,
+	update_time,
+	update_by
+)
+values
+(
+	#{data.name},
+	#{data.remark},
+	#{data.course_id},
+	#{data.show_order},
+	#{data.valid_flag},
+	NOW(),
+	#{data.session.userInfo.userId},
+	NOW(),
+	#{data.session.userInfo.userId}
+)

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+      xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmChooseResource" title="选择资源">
+  <panel name="resourceTree" object="tree"  type="Tree" multiple="" search="Y">
+    <control name="id" title="树id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+    <control name="pid" title="树父id" property="pid" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+    <control name="name" title="树节点" property="name" type="DataLink" edit="" required="" format="" width="" height="" column=""/>
+  </panel>
+  <panel name="pCondition" title="查询条件" object="tCustomerResources" type="Group">
+		<control name="lk_name" title="搜索" property="name" type="TextBox" edit="Y" required="N" format="" width="1" height="1" column="3" />
+  		<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="1" column="1"/>
+  </panel>
+  <panel name="resourceHidden" title="保存" object="tcsr" type="Hidden" multiple="Y">
+  	<control name="ids" title="ids" property="ids" type="Hidden" edit="" required="" format="" width="" height="" column="" />
+    <control name="cusresourcesId" title="资源id" property="cusresourcesId" type="Hidden" edit="" required="" format="" width="" height="" column="" />
+	<control name="courseId" title="课程id" property="courseId" type="Hidden" edit="" required="" format="" width="" height="" column="" />
+	<control name="labelId" title="标签id" property="labelId" type="Hidden" edit="" required="" format="" width="" height="" column="" />
+	<control name="sectionId" title="小节id" property="sectionId" type="Hidden" edit="" required="" format="" width="" height="" column="" />
+  	<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.userId" format="" width="1" height="1" column="" />
+	<control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column="" />
+	<control name="createTime" title="创建日期" property="createTime" type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():nil" format="" width="1" height="1" column="" />
+	<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="editMode=='Add'?session.userInfo.userId:nil" format="" width="1" height="1" column="" /> 	
+  </panel>
+   <panel name="empGroup" title="查询条件" object="tCustomerResources" type="Hidden"  multiple="Y">
+    <control name="eq_OrgId" title="部门编号" property="parentId" type="TextBox" edit="" required="" format="" width="1" height="1" column="1"/>
+  </panel>
+  <panel name="resourceDg" title="列表" object="tCustomerResources" type="Grid"  multiple="Y">
+    <control name="ctlName" title="资源名称" property="name" type="TextBox" edit="" required="" format="" width="380" height="" column=""/>
+    <control name="ctlCode" title="资源后缀名" property="fileType" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+    <control name="ctlOrgName" title="资源路径" property="filePath" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+    <control name="ctlGenderName" title="版本号" property="versionCode" type="TextBox" edit="" required="" format="" width="80" height="" column=""/>
+    <control name="backupId" title="被备份文件ID" property="backupId" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+    <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+  </panel>
+  <panel name="resourceDown" title="pnlDown" object="" type="Toolbar">
+  	 <control name="ctlQueryResources" title="搜索" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+	 <control name="ctlSave" title="保存" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+  	 <control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+  </panel>
+   <!-- 逻辑加载 -->
+    <flow trigger="" event="OnLoad" filter="">
+      <procedure name="jsdecodeid" server="" logic="DecodeId" ifyes="tree" ifno="">
+		<param name="Out" value="resourceHidden.ids" />
+	  </procedure>
+      <procedure name="tree"  logic="Query" ifyes="" ifno="">
+        <param name="In" value=""></param>
+        <param name="Out" value="resourceTree"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryResourcesList"></param>
+      </procedure>
+     </flow>
+    <!-- 树点击事件 -->
+    <flow trigger="resourceTree" event="OnClick" filter="" >
+      <procedure name="jsencodeid1" server="" logic="EncodeId" ifyes="jDecodeId1" ifno="">
+        <param name="In" value="resourceTree.id"></param>
+      </procedure>
+      <procedure name="jDecodeId1" server="" logic="DecodeId" ifyes="jsencodeid2" ifno="">
+        <param name="Out" value="empGroup.eq_OrgId"></param>
+      </procedure>	
+    	<procedure name="jsencodeid2" server="" logic="EncodeId" ifyes="jDecodeId2" ifno="">
+        <param name="In" value="resourceTree.id"></param>
+      </procedure>
+      <procedure name="jDecodeId2" server="" logic="DecodeId" ifyes="queryTable" ifno="">
+        <param name="Out" value="pCondition.id"></param>
+      </procedure>
+      <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="empGroup"></param>
+        <param name="Out" value="resourceDg"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryFileList"></param>
+      </procedure>  
+    </flow>
+    <!-- 保存 -->
+    <flow trigger="resourceDown.ctlSave" event="OnClick" filter="" defaultEnter="Y">
+    	<procedure name="je" server="" logic="EncodeId" ifyes="jd" ifno="j0">
+		  <param name="In" value="resourceDg.id" />
+	   </procedure>
+	   <procedure name="j0" server="" logic="InfoMsg" ifyes="" ifno="">
+       		<param name="Msg" value="请至少选择一条资源"></param>
+     	</procedure> 
+	   <procedure name="jd" server="" logic="DecodeId" ifyes="jssave" ifno="">
+		  <param name="Out" value="resourceHidden.cusresourcesId" />
+	   </procedure>
+		<procedure name="jssave" logic="SaveCustom" ifyes="jsclose"
+			ifno="">
+			<param name="Plugin" value="DoBreakUpIdPlugin" />
+			<param name="Sql" value="zhongdeprofession/QryUseless"/>
+			<param name="In" value="resourceHidden"></param>
+			<param name="Msg" value="'资源信息已被保存,详情请查看操作日志'"></param>
+		</procedure>
+		<procedure name="jsclose" server="" logic="Close" ifyes=""
+			ifno="">
+			<param name="Refresh" value="true"></param>
+		</procedure>
+	</flow>
+	<!-- 取消 -->
+	<flow trigger="resourceDown.ctlCancel" event="OnClick" filter="">
+		<procedure name="jsclose" server="" logic="Close" ifyes=""
+			ifno="">
+			<param name="Refresh" value="false"></param>
+		</procedure>
+	</flow>
+	<!-- 查询 -->
+	 <flow trigger="resourceDown.ctlQueryResources" event="OnClick" filter="">  
+      <procedure name="Query"  logic="Query" ifyes="" ifno="" sync="Y">
+           <param name="In" value="pCondition"></param>
+           <param name="Out" value="resourceDg"></param>
+           <param name="Sql" value="zhongdeprofession/QryFileList"></param>
+      </procedure> 
+    </flow>
+    <!-- 布局 --> 
+    <layout>
+     <region location ="North" scale="">
+        <subregion panel="resourceDown" location="North" scale="" />
+         <subregion panel="pCondition" location="South" scale="" />
+     </region>
+   	 <region location ="Center" scale="">
+    	<subregion panel="resourceDg" location="Center" scale=""/>
+      </region>
+      <region location ="West" scale="200px">
+        <subregion panel="resourceTree" location ="Center" scale="200px"/>
+      </region>
+      <region location ="South" scale="">
+        <subregion panel="resourceHidden" location="Center" scale="" />
+        <subregion panel="empGroup" location="Center" scale="" />
+      </region>
+    </layout>
+  </ui>
+  </ui_layer>
+</tsoftware>

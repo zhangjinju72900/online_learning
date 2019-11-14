@@ -1,0 +1,406 @@
+UI名称		教案-查询（frmLessonPlanList）  
+
+tokenKey	 OnClick_pToolbar_btnSearch_frmLessonPlanList_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			eq_classId: "308"		--班级id
+			eq_courseId: ""			--课程id
+			eq_sectionId: ""		--小节id
+			lk_name: "s"   			--教案名
+			order: "desc"
+			page: 1
+			rows: 50
+			sort: "id"
+			}
+
+返回示例
+"data":		{	
+		classId: 308						--班级id
+		className: "2019级汽修1班222"			--年级名加班级名
+		courseCount: 0						--课时数
+		courseId: 0							--课程id
+		courseName: null					--课程名
+		createBy: 2							--创建人id
+		createTime: "2019-04-04 13:17:18"	--创建时间
+		customerTask: "ss"					--客户任务
+		delete: "删除"
+		edit: "编辑"
+		equipment: "ss"						--设备
+		guideTeacherId: 0					--指导教师ID
+		guideTeacherName: null				--指导教师名
+		homeworkContent: "ss"				--作业内容
+		id: 25								--教案id
+		name: "sss"							--教案名
+		sectionId: 0						--小节id
+		sectionName: null					--小节名
+		studentCount: 0						--学生人数
+		teacherId: 0						--教师id
+		teachingContent: "ss"				--教学内容
+		teachingGoal: "ss"					--教学目标
+		teachingObject: ""					--授课对象
+		teachingSite: ""					--授课地点
+		updateBy: 2							--更新人id
+		updateTime: "2019-04-04 13:17:18"	--更新时间
+		}
+	
+	
+	
+UI名称		教案-选择班级（frmLessonPlanList）
+
+tokenKey	OnLoad_frmLessonPlanList_list
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data":		{
+			
+			}
+
+返回示例
+"data":		{
+		0: {text: "2019级汽修1班222"	--班级名称
+			value: 308   			--班级id	
+			}
+		1: {text: "2017级汽修1班1"	--班级名称
+			value: 1047				--班级id
+			}			
+		}
+
+UI名称		教案-选择课程（frmLessonPlanList）
+
+tokenKey	OnLoad_frmLessonPlanList_list1
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data":		{
+			classId: "309"  				--班级id
+			}
+
+返回示例
+"data":		{
+		text: "领域三 汽车发动机机械系统拆装与修理3", --课程名
+		value: 42							--课程id
+		}
+		
+		
+		
+UI名称		教案-选择课程小节（frmLessonPlanList）
+
+tokenKey	OnLoad_frmLessonPlanList_list2
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data":		{
+			courseId: "41"  --课程id
+			}
+
+返回示例
+"data":		{
+		text: "22",				--小节名称
+		value: 84				--小节id
+		}
+
+		
+
+UI名称		教案-新增教案保存（frmLessonPlanAdd）  
+
+tokenKey	 OnClick_pButton_save_frmLessonPlanAdd_jssave
+
+接口地址	/api/Save
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			Mode: "Add"					
+			courseId: "78"					--课程id
+			classId	: "78"					--班级id
+			sectionId: "78"					--小节id
+			name: "测试"						--教案名称
+			courseCount: "XX"				--学时
+			studentCount: "78"				--学生人数
+			guideTeacherId: "XX"			--指导教师
+			teachingObject: "XX"			--授课对象
+			teachingSite: "XX"				--任务地点
+			equipment: "XX"					--所需设备
+			customerTask: "XX"				--客户任务
+			teachingGoal: "XX"				--教学目标
+			teachingContent: "XX"			--教学内容
+			homeworkContent: "XX"			--作业内容
+			step:[{
+				Mode: "Add"
+				editing: true
+				index: 0						--序号
+				name: "预习"						--教学步骤名
+				teachingAssist: "开开"			--教学步骤的教学辅助
+				teachingContent: "预习1"			--教学步骤的教学内容
+				teachingCount: "1"				--教学步骤的教学时数
+				teachingMethod: "因材施教"		--教学步骤的教学方法
+				},
+				{...}
+				]
+			
+			}
+
+返回示例
+"data":		{
+		classId: 1047
+		class_id: 1047
+		courseCount: 1
+		courseId: 0
+		course_count: 1
+		course_id: 0
+		createBy: 2
+		createTime: "2019-04-04 14:01:33"
+		create_by: 2
+		create_time: "2019-04-04 14:01:33"
+		customerTask: "xuxixixi"
+		customer_task: "xuxixixi"
+		equipment: "ack"
+		guideTeacherId: 0
+		guideTeacherName: null
+		guide_teacher_id: 0
+		homeworkContent: "学习22"
+		homework_content: "学习22"
+		id: 26
+		name: "量子力学1"
+		school_id: 0
+		sectionId: 0
+		section_id: 0
+		studentCount: 10
+		student_count: 10
+		teacher_id: 0
+		teachingContent: "学习111"
+		teachingGoal: "掌握1111"
+		teachingObject: ""
+		teachingSite: ""
+		teaching_content: "学习111"
+		teaching_goal: "掌握1111"
+		teaching_object: ""
+		teaching_site: ""
+		updateBy: 2
+		updateTime: "2019-04-04 14:01:33"
+		update_by: 2
+		update_time: "2019-04-04 14:01:33"
+		valid_flag: 0
+		}
+		
+			
+		
+
+
+UI名称		教案-编辑(根据教案id查询详情)（frmLessonPlanEdit）  
+
+tokenKey	 OnLoad__frmLessonPlanEdit_jQuery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			eq_id: "26"					--教案id
+			}
+
+返回示例
+"data":		{
+		classId: "1047"
+		className: "2017级汽修1班1"
+		courseCount: "1.00"
+		courseId: "0"
+		courseName: null
+		createBy: "2"
+		createTime: "2019-04-04 14:01:33.0"
+		customerTask: "xuxixixi"
+		eq_id: "26"
+		equipment: "ack"
+		guideTeacherId: "0"
+		guideTeacherName: ""
+		homeworkContent: "学习22"
+		id: 26
+		name: "量子力学1"
+		sectionId: "0"
+		sectionName: null
+		studentCount: "10.00"
+		teacherId: 0
+		teachingContent: "学习111"
+		teachingGoal: "掌握1111"
+		teachingObject: ""
+		teachingSite: ""
+		updateBy: "2"
+		updateTime: "2019-04-04 14:01:33.0"
+		}	
+		
+		
+UI名称		教案-编辑(根据教案id查询教学步骤)（frmLessonPlanEdit）  
+
+tokenKey	 OnLoad__frmLessonPlanEdit_j2
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			eq_lessonPlanId: "26"				--教案id
+			}
+
+返回示例
+"data":		{
+		createBy: 2
+		createTime: "2019-04-04 14:01:33"
+		id: 16										--教学步骤id
+		lessonPlanId: 26							--教案id
+		name: "预习"									--教学步骤名
+		teachingAssist: "开开"
+		teachingContent: "预习1"
+		teachingCount: 1
+		teachingMethod: "因材施教"
+		updateBy: 2
+		updateTime: "2019-04-04 14:01:33"
+		}			
+		
+		
+		
+UI名称		教案-编辑保存（frmLessonPlanEdit）  
+
+tokenKey	 OnClick_pButton_save_frmLessonPlanEdit_jssave
+
+接口地址	/api/save
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			
+			Mode: "Edit"					
+			courseId: "78"					--课程id
+			classId	: "78"					--班级id
+			sectionId: "78"					--小节id
+			name: "测试"						--教案名称
+			courseCount: "XX"				--学时
+			studentCount: "78"				--学生人数
+			guideTeacherId: "XX"			--指导教师
+			teachingObject: "XX"			--授课对象
+			teachingSite: "XX"				--任务地点
+			equipment: "XX"					--所需设备
+			customerTask: "XX"				--客户任务
+			teachingGoal: "XX"				--教学目标
+			teachingContent: "XX"			--教学内容
+			homeworkContent: "XX"			--作业内容
+			step:[{
+				createBy: 2
+				createTime: "2019-04-04 14:01:33"
+				id: 16							--教学步骤id
+				lessonPlanId: 26				--教案id
+				name: "预习"						--教学步骤名
+				teachingAssist: "开开"			--教学步骤的教学辅助
+				teachingContent: "预习1"			--教学步骤的教学内容
+				teachingCount: "1"				--教学步骤的教学时数
+				teachingMethod: "因材施教"		--教学步骤的教学方法
+				updateBy: 2
+				updateTime: "2019-04-04 14:01:33"
+				},
+				{...}
+				]
+			}
+
+返回示例
+"data":		{
+		classId: 1047
+		class_id: 1047
+		courseCount: 1
+		courseId: 0
+		course_count: 1
+		course_id: 0
+		createBy: 2
+		createTime: "2019-04-04 14:52:05"
+		create_by: 2
+		create_time: "2019-04-04 14:52:05"
+		customerTask: "xuxixixi"
+		customer_task: "xuxixixi"
+		equipment: "ack"
+		guideTeacherId: 0
+		guideTeacherName: null
+		guide_teacher_id: 0
+		homeworkContent: "学习22"
+		homework_content: "学习22"
+		id: 26
+		name: "量子力学1"
+		school_id: 0
+		sectionId: 0
+		section_id: 0
+		studentCount: 10
+		student_count: 10
+		teacher_id: 0
+		teachingContent: "学习111"
+		teachingGoal: "掌握1111"
+		teachingObject: ""
+		teachingSite: ""
+		teaching_content: "学习111"
+		teaching_goal: "掌握1111"
+		teaching_object: ""
+		teaching_site: ""
+		updateBy: 2
+		updateTime: "2019-04-04 14:52:05"
+		update_by: 2
+		update_time: "2019-04-04 14:52:05"
+		valid_flag: 0
+		}		
+		
+UI名称		删除教案（frmLessonPlanList）  
+
+tokenKey	 OnClick_pTable_delete_frmLessonPlanList_j1
+
+接口地址	/api/savecustom 
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			id: "2"						--教案id
+			}
+
+返回示例
+"data":		{
+			teacher_id:2							--教师id
+			class_id:309							--教室id
+			guide_teacher_id:2						--指导教师id
+			className:null
+			valid_flag:1
+			course_count:11.00
+			teaching_goal:"成功"						--教学目标
+			teaching_object:"学生"					--教学对象
+			create_by:2
+			sectionName:null
+			update_time:"2019-03-26 09:47:55"
+			classId:"测试1"
+			school_id:1
+			section_id:2
+			id":1
+			update_by:2
+			course_id:5								--课程id
+			student_count":22.00
+			create_time:"2019-03-20 14:06:07"
+			equipment:"电脑"
+			updateTime":2019-03-26 09:47:55"
+			homework_content:"删除的测试"
+			courseName:null
+			teaching_content:"测试"
+			teaching_site:"联大"						--教学场所
+			name":测试1"
+			customer_task:"显示"
+		}

@@ -1,0 +1,1 @@
+update t_order set order_status = '2' where id = #{data.id} and order_status = '1' and user_id = #{data.session.userInfo.userId}

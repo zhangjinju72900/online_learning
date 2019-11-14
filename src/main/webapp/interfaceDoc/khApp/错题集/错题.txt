@@ -1,0 +1,108 @@
+UI名称		错题集课程分类及数量（frmWrongQuesCollect）
+
+tokenKey	OnClick_pToolbar_btnQry_frmWrongQuesCollect_MisQuestionQuery1
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+		"data": 	{
+			page: 1
+			rows: 50
+			userId: "2"							--学生用户id
+		}
+
+返回示例
+"data":{"total":3,
+		"rows":[{
+				"studentId": 2					  --学生id
+				"number":1,                       --数量
+				"courseName":"语文",              --课程名称
+				"courseId":4                      --课程ID
+				},{"number":"2","courseName":"全部课程"}          --List最后一个为总数
+				]}
+				
+				
+	
+				
+
+UI名称		查看错题集详情（frmWrongSetDetails）
+
+tokenKey	OnClick_pToolbar_btnQry_frmWrongSetDetails_je
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		courseId: "5"				--课程id(若查看全部错题不分课程可不传值)
+		questionId: "122"			--当前题目id(第一题时可为空)
+		type: "next"				--下一题或上一题 （"next"下一题，"previous"上一题）
+		userId: "2"					--当前用户id
+		}
+
+返回示例
+"data":		{
+			answerThought: "先想想昨天是几月份了"				--解答思路
+			content: "今天是几月份"							--题干
+			courseId: 4										--课程id
+			difficultyLevel: 0								--难度等级；0-简单；1-一般难度；2-比较难；3-困难
+			nextFlag: 1										--是否有下一页(0-无，1-有)
+			previousFlag: 0									--是	否有上一页(0-无，-1-有)
+			questionId: 123									--试题id
+			questionOptions: [{correctFlag: 0, id: 9, title: "A", content: "1"},
+							 {correctFlag: 1, id: 10, title: "B", content: "2"}]		--试题选项内容,correctFlag-正确答案标识0-是1-否，content-选项内容,title:选项标题ABCD√×
+			
+			questionType: 0									--试题类型（0-单选，1-多选，2-判断，3-主观）
+			studentId: 2									--学生id
+		}
+
+
+
+
+
+
+
+UI名称		删除错题集（frmWrongSetDetails）
+
+tokenKey	OnClick_pToolbar_btnRemove_frmWrongSetDetails_je
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		questionId: "122"			--当前题目id
+		userId: "2"					--当前用户id
+		}
+
+返回示例
+"data":		{
+			class_id: 308
+			courseId: 4
+			course_id: 4
+			create_by: 2
+			create_time: "2019-01-10 11:14:11"
+			homework_detail_id: 9
+			homework_id: 10
+			id: 3
+			questionId: 123
+			question_id: 123
+			school_id: 49
+			section_id: 2
+			student_id: 2
+			teacher_id: 2
+			type: null
+			update_by: 2
+			update_time: "2019-01-10 11:14:11"
+			userId: null
+			valid_flag: 0
+		}
+
+
+
+
+				

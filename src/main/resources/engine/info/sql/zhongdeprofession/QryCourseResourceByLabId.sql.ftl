@@ -1,0 +1,1 @@
+select * from t_course_section_resources r where r.label_id=#{data.label_id} and r.section_id=#{data.section_id}

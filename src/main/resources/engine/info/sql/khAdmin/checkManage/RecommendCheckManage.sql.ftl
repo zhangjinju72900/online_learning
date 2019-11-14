@@ -1,0 +1,2 @@
+update t_information set recommend_flag=1 where #{data.type}='info' and id = #{data.id} and check_status = 1;
+update t_information set recommend_flag=1 where #{data.type}='ac_join_pic' and id = #{data.id} and check_status = 1;

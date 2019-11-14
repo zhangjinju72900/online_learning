@@ -1,0 +1,1 @@
+select maintain_manual_id as maintainManualId, content as text from t_maintain_manual_search_record where id = #{data.searchRecordId}

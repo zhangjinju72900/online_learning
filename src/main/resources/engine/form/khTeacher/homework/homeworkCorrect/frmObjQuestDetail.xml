@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmObjQuestDetail" title="客观题作业批改题库详情">
+	 		<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnreturn" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+			<panel name="pHidden" title="隐藏条件" object="question" type="Group">
+			 	<control name="questionId" title="试题id" property="id" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+			</panel>
+            <panel name="pCondition" title="查询条件" object="question" type="Group">
+                <control name="id" title="试题id" property="id" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+            	<control name="content" title="题干" property="content" type="TextBox" edit="N" required="" format="" width="3" height="2" column="4"/>
+                <control name="optionContent" title="选项内容" property="optionContent" type="TextBox" edit="N" required="" format="" width="3" height="2" column="4"/>
+                <control name="correctTitle" title="正确答案选项" property="correctTitle" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+                <control name="answerThought" title="回答思路/解析" property="answerThought" type="TextBox" edit="N" required="" format="" width="3" height="2" column="4"/>
+            	</panel>
+            	
+            <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		        <procedure name="annDecodeId" logic="DecodeId"  ifyes="qQuestionDeTail" ifno="" >
+			    	<param name="Out" value="pHidden.questionId"></param>
+			   	  </procedure>
+		      <procedure name="qQuestionDeTail" logic="Query" ifyes="" ifno="">
+		      	 <param name="In" value="pHidden"></param>
+		         <param name="Out" value="pCondition"></param>
+		         <param name="Plugin" value="getObjAnswerOptionsPlugin"></param>
+		         <param name="Sql" value="khTeacher/homework/homeworkCorrect/QryObjQuestDetail"></param>
+		      </procedure>
+		    </flow>
+		    
+		    
+		 
+   			<!--返回-->
+		    <flow trigger="pToolbar.btnreturn" event="OnClick" filter="">
+		       <procedure name="proTransition" server="/frmObjectDetail" logic="Back" ifyes="" ifno="">
+		         <param name="To" value="frmObjectDetail"></param>
+		       </procedure>
+		    </flow>
+            <!-- 布局 -->
+            <layout>
+                <region location ="North" scale="">
+                    <subregion panel="pToolbar" location="North" scale=""/>
+                </region>
+                <region location ="Center" scale="">
+                	<subregion panel="pHidden" location="North" scale=""/>
+                	<subregion panel="pCondition" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

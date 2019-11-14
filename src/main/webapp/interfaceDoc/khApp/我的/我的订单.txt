@@ -1,0 +1,154 @@
+UI名称		我的订单列表接口（frmOrderList）
+
+tokenKey	OnLoad__frmOrderList_j2
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {eq_userId: "5", --人员ID 
+		eq_orderStatus: "",  --订单状态，此处传空串
+		page: 1, rows: 50}
+
+返回示例
+"data":{"amount":1.00,  --订单金额
+		"code":"1ad",  --订单编码
+		"quantity":1,  --订单商品数量
+		"orderStatus":9,  --订单状态 0:待支付,1:已支付,2:已完成,9:已取消
+		"goodId":25,  --商品ID
+		"userId":5,  --人员ID
+		"realAmount":0.00,  --实际金额
+		"orderTime":"2018-08-16 13:54:59",  --订单时间
+		"goodName":"qwet",  --商品名称
+		"realIntegral":0,  --实际积分数
+		"integral":1,  --订单积分
+		"id":40,  --订单ID
+		"picId":"1405,1406"  --商品图片ID,多个逗号分隔
+		}
+		
+		
+
+
+UI名称		订单详情接口1（frmOrderView）
+
+tokenKey	OnLoad__frmOrderView_qid
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {id: "40"}  --订单ID
+
+返回示例
+"data":{"amount":"1.00",  --订单金额
+		"consignee":"",  --收货人名称
+		"address":null,  --收货地址
+		"quantity":"1",  --数量
+		"code":"1ad",  --订单编号
+		"specification":"",  --规格
+		"orderStatus":"9",  --订单状态 0:待支付,1:已支付,2:已完成,9:已取消
+		"goodId":"25",  --商品ID
+		"realAmount":"0.00",  --实际支付金额
+		"totalAmount":"0积分 + 0.00元",  --实际支付拼接
+		"logistic":"1",  --物流
+		"goodName":"qwet",  --商品名称
+		"realIntegral":"1.00", --实际支付积分
+		"integral":"1",  --订单积分
+		"payMethod":"1",  --支付方式 金额支付方式;0:无,1:微信,2:支付宝
+		"tel":"",  --收货人电话
+		"id":"40",  --订单ID
+		"picId":"1405,1406",  --订单商品图片
+		"logisticCode":""  --物流单号
+		"logisticAmount":8 --物流金额
+		"usableIntegral":2525 --可用积分
+		}		
+		
+		
+		
+
+
+UI名称		订单详情接口2，未支付订单查询可支付方式（frmOrderView）
+
+tokenKey	OnLoad__frmOrderView_queryMemo
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {id: "40", page: 1, rows: 50}  --订单ID
+
+返回示例
+"data":{"amount":10.00, --需支付金额
+		"integral":100, --需支付积分
+		"id":27}		--可支付方式ID
+
+
+
+		
+
+UI名称		取消订单（frmOrderView）（只有未支付订单可以取消）
+
+tokenKey	OnClick_pToolbar_btnCannel_frmOrderView_j1
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		id: "1" --订单ID
+	}
+
+返回示例 --订单数据 code为0：取消成功
+"data": {"code":"1221","orderStatus":2,"order_time":"2018-08-10 19:16:31","create_by":0,"realAmount":10.00,"order_status":2,"logistic_code":"","update_time":null,"goodName":null,"integral":10,"payMethod":0,"tel":null,"id":1,"update_by":0,"picId":null,"logisticCode":"","real_integral":10,"amount":10.00,"consignee":null,"quantity":null,"create_time":null,"consign_address_id":1,"specification":null,"pay_method":0,"real_amount":10.00,"totalAmount":null,"logistic":"","logistic_amount":0.00,"user_id":1}
+
+
+
+
+UI名称		确认收货（frmOrderView）（只有已支付订单可以确认收货）
+
+tokenKey	OnClick_pToolbar_btnConfirm_frmOrderView_j1
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		id: "1" --订单ID
+	}
+
+返回示例 --订单数据 code为0：确认收货成功
+"data": {"code":"1221","orderStatus":2,"order_time":"2018-08-10 19:16:31","create_by":0,"realAmount":10.00,"order_status":2,"logistic_code":"","update_time":null,"goodName":null,"integral":10,"payMethod":0,"tel":null,"id":1,"update_by":0,"picId":null,"logisticCode":"","real_integral":10,"amount":10.00,"consignee":null,"quantity":null,"create_time":null,"consign_address_id":1,"specification":null,"pay_method":0,"real_amount":10.00,"totalAmount":null,"logistic":"","logistic_amount":0.00,"user_id":1}
+
+
+
+
+UI名称		再次购买（frmOrderView）
+
+tokenKey	OnClick_pToolbar_btnBuyAgain_frmOrderView_qid
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		id: "1" --订单ID
+	}
+
+返回示例 --订单数据 code为0：确认收货成功
+"data":{
+	"address":"xcxczxzxc", --默认地址
+	"addressDetail":"xasassa", --默认明细地址
+	"quantity":10, --数量
+	"goodName":"12212", --商品名称
+	"name":"assas", --默认收货人姓名
+	"tel":"135454", --默认联系电话
+	"payDetail":[{"amount":22.00,"integral":100,"id":1},{"amount":44.00,"integral":200,"id":2}], --该商品需支付金额数、该订单需支付积分数、支付表ID
+	"id":1, --订单ID
+	"goodId":1 --商品ID
+	}	

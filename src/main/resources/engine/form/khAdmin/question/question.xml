@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+  <object name="questionA" table="t_question" primary="id" unique="id" order=""> 
+			
+			
+			<property name="qid" type="Long" length="20" initial="" field=""/>
+			<property name="aid" type="Long" length="20" initial="" field=""/>
+			<property name="aquestionId" type="Long" length="20" initial="" field=""/>
+			<property name="atitle" type="Long" length="20" initial="" field=""/>
+			<property name="acontent" type="String" length="2000" initial="" field=""/>
+			<property name="acorrectFlag" type="Long" length="1" initial="" field=""/>
+			
+			<property name="btitle" type="Long" length="20" initial="" field=""/>
+			<property name="bcontent" type="String" length="2000" initial="" field=""/>
+			<property name="bcorrectFlag" type="Long" length="1" initial="" field=""/>
+			
+			<property name="ctitle" type="Long" length="20" initial="" field=""/>
+			<property name="ccontent" type="String" length="2000" initial="" field=""/>
+			<property name="ccorrectFlag" type="Long" length="1" initial="" field=""/>
+			
+			<property name="dtitle" type="Long" length="20" initial="" field=""/>
+			<property name="dcontent" type="String" length="2000" initial="" field=""/>
+			<property name="dcorrectFlag" type="Long" length="1" initial="" field=""/>
+			
+			<property name="etitle" type="Long" length="20" initial="" field=""/>
+			<property name="econtent" type="String" length="2000" initial="" field=""/>
+			<property name="ecorrectFlag" type="Long" length="1" initial="" field=""/>
+			
+			<property name="ftitle" type="Long" length="20" initial="" field=""/>
+			<property name="fcontent" type="String" length="2000" initial="" field=""/>
+			<property name="fcorrectFlag" type="Long" length="1" initial="" field=""/>
+			
+			<property name="sum" type="Long" length="20" initial="" field=""/>
+			<property name="title" type="Long" length="20" initial="" field=""/>
+			<property name="correctFlag" type="Long" length="1" initial="" field=""/>
+			
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="content" type="String" length="2000" initial="" field="content"/>
+			<property name="questionClassifyId" type="Long" length="20" initial="" field="question_classify_id"/>
+			<property name="questionClassifyName" type="String" length="100" initial="" field=""/>
+			<property name="questionType" type="Long" length="1" initial="" field="question_type"/>
+			<property name="difficultyLevel" type="Long" length="1" initial="" field="difficulty_level"/>
+			<property name="enableStatus" type="Long" length="1" initial="" field="enable_status"/>
+			<property name="answerThought" type="String" length="2000" initial="" field="answer_thought"/>
+			<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+			<property name="dataFlag" type="Long" length="1" initial="" field="data_flag"/>
+			<property name="teacherId" type="Long" length="20" initial="" field="teacher_id"/>
+			<property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+			<property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+			<property name="number" type="String" length="20" initial="" field=""/>
+			<property name="flag" type="String" length="20" initial="" field=""/>
+			<property name="ctlName1" type="String" length="20" initial="" field=""/>
+			<property name="fileId" type="String" length="20" initial="" field=""/>
+			<property name="fileName" type="String" length="20" initial="" field=""/>
+  </object>     
+
+  <object name="quesAnOptions" table="t_question_answer_options" primary="id" unique="id" order=""> 
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="questionId" type="Long" length="20" initial="" field="question_id"/>
+			<property name="title" type="String" length="10" initial="" field="title"/>
+			<property name="content" type="String" length="2000" initial="" field="content"/>
+			<property name="correctFlag" type="Long" length="1" initial="" field="correct_flag"/>
+			<property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+			<property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+  </object>     
+  
+  <object name="quesClassify" table="t_question_classify" primary="id" unique="id" order=""  > 
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="name" type="String" length="50" initial="" field="name"/>
+			<property name="pid" type="Long" length="20" initial="" field="parent_id"/>
+			<property name="remark" type="String" length="500" initial="" field="remark"/>
+			<property name="dataFlag" type="Long" length="1" initial="" field="data_flag"/>
+			<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+			<property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+			<property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+			<property name="sum" type="Long" length="20" initial="" field=""/>
+  </object>     
+  
+
+</model_layer>
+
+
+</tsoftware>

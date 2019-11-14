@@ -1,0 +1,1 @@
+DELETE FROM t_course_label WHERE course_id=#{data.courseId} and label_id=#{data.labelId}

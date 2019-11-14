@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+		   
+	<ui_layer>
+		<ui name="frmAttendClass" title="上课">
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnCreate" title="获取课程小节信息" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnQuery" title="执行点名" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnSelectAll" title="全部选择" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnStart" title="开始上课" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnSignIn" title="二维码签到" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnQueryMa" title="查询资料" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnEnd" title="结束上课" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+			<panel name="pCondition" title="查询条件" object="attendClass" type="Group">
+			    <control name="attendClassRecordId" title="attendClassRecordId" property="attendClassRecordId" type="TextBox"
+			       edit="Y" required="N" format="" width="10" height="1" column="2"/>
+			    <control name="studentId" title="studentId" property="studentId" type="Hidden"
+			       edit="" required="" format="" width="100" height="" column=""/>
+			    <control name="schoolId" title="学校" property="schoolId" type="Hidden"
+			       edit="N" required="N" format="" width="10" height="1" column="2"/>
+			    <control name="classId" title="选择班级" property="classId" type="ComboBox"
+			       edit="Y" required="N" format="" initial="308" width="10" height="1" column="2"/>
+			    <control name="courseId" title="选择课程" property="courseId" type="ComboBox"
+			       edit="Y" required="N" format="" initial="4" width="10" height="1" column="2"/>
+			    <control name="sectionId" title="选择课程任务" property="sectionId" type="ComboBox"
+			       edit="Y" required="N" format="" width="10" height="1" column="3"/>
+       			<control name="ids" title="学生签到记录IDS" property="" type="TextBox"
+			       edit="Y" required="N" format="" width="10" height="1" column="3"/>   
+  			 </panel>
+  			 
+			 <panel name="pTable" title="查询结果" object="attendClassSign" type="Grid" multiple="Y">
+			     <control name="SignIn" title="手动签到" property="" type="Link"
+			       edit="" required="" format="" width="100" height="" column=""/>
+			     <control name="id" title="ID" property="id" type="Hidden"
+			       edit="N" required="N" format="" width="100" height="1" column=""/> 
+			    <control name="attendClassRecordId" title="attendClassRecordId" property="attendClassRecordId" type="TextBox"
+			       edit="N" required="N" format="" width="100" height="1" column=""/>
+			    <control name="studentId" title="studentId" property="studentId" type="Hidden"
+			       edit="" required="" format="" width="100" height="" column=""/>
+			    <control name="name" title="学生姓名" property="name" type="DataLink"
+			       edit="" required="" format="" width="100" height="" column=""/>
+			    <control name="validFlag" title="是否签到" property="validFlag" type="TextBox"
+			       edit="" required="" format="" width="100" height="" column=""/>
+			    <control name="createTime" title="创建时间" property="createTime"
+			       type="TextBox" edit="" required="N" format="" width="180" height="1"
+			       column=""/>
+			    <control name="eq_updateTime" title="修改时间" property="updateTime"
+			       type="TextBox" edit="" required="N" format="" width="180" height="1"
+			       column=""/>
+			    <control name="createBy" title="创建人" property="createBy" type="Hidden"
+			       edit="" required="N" format="" width="180" height="1" column=""/>
+			    <control name="eq_updateBy" title="修改人" property="updateBy"
+			       type="Hidden" edit="" required="" format="" width="180" height="1"
+			       column=""/>
+			 </panel>
+			 
+			<panel name="pCon" title="我的资料查询条件" object="teachingAssist" type="Group">
+			
+				<control name="eq_courseId" title="课程id" property="courseId" type="TextBox"
+						 edit="Y" required="N" format=""  width="50" height="2" column=""/>
+				<control name="eq_sectionId" title="小节id" property="sectionId" type="TextBox"
+						 edit="Y" required="N" format="" width="50" height="2" column="1"/>
+			</panel>
+			<panel name="pMateria" title="我的资料查询结果" object="teachingAssist" type="Grid" multiple="Y">
+				<control name="name" title="教辅资料名" property="name" type="TextBox"
+						 edit="" required="" format="" width="100" height="" column=""/>
+				<control name="courseId" title="课程ID" property="courseId" type="TextBox"
+						 edit="Y" required="N" format=""  width="100" height="" column=""/>
+				<control name="sectionId" title="小节ID" property="sectionId" type="TextBox"
+						 edit="Y" required="N" format="" width="100" height="" column=""/>
+				<control name="professionalId" title="专业ID" property="professionalId" type="TextBox"
+						 edit="Y" required="N" format="" width="100" height="" column=""/>
+				<control name="fileId" title="文件ID" property="fileId" type="TextBox"
+						 edit="Y" required="N" format="" width="100" height="" column=""/>
+				<control name="ossKey" title="OSS KEY" property="ossKey" type="TextBox"
+						 edit="Y" required="N" format="" width="100" height="" column=""/>
+				<control name="bucketName" title="bucketName" property="bucketName" type="TextBox"
+						 edit="Y" required="N" format="" width="100" height="" column=""/>
+				<control name="createTime" title="创建时间" property="createTime" type="TextBox"
+						 edit="Y" required="N" format="" width="100" height="" column=""/>
+				<control name="createBy" title="创建人" property="createBy" type="TextBox"
+						 edit="Y" required="N" format="" width="100" height="" column=""/>
+				<control name="updateTime" title="更新时间" property="updateTime" type="TextBox"
+						 edit="Y" required="N" format="" width="100" height="" column=""/>
+				<control name="updateBy" title="更新人" property="updateBy" type="TextBox"
+						 edit="Y" required="N" format="" width="100" height="" column=""/>
+			</panel>
+
+			<panel name="pQrCode" title="二维码" object="attendClass" type="Group">
+				<control name="signQrFileId" title="二维码id" property="signQrFileId" type="TextBox"
+						 edit="N" required="N" format="" width="1" height="1" column="1"/>
+			</panel>
+
+			<!-- 逻辑加载 -->
+			 <flow trigger="" event="OnLoad" filter="">
+				<procedure name="jClear" logic="Clear" ifyes="pClear" ifno=""
+						   sync="Y">
+					<param name="Out" value="pCondition"/>
+				</procedure>
+				 <procedure name="pClear" logic="Clear" ifyes="list1" ifno=""
+						   sync="Y">
+					<param name="Out" value="pCon"/> 
+				</procedure> 
+				 <procedure name="list1" logic="List" ifyes="list2" ifno="">
+					<param name="Out" value="pCondition.classId"/>
+					<param name="Sql" value="khTeacher/attendClass/ListClassId"/>
+				</procedure>
+				<procedure name="list2" logic="List" ifyes="list3" ifno="">
+					<param name="In" value="pCondition"/>
+					<param name="Out" value="pCondition.courseId"/>
+					<param name="Sql" value="khTeacher/attendClass/ListCourseId"/>
+				</procedure>
+				<procedure name="list3" logic="List" ifyes="jsquery" ifno="">
+					<param name="In" value="pCondition"/>
+					<param name="Out" value="pCondition.sectionId"/>
+					<param name="Sql" value="khTeacher/attendClass/ListSectionId"/>
+				</procedure>  
+				  <procedure name="jsquery"  logic="Query" ifyes="jsquery1" ifno="">
+				        <param name="In" value="pCon" />
+				        <param name="Out" value="pMateria" />
+				        <param name="Sql" value="khTeacher/attendClass/ListTeachingAssist" />
+				 </procedure> 
+				  <procedure name="jsquery1"  logic="Query" ifyes="" ifno="">
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="khTeacher/attendClass/QryStudentList2"/>
+				 </procedure> 
+				
+			</flow> 
+			
+			<!--查询逻辑  -->
+				 <flow trigger="pToolbar.btnQueryMa" event="OnClick" filter="">
+				      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
+				        <param name="In" value="pCon" />
+				        <param name="Out" value="pMateria" />
+				        <param name="Sql" value="khTeacher/attendClass/ListTeachingAssist" />
+				      </procedure> 
+				</flow> 
+				
+			<!--手动签到  -->
+				 <flow trigger="pTable.SignIn" event="OnClick" filter="">
+				 	<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="save" ifno="">
+						<param name="In" value="pTable.id"></param>
+					</procedure>
+					<procedure name="save" logic="SaveCustom" ifyes="TimeOut" ifno="">
+				 		<param name="In" value="pTable" />
+				 		<param name="Sql" value="khTeacher/attendClass/UpdateSignRecord" />
+				 	</procedure>
+				    <procedure name="TimeOut" logic="InfoMsg" ifyes="jsquery1" ifno="">
+				      	<param name="Msg" value="已签到"></param>
+					 </procedure> 
+					 <procedure name="jsquery1"  logic="Query" ifyes="" ifno="">
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="khTeacher/attendClass/QryStudentList2"/>
+				 </procedure>
+				 </flow> 
+				
+			<!-- 执行点名 -->
+			<flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
+				<procedure name="jSave" logic="SaveCustom" ifyes="QueryId" ifno="">
+					<param name="In" value="pCondition"/>
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+					<param name="Plugin" value="InsertAttendClassPlugin"/>
+				</procedure>
+				<procedure name="QueryId" logic="Query" ifyes="QueryStudent" ifno="">
+					<param name="In" value="pCondition"/>
+					<param name="Out" value="pCondition"/>
+					<param name="Sql" value="khTeacher/attendClass/QryRecordId"/>
+				</procedure>
+				<procedure name="QueryStudent" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition"/>
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="khTeacher/attendClass/QryStudentList"/>
+				</procedure>
+
+			</flow>
+			<!--开始上课-->
+			<flow trigger="pToolbar.btnStart" event="OnClick" filter="">
+				<procedure name="jSave" logic="SaveCustom" ifyes="js" ifno="">
+					<param name="In" value="pCondition"/>
+					<param name="sql" value="khAdmin/resourcesManage/QryTest"/>
+					<param name="Plugin" value="UpdateAttendClassRecord"/>
+				</procedure>
+				<procedure name="js" server="" logic="EncodeId" ifno="" ifyes="j2" sync="Y">
+					<param name="In" value="pCondition.attendClassRecordId"/>
+				</procedure>
+				<procedure name="j2" server="" logic="Transition" ifyes="" ifno="" sync="Y">
+					<param name="To" value="frmAttendClassPage"/>
+					<param name="Mode" value="ReadOnly"/>
+				</procedure>
+			</flow>
+			<!--结束上课-->
+			<flow trigger="pToolbar.btnEnd" event="OnClick" filter="">
+				<procedure name="jSave" logic="SaveCustom" ifyes="js" ifno="">
+					<param name="In" value="pTable"/>
+					<param name="Plugin" value="CloseClassPlugin"/>
+					<param name="Out" value="pTable"/>
+					<param name="sql" value="khTeacher/attendClass/UpdateCloseClass"/>
+				</procedure>
+			</flow>
+			
+			<!-- 二维码签到 -->
+			<flow trigger="pToolbar.btnSignIn" event="OnClick" filter="">
+		      <procedure name="jspopup" logic="Popup" ifyes="jsquery" ifno="">
+		        <param name="To" value="frmQrCodeSignIn" />
+		        <param name="Mode" value="Add" />
+		         <param name="Window" value="Medium" />
+		          <param name="Title" value="二维码签到" />
+		      </procedure>
+		     </flow>
+		    
+			<flow trigger="pToolbar.btnCreate" event="OnClick" filter="">
+		      <procedure name="jspopup" logic="Popup" ifyes="jsquery" ifno="">
+		        <param name="To" value="frmCourseSectionInfo" />
+		        <param name="Mode" value="Add" />
+		         <param name="Window" value="Medium" />
+		          <param name="Title" value="获取课程小节信息" />
+		      </procedure>
+		     </flow>
+
+			<!-- 布局 -->
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale=""/>
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pCon" location="North" scale=""/>
+					<subregion panel="pCondition" location="East" scale="30%"/>
+					<subregion panel="pMateria" location="Center" scale=""/>
+					<subregion panel="pTable" location="Center" scale=""/>
+					
+				</region>
+				
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

@@ -1,0 +1,30 @@
+UI名称		我的发布列表接口（frmPublishList）
+
+tokenKey	OnLoad__frmPublishList_j2
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {page: 1, rows: 50}
+
+返回示例
+"data":{"clickCount":0,  --点击数
+		"releaseTime":"2018-09-03 14:51:59",  --发布时间
+		"validFlag":0,  --状态
+		"count":1,  --评论数
+		"picId":0,  --图片ID
+		"releaseBy":5,  --发布人ID
+		"likeCount":0,  --点赞数
+		"source":0,  --来源 0:普通用户,1:官方,2：活动晒图
+		"title":"12122121",  --活动标题
+		"activityId":8,  --活动ID
+		"activityTitle":"活动1",  --活动标题
+		"collectCount":1,  --收藏数
+		"id":33
+		}
+		
+		
+
+

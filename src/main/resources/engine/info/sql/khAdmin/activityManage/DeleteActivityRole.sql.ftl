@@ -1,0 +1,1 @@
+delete from t_activity_join_role where activity_id = #{data.id}

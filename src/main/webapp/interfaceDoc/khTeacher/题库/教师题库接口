@@ -1,0 +1,265 @@
+UI名称		题库接口-教师题库列表（frmMeQuestionList）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmMeQuestionList_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+        "eq_dataFlag":"0"   --是否公有
+		eq_difficultyLevel: "1" 	--难度等级
+		eq_enableStatus: "1"		--启用状态
+		eq_id: "76"			--试题id
+		questionClassifyName: "小学语文"    --试题分类名
+		eq_questionType: "1"		--试题类型
+		lk_content: "牛顿"		--题干
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		content: "牛顿发现了万有引力并创建了牛顿定律"	--题干
+		createTime: "2019-01-02 21:17:11"		--创建时间
+		difficultyLevel: 1				--难度
+		difficultyLevelName: "一般难度"			--难度对应字典项名称
+		enableStatus: 1					--启用状态
+		enableStatusName: "禁用"			--启用状态名称
+		id: 76  --id
+		"validFlag":0 --是否有效
+		"dataFlag":0    --是否公有
+		questionClassifyName: "小学语文"				--分类id
+		questionType: 1					--试题类型
+		questionTypeName: "多选"			--试题类型名称
+		}
+
+
+
+
+UI名称		题库接口-教师题库管理-选择题目类型（frmMeQuestionList）
+
+tokenKey	 OnLoad__frmMeQuestionList_typeList
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{}
+
+返回示例
+"data":		{text: "单选"
+			value: "0"				--试题类型（0-单选，1-多选，2-判断）
+
+
+UI名称		题库接口-教师题库管理-选择是否公有（frmMeQuestionList）
+
+tokenKey	 OnLoad__frmMeQuestionList_dateTypeList
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{}
+
+返回示例
+"data":[{"text":"公有","value":"0"},{"text":"私有","value":"1"}]
+
+
+UI名称		题库接口-教师题库管理-选择题目启用状态（frmMeQuestionList）
+
+tokenKey	 OnLoad__frmMeQuestionList_statusList
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{}
+
+返回示例
+"data":		{text: "启用"
+			value: "0"}			--题目启用状态；0-启用；1-禁用
+
+
+UI名称		题库接口-教师题库管理-选择题目难度等级（frmMeQuestionList）
+
+tokenKey	 OnLoad__frmMeQuestionList_difficuty
+
+        接口地址	/api/list
+
+        接口类型	POST
+
+        参数示例
+        "data": 	{}
+
+        返回示例
+        "data":		{text: "简单"
+        			value: "0"}			--难度等级；0-简单；1-一般难度；2-比较难；3-困难
+
+
+UI名称		题库接口-教师题库管理-选择试题分类（frmQuestionTreeM）
+
+tokenKey	 OnClick__questionTool_save_frmQuestionTreeM_jBranch
+
+        接口地址	/api/Branch
+
+        接口类型	POST
+
+        参数示例
+        "data": 	{id: "37", 			--分类id
+        			name: "小学语文"}		--分类名
+
+        返回示例
+        "data":		{eq_questionClassifyId: "37"
+        			questionClassifyName: "小学语文"}			
+
+
+UI名称		题库接口-新增试题（frmQuestionAddM）
+
+tokenKey	OnClick_pformDown_ctlSave_frmQuestionAddM_jssave
+
+接口地址	/api/Save
+
+接口类型	POST
+
+参数示例
+"data":{"id":"",   --题目id
+"eq_questionClassifyId":"37", ----分类id
+"questionClassifyName":"小学语文", ----分类名
+"questionType":"0",--试题类型
+"difficultyLevel":"0",--试题难度
+"enableStatus":"0",--启用状态
+"dataFlag":"1",  --数据标识
+"content":"111",--题干
+"answerThought":"测试数据",--回答思路
+"Mode":"Add"--模式
+}
+
+返回示例
+"data":{"id":"",
+"eq_questionClassifyId":"37",
+"questionClassifyName":"小学语文",
+"questionType":"0",
+"difficultyLevel":"0",
+"enableStatus":"0",
+"dataFlag":"1",
+"content":"111",
+"answerThought":"测试数据",
+"Mode":"Add",
+}--和上面一样
+
+UI名称		题库接口-新增选项（frmQuestionAddM）
+
+tokenKey	OnClick_pformDown_ctlSave_frmQuestionAddM_jssavelist
+
+接口地址	/api/SaveCustom
+
+接口类型	POST
+
+参数示例
+"data":{"total":6,"rows":[
+{
+"correctFlag1":"是",--是否是正确答案
+"title1":"A",--选项标题
+"content1":"test",--选项内容
+},
+{
+"title2":"C",--选项标题
+"content2":"test",--选项内容
+"correctFlag2":"是"--是否是正确答案
+},
+{...},{...},{...},{...}
+]
+}
+返回示例
+"data":{"total":6,"rows":[
+{
+"title1":"C",
+"content1":"test",
+"correctFlag1":"是",
+},{...},{...},{...},{...},{...}]
+}
+
+UI名称		题库接口-编辑试题（frmQueAnserEditM）
+
+tokenKey	OnClick_pformDown_ctlSave_frmQueAnserEditM_jssave
+
+接口地址	/api/Save
+
+接口类型	POST
+
+参数示例
+"data":{"id":"205",   --题目id
+"eq_questionClassifyId":"37", ----分类id
+"questionClassifyName":"小学语文", ----分类名
+"questionType":"0",--试题类型
+"difficultyLevel":"0",--试题难度
+"enableStatus":"0",--启用状态
+"content":"111",--题干
+"answerThought":"测试数据",--回答思路
+"Mode":"Edit"--模式
+}
+
+返回示例
+"data":{"id":"205",
+"eq_questionClassifyId":"37",
+"questionClassifyName":"小学语文",
+"questionType":"0",
+"difficultyLevel":"0",
+"enableStatus":"0",
+"content":"111",
+"answerThought":"测试数据",
+"Mode":"Edit"
+}
+
+UI名称		题库接口-编辑选项（frmQueAnserEditM）
+
+tokenKey	OnClick_pformDown_ctlSave_frmQueAnserEditM_jssavelist
+
+接口地址	/api/SaveCustom
+
+接口类型	POST
+
+参数示例
+"data":{"total":6,"rows":[
+{
+"correctFlag1":"是",--是否是正确答案
+"title1":"A",--选项标题
+"content1":"test",--选项内容
+},
+{
+"title2":"C",--选项标题
+"content2":"test",--选项内容
+"correctFlag2":"是"--是否是正确答案
+},
+{...},{...},{...},{...}
+]
+}
+返回示例
+"data":{"total":6,"rows":[
+{
+"title1":"C",
+"content1":"test",
+"correctFlag1":"是",
+},{...},{...},{...},{...},{...}]
+}
+
+UI名称		题库接口-删除试题（frmMeQuestionList）
+
+tokenKey	OnClick_pTable_ctlDelete_frmMeQuestionList_Query
+
+接口地址	/api/SaveCustom
+
+接口类型	POST
+
+参数示例
+"data":{"id":"159" --题目id
+}
+返回示例
+"data":{
+"id":"159"--题目id
+}

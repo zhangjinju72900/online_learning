@@ -1,0 +1,30 @@
+
+UI名称		客观题作业回答详情-试题详情（frmObjQuestDetail）
+
+tokenKey	OnLoad__frmObjQuestDetail_qQuestionDeTail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		questionId: "122"				--试题id
+		}
+
+返回示例
+"data":		{
+		answerThought: "先想想昨天是星期几了"		--回答思路/答案解析
+		content: "今天星期几"					--题干	
+		correctTitle: "C,D"						--正确答案
+		id: "122"								--试题id
+		"optionContent":[											--客观题试题选项 -
+			{"correctFlag":1,"id":59,"title":"B","content":"SDFW1"},		--title为选项名如:A,B,C,D,√,×
+			{"correctFlag":1,"id":60,"title":"A","content":"SDFW"},			--content为选项内容 此例中A选项内容为SDFW
+			{"correctFlag":0,"id":61,"title":"C","content":"SDFW3"}			--correctFlag 该选项是否为正确选项标识 0-是正确答案 1-否
+			]						
+		}
+
+
+
+

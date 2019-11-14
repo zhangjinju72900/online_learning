@@ -1,0 +1,294 @@
+﻿UI名称		资讯专题列表（frmInforSubList）
+
+tokenKey：OnLoad__frmInforSubList_jQuery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {
+		"eq_id": "",
+		"page": 1,
+		"rows": 50
+	},
+
+返回示例
+"data": {
+		"total": 1,
+		"rows": [
+			{"clickCount":0,--点击数
+			"releaseTime":"2018-09-20 10:35:03",--发布时间
+			"releaseName":"测试用户勿删", --发布人名称
+			"subject":"专题详情",
+			"likeCount":0,--点赞数
+			"likeType":"0"--是否已点赞，0未点赞，1已点赞
+			"source":"1",-- 来源，type为info时，source为0，为普通用户发布动态，1为官方发布，2为普通用户发布活动晒图
+			"valid_flag":0,--标识（0-正常；1-作废）
+			"title":"定州职教中心隆重举行中德诺浩高技能人才培养基地揭牌仪式", --标题
+			"type":"info",--类型，info 资讯，sub为专题
+			"activityId":"",--source为2时，被晒图的活动ID
+			"activityTitle":"",--source为2时，被晒图的活动标题
+			"updateBy":7,--更新人
+			"nickname":"",--用户昵称
+			"id":45,--ID
+			"top_time":"2018-09-25 15:49:49",--置顶时间
+			"focusType":"1",--是否已关注，0未关注，1已关注
+			"collectCount":0,--收藏数
+			"count":1,--评论数量
+			"activityPic":"",--source为2时，被晒图的活动首图
+			"releaseBy":7,--发布人（记录从app创建）
+			"updateTime":"2018-09-21 15:56:58",--更新时间
+			"uFileId":1527,--用户图片id
+			"createBy":7,--创建人
+			"collectType":"0"--是否收藏，0未收藏，1已收藏
+			"top_flag":1,--是否置顶
+			"createTime":"2018-09-20 10:35:03",--创建时间
+			"releaseAddress":"",--发布地址（app）
+			"information":"咨询详情",
+			"fileId":"1595"--图片ID,多个以逗号隔开
+		}]
+	},
+	
+	
+	
+	
+UI名称		资讯详情（informationView）
+
+tokenKey：OnLoad__informationView_qid
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {
+		"id": "37"
+	},
+
+
+返回示例
+"data": {"releaseTime":"2018-09-15 10:17:57.0",--发布时间
+	"releaseName":"测试用户勿删",--发布人名称
+	"latitude":0.0,--发布地址纬度（app）
+	"likeCount":"1",--点赞数
+	"likeType":"0",--是否已点赞，0未点赞，1已点赞
+	"source":1,--来源;来源，type为info时，source为0，为普通用户发布动态，1为官方发布，2为普通用户发布活动晒图
+	"title":"111",--资讯标题
+	"content":"德玛西亚万岁",--内容
+	"activityId":"",--source为2时，被晒图的活动ID
+	"activityTitle":"",--source为2时，被晒图的活动标题
+	"reviewCount":0,--评论数
+	"updateBy":"",--更新人
+	"forwardType":"",
+	"nickname":"",--用户昵称
+	"id":"37",--资讯ID
+	"longitude":0.0,--发布地址经度（app）
+	"fileID":"0",--资讯首图（官方为一个，普通用户可能多个，逗号分隔）
+	"focusType":"0",--是否已关注，0未关注，1已关注
+	"count":0,--评论数
+	"collectCount":0,--收藏数
+	"activityPic":"",--source为2时，被晒图的活动首图
+	"releaseBy":"7",--发布人
+	"relesesAddress":"",--发布地址
+	"uFileId":1527,--用户头像图片ID
+	"informationLabelId":"1",--资讯标签ID
+	"createBy":"7",--创建人
+	"collectType":"0",--是否收藏，0未收藏，1已收藏
+	"createTime":"2018-09-15 10:17:57",--创建时间
+	"reviewEdit":"",
+	}	
+	
+	
+	
+	
+UI名称		资讯查询评论列表（informationView）
+
+tokenKey：OnLoad__informationView_qid2
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {
+		"id": "7",
+		"page": 1,
+		"rows": 50,
+		"sort": "id",
+		"order": "desc"
+	},
+
+
+返回示例
+"data": {
+		"total": 1,
+		"rows": [
+			{"reviewBy":2,--评论人ID
+			"reviewName":"2121"--评论人名称
+			"checkBy":0,
+			"infoId":7, --资讯ID
+			"validFlag":0,
+			"topFlag":0,
+			"updateTime":"2018-08-08 13:33:37",
+			"topTime":null,
+			"content":"3", -- 评论内容
+			"checkStatus":1,
+			"createBy":4,
+			"checkTime":null,
+			"createTime":"2018-08-08 13:33:37",
+			"updateBy":5,
+			"topBy":0,
+			"id":2,
+			"reviewTime":"2018-08-08 13:33:37" -- 评论时间
+			}		
+		]
+	},
+
+
+
+
+UI名称		资讯增加点击数（informationView）
+
+tokenKey：OnLoad__informationView_j3
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		"id": "7"
+	},
+
+
+返回示例
+"data": {"recommend_flag":0,"top_by":0,"review_count":0,"originator":0,"valid_flag":0,"title":"0808","content":"活动","create_by":1,"update_time":"2018-08-08 15:30:50","integral":0,"activity_type":1,"origin_time":"2018-08-08 13:34:56","id":7,"join_count":0,"top_time":null,"update_by":1,"join_integral":10,"address":"","like_count":0,"create_time":null,"end_time":"2018-08-28 00:00:00","release_status":0,"apply_count":0,"start_time":"2018-08-15 00:00:00","site":"","top_flag":1,"file_id":1060},
+
+
+
+
+UI名称		资讯点赞（informationView）
+
+tokenKey：OnClick_pToolbar_like_informationView_j1
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		"id": "7"
+	},
+
+
+返回示例
+"data": {"recommend_flag":0,"top_by":0,"releaseTime":"2018-08-06 09:29:17","latitude":0.0,"review_count":1,"click_count":32,"likeCount":null,"valid_flag":0,"source":1,"title":"咨询1","content":"1","create_by":0,"update_time":"2018-08-06 09:29:17","updateBy":0,"activity_id":1,"id":5,"top_time":null,"update_by":0,"release_by":0,"release_time":"2018-08-06 09:29:17","longitude":0.0,"information_label_id":1,"like_count":3,"release_address":"","create_time":"2018-08-06 09:29:17","releaseBy":0,"release_status":1,"collect_count":0,"check_status":1,"informationLabelId":1,"createBy":0,"top_flag":0,"check_by":0,"reviewEdit":null,"file_id":1,"check_time":"2018-08-06 09:29:17","fileId":1}
+
+
+
+
+
+UI名称		资讯收藏（informationView）
+
+tokenKey：OnClick_pToolbar_collect_informationView_j1
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		"id": "7",
+	},
+
+
+返回示例
+"data": {"recommend_flag":0,"top_by":0,"releaseTime":"2018-08-06 09:29:17","latitude":0.0,"review_count":1,"click_count":32,"likeCount":null,"valid_flag":0,"source":1,"title":"咨询1","content":"1","create_by":0,"update_time":"2018-08-06 09:29:17","updateBy":0,"activity_id":1,"id":5,"top_time":null,"update_by":0,"release_by":0,"release_time":"2018-08-06 09:29:17","longitude":0.0,"information_label_id":1,"like_count":3,"release_address":"","create_time":"2018-08-06 09:29:17","releaseBy":0,"release_status":1,"collect_count":1,"check_status":1,"informationLabelId":1,"createBy":0,"top_flag":0,"check_by":0,"reviewEdit":null,"file_id":1,"check_time":"2018-08-06 09:29:17","fileId":1}
+
+
+
+UI名称		资讯取消收藏（informationView）
+
+tokenKey：OnClick_pToolbar_deleteCollect_informationView_j1
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		"id": "7",
+	},
+
+
+返回示例
+"data": {"recommend_flag":0,"top_by":0,"releaseTime":"2018-08-06 09:29:17","latitude":0.0,"review_count":0,"click_count":32,"likeCount":null,"valid_flag":0,"source":1,"title":"咨询1","content":"1","create_by":0,"update_time":"2018-08-06 09:29:17","updateBy":0,"activity_id":1,"id":5,"top_time":null,"update_by":0,"release_by":0,"release_time":"2018-08-06 09:29:17","longitude":0.0,"information_label_id":1,"like_count":3,"release_address":"","create_time":"2018-08-06 09:29:17","releaseBy":0,"release_status":1,"collect_count":0,"check_status":1,"informationLabelId":1,"createBy":0,"top_flag":0,"check_by":0,"reviewEdit":null,"file_id":1,"check_time":"2018-08-06 09:29:17","fileId":1}
+
+
+
+
+UI名称		资讯评论（informationView）
+
+tokenKey：OnClick_pToolbar_review_informationView_j1
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		"id": "7",
+		"reviewEdit":"121212"
+	},
+
+
+返回示例
+{"code":"0","msg":"评论成功","method":"SaveCustom","token":{"uiName":"informationView","functionId":"OnClick_pToolbar_review_informationView_j1","token":"cd6867f8f06b4f4688b04137ceb638c4","filterStatement":""},"hmac":"6031cfa67889d2d5254b245a001512bc"} -- 无data	
+
+
+
+
+
+UI名称		资讯删除（frmInformationList）
+
+tokenKey：OnClick_pToolbar_btnDelete_frmInformationList_jDelete
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		"id": "7",  --资讯ID
+		"userId":"121212"  --当前登录人ID
+	},
+
+
+返回示例
+{{"recommend_flag":0,"top_by":0,"releaseStatusName":null,"releaseTime":"2018-12-11 14:38:19","tFlag":null,"releaseName":null,"reFlag":null} -- 无data	
+
+
+
+
+
+
+
+UI名称		资讯分享（informationView）
+
+tokenKey：OnClick_pToolbar_forward_informationView_j1
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		"id": "7",  --资讯ID
+		createBy":"121212"  --当前登录人ID
+		forwardType:0        --0:朋友圈,1:微信,2:QQ
+	},
+
+
+返回示例
+{{"recommend_flag":0,"top_by":0,"releaseStatusName":null,"releaseTime":"2018-12-11 14:38:19","tFlag":null,"releaseName":null,"reFlag":null}

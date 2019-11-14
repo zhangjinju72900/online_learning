@@ -1,0 +1,1 @@
+update t_homework_detail_answer set objective_real_score = #{data.realScore}, status = 1, update_time = now(), update_by = #{data.userId} where id = #{data.homeworkDetailAnswerId}

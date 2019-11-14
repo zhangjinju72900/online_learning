@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xsi:noNamespaceSchemaLocation="../componentConfig.xsd" 
+		   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ui_layer>
+	<ui title="订单编辑" name="OrderChangeEdit">
+	<panel title="订单编辑" name="pForm" type="Group" object="productOrder">
+		<control title="ID:" name="eq_id" type="Hidden"  height="1" width="2" format="" required="N" edit="N" property="id" column=""/>
+		<control title="商品名称:" name="eq_orderName" type="TextBox" height="1" width="2" format="" required="N" edit="N" property="orderName" column=""/>
+		<control title="订单号:" name="eq_code" type="TextBox" height="1" width="2" format="" required="N" edit="N" property="code" column="3"/>
+		<control title="物流:" name="eq_logistic" type="TextBox"  height="1" width="2" format="" required="N" edit="Y" property="logistic" column=""/>
+		<control title="物流编号:" name="eq_logisticCode" type="TextBox" height="1" width="2" format="" required="N" edit="Y" property="logisticCode" multiple="Y" column="3"/>
+		<control title="订单状态:" name="eq_orderStatus" type="ComboBox" height="1" width="2" format="" required="N" edit="Y" property="orderStatus" column="3"/>
+		<control name="updateTime" title="更新时间" property="updateTime" type="Hidden"	target="CurrentTime()" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="updateBy" title="更新人" property="updateBy" type="Hidden" target="session.userInfo.userId" edit="" required="" format="" width="200" height="" column=""/>
+	</panel>
+	<panel title="工具按钮" name="pButton" type="Toolbar" object="">
+		<control title="确认" name="save" type="Button" column="2" height="" width="" format="" required="" edit="" property=""/>
+		<control title="取消" name="cancel" type="Button" column="2" height="" width="" format="" required="" edit="" property=""/>
+	</panel>
+
+	<!-- 页面加载 -->
+	<flow filter="" event="OnLoad" trigger="">
+		<procedure name="tClear" sync="Y" ifno="" ifyes="tBranch" logic="Clear">
+			<param name="Out" value="pForm"/>
+		</procedure>
+		<procedure name="tBranch" ifno="tDecodeId" ifyes="" logic="Branch" server="">
+			<param name="In" value="getStorage('OrderChangeEdit')=='Add'"/>
+		</procedure>
+		<procedure name="tDecodeId" ifno="" ifyes="listOrderStatus" logic="DecodeId" server="">
+			<param name="Out" value="pForm.eq_id"/>
+		</procedure>
+		<procedure name="listOrderStatus" logic="List" ifyes="tid"  ifno="">
+			<param name="Out" value="pForm.eq_orderStatus" />
+			<param name="Sql" value="khAdmin/orderManage/ListOrderStatus" />
+		</procedure>
+		<procedure name="tid" ifno="" ifyes="" logic="QueryById">
+			<param name="In" value="pForm"/>
+			<param name="Out" value="pForm"/>
+			<param name="Sql" value="khAdmin/orderManage/QryOrderList"/>
+		</procedure>
+	</flow>
+	
+
+<!-- 保存工作项 -->
+	<flow filter="" event="OnClick" trigger="pButton.save">
+		<procedure name="jssave" ifno="" ifyes="jsclose" logic="Save">
+			<param name="In" value="pForm"/>
+			<param name="Msg" value="'订单已保存'"/>
+		</procedure>
+		<procedure name="jsclose" ifno="" ifyes="" logic="Close" server="">
+			<param name="Refresh" value="true"/>
+		</procedure>	
+	</flow>
+
+<!-- 关闭工作项 -->
+	<flow filter="" event="OnClick" trigger="pButton.cancel">
+		<procedure name="jsclose" ifno="" ifyes="" logic="Close" server="">
+			<param name="Refresh" value="true"/>
+		</procedure>
+	</flow>
+
+<!-- 布局 -->
+	<layout>
+		<region scale="" location="South">
+			<subregion scale="" location="South" panel="pButton"/>
+		</region>
+		<region scale="" location="Center">
+			<subregion scale="" location="Center" panel="pForm"/>
+		</region>
+	</layout>
+
+</ui>
+</ui_layer>
+</tsoftware>

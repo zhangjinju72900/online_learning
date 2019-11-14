@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmAppCourseScore" title="课程成绩查询"> 
+  	
+  	
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		<control name="btnQuery" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="btnAddScore" title="新增成绩" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	
+	<panel name="pCondition" title="查询条件" object="courseResourcesScore" type="Group">
+		<control name="eq_id" title="id" property="id" type="TextBox" edit="Y" required="N" format="" width="1" height="1" column="1"/>
+	</panel>
+  
+	<panel name="pTable" title="查询结果" object="courseResourcesScore" type="Grid" multiple="N" >
+		<control name="id" title="id" property="id" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="customerResourcesId" title="customerResourcesId" property="customerResourcesId" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="courseName" title="课程名称" property="courseName" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="score" title="分数" property="score" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		
+	</panel>
+	<!-- 初始加载 -->
+    <flow trigger="" event="OnLoad" filter="">  
+      <procedure name="jQuery"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pCondition"></param>
+        <param name="Out" value="pTable"></param>
+        <param name="Sql" value="khApp/study/course/QryResourcesScore"></param>
+      </procedure>    
+    </flow>	
+
+	<!-- 查询点击事件 -->
+    <flow trigger="pToolbar.btnQuery" event="OnClick" filter="">  
+      <procedure name="Query"  logic="Query" ifyes="" ifno="" sync="Y">
+           <param name="In" value="pCondition"></param>
+           <param name="Out" value="pTable"></param>
+           <param name="Sql" value="khApp/study/course/QryResourcesScore"></param>
+      </procedure> 
+    </flow>
+    
+    <!-- 新增 资讯-->
+	 <flow trigger="pToolbar.btnAddScore" event="OnClick" filter="">
+      <procedure name="jspopup" logic="Transition" ifyes="jsquery" ifno="">
+        <param name="To" value="frmScoreAdd" />
+        <param name="Mode" value="Add" />
+        <!-- <param name="Window" value="Medium" /> -->
+        <param name="Title" value="新增分数" />
+      </procedure>
+      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pCondition" />
+        <param name="Out" value="pTable" />
+        <param name="Sql" value="khApp/study/course/QryResourcesScore" />
+      </procedure> 
+ 	</flow>
+	
+    <!-- 布局 -->
+    <layout>
+      <region location ="North" scale="">
+        <subregion panel="pToolbar" location ="North" scale=""/>
+      </region>
+	  <region location ="Center" scale="">
+	  	<subregion panel="pCondition" location="North" scale=""/>
+		<subregion panel="pTable" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui> 
+</ui_layer>
+</tsoftware>

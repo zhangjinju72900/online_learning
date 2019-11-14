@@ -1,0 +1,266 @@
+UI名称		教辅资料-选择专业（frmTeachingAssist）  
+
+tokenKey	 OnLoad__frmTeachingAssist_listProfess
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{}
+
+返回示例
+"data":		{
+		"text":"测试专业勿删",	--专业名称
+		"value":15				--专业id
+		}
+		
+		
+		
+		
+UI名称		教辅资料-选择课程（frmTeachingAssist）  
+
+tokenKey	 OnLoad__frmTeachingAssist_listCourse
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			professionalId:13  --专业id
+			}
+
+返回示例
+"data":		{
+		"text":"测试课程勿删",	--课程名称
+		"value":15				--课程id
+		}		
+		
+		
+		
+		
+		
+UI名称		教辅资料-选择小节（frmTeachingAssist）  
+
+tokenKey	 OnLoad__frmTeachingAssist_listSection
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			courseId:76  --课程id
+			}
+
+返回示例
+"data":		{
+		"text":"任务四进气排气",	--小节名称
+		"value":78				--小节id
+		}	
+		
+		
+	
+	
+UI名称		教辅资料-列表查询（frmTeachingAssist）  
+
+tokenKey	 OnClick_pToolbar_btnsearch_frmTeachingAssist_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			eq_courseId: ""				--课程id
+			eq_professionalId: "15"		--专业id
+			eq_sectionId: ""			--小节id
+			lk_name: "测试"				--教辅资料名称
+			order: "desc"				
+			page: 1
+			rows: 50
+			sort: "id"
+			}
+
+返回示例
+"data":		{
+		total: 1, rows: [{
+		bucketName: "http://know-how001.oss-cn-beijing.aliyuncs.com/7d785cb48ca449eb9de2498d5180c0cd201903050237562.png"	--文件ossurl地址
+		courseId: 78													--课程id
+		courseName: "汽车构造认知"										--课程名
+		ctlEdit: "修改"													
+		fileType: "png"													--文件类型
+		id: 16															--教辅资料id
+		name: "测试文件33"												--教辅资料名
+		ossKey: "7d785cb48ca449eb9de2498d5180c0cd201903050237562.png"									--文件osskey
+		professionalId: 15												--专业id
+		professionalName: "测试专业勿删"									--专业名称
+		sectionId: 78													--小节id
+		sectionName: "二大大"											--小节名称
+		visibleFlag: 1													--是否对学生公开标识(0-公开/1-不公开)
+		visibleFlagName: "不公开"										--是否对学生公开
+		}]
+		}
+		
+		
+		
+		
+	
+UI名称		教辅资料-新增教辅资料保存（frmAddAssist）  
+
+tokenKey	 OnClick_pToolbar_btnSave_frmAddAssist_jssave2
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			Mode: "Add"					
+			courseId: "78"					--课程id
+			fileId: "2355"					--文件id
+			id: null						
+			name: "新增资料2"				--教辅资料名
+			professionalId: "16"			--专业id
+			sectionId: "76"					--小节id
+			visibleFlag: "1"				--是否对学生公开标识(0-公开/1-不公开)
+			}
+
+返回示例
+"data":		{
+		bucket_name: "http://know-how001.oss-cn-beijing.aliyuncs.com/b85a12d9c52d4f1e8a3b9bc43cc97f37201903050416232.jpg"   --文件ossurl
+		courseId: 78
+		course_id: 78
+		create_by: 2
+		create_time: "2019-03-15 13:53:44"
+		fileId: 2355						--文件id
+		file_id: 2355
+		id: 17								--新增教辅资料id
+		name: "新增资料2"
+		oss_key: "b85a12d9c52d4f1e8a3b9bc43cc97f37201903050416232.jpg"
+		professionalId: 16
+		professional_id: 16
+		sectionId: 76
+		section_id: 76
+		teacher_id: 2
+		update_by: 2
+		update_time: "2019-03-15 13:53:44"
+		valid_flag: 0
+		visibleFlag: 1
+		visible_flag: 1
+		}
+		
+		
+		
+		
+		
+UI名称		教辅资料-修改教辅资料保存（frmEditAssist）  
+
+tokenKey	 OnClick_pToolbar_btnSave_frmEditAssist_jssave2
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			Mode: "Edit"
+			courseId: "78"
+			fileId: "2355"				--教辅资料文件id
+			id: "16"					--要修改的教辅资料id
+			name: "测试文件33"
+			professionalId: "15"
+			sectionId: "78"
+			visibleFlag: "1"
+			}
+
+返回示例
+"data":		{
+		bucket_name: "http://know-how001.oss-cn-beijing.aliyuncs.com/b85a12d9c52d4f1e8a3b9bc43cc97f37201903050416232.jpg"
+		courseId: 78
+		course_id: 78
+		create_by: 2
+		create_time: "2019-03-14 19:30:30"
+		fileId: 2355
+		file_id: 2355
+		id: 16
+		name: "测试文件33"
+		oss_key: "b85a12d9c52d4f1e8a3b9bc43cc97f37201903050416232.jpg"
+		professionalId: 15
+		professional_id: 15
+		sectionId: 78
+		section_id: 78
+		teacher_id: 2
+		update_by: 2
+		update_time: "2019-03-15 14:03:16"
+		valid_flag: 0
+		visibleFlag: 1
+		visible_flag: 1
+		}
+		
+UI名称		删除教辅资料（frmTeachingAssist）  
+
+tokenKey	 OnClick_pTable_ctlDel_frmTeachingAssist_jssave2
+
+接口地址	/api/savecustom 
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			id: "2"						--教辅资料id
+			}
+
+返回示例
+"data":		{
+			bucket_name: ""
+			courseName: null			--课程名称
+			course_id: 4				--课程ID
+			create_by: 0
+			create_time: null
+			fileType: null				--文件类型
+			file_id: 0					--教辅资料文件ID
+			id: 2						--教辅资料ID
+			name: "测试数据2"				--教辅资料名称
+			oss_key: ""
+			professionalName: null		--专业名
+			professional_id: 1			--专业ID
+			sectionName: null			--小节名
+			section_id: 52				--小节ID
+			teacher_id: 2
+			update_by: 0
+			update_time: null
+			valid_flag: 0					--是否对学生公开标识(0-公开/1-不公开)
+			visibleFlagName: null			--是否对学生公开(公开/不公开)
+			visible_flag: 0
+		}
+		
+UI名称		教辅资料详情（frmTeachingAssistView）   
+
+tokenKey	 OnLoad__frmTeachingAssistView_qid
+
+接口地址	/api/querybyid
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			eq_id: "4"						--教辅资料ID
+			
+			}
+
+返回示例
+"data":		{
+			bucketName: ""
+			courseId: 78					--课程id
+			courseName: "汽车构造认知"			--课程名
+			fileId: 2235					
+			id: 7							--教辅资料ID
+			name: "ceshi22"					--教辅资料名
+			ossKey: ""
+			professionalId: 27				--专业ID
+			sectionId: 76					--小节ID
+			visibleFlag: 0					--是否对学生公开
+		}
+		

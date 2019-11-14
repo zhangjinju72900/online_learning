@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<object name="ResourcesError" table="t_course_resources_error_recovery" primary="id" unique="" order="">
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="courseId" type="Long" length="20" initial="" field="course_id"/>
+			<property name="sectionId" type="Long" length="20" initial="" field="section_id"/>
+			<property name="labelId" type="Long" length="20" initial="" field="label_id"/>
+			<property name="customerResourcesId" type="Long" length="20" initial="" field="customer_resources_id"/>
+			<property name="courseResourcesName" type="String" length="50" initial="" field="course_resources_name"/>
+			<property name="fileId" type="Long" length="20" initial="" field="file_id"/>
+
+
+			<property name="ossKey" type="String" length="64" initial="" field="oss_key"/>
+			<property name="ossUrl" type="String" length="200" initial="" field="oss_url"/>
+			<property name="content" type="String" length="500" initial="" field="content"/>
+
+			<property name="status" type="Long" length="1" initial="" field="status"/>
+			<property name="schoolId" type="Long" length="20" initial="" field="school_id"/>
+			<property name="teacherId" type="Long" length="20" initial="" field="teacher_id"/>
+			<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+			<property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+			<property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+
+
+			<property name="courseSectionResourcesId" type="Long" length="20" initial="" field=""/>
+
+		</object>
+	</model_layer>
+</tsoftware>

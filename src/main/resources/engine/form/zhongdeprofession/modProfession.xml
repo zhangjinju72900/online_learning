@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<object name="tprofession" table="t_professional" primary="id"
+			unique="">
+			<property name="id" type="Long" length="20" validate=""
+				field="id" />
+			<property name="name" type="String" length="50" validate=""
+				field="name" />
+			<property name="parent" type="String" length="50" validate=""
+				field="parent_id" />
+			<property name="remark" type="String" length="200" validate=""
+				field="remark" />
+			<property name="dataFlag" type="Long" length="20" validate=""
+				field="data_flag" />
+			<property name="validFlag" type="Long" length="20" validate=""
+				field="valid_flag" />
+			<property name="updateTime" type="Date" length="" validate=""
+				field="update_time" />
+			<property name="updateBy" type="Long" length="20" validate=""
+				field="update_by" />
+			<property name="createTime" type="Date" length="" validate=""
+				field="create_time" />
+			<property name="createBy" type="Long" length="20" validate=""
+				field="create_by" />
+
+
+			<!-- 新增字段 -->
+			<!-- <property name="code" type="Long" length="20" validate=""
+				field="" /> -->
+			<property name="createByName" type="String" length="50"
+				validate="" field="" />
+			<property name="updateByName" type="String" length="50"
+				validate="" field="" />
+
+
+		</object>
+
+		<object name="tcourse" table="t_course" primary="id" order="createTime desc,showOrder"
+			unique="">
+			<property name="id" type="Long" length="20" validate=""
+				field="id" />
+			<property name="showOrder" type="Long" length="20" validate=""
+				field="show_order" />
+			<property name="name" type="String" length="50" validate=""
+				field="name" />
+			<property name="professionalId" type="Long" length="20"
+				validate="" field="professional_id" />
+			<property name="courseCount" type="Long" length="20"
+				validate="" field="course_count" />
+			<property name="difficultyLevel" type="Long" length="200"
+				validate="" field="difficulty_level" />
+			<property name="remark" type="String" length="300" validate=""
+				field="remark" />
+			<property name="fileId" type="Long" length="20" validate=""
+				field="file_id" />
+			<property name="visibleFlag" type="Long" length="20"
+				validate="" field="visible_flag" />
+			<property name="visibleFlagName" type="String" length="2" validate="" field="" />
+			<property name="validFlag" type="Long" length="20" validate=""
+				field="valid_flag" />
+			<property name="updateTime" type="Date" length="" validate=""
+				field="update_time" />
+			<property name="updateBy" type="Long" length="10" validate=""
+				field="update_by" />
+			<property name="createTime" type="Date" length="" validate=""
+				field="create_time" />
+			<property name="createBy" type="Long" length="10" validate=""
+				field="create_by" />
+		
+
+			<!-- 新增字段 -->
+			<property name="createByName" type="String" length="50"
+				validate="" field="" />
+			<property name="updateByName" type="String" length="50"
+				validate="" field="" />
+			<property name="fileName" type="String" length="50"
+				validate="" field="" />
+		</object>
+		
+		<object name="tSection" table="t_section" primary="id" order="showOrder asc"
+			unique="">
+			<property name="id" type="Long" length="20" validate=""  field="id"/>
+			<property name="name" type="String" length="50" validate="" field="name" />
+			<property name="remark" type="String" length="200" validate="" field="remark" />
+			<property name="courseId" type="Long" length="20" validate="" field="course_id" />
+			<property name="validFlag" type="Long" length="20" validate="" field="valid_flag" />
+			<property name="updateTime" type="Date" length="" validate=""
+				field="update_time" />
+			<property name="updateBy" type="Long" length="20" validate=""
+				field="update_by" />
+			<property name="createTime" type="Date" length="" validate=""
+				field="create_time" />
+			<property name="createBy" type="Long" length="20" validate=""
+				field="create_by" />
+			<property name="showOrder" type="Long" length="20" validate=""
+				field="show_order" />
+		</object>
+		<object name="tLabel" table="t_label" primary="id"
+			unique="">
+			<property name="id" type="Long" length="20" validate=""  field="id"/>
+			<property name="label" type="String" length="50" validate="" field="name" />
+			<property name="labelType" type="Long" length="20" validate="" field="label_type" />
+			<property name="validFlag" type="Long" length="20" validate="" field="valid_flag" />
+			<property name="updateTime" type="Date" length="" validate="" field="update_time" />
+			<property name="updateBy" type="Long" length="20" validate="" field="update_by" />
+			<property name="createTime" type="Date" length="" validate="" field="create_time" />
+			<property name="createBy" type="Long" length="20" validate="" field="create_by" />
+			<property name="courseorsectionId" type="Long" length="20" validate=""  field=""/>
+		</object>
+		<object name="tcsr" table="t_course_section_resources" primary="id"
+			unique="">
+			<property name="id" type="Long" length="20" validate=""  field="id"/>
+			<property name="cusresourcesId" type="String" length="200" validate=""  field="customer_resources_id"/>
+			<property name="sectionId" type="Long" length="20" validate=""  field="section_id"/>
+			<property name="labelId" type="Long" length="20" validate=""  field="lable_id"/>
+			<property name="courseId" type="Long" length="20" validate=""  field="course_id"/>
+			<property name="courseResName" type="String" length="50" validate=""  field="course_resources_name"/>
+			<property name="updateTime" type="Date" length="" validate="" field="update_time" />
+			<property name="updateBy" type="Long" length="20" validate="" field="update_by" />
+			<property name="createTime" type="Date" length="" validate="" field="create_time" />
+			<property name="createBy" type="Long" length="20" validate="" field="create_by" />
+			
+			<property name="name" type="String" length="50" initial="" field=""/>
+			<property name="fileType" type="String" length="20" field=""/>
+			<property name="filePath" type="String" length="500" field=""/>
+			<property name="versionCode" type="String" length="20" field=""/>
+			<property name="ids" type="String" length="400" field=""/>
+		</object>
+	</model_layer>
+</tsoftware>

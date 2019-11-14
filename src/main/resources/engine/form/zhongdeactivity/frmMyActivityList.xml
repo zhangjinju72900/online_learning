@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+
+	<ui_layer>
+		<ui name="frmMyActivityList" title="活动列表">
+			<!-- 工具栏 pToolbar. -->
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnQuery" title="查询" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+
+			<!-- 查询条件 Hidden pCondition-->
+			<panel name="pCondition" title="查询条件" object="" type="Hidden">
+				<control name="eq_applyBy" title="报名人" property="applyBy"
+					type="TextBox" edit="Y" required="N" format="" width="1" height="1"
+					initial="session.userInfo.userId" column="" />
+				<control name="eq_validFlag" title="标识" property="validFlag"
+					type="TextBox" edit="Y" required="N" format="" width="1" height="1"
+					initial="0" column="3" />
+			</panel>
+
+			<!-- 查询结果 pTable -->
+			<panel name="pTable" title="查询结果" object="tActivity" type="Grid"
+				order="id desc">
+				<control name="id" title="活动ID" property="id" type="Hidden"
+					edit="" required="" format="" width="80" height="" column="" />
+					
+				<control name="title" title="活动标题" property="title" type="TextBox"
+					edit="" required="" format="" width="400" height="" column="" />
+					
+				<control name="site" title="活动地点" property="site" type="TextBox"
+					edit="" required="" format="" width="150" height="" column="" />
+					
+				<control name="startTime" title="开始时间" property="startTime"
+					type="TextBox" edit="" required="" format="" width="150" height=""
+					column="" />
+				<control name="validFlag" title="活动类型" property="validFlag"
+					type="TextBox" edit="" required="" format="" width="80" height=""
+					column="" />
+				<control name="picId" title="图片ID" property="picId" type="TextBox"
+					edit="" required="Y" format="" width="80" height="" column="" />
+			</panel>
+
+			<!--页面逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="c1" logic="Clear" ifyes="j2" ifno="">
+					<param name="Out" value="pCondition" />
+				</procedure>
+				<procedure name="j2" logic="Query" ifyes="" ifno="">
+					<!-- <param name="In" value="pCondition"></param> -->
+					<param name="Out" value="pTable"></param>
+					<param name="Plugin" value="activityInfoCDN"></param>
+					<param name="Sql" value="zhongdeactivity/QryActivityList"></param>
+				</procedure>
+			</flow>
+
+			<!-- 查询按钮 pToolbar.btnQuery -->
+			<flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<!-- <param name="In" value="pCondition"></param> -->
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="zhongdeactivity/QryActivityList"></param>
+				</procedure>
+			</flow>
+
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale="" />
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pCondition" location="North" scale="" />
+					<subregion panel="pTable" location="Center" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

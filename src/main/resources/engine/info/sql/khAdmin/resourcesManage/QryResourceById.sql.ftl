@@ -1,0 +1,1 @@
+select sum(file_id) as id from t_customer_resources where FIND_IN_SET(id, queryChildrenAreaInfo(#{data.id})); 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+      xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmResourcesVersion" title="资源历史版本">
+   	<panel name="pnlHidden" title="查询条件" object="org" type="Hidden">
+		<control name="eq_backupId" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+        <control name="modelId" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="empGroup" title="tab1" object="tCustomerResources" type="Grid">
+		<control name="ctlEdit" title="归档" property="" type="Link" edit="" required="" format="" width="40" height="" column=""/>
+		<control name="ctlId" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+		<control name="ctlName" title="资源名称" property="name" type="TextBox" edit="N" required="" format="" width="120" height="1" column=""/>
+		<control name="ctlFileType" title="资源后缀名" property="fileType" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+		<control name="ctlFilePath" title="资源路径" property="filePath" type="TextBox" edit="N" required="" format="" width="200" height="1" column="3"/>
+		<control name="ctlParentId" title="父Id" property="parentId" type="Hidden" edit="N" required="" format="" width="" height="1" column="3"/>
+		<control name="ctlVersionCode" title="版本号" property="versionCode" type="TextBox" edit="N" required="" format="" width="80" height="1" column="3"  />
+		<control name="ctlResourcesType" title="文件类型" property="resourcesType" type="Hidden" edit="N" required="" format="" width="" height="2" column="3"  />
+	</panel>
+	<panel name="pTable1" title="查询结果" object="tCustomerResources" type="Hidden">
+  	 	<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+  	 	<control name="backupId" title="backupId" property="backupId" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+  	 	<control name="backupType" title="backupType" property="backupType" type="Hidden" edit="" required="" target="1" format="1" width="150" height="" column=""/>
+  	 	<control name="updateTime" title="最新更新时间" property="updateTime" type="Hidden" edit="Y" required="" target="CurrentTime()" format="" width="1" height="1" column=""/>
+  	 	<control name="updateBy" title="最新更新人" property="updateBy" type="Hidden" edit="Y" required="" target="session.userInfo.userId" format="" width="1" height="1" column="2"/>
+  	</panel>
+	<panel name="empDown" title="pnlDown" object="" type="Toolbar">
+		<control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>	
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="getId" server="" logic="DecodeId" ifyes="queryTable" ifno="">
+        <param name="Out" value="pnlHidden.eq_backupId"></param>
+      </procedure> 
+      <procedure name="queryTable" logic="Query" ifyes="" ifno="">
+        <param name="In" value="pnlHidden"></param>
+        <param name="Out" value="empGroup"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryFileHistoryVersionList"></param>
+      </procedure>
+    </flow>
+    <!-- 归档 -->
+    <flow trigger="empGroup.ctlEdit" event="OnClick" filter="" >
+      <procedure name="msg" server="" logic="ConfirmMsg" ifyes="jsencodeid" ifno="">
+       <param name="Title" value="归档"></param>
+       <param name="Msg" value="确认归档当前记录吗?"></param>
+      </procedure>
+      
+      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jsencodeid2" ifno="">
+      	<param name="In" value="empGroup.id"></param>
+      </procedure>
+      <procedure name="jsencodeid2" server="" logic="DecodeId" ifyes="jsencodeid3" ifno="">
+      	<param name="Out" value="pTable1.id"></param>
+      </procedure>
+      
+      <procedure name="jsencodeid3" server="" logic="EncodeId" ifyes="jsencodeid4" ifno="">
+      	<param name="In" value="pnlHidden.eq_backupId"></param>
+      </procedure>
+      <procedure name="jsencodeid4" server="" logic="DecodeId" ifyes="jssave" ifno="">
+      	<param name="Out" value="pTable1.backupId"></param>
+      </procedure>
+      
+      
+      <procedure name="jssave"  logic="Save" ifyes="jsclose" ifno="">
+        <param name="In" value="pTable1"></param>
+        <param name="Plugin" value="archiveService" />
+        <param name="Msg" value="'该资源已归档'"></param>
+      </procedure>
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>
+    <!-- 取消 -->
+    <flow trigger="empDown.ctlCancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="false"></param>
+      </procedure>
+    </flow>
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="empDown" location="South" scale="" />
+      </region>
+      <region location ="Center" scale="">
+		<subregion panel="empGroup" location="Center" scale="" />      
+      </region>
+      <region location ="North" scale="">
+        <subregion panel="pnlHidden" location="North" scale="" />
+      </region>
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

@@ -1,0 +1,1 @@
+insert into t_customer_user_role(customer_user_id,role_id,create_time,create_by,update_time,update_by) values (#{data.customerId},#{data.roleId},now(),#{data.session.userInfo.empId},now(),#{data.session.userInfo.empId});

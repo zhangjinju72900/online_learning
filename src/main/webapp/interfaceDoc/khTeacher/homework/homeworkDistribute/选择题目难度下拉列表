@@ -1,0 +1,18 @@
+
+
+UI名称		作业分发-从题库选择-选择题目难度等级（frmQuestionList）
+
+tokenKey	 OnLoad__frmQuestionList_difficuty
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{}
+
+返回示例
+"data":		{text: "简单"		
+			value: "0"}			--难度等级；0-简单；1-一般难度；2-比较难；3-困难
+		
+

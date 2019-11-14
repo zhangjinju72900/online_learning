@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <model_layer>
+        <object name="project" table="t_project" primary="id" unique="name" order="">
+            <property name="id" type="Long" length="20" initial="" field="id"/>
+            <property name="name" type="String" length="50" initial=""  field="name"/>
+            <property name="description" type="String" length="200"   initial="" field="description"/>
+            <property name="status" type="String" initial="" field="status"></property>
+            <property name="statusName" type="String" initial="" field=""></property>
+            <property name="updateBy" type="Long" length="10" validate="" field="update_by"/>
+            <property name="updateByName" type="String" length="50" validate="" field=""/>
+            <property name="createBy" type="Long" length="10" validate="" field="create_by"/>
+            <property name="createByName" type="String" validate="" field=""/>
+            <property name="updateTime" type="Date" length="" validate="" field="update_time"/>
+            <property name="createTime" type="Date" length="" validate="" field="create_time"/>
+            <property name="codeRepoUrl" type="String" length="500" field="code_repo_url"/>
+            <property name="projectManager" type="Long" length="20" field="project_manager"/>
+            <property name="projectManagerName" type="String" length="20" field=""/>
+            <property name="testManager" type="Long" length="20" field="test_manager"/>
+            <property name="testManagerName" type="String" length="20" field=""/>
+            <property name="productManager" type="Long" length="20" field="product_manager"/>
+            <property name="productManagerName" type="String" length="20" field=""/>
+
+        </object>
+    </model_layer>
+    <ui_layer>
+        <ui name="frmProjectList" title="项目列表">
+            <panel name="pnlToolbar" title="工具条" object="" type="Toolbar">
+                <control name="ctlSearch" title="查询" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlClear" title="清空条件" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlAdd" title="新增项目" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+
+                <control name="ctlExport" title="导出清单" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+            </panel>
+            <panel name="pnlCondition" title="查询条件" object="project" type="Group">
+                <control name="lk_name" title="项目名称" property="name" type="TextBox" edit="Y" required="N" format=""
+                         width="2" height="1" column=""/>
+                <control name="eq_status" title="状态" property="status" type="ComboBox" edit="Y" required="N" format=""
+                         width="1" height="1" column="4"/>
+
+            </panel>
+
+            <panel name="pnlList" title="查询结果" object="project" type="Grid">
+		  		<filter name="projMember"><!-- 字典项 -->
+					<field name="id" sign="in" condition="(select proj_id from t_proj_emp where emp_id='#{session.userInfo.empId}')" conjunction="or" />
+				</filter>            
+                <control name="ctlEdit" title="编辑" property="" type="Link" edit="" required="" format="" width="100"
+                         height="" column=""/>
+                <control name="ctlDelete" title="删除" property="" type="Link" edit="" required="" format="" width="100"
+                         height="" column=""/>
+                <control name="ctlForbidden" title="禁用" property="" type="Link" edit="" required="" format=""
+                         width="100" height="" column=""/>
+                <control name="ctlRestore" title="恢复" property="" type="Link" edit="" required="" format="" width="100"
+                         height="" column=""/>
+
+                <control name="ctlId" title="主键Id" property="id" type="Hidden" edit="" required="" format="" width=""
+                                                       height="" column=""/>
+                <control name="ctlStatus" title="状态" property="status" type="Hidden" edit="" required="" format="" width=""
+                         height="" column=""/>
+
+                <control name="ctlName" title="项目名称" property="name" type="DataLink" edit="" required="" format=""
+                         width="200" height="" column=""/>
+                <control name="statusName" title="状态" property="statusName" type="TextBox" edit="" required=""
+                         format=""
+                         width="50" height="" column=""/>
+                <control name="codeRepoUrl" title="代码库URL" property="codeRepoUrl" type="TextBox" edit="" required=""
+                         format=""
+                         width="280" height="" column=""/>
+                <control name="projectManagerName" title="开发经理" property="projectManagerName" type="TextBox" edit="" required=""
+                         format=""
+                         width="80" height="" column=""/>
+                <control name="productManagerName" title="产品经理" property="productManagerName" type="TextBox" edit="" required=""
+                         format=""
+                         width="80" height="" column=""/>
+                <control name="testManagerName" title="测试经理" property="testManagerName" type="TextBox" edit="" required=""
+                         format=""
+                         width="80" height="" column=""/>
+                <control name="createBy" title="创建人" property="createByName" type="TextBox" edit="" required="N"
+                         format="" width="80" height="1" column=""/>
+                <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="" required="N"
+                         format="" width="140" height="1" column=""/>
+                <control name="updateBy" title="最后修改人" property="updateByName" type="TextBox" edit="" required="N"
+                         format="" width="80" height="1" column=""/>
+                <control name="updateTime" title="最后修改时间" property="updateTime" type="TextBox" edit="" required="N"
+                         format="" width="140" height="1" column=""/>
+
+
+            </panel>
+
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="procClear" logic="Clear" ifyes="procList" ifno="" sync="Y">
+                    <param name="Out" value="pnlCondition"></param>
+                </procedure>
+                <procedure name="procList" logic="List" ifyes="procQuery" ifno="">
+                    <param name="Out" value="pnlCondition.eq_status"></param>
+                    <param name="Sql" value="ProjectStatus"></param>
+                    <param name="Options" value=",[全部]"></param>
+                </procedure>
+                <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjList"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlToolbar.ctlSearch" event="OnClick" filter="">
+                <procedure name="proQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjList"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlClear" event="OnClick" filter="">
+                <procedure name="procClear" logic="Clear" ifyes="" ifno="">
+                    <param name="Out" value="pnlCondition"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlExport" event="OnClick" filter="">
+
+                <procedure name="procExport"  logic="Export" ifyes="" ifno="">
+                    <param name="Format" value="pnlList"></param>
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Sql" value="QryProjList"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlToolbar.ctlAdd" event="OnClick" filter="">
+                <procedure name="procPopup" logic="Popup" ifyes="procQuery" ifno="">
+                    <param name="To" value="frmProjectEdit"></param>
+                    <param name="Mode" value="Add"></param>
+                    <param name="Window" value="Medium"></param>
+                    <param name="Title" value="新增项目"></param>
+                </procedure>
+                <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjList"></param>
+                </procedure>
+            </flow>
+
+
+            <flow trigger="pnlList.ctlEdit" event="OnClick" filter="">
+                <procedure name="procEncodeId" server="" logic="EncodeId" ifyes="procPopup" ifno="">
+                    <param name="In" value="pnlList.id"></param>
+                    <param name="Mode" value="onClick"></param>
+                </procedure>
+                <procedure name="procPopup" logic="Popup" ifyes="procQuery" ifno="">
+                    <param name="To" value="frmProjectEdit"></param>
+                    <param name="Mode" value="Edit"></param>
+                    <param name="Window" value="Medium"></param>
+                    <param name="Title" value="编辑项目"></param>
+                </procedure>
+                <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjList"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.ctlDelete" event="OnClick" filter="row.status!='open'">
+                <procedure name="procConfirm" server="" logic="ConfirmMsg" ifyes="procDelete" ifno="">
+                    <param name="Title" value="删除项目"></param>
+                    <param name="Msg" value="确认删除当前记录吗?"></param>
+                </procedure>
+                <procedure name="procDelete" logic="Delete" ifyes="procQuery" ifno="">
+                    <param name="In" value="pnlList"/>
+                    <param name="Constraints"
+                           value="t_proj_emp.proj_id|项目中还有成员不能删除" />
+                    <param name="Cascade" value="t_proj_emp.proj_id" />
+
+                    <param name="Msg" value="model.name+'已删除'"/>
+                </procedure>
+                <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjList"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.ctlForbidden" event="OnClick" filter="row.status!='close'">
+                <procedure name="procConfirm" server="" logic="ConfirmMsg" ifyes="procSave" ifno="">
+                    <param name="Title" value="提示信息"></param>
+                    <param name="Msg" value="确认禁用当前项目吗?"></param>
+                </procedure>
+                <procedure name="procSave" logic="SaveCustom" ifyes="procQuery" ifno="">
+                    <param name="In" value="pnlList"></param>
+                    <param name="Msg" value="model.name+'状态已改为关闭'"></param>
+                    <param name="Sql" value="updateProjectStatus_Close"></param>
+                </procedure>
+                <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjList"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlList.ctlRestore" event="OnClick" filter="row.status!='open'">
+                <procedure name="procConfirm" server="" logic="ConfirmMsg" ifyes="procSave" ifno="">
+                    <param name="Title" value="提示信息"></param>
+                    <param name="Msg" value="确认恢复当前项目吗?"></param>
+                </procedure>
+                <procedure name="procSave" logic="SaveCustom" ifyes="procQuery" ifno="">
+                    <param name="In" value="pnlList"></param>
+                    <param name="Msg" value="model.name+'状态已改为打开'"></param>
+                    <param name="Sql" value="updateProjectStatus_Open"></param>
+                </procedure>
+                <procedure name="procQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjList"></param>
+                </procedure>
+
+            </flow>
+
+            <flow trigger="pnlList.ctlName" event="OnClick" filter="">
+                <procedure name="procEncodeId" server="" logic="EncodeId" ifyes="procTransition" ifno="">
+                    <param name="In" value="pnlList.id"></param>
+                    <param name="Mode" value="onClick"></param>
+                </procedure>
+                <procedure name="procTransition" server="/frmProjectView" logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmProjectView"></param>
+                    <param name="Mode" value="Readonly"></param>
+                </procedure>
+
+            </flow>
+
+            <layout>
+                <region location="North" scale="">
+                    <subregion panel="pnlToolbar" location="North" scale=""/>
+                </region>
+                <region location="Center" scale="">
+                    <subregion panel="pnlCondition" location="North" scale=""/>
+                    <subregion panel="pnlList" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

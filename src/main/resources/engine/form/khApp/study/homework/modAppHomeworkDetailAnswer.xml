@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+ <model_layer>
+  <object name="appHomeworkDetailAnswer" table="t_homework_detail_answer" primary="id" unique="" order="">
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+ 
+   <!-- 关联表字段 -->
+   <property name="questionClassifyName" type="String" length="100" initial="" field=""/>
+   <property name="questionTypeName" type="String" length="100" initial="" field=""/>
+   <property name="difficultyLevelName" type="String" length="20" initial="" field=""/>
+   <property name="enableStatusName" type="String" length="20" initial="" field=""/>
+   <property name="fileIds" type="Long" length="20" initial="" field=""/>
+   
+   <property name="homeworkId" type="Long" length="20" initial="" field=""/>
+   <property name="homeworkDetailId" type="Long" length="20" initial="" field=""/>
+   <property name="homeworkAnswerId" type="Long" length="20" initial="" field=""/>
+   <property name="homeworkDetailAnswerId" type="Long" length="20" initial="" field=""/>
+   
+   <property name="userId" type="String" length="20" initial="" field=""/>
+   <property name="type" type="String" length="20" initial="" field=""/>
+   <property name="content" type="String" length="2000" initial="" field=""/>
+  </object>
+  
+ </model_layer>
+</tsoftware>

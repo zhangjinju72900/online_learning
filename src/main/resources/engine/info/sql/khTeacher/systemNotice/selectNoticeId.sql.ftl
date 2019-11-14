@@ -1,0 +1,1 @@
+select id from t_notice where title = #{data.title} and context=#{data.context} ; 

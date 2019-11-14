@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmAddManualResource" title="新增维修手册资源">
+			<panel name="resourceGroup" title="tab1" object="tFTPResources"
+				type="Group">
+				<control name="eq_id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="" column="1" />
+				<control name="eq_parentId" title="所属目录" property="parentId" type="Hidden" edit="Y" required="Y" format="" width="1" height="" column="1" />
+				<control name="parentName" title="所属目录名称" property="parentName" type="PopupBox" edit="Y" required="Y" format="" width="1" height="" column="1" />
+				<control name="fileName" title="文件名称" property="fileName" type="TextBox" edit="Y" required="Y" format="" width="1" height="" column="1" />
+				<control name="resourceType" title="资源类型" property="resourceType" type="Hidden" edit="" required="" target="1" format="" width="1" height="" column="1" />
+				<control name="codingFormat" title="编码格式" property="codingFormat" initial="'0'" type="ComboBox" edit="Y" required="Y" format="" width="1" height="" column="1" />
+				<control name="fileType" title="文件类型" property="fileType" initial="'0'" type="ComboBox" edit="Y" required="Y" format="" width="1" height="" column="1"  />
+				<control name="remark" title="备注" property="remark" type="TextBox" edit="Y" required="" format="" width="1" height="3" column="1" />
+				<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.userId" format="" width="1" height="1" column="" />
+				<control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column="" />
+				<control name="createTime" title="创建日期" property="createTime" type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():nil" format="" width="1" height="1" column="" />
+				<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="editMode=='Add'?session.userInfo.userId:nil" format="" width="1" height="1" column="" />
+			</panel>
+
+			<panel name="resourceDown" title="pnlDown" object="" type="Toolbar">
+				<control name="ctlSave" title="确认" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="ctlCancel" title="取消" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+
+			<!-- 页面逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="branch" server="" logic="Branch" ifyes="jsDec" ifno="getType">
+					<param name="In" value="getEditMode()=='Edit'"></param>
+				</procedure>
+				<procedure name="jsDec" server="" logic="DecodeId" ifyes="getType" ifno="">
+					<param name="Out" value="resourceGroup.eq_id"></param>
+				</procedure>
+				<procedure name="getType"  logic="List" ifyes="getCoding" ifno="">
+			        <param name="Out" value="resourceGroup.fileType"></param>
+			        <param name="Sql" value="khAdmin/resourceUpload/QryResourceTypeNoScorm"></param>
+     			 </procedure>
+				<procedure name="getCoding"  logic="List" ifyes="branch2" ifno="">
+			        <param name="Out" value="resourceGroup.codingFormat"></param>
+			        <param name="Sql" value="khAdmin/resourcesManage/QryResourcesCoding"></param>
+     			 </procedure>
+     			 <procedure name="branch2" server="" logic="Branch" ifyes="jsquery" ifno="">
+					<param name="In" value="getEditMode()=='Edit'"></param>
+				</procedure>
+     			 <procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<param name="In" value="resourceGroup.eq_id" />
+					<param name="Out" value="resourceGroup" />
+					<param name="Sql" value="khAdmin/resourceUpload/QryResources" />
+				</procedure>
+			</flow>
+			<!-- 选择目录 -->
+			<flow trigger="resourceGroup.parentName" event="OnClick" filter="" >
+		      <procedure name="find"  logic="Find" ifyes="" ifno="">
+		        <param name="Out" value="resourceGroup"/>
+		        <param name="Sql" value="ManualDirectory"/>
+		        <param name="Multi" value="N" />
+		        <param name="Title" value="选择目录"/>
+		         <param name="Window" value="Medium"/>
+		         <param name="Options" value="$RESET,重置"/>
+		        <param name="Columns" value="id,目录id,eq_parentId|name,目录名称,parentName"/>
+		      </procedure>
+    		</flow>  
+			
+			<!-- 确认 -->
+			<flow trigger="resourceDown.ctlSave" event="OnClick" filter="" defaultEnter="Y">
+				<procedure name="jssave" logic="Save" ifyes="jsclose"
+					ifno="">
+					<param name="In" value="resourceGroup"></param>
+					<param name="Msg" value="'信息已被保存'"></param>
+				</procedure>
+				<procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="true"></param>
+				</procedure>
+			</flow>
+
+			<!-- 取消 -->
+			<flow trigger="resourceDown.ctlCancel" event="OnClick" filter="">
+				<procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="false"></param>
+				</procedure>
+			</flow>
+
+			<layout>
+				<region location="South" scale="">
+					<subregion panel="resourceDown" location="South" scale="" />
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="resourceGroup" location="Center" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

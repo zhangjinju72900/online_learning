@@ -1,0 +1,1 @@
+select question_id as questionId from t_homework_detail where id = #{data.id}

@@ -1,0 +1,1 @@
+select customer_user_id AS receiverId from t_customer_user_class where class_id = #{data.className} ; 

@@ -1,0 +1,1 @@
+select id from t_school where name = #{data.title} and valid_flag = 0

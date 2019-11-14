@@ -1,0 +1,24 @@
+UI名称		客观作业试题错误率柱状图参数（frmObjectScore）
+
+tokenKey	OnClick_pToolbar_btnHistogram_frmObjectScore_qHistogram
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "10"		--客观作业id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		{"seriesData":[100.0,100.0,0.0,50.0],			--y轴错误率(100.0即错误率为100%,50.0即错误率为50%)
+		"xAxisData":["120","122","123","124"]}			--x轴试题id
+		}
+
+
+
+

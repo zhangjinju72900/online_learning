@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <model_layer>
+        <object name="projectOverview" table="t_project" primary="id" unique="name" order="">
+            <property name="id" type="Long" length="32" initial="" field="id"/>
+            <property name="name" type="String" length="50" initial=""  field="name"/>
+            <property name="empCnt" type="Long"    initial="" field=""/>
+            <property name="featureUnfix" type="Long" initial="" field="" />
+            <property name="feature" type="Long" initial="" field="" />
+            <property name="bugUnclose" type="Long" validate="" field=""/>
+            <property name="bug" type="Long"  validate="" field=""/>
+            <property name="completeFtPer" type="Long" validate="" field=""/>
+            <property name="closeBugPer" type="Long" validate="" field=""/>
+        </object>
+    </model_layer>
+    <ui_layer>
+        <ui name="frmProjectOverview" title="项目概览">
+            <panel name="pnlToolbar" title="工具条" object="" type="Toolbar">
+                <!--<control name="ctlSearch" title="查询" property="" type="Button" edit="" required="" format="" width=""-->
+                         <!--height="" column=""/>-->
+                <control name="ctlExport" title="导出清单" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+            </panel>
+
+            <panel name="pnlList" title="查询结果" object="projectOverview" type="Grid">
+		  		<filter name="projMember"><!-- 字典项 -->
+					<field name="id" sign="in" condition="(select proj_id from t_proj_emp where emp_id='#{session.userInfo.empId}')" conjunction="or" />
+				</filter>            
+                <control name="ctlId" title="主键Id" property="id" type="Hidden" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="name" title="项目名称" property="name" type="TextBox" edit="" required="" format=""
+                         width="200" height="" column=""/>
+                <control name="empCnt" title="成员数" property="empCnt" type="TextBox" edit="" required="" format=""
+                         width="100" height="" column=""/>
+                <control name="featureUnfix" title="未完成需求数" property="featureUnfix" type="TextBox" edit="" required=""
+                         format="" width="100" height="1" column=""/>
+                <control name="feature" title="需求总数" property="feature" type="TextBox" edit="" required=""
+                         format="" width="100" height="1" column=""/>
+                <control name="bugUnclose" title="未关闭缺陷数" property="bugUnclose" type="TextBox" edit="" required=""
+                         format="" width="100" height="1" column=""/>
+                <control name="bug" title="缺陷总数" property="bug" type="TextBox" edit="" required=""
+                         format="" width="100" height="1" column=""/>
+                <control name="completeFtPer" title="需求完成率" property="completeFtPer" type="TextBox" edit="" required=""
+                         format="" width="100" height="1" column=""/>
+                <control name="closeBugPer" title="缺陷关闭率" property="closeBugPer" type="TextBox" edit="" required=""
+                         format="" width="100" height="1" column=""/>
+                
+            </panel>
+
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="proQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlList"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="QryProjectOverview"></param>
+                </procedure>
+            </flow>
+            <!-- 查询 -->
+            <!--<flow trigger="pnlToolbar.ctlSearch" event="OnClick" filter="">-->
+                <!--<procedure name="proQuery" logic="Query" ifyes="" ifno="">-->
+                    <!--<param name="In" value="pnlList"></param>-->
+                    <!--<param name="Out" value="pnlList"></param>-->
+                    <!--<param name="Sql" value="QryProjectOverview"></param>-->
+                <!--</procedure>-->
+            <!--</flow>-->
+            <!-- 导出 -->
+            <flow trigger="pnlToolbar.ctlExport" event="OnClick" filter="">
+                <procedure name="procExport" logic="Export" ifyes="" ifno="">
+                    <param name="In" value="pnlList"></param>
+                    <param name="Format" value="pnlList"></param>
+                    <param name="Sql" value="QryProjectOverview"></param>
+                </procedure>
+            </flow>
+
+            <layout>
+                <region location="North" scale="">
+                    <subregion panel="pnlToolbar" location="North" scale=""/>
+                </region>
+                <region location="Center" scale="">
+                    <subregion panel="pnlList" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

@@ -1,0 +1,1 @@
+select date_format(now(),'%Y-%m-%d') as createTime

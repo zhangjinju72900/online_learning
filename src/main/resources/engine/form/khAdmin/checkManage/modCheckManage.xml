@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<object name="checkManage" table="t_information_review" primary="id" unique="" order="topFlag desc,reviewTime desc" autoinc="Y">
+		<property name="id" type="String" length="500" initial="" field="id"/>
+		<property name="informationId" type="Long" length="20" initial="" field="information_id"/>
+		<property name="reviewBy" type="Long" length="20" field="review_by"/>
+		<property name="content" type="String" length="200" field="content"/>
+		<property name="reviewTime" type="Date" length="" field="review_time"/>
+		<property name="checkStatus" type="Long" length="1" initial="" field="check_status"/>
+		<property name="checkTime" type="Date" length="" field="check_time"/>
+  		<property name="topFlag" type="Long" length="1" initial="" field="top_flag"/>
+  		<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+		<property name="topFlagName" type="String" length="50" initial="" field=""/>
+		<property name="topTime" type="Date" length="" initial="" field="top_time"/>
+		<property name="likeCount" type="Long" length="1" initial="" field="like_count"/>
+		
+
+		<property name="title" type="String" length="" field=""/>
+  		<property name="file" type="String" length="" field=""/>
+  		<property name="fileId" type="String" length="" field=""/>
+  		<property name="type" type="String" length="" field=""/>
+  		<property name="checkType" type="String" length="" field=""/>
+  		<property name="status" type="String" length="" initial="" field=""/>
+  		<property name="reviewName" type="String" length="" initial="" field=""/>
+  		<property name="recommendFlag" type="String" length="" initial="" field=""/>
+  		<property name="reFlag" type="Long" length="1" field=""/>
+		<property name="tFlag" type="Long" length="1" field=""/>
+		<property name="school" type="String" length="1" initial="" field=""/>
+		
+		<!-- 能不能进行推荐 -->
+		<property name="ableRecommend" type="String" length="20" field=""/>
+  </object>    
+  <object name="checkManage1" table="t_information_review" primary="id" unique="" order="reviewTime desc" autoinc="Y">
+		<property name="id" type="String" length="500" initial="" field="id"/>
+		<property name="informationId" type="Long" length="20" initial="" field="information_id"/>
+		<property name="reviewBy" type="Long" length="20" field="review_by"/>
+		<property name="content" type="String" length="200" field="content"/>
+		<property name="reviewTime" type="Date" length="" field="review_time"/>
+		<property name="checkStatus" type="Long" length="1" initial="" field="check_status"/>
+		<property name="checkTime" type="Date" length="" field="check_time"/>
+  		<property name="topFlag" type="Long" length="1" initial="" field="top_flag"/>
+  		<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+		<property name="topFlagName" type="String" length="50" initial="" field=""/>
+		<property name="topTime" type="Date" length="" initial="" field="top_time"/>
+		<property name="likeCount" type="Long" length="1" initial="" field="like_count"/>
+		
+
+		<property name="title" type="String" length="" field=""/>
+  		<property name="file" type="String" length="" field=""/>
+  		<property name="fileId" type="String" length="" field=""/>
+  		<property name="type" type="String" length="" field=""/>
+  		<property name="checkType" type="String" length="" field=""/>
+  		<property name="status" type="String" length="" initial="" field=""/>
+  		<property name="reviewName" type="String" length="" initial="" field=""/>
+  		<property name="recommendFlag" type="String" length="" initial="" field=""/>
+  		<property name="reFlag" type="Long" length="1" field=""/>
+		<property name="tFlag" type="Long" length="1" field=""/>
+		<property name="school" type="String" length="1" initial="" field=""/>
+		<property name="readPeople" type="Long" length="20" field=""/>
+		<!-- 能不能进行推荐 -->
+		<property name="ableRecommend" type="String" length="20" field=""/>
+  </object>          
+</model_layer>
+</tsoftware>   

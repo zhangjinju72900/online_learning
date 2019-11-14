@@ -1,0 +1,37 @@
+UI名称		题库列表（frmHomeworkList）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmQuestionList_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		eq_difficultyLevel: "1" 	--难度等级
+		eq_enableStatus: "1"		--启用状态
+		eq_id: "76"			--试题id
+		eq_questionClassifyId: "1"	--试题分类
+		eq_questionType: "1"		--试题类型
+		lk_content: "牛顿"		--题干
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		content: "牛顿发现了万有引力并创建了牛顿定律"	--题干
+		createTime: "2019-01-02 21:17:11"		--创建时间
+		difficultyLevel: 1				--难度
+		difficultyLevelName: "一般难度"			--难度对应字典项名称
+		enableStatus: 1					--启用状态
+		enableStatusName: "禁用"			--启用状态名称
+		id: 76
+		questionClassifyId: 1				--分类id
+		questionType: 1					--试题类型
+		questionTypeName: "多选"			--试题类型名称
+		}
+
+
+
+

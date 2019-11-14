@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">			
+	<ui_layer>
+		<ui name="frmPostageAdd" title="新增工作项">		
+			<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+				<control name="save" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+				<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+			</panel>			
+			<!-- 查询结果 -->
+			<panel name="pForm" title="新增" object="postage" type="Group">
+				<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="80" height="" column="1"/>
+				<control name="province" title="省份" property="province" type="ComboBox" edit="Y" required="Y" format="" width="1" height="1" column=""/>				
+				<control name="price" title="价格" property="price" type="TextBox" edit="Y" required="Y" format="" width="1" height="1" column=""/>				
+				<control name="freeshipping" title="免邮价格" property="freeshipping" type="TextBox" edit="Y" required="Y" format="" width="1" height="1" column="3"/>				
+			</panel>	
+			
+					 
+		   <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		       <procedure name="jClear"  logic="Clear" ifyes="js" ifno="" sync="Y">
+		         <param name="Out" value="pForm"></param>     		   	 
+		       </procedure>		 
+		       <procedure name="js" server="" logic="List" ifyes="qid" ifno="">
+			         <param name="Out" value="pForm.province"></param>
+			         <param name="Sql" value="khAdmin/postage/QryProvinceList"></param>
+			   </procedure>  
+	       		  		     	      		       
+		    </flow>
+		    
+		    
+		    
+			<!-- 保存工作项 -->
+			<flow trigger="pButton.save" event="OnClick" filter="">
+				<procedure name="jssave" logic="Save" ifyes="jsclose" ifno="">
+					<param name="In" value="pForm"></param>
+					<param name="Plugin" value="savePostage"></param>
+					<param name="Msg" value="'已保存'"></param>
+				</procedure>
+				<procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+					<param name="Refresh" value="true"></param>
+				</procedure>
+			</flow>		
+			<!-- 关闭工作项 -->
+			<flow trigger="pButton.cancel" event="OnClick" filter="">
+				<procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+					<param name="Refresh" value="true"></param>
+				</procedure>
+			</flow>				
+			<!-- 布局 -->
+		    <layout>
+			  	<region location ="South" scale="">
+			    		<subregion panel="pButton" location ="East" scale=""/>
+			    </region>
+				<region location ="Center" scale="">
+					<subregion panel="pForm" location="Center" scale=""/>
+			    </region>
+		    </layout>
+		    
+    		</ui>
+    </ui_layer>
+</tsoftware>

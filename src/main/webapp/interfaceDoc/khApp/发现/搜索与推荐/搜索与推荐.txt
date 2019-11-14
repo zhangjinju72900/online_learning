@@ -1,0 +1,114 @@
+UI名称		搜索列表（frmQueryList）
+
+tokenKey：OnClick_pToolbar_btnsearch_frmQueryList_jsquery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {
+		"content": "", --搜索内容
+		"page": 1,
+		"rows": 50
+	},
+
+返回示例
+"data": {
+		"total": 1,
+		"rows": [
+			{"originTime":"2018-08-06 09:29:14", --发布时间
+			"count":0,  --评论数
+			"likeCount":3, --点赞数
+			"likeType":"0", --是否已点赞， 0:未点，1:已点
+			"source":0, --来源，--type为info时，source为1，代表官方资讯，fileId只会有一个值，source为其他值，代表普通资讯，fileId可能会有多个值（，隔开）
+			"valid_flag":0,
+			"title":"专题4", --标题
+			"type":"sub", --类型info：资讯， sub:专题，act:活动
+			"content":"4", --内容
+			"createBy":0, --创建人
+			"top_flag":1, --置顶 0：不置顶，1：置顶
+			"createTime":"2018-08-06 09:29:17",--创建时间
+			"id":8, --ID
+			"top_time":"2018-08-07 06:18:46",--置顶时间
+			"fileId":"0" --图片ID,多个以逗号隔开,
+
+			新增返回数据：
+			"timeType":"",--type为活动时，-1未开始，0进行中，1已结束
+			"activityTitle":"",--活动标题
+			"nickname":"",--用户昵称
+			"activityId":"",--source为2时，被晒图的活动ID
+			"startTime":"",--开始时间
+			"focusType":"0",--source为资讯时，是否关注，0未，1已
+			"collectCount":0,--收藏数
+			"count":1,--评论数
+			"activityPic":"",--source为2时，被晒图的活动首图
+			"uFileId":1527,--用户头像图片ＩＤ
+			"collectType":"0",--source为1且type为资讯，是否已收藏，0未，1已
+			"releaseAddress":"",--发布地址
+			"endTime":"",--结束时间
+			
+		}]
+	},
+
+
+
+
+UI名称		推荐列表（frmRecommendList）
+
+tokenKey：OnLoad__frmRecommendList_jQuery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {
+		"eq_id": "", 
+		"page": 1,
+		"rows": 50
+	},
+
+返回示例
+"data": {
+		"total": 1,
+		"rows": [
+			{"originTime":null,  --发布时间
+		"clickCount":"9", -- 点击数
+		"count":0, --评论数
+		"uFileId":null, --发布人头像文件ID
+		"likeType":"0", --是否已点赞， 0:未点，1:已点
+		"source":0, --来源，--type为info时，source为1，代表官方资讯，fileId只会有一个值，source为其他值，代表普通资讯，fileId可能会有多个值（，隔开）
+		"valid_flag":0,--标识（0-正常；1-作废）
+		"title":"活动1", --标题
+		"type":"act", ---类型info：资讯， sub:专题，act:活动
+		"createBy":0,--创建人
+		"top_flag":1,  --置顶 0：不置顶，1：置顶
+		"createTime":null,--创建时间
+		"uName":null, --发布人名称
+		"id":8, --ID
+		"top_time":null, --置顶时间
+		"fileId":"0"  --图片ID,多个以逗号隔开,
+
+		新增返回数据：
+		"timeType":"",--type为活动时，-1未开始，0进行中，1已结束
+		"likeCount":1,--点赞数
+		"activityId":"",--source为2时，被晒图的活动ID
+		"activityTitle":"",--source为2时，被晒图的活动标题
+		"nickname":"",--用户昵称
+		"startTime":"",--开始时间
+		"focusType":"0",--source为资讯时，是否关注，0未，1已
+		"collectCount":0,--收藏数
+		"activityPic":"",--source为2时，被晒图的活动首图
+		"collectType":"0",--source为1且type为资讯，是否已收藏，0未，1已
+		"releaseAddress":"",--发布地址
+		"endTime":"",--结束时间
+		}]
+	},
+
+
+
+
+
+
+

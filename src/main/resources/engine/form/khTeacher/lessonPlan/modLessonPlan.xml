@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<object name="modLessonPlan" table="t_lesson_plan" primary="id" unique="" order="id desc" autoinc="Y">
+		<property name="id" type="Long" length="200" initial="" field="id"/>
+		<property name="name" type="String" length="200" initial="" field="name"/>
+		<property name="classId" type="Long" length="100" initial="" field="class_id"/>
+		<property name="lessonId" type="Long" length="100" initial="" field="course_id"/>
+		<property name="courseId" type="Long" length="100" initial="" field="course_id"/>
+		<property name="sectionId" type="Long" length="100" initial="" field="section_id"/>
+		<property name="courseCount" type="Long" length="100" initial="" field="course_count"/>
+		<property name="studentCount" type="Long" length="100" initial="" field="student_count"/>
+		<property name="guideTeacherId" type="Long" length="100" initial="" field="guide_teacher_id"/>
+		<property name="tname" type="Long" length="100" initial="" field=""/>
+		<property name="teachingObject" type="String" length="100" initial="" field="teaching_object"/>
+		<property name="teachingSite" type="String" length="100" initial="" field="teaching_site"/>
+		<property name="equipment" type="String" length="200" initial="" field="equipment"/>
+		<property name="customerTask" type="String" length="200" initial="" field="customer_task"/>
+		<property name="teachingGoal" type="String" length="200" initial="" field="teaching_goal"/>
+		<property name="teachingContent" type="String" length="200" initial="" field="teaching_content"/>
+		<property name="homeworkContent" type="String" length="200" initial="" field="homework_content"/>
+		<property name="teacherId" type="Long" length="100" initial="" field="teacher_id"/>
+		<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+		
+		<property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+		<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+		<property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+		<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+		<property name="schoolId" type="Long" length="20" initial="" field="school_id"/>
+		<property name="createDate" type="Long" length="100" initial="" field=""/>
+		
+		<property name="className" type="String" length="500" initial="" field=""/>
+		<property name="courseName" type="String" length="500" initial="" field=""/>
+		<property name="sectionName" type="String" length="200" initial="" field=""/>
+		<property name="guideTeacherName" type="Long" length="100" initial="" field=""/>
+		<property name="regionName" type="Long" length="100" initial="" field=""/>
+	</object>
+	
+	<object name="modLessonStep" table="t_lesson_step" primary="id" unique="" order="id desc" autoinc="Y">
+		<property name="id" type="Long" length="200" initial="" field="id"/>
+		<property name="lessonPlanId" type="Long" length="200" initial="" field="lesson_plan_id"/>
+		<!-- <property name="name" type="String" length="200" initial="" field="name"/> -->
+  		<property name="bzname" type="String" length="200" initial="" field="name"/>
+		<property name="teachingCount" type="Long" length="100" initial="" field="teaching_count"/>
+		<!-- <property name="teachingContent" type="String" length="400" initial="" field="teaching_content"/> -->
+  		<property name="steachingContent" type="String" length="400" initial="" field="teaching_content"/>
+		<property name="teachingAssist" type="String" length="400" initial="" field="teaching_assist"/>
+		<property name="teachingMethod" type="String" length="400" initial="" field="teaching_method"/>
+		<property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+		<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+		<property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+		<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+	</object>
+</model_layer>
+</tsoftware>

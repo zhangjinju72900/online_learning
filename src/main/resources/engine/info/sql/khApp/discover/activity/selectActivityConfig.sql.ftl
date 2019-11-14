@@ -1,0 +1,1 @@
+select id from t_activity_config where activity_id = #{data.activityId}

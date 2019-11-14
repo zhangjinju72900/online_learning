@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+      xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmResourcesUnzip" title="资源编辑">
+   	<panel name="pnlHidden" title="查询条件" object="tCustomerResources" type="Hidden">
+		<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="empGroup" title="tab1" object="tCustomerResources" type="Group">
+		<control name="ctlId" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+		<control name="ctlCoding" title="编码格式" property="" type="ComboBox" edit="Y" required="Y" format="" width="1" height="1" column="1"/>
+	</panel>
+	<panel name="empDown" title="pnlDown" object="" type="Toolbar">
+		<control name="ctlSave" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+		
+    <flow trigger="" event="OnLoad" filter="" >
+    	
+      <procedure name="getId" server="" logic="DecodeId" ifyes="getEmptype" ifno="">
+        <param name="Out" value="empGroup.ctlId"></param>
+      </procedure>
+      
+      <procedure name="getEmptype"  logic="List" ifyes="qid" ifno="">
+        <param name="Out" value="empGroup.ctlCoding"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryResourcesCoding"></param>
+      </procedure>
+    </flow>
+    
+    <flow trigger="empDown.ctlSave" event="OnClick" filter="" >
+      <procedure name="jssave"  logic="SaveCustom" ifyes="jsclose" ifno="">
+        <param name="In" value="empGroup"></param>
+        <param name="Out" value="empGroup.ctlId"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+        <param name="Plugin" value="unzipExecute" />
+        <param name="Msg" value="'资源已保存'"></param>
+      </procedure>
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>
+    <!-- 取消 -->
+    <flow trigger="empDown.ctlCancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="false"></param>
+      </procedure>
+    </flow>
+    
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="empDown" location="South" scale="" />
+      </region>
+      <region location ="North" scale="">
+        <subregion panel="empGroup" location="Center" scale="" />
+        <subregion panel="pnlHidden" location="North" scale="" />
+      </region>
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

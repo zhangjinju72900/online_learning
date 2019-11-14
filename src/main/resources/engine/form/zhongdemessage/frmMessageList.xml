@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+
+	<ui_layer>
+		<ui name="frmMessageList" title="消息列表">
+			<!-- 工具栏 pToolbar.btnQuery -->
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnQuery" title="查询" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column="" />
+			   <control name="btnReadFlag" title="查看情况查询" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column="" />
+			   <control name="btnChangeReadFlag" title="类别标记已读" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column="" />
+				<control name="btnDelete" title="删除" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+
+			<!-- 查询条件   -->
+			<panel name="pCondition" title="查询条件" object="tMessageRecord"
+				   type="Group">
+				<!--<control name="eq_relationId" title="消息相关人" property="relationId"-->
+						 <!--type="Hidden" edit="Y" required="N" format="" width="1" height="1"-->
+						 <!--initial="session.userInfo.userId" column="" />-->
+				<control name="eq_listType" title="发送类型" property="listType"
+						 type="ComboBox" edit="Y" required="N" format="" width="1" height="1" column="3"/>
+			</panel>
+
+			<!-- 查询结果 pTable   -->
+			<panel name="pTable" title="查询结果" object="tMessageRecord" type="Grid"
+				   order="id desc" multiple="Y">
+				<control name="ctlSetRead" title="设为已读" property="" type="Link"
+						 edit="N" required="" format="" width="80" height="" column="" />
+				<control name="id" title="消息ID" property="id" type="TextBox"
+						 edit="" required="" format="" width="80" height="" column="" />
+				<control name="receiverId" title="接收人ID" property="receiverId" type="TextBox"
+						 edit="" required="" format="" width="80" height="" column="" />
+				<control name="senderId" title="发送人ID" property="senderId" type="TextBox"
+						 edit="" required="" format="" width="80" height="" column="" />
+				<control name="senderType" title="发送类型" property="senderType" type="TextBox"
+						 edit="" required="" format="" width="80" height="" column="" />
+				<control name="senderTime" title="发送时间" property="senderTime" type="TextBox"
+						 edit="" required="" format="" width="80" height="" column="" />
+				<control name="ufileId" title="头像ID" property="ufileId" type="Hidden"
+						 edit="" required="" format="" width="80" height="" column="" />
+
+				<control name="nickname" title="昵称" property="nickname" type="TextBox"
+						 edit="" required="" format="" width="80" height="" column="" />
+				<control name="content" title="内容" property="content" type="TextBox"
+						 edit="" required="" format="" width="80" height="" column="" />
+				<control name="readFlagName" title="是否已读" property="readFlagName" type="TextBox"
+						 edit="" required="" format="" width="80" height="" column="" />
+				<control name="readFlag" title="是否已读标识" property="readFlag" type="Hidden"
+						 edit="" required="" format="" width="80" height="" column="" />
+				<control name="sumFlag" title="是否已读标识" property="" type="Hidden"
+						 edit="" required="" format="" width="80" height="" column="" />
+			</panel>
+
+			<!--页面逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="c1" logic="Clear" ifyes="list1" ifno="">
+					<param name="Out" value="pCondition" />
+				</procedure>
+				<procedure name="list1" logic="List" ifyes="j2" ifno="">
+					<param name="Out" value="pCondition.eq_listType"/>
+					<param name="Sql" value="zhongdemessage/ListSenderType"/>
+				</procedure>
+				<procedure name="j2" logic="Query" ifyes="" ifno="">
+					 <param name="In" value="pCondition"/>
+					<param name="Out" value="pTable"/>
+					<!-- <param name="Plugin" value="updateMessageReadFlagPlugin"/> -->
+					<param name="Sql" value="zhongdemessage/QryMessageList"/>
+				</procedure>
+			</flow>
+
+			<!-- 查询按钮 pToolbar.btnQuery -->
+			<flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					 <param name="In" value="pCondition"/>
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="zhongdemessage/QryMessageList"/>
+				</procedure>
+			</flow>
+			<!-- 查询按钮 pToolbar.btnReadFlag -->
+			<flow trigger="pToolbar.btnReadFlag" event="OnClick" filter="">
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					 <param name="In" value="pCondition"/>
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="zhongdemessage/QryMessageFlagList"/>
+				</procedure>
+			</flow>
+			<!-- 标记已读 pToolbar.btnChangeReadFlag -->
+			<flow trigger="pToolbar.btnChangeReadFlag" event="OnClick" filter="">
+				<procedure name="jsSave" logic="SaveCustom" ifyes="" ifno="">
+					 <param name="In" value="pCondition"/>
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="zhongdemessage/UpdateMessageFlagForType"/>
+				</procedure>
+			</flow>
+
+			<!-- 批量删除消息 -->
+			<flow trigger="pToolbar.btnDelete" event="OnClick" filter="">
+				<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jsDecodeid" ifno="j0">
+					<param name="In" value="pTable.id"/>
+				</procedure>
+				<procedure name="j0" server="" logic="InfoMsg" ifyes="" ifno="">
+					<param name="Msg" value="请至少选择一条消息"/>
+				</procedure>
+				<procedure name="jsDecodeid" server="" logic="DecodeId" ifyes="jCMsg" ifno="">
+					<param name="out" value="pTable.id"/>
+				</procedure>
+				<procedure name="jCMsg" server="" logic="ConfirmMsg" ifyes="jDelete" ifno="">
+					<param name="Title" value="删除提示" />
+					<param name="Msg" value="确认删除当前消息吗?" />
+				</procedure>
+				<procedure name="jDelete"  logic="SaveCustom" ifyes="queryInfo" ifno="">
+					<param name="In" value="pTable" />
+					<param name="DAOPlugin" value="deleteMessagePlugin"/>
+					<param name="sql" value="khAdmin/resourcesManage/QryTest"/>
+					<param name="Msg" value="'资讯已删除'" />
+				</procedure>
+				<procedure name="queryInfo" logic="Query" ifyes="" ifno="">
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="zhongdemessage/QryMessageList"/>
+				</procedure>
+			</flow>
+
+			<!-- 设为已读 -->
+			<flow trigger="pTable.ctlSetRead" event="OnClick" filter="row.readFlag == 0">
+				<procedure name="jInsert"  logic="SaveCustom" ifyes="queryInfo" ifno="">
+					<param name="In" value="pTable" />
+					<param name="Sql" value="zhongdemessage/UpdateMessageFlag"></param>
+
+					<param name="Msg" value="已设为已读" />
+				</procedure>
+				<procedure name="queryInfo" logic="Query" ifyes="" ifno="">
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="zhongdemessage/QryMessageList"/>
+				</procedure>
+
+
+			</flow>
+
+
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale="" />
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pCondition" location="North" scale="" />
+					<subregion panel="pTable" location="Center" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

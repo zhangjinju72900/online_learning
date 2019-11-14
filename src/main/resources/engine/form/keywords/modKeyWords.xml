@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<object name="keyWords" table="t_keyword" primary="id" unique="" order="id desc" autoinc="Y">
+	<property name="id" type="Long" length="10" initial="" field="id"/>
+	<property name="word" type="String" length="50" field="word"/>
+    <property name="createTime" type="Date" length="" validate=""  field="create_time" />
+     <property name="creater" type="String" length="50" field="create_by"/>
+     <property name="updateTime" type="Date" length="" validate=""  field="update_time" />
+     <property name="updater" type="String" length="50" field="update_by"/>
+
+  </object>       
+</model_layer>
+</tsoftware>

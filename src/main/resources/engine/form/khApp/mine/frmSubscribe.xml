@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmSubscribe" title="我的关注"> 
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+         <control name="back" title="返回" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+         <control name="focusOn" title="关注" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+         <control name="cancel" title="取消关注" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
+    </panel>
+	<panel name="pCondition" title="查询结果" object="Subscription" type="Group" multiple="N" >
+		<control name="focusOnId" title="关注人ID" property="focusOnId" type="TextBox" edit="Y" required="" format="" width="2" height="1" column="1"/>
+	</panel>
+	<!-- 初始加载 -->
+    <flow trigger="" event="OnLoad" filter="">  
+        <procedure name="j1" logic="DecodeId" ifyes="qid" ifno="">
+            <param name="Out" value="pCondition.focusOnId"></param>
+        </procedure>
+    </flow>	
+    <!-- 关注 -->
+    <flow trigger="pToolbar.focusOn" event="OnClick" filter="">
+      <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+          <param name="Sql" value="khApp/mine/focus/SaveFocusOn"></param>
+          <param name="In" value="pCondition"></param>
+          <param name="Msg" value="'关注成功'"></param>
+      </procedure>            
+    </flow>
+    <!-- 取消关注 -->
+    <flow trigger="pToolbar.cancel" event="OnClick" filter="">
+      <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+          <param name="Sql" value="khApp/mine/focus/CancelFocusOn"></param>
+          <param name="In" value="pCondition"></param>
+          <param name="Msg" value="'取消关注成功'"></param>
+      </procedure>
+    </flow> 
+    <!--返回-->
+    <flow trigger="pToolbar.back" event="OnClick" filter="">
+        <procedure name="proTransition" server="/frmMySubscriptions" logic="Back" ifyes="" ifno="">
+            <param name="To" value="frmMySubscriptions"></param>
+        </procedure>
+    </flow>
+    <!-- 布局 -->
+    <layout>
+  	  <region location ="North" scale="">
+        <subregion panel="pToolbar" location ="North" scale=""/>
+      </region>
+	  <region location ="Center" scale="">
+		<subregion panel="pCondition" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui> 
+</ui_layer>
+</tsoftware>

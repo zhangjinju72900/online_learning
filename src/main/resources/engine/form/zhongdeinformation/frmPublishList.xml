@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+
+	<ui_layer>
+		<ui name="frmPublishList" title="发布列表">
+			<!-- 工具栏 pToolbar.btnQuery -->
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnQuery" title="查询" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+
+			<!-- 查询条件 Hidden pCondition.eq_applyBy pCondition.eq_validFlag -->
+			<panel name="pCondition" title="查询条件" object="tInformation"
+				type="Group">
+				<control name="userId" title="发布人" property="releaseBy"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					initial="" column="" />
+				<!-- <control name="eq_validFlag" title="标识" property="validFlag"
+					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					initial="0" column="3" /> -->
+			</panel>
+
+			<!-- 查询结果 pTable -->
+			<panel name="pTable" title="查询结果" object="tInformation" type="Grid"
+				order="id desc">
+				<control name="id" title="资讯ID" property="id" type="Hidden"
+					edit="" required="" format="" width="80" height="" column="" />
+				<control name="title" title="资讯标题" property="title" type="TextBox"
+					edit="" required="" format="" width="380" height="" column="" />
+
+				<control name="picId" title="图片" property="picId" type="Hidden"
+					edit="" required="" format="" width="80" height="" column="" />
+
+				<control name="likeCount" title="点赞数" property="likeCount"
+					type="TextBox" edit="" required="" format="" width="130" height=""
+					column="" />
+				<control name="reviewCount" title="评论人数" property="reviewCount"
+					type="TextBox" edit="" required="" format="" width="130" height=""
+					column="" />
+				<control name="releaseTime" title="发布时间" property="releaseTime"
+					type="TextBox" edit="" required="" format="" width="180" height=""
+					column="" />
+				<control name="validFlag" title="标识" property="validFlag"
+					type="TextBox" edit="" required="" format="" width="130" height=""
+					column="" />
+				<control name="source" title="来源" property="source" type="TextBox"
+					edit="" required="" format="" width="130" height="" column="" />
+
+				<control name="releaseBy" title="发布人" property="releaseBy"
+					type="Hidden" edit="" required="N" format="" width="130" height="1"
+					column="" />
+			</panel>
+
+			<!--页面逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="c1" logic="Clear" ifyes="j2" ifno="">
+					<param name="Out" value="pCondition" />
+				</procedure>
+				<procedure name="j2" logic="Query" ifyes="" ifno="">
+					 <param name="In" value="pTable"></param> 
+					<param name="Out" value="pTable"></param>
+					<param name="Plugin" value="activityInfoCDN"></param>
+					<param name="Sql" value="zhongdeinformation/QryInformationList"></param>
+				</procedure>
+			</flow>
+
+			<!-- 查询按钮 pToolbar.btnQuery -->
+			<flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
+				<procedure name="jsquery" logic="Query" ifyes="" ifno="">
+					<!-- <param name="In" value="pCondition"></param> -->
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="zhongdeinformation/QryInformationList"></param>
+				</procedure>
+			</flow>
+
+			<!-- 活动详情 -->
+			<!-- <flow trigger="pTable.title" event="OnClick" filter=""> <procedure 
+				name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno=""> <param 
+				name="In" value="pTable.id"></param> </procedure> <procedure name="jspopup" 
+				logic="Popup" ifyes="jsquery" ifno=""> <param name="To" value="frmMyActivityEdit"></param> 
+				<param name="Mode" value="Edit"></param> <param name="Window" value="Large"></param> 
+				<param name="Title" value="编辑活动"></param> </procedure> <procedure name="jsquery" 
+				logic="Query" ifyes="" ifno=""> <param name="In" value="pCondition"></param> 
+				<param name="Out" value="pTable"></param> <param name="Sql" value="zhongde/QryActivityList"></param> 
+				</procedure> </flow> -->
+
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale="" />
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pCondition" location="North" scale="" />
+					<subregion panel="pTable" location="Center" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

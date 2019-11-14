@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmAppGoodsEdit" title="商品收藏"> 
+	<panel name="pForm" title="查询结果" object="goodsCollect" type="Group" multiple="N" >
+		<control name="eq_goodId" title="商品id" property="goodId" type="TextBox" edit="Y" required="" format="" width="1" height="" column="2"/>
+	</panel>
+	<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+	    <control name="cancelSave" title="取消收藏" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+		<control name="save" title="收藏" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+		<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+	</panel>
+	<!-- 初始加载 -->
+    <flow trigger="" event="OnLoad" filter="">   
+      <procedure name="jClear"  logic="Clear" ifyes="jDecodeId" ifno="" sync="Y">
+           <param name="Out" value="pForm"></param>
+      </procedure> 
+       <procedure name="jDecodeId" server="" logic="DecodeId" ifyes="qid" ifno="">
+        <param name="Out" value="pForm.eq_goodId" />
+      </procedure>    
+    </flow>	
+    
+  <!-- 收藏-->
+  <flow trigger="pButton.save" event="OnClick" filter="">
+      <procedure name="jsSave" logic="SaveCustom" ifyes="jsclose" ifno="">
+      <param name="Plugin" value="addGoodsCollect" />
+      <param name="Sql" value="khApp/mine/mall/updateGoods" />   
+        <param name="In" value="pForm" />  
+        <param name="Msg" value="'成功'" />
+      </procedure>
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>
+    
+     <!-- 取消收藏-->
+  <flow trigger="pButton.cancelSave" event="OnClick" filter="">
+      <procedure name="jsSave" logic="SaveCustom" ifyes="jsclose" ifno="">
+      <param name="Plugin" value="cancelGoodsCollect" />
+      <param name="Sql" value="khApp/mine/mall/cancelGoodsCollect" />   
+        <param name="In" value="pForm" />  
+        <param name="Msg" value="'成功'" />
+      </procedure>
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>
+    
+    <!-- 取消 -->
+    <flow trigger="pButton.cancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>
+    <!-- 布局 -->
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="pButton" location="South" scale="" />
+      </region>
+	  <region location ="Center" scale="">
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui> 
+</ui_layer>
+</tsoftware>

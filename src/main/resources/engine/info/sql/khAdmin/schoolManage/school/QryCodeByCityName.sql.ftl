@@ -1,0 +1,1 @@
+select code from t_city where name = #{data.value} and level='1'

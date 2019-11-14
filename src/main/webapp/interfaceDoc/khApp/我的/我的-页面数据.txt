@@ -1,0 +1,31 @@
+﻿UI名称		我的页面展示接口（frmAppBasicList）
+
+tokenKey	OnLoad__frmAppBasicList_jQuery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {page: 1, rows: 50}
+
+返回示例
+"data":{"readFlagName":"无",  
+"readFlag":0,  --是否有未读信息 0没有，1有
+"collectCount":3,  --收藏数量
+"focusCount":8,  --关注数量
+"ctlSign":"签到",
+"userExplain":"我是管理员哦我是管理员哦",   --个人简介
+"integral":3319,  --积分
+"name":"管理员",  --名称
+"nickname":"小兔子耳朵长长",  --昵称
+"signType":0,  --是否签到 0未签，1已签
+"msgCount":58,  --消息数量
+"id":2,  --人员ID
+"publishCount":13,  --发布数量
+"fileId":2082  --人员头像
+}
+		
+		
+
+

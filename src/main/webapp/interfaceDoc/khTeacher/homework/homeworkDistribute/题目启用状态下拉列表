@@ -1,0 +1,18 @@
+
+
+UI名称		作业分发-从题库选择-选择题目启用状态（frmQuestionList）
+
+tokenKey	 OnLoad__frmQuestionList_statusList
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{}
+
+返回示例
+"data":		{text: "启用"
+			value: "0"}			--题目启用状态；0-启用；1-禁用
+		
+

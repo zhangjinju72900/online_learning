@@ -1,0 +1,1 @@
+update t_course_section_resources SET course_resources_name=IFNULL(#{data.courseResName},#{data.name}) WHERE id=#{data.id}

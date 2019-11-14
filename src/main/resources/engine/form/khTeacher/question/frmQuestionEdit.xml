@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmQuestionEdit" title="编辑">
+			<panel name="pForm" title="编辑" object="question" type="Group">
+				<control name="id" title="试题id" property="id" type="Hidden" edit="Y"
+						 required="N" format="" multiple="N" width="1" height="1" column=""/>
+				<control name="eq_questionClassifyId" title="试题分类id" property="questionClassifyId" type="Hidden" edit="Y"
+						 required="N" format="" multiple="N" width="1" height="1" column=""/>
+				<control name="questionClassifyName" title="试题分类" property="questionClassifyName" type="PopupBox" edit="Y"
+						 required="N" format="" multiple="N" width="1" height="1" column="2"/>
+				<control name="questionType" title="题型" property="questionType" type="ComboBox" edit="Y"
+						 required="Y" format="" multiple="N" width="1" height="1" column=""/>
+				<control name="optionsNumber" title="选项数量" property="optionsNumber" type="ComboBox" edit="Y"
+						 required="N" format="" multiple="N" width="1" height="1" column="2"/>
+				<control name="difficultyLevel" title="难度" property="difficultyLevel" type="ComboBox" edit="Y"
+						 required="Y" format="" multiple="N" width="1" height="1" column=""/>
+				<control name="enableStatus" title="状态" property="enableStatus" type="ComboBox" edit="Y"
+						 required="N" format="" multiple="N" width="1" height="1" column="2"/>
+				<control name="content" title="题干" property="content" type="TextBox" edit="Y"
+						 required="Y" format="" multiple="N" width="1" height="1" column="1"/>
+				<control name="answerThought" title="答题解析" property="answerThought" type="TextBox" edit="Y"
+						 required="N" format="" multiple="N" width="1" height="1" column="1"/>
+				<control name="teacherId"   title="老师Id"  property="teacherId"  type="Hidden" edit="N" required="N" 
+			    		target="session.userInfo.userId" format="" width="1" height="1" column="2"  />
+				<control name="createTime"   title="创建日期"  property="createTime"  type="Hidden" edit="N" required="N" 
+			    		target="editMode=='Add'?CurrentTime():nil" format="" width="1" height="1" column=""  />
+			    <control name="createBy"   title="创建人"  property="createBy"  type="Hidden" edit="N" required="N" 
+			    		target="editMode=='Add'?session.userInfo.userId:nil" format="" width="1" height="1" column="2"  />
+			    <control name="updateTime"  title="更新日期"  property="updateTime"  type="Hidden" edit="N" required="N" 
+						target="CurrentTime()" format="" width="1" height="1" column=""  />
+			    <control name="updateBy"   title="更新人"  property="updateBy"  type="Hidden" edit="N" required="N" 
+			    		target="session.userInfo.userId" format="" width="1" height="1" column="2"  /> 
+			</panel>
+			<panel name="pTable" title="查询结果" object="questionOption" type="Grid" multiple="Y">
+				<control name="ctlAdd" title="新增选项" property="" type="Button" edit="" required="" format="" width=""
+						 height="" column=""/>
+				<control name="ctlDel" title="删除选项" property="" type="Button" edit="" required="" format="" width=""
+						 height="" column=""/>
+				<control name="id" title="id" property="id" type="TextBox" edit="N" required="" format="" width="100"
+						 height="1" initial="0"  column=""/>
+				<control name="questionId" title="问题id" property="questionId" type="Hidden" edit="Y" required=""
+						 format="" width="100" height="1" column=""/>
+				<control name="title" title="选项标题" property="title" type="TextBox" edit="Y" required="" format=""
+						 width="100" height="1" column=""/>
+				<control name="content" title="选项内容" property="content" type="TextBox" edit="Y" required="" format=""
+						 width="100" height="1" column=""/>
+				<control name="correctFlag" title="是否正确答案" property="correctFlag" type="TextBox" edit="Y" required=""
+						 format="" width="100" height="1" column=""/>
+			    <control name="createTime"   title="创建日期"  property="createTime"  type="Hidden" edit="N" required="N" 
+			    		target="editMode=='Add'?CurrentTime():nil" format="" width="1" height="1" column=""  />
+			    <control name="createBy"   title="创建人"  property="createBy"  type="Hidden" edit="N" required="N" 
+			    		target="editMode=='Add'?session.userInfo.userId:nil" format="" width="1" height="1" column="2"  />
+			    <control name="updateTime"  title="更新日期"  property="updateTime"  type="Hidden" edit="N" required="N" 
+						target="CurrentTime()" format="" width="1" height="1" column=""  />
+			    <control name="updateBy"   title="更新人"  property="updateBy"  type="Hidden" edit="N" required="N" 
+			    		target="session.userInfo.userId" format="" width="1" height="1" column="2"  />  
+			</panel>
+			<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+				<control name="save" title="确认" property="" type="Button" edit="" required="" format="" width=""
+						 height="" column="2"/>
+				<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width=""
+						 height="" column="2"/>
+			</panel>
+			<!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="jClear" logic="Clear" ifyes="jBranch" ifno="">
+					<param name="Out" value="pForm"/>
+				</procedure>
+				<procedure name="jBranch" logic="Branch" ifyes="typeList" ifno="j1">
+					<param name="In" value="getStorage('frmQuestionEdit_EditMode')=='Add'"/>
+				</procedure>
+				<procedure name="j1" server="" logic="DecodeId" ifyes="qryQuestion" ifno="">
+					<param name="Out" value="pForm.id"/>
+				</procedure>
+				<procedure name="qryQuestion" logic="Query" ifyes="qryQuestionOptions" ifno="">
+					<param name="In" value="pForm"/>
+					<param name="Out" value="pForm"/>
+					<param name="Sql" value="khTeacher/question/QryQuestion"/>
+				</procedure>
+				<procedure name="qryQuestionOptions" logic="Query" ifyes="typeList" ifno="">
+					<param name="In" value="pForm"/>
+					<param name="Out" value="pTable"/>
+					<param name="Sql" value="khTeacher/question/QryQuestionOptions"/>
+				</procedure>
+				<procedure name="typeList" logic="List" ifyes="optionsNumberList" ifno="" sync="Y">
+					<param name="Out" value="pForm.questionType"/>
+					<param name="Sql" value="khTeacher/question/QryQuestionTypeList"/>
+				</procedure>
+				<procedure name="optionsNumberList" logic="List" ifyes="difficulty" ifno="" sync="Y">
+					<param name="Out" value="pForm.optionsNumber"/>
+					<param name="Sql" value="khTeacher/question/QryOptionsNumberList"/>
+				</procedure>
+				<procedure name="difficulty" logic="List" ifyes="statusList" ifno="" sync="Y">
+					<param name="Out" value="pForm.difficultyLevel"/>
+					<param name="Sql" value="khTeacher/question/QryDifficultyList"/>
+				</procedure>
+				<procedure name="statusList" logic="List" ifyes="" ifno="" sync="Y">
+					<param name="Out" value="pForm.enableStatus"/>
+					<param name="Sql" value="khTeacher/question/QryEnableStatusList"/>
+				</procedure>
+			</flow>
+			
+			<!-- 题库分类点击事件 -->
+			<flow trigger="pForm.questionClassifyName" event="OnClick" filter="">
+				<procedure name="jspopup" server="" logic="Popup" ifyes="" ifno="">
+					<param name="To" value="frmQuestionTreeM"></param>
+					<param name="Mode" value="Add"></param>
+					<!-- <param name="Sql" value="khTeacher/question/QryClassifyTree"/>	 -->
+					<param name="Window" value="Medium" />
+					<param name="Title" value="选择题库分类"></param>
+			  </procedure>
+			</flow>
+
+			<!-- addRow -->
+			<flow trigger="pTable.ctlAdd" event="OnClick" filter="">
+				<procedure name="addRow" server="" logic="AddRow" ifyes="" ifno="">
+					<param name="Out" value="pTable"/>
+				</procedure>
+			</flow>
+			<!-- remove -->
+			<flow trigger="pTable.ctlDel" event="OnClick" filter="">
+				<procedure name="removeRow" server="" logic="RemoveRow" ifyes="" ifno="">
+					<param name="In" value="pTable"/>
+				</procedure>
+			</flow>
+
+			<!-- 保存 -->
+			<flow trigger="pButton.save" event="OnClick" filter="" defaultEnter="Y">
+				<procedure name="branch" server="" logic="Branch" ifyes="msg" ifno="jsSave1">
+					<param name="In" value="getPanelControlValue('pForm.questionClassifyId'||'pForm.content')==''"/>
+				</procedure>
+				<procedure name="msg" server="" logic="ConfirmMsg" ifyes="" ifno="">
+					<param name="Title" value="提示"/>
+					<param name="Msg" value="请添加试题！"/>
+				</procedure>
+				<procedure name="jsSave1" logic="Save" ifyes="jsClose" ifno="">
+					<param name="In" value="pForm,pTable.questionId"/>
+					<!-- <param name="sql" value="khAdmin/resourcesManage/QryTest"/> -->
+					<!-- <param name="Plugin" value="InsertQuestionPlugin"/> -->
+					<param name="Msg" value="'已保存'"/>
+				</procedure>
+				<!-- <procedure name="jsSave2" logic="SaveCustom" ifyes="jsClose" ifno="">
+					<param name="In" value="pTable"/>
+					<param name="sql" value="khAdmin/resourcesManage/QryTest"/>
+					<param name="Plugin" value="InsertQuestionOptionsPlugin"/>
+					<param name="Msg" value="'已保存'"/>
+				</procedure> -->
+				<procedure name="jsClose" server="" logic="Close" ifyes="" ifno="">
+					<param name="Refresh" value="true"/>
+				</procedure>
+			</flow>
+
+			<!-- 取消 -->
+			<flow trigger="pButton.cancel" event="OnClick" filter="">
+				<procedure name="jsClose" server="" logic="Close" ifyes="" ifno="">
+					<param name="Refresh" value="true"/>
+				</procedure>
+			</flow>
+			<layout>
+				<region location="Center" scale="">
+					<subregion panel="pForm" location="North" scale=""/>
+					<subregion panel="pTable" location="Center" scale=""/>
+				</region>
+				<region location="South" scale="">
+					<subregion panel="pButton" location="South" scale=""/>
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

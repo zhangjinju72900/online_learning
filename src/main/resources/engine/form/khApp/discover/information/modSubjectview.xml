@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+ <model_layer>
+  <object name="modsubjectView" table="t_subject" primary="id" unique="" order="">
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="title" type="String" length="50" initial="" field="title"/>
+   <property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+   <property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+   <property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+   <property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+   <property name="fileID" type="Long" length="20" initial="" field=""/>
+   <property name="count" type="Long" length="10" initial="" field=""/>
+   <property name="releaseStatus" type="Long" length="1" initial="" field=""/>
+   <property name="validFlag" type="Long" length="1" initial="" field=""/>
+   <property name="releaseTime" type="Date" length="20" initial="" field=""/>
+   <property name="releaseBy" type="Long" length="20" initial="" field=""/>
+   <property name="content" type="String" length="200" initial="" field=""/>
+   <property name="likeCount" type="Long" length="10" initial="" field=""/>
+   <property name="clickCount" type="Long" length="10" initial="" field=""/>
+   <property name="reviewCount" type="Long" length="10" initial="" field=""/>
+   <property name="subjectId" type="Long" length="20" initial="" field=""/>
+   <property name="picInfoId" type="Long" length="20" initial="" field=""/>
+   <property name="infoId" type="Long" length="20" initial="" field=""/>
+   <property name="infoTitle" type="String" length="50" initial="" field=""/>
+   <property name="infClickCount" type="Long" length="10" initial="" field=""/>
+   <property name="infCreateTime" type="Date" length="20" initial="" field=""/>
+   <property name="reviewEdit" type="String" length="200" initial="" field=""/>
+
+   <property name="infoContent" type="String" length="200" initial="" field=""/>
+
+
+
+
+  </object>
+ </model_layer>
+</tsoftware>

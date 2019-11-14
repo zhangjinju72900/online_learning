@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+  <object name="operate" table="t_operate_log" primary="id" unique="" order="">
+  		<property name="id" type="Long" length="20" initial="" field="id"/>
+  		<property name="customerUserId" type="Long" length="20" initial="" field="customer_user_id"/>
+  		<property name="eventType" type="String" length="100" field="event_type"/>
+  		<property name="assemblyType" type="Long" length="20" initial="" field="assembly_type"/>
+  		<property name="eventDesc" type="String" length="200" field="event_desc"/>
+  		<property name="platformType" type="Long" length="20" initial="" field="platform_type"/>
+  		<property name="sourceIp" type="String" length="20" field="source_ip"/>
+  		
+  		<property name="zCount" type="Long" length="20" initial="" field=""/>
+  		<property name="hour" type="Date" length="" validate=""  field="" />
+  		<property name="DateTime" type="Date" length="" validate=""  field="" />
+  		<property name="gCount" type="Long" length="20" initial="" field=""/>
+  		<property name="date" type="String" length="20" initial="" field=""/>
+  		<property name="informationCount" type="Long" length="20" initial="" field=""/>
+  		<property name="addUser" type="Long" length="20" initial="" field=""/>
+  		<property name="LivelyUser" type="Long" length="20" initial="" field=""/>
+  		<property name="LivelyCount" type="Long" length="20" initial="" field=""/>
+  		<property name="CoursewareCount" type="Long" length="20" initial="" field=""/>
+  		<property name="Time" type="Date" length="" field=""/>
+  		
+	  	<property name="updateBy" type="Long" length="10" validate=""  field="update_by" />
+		<property name="createBy" type="Long" length="10" validate=""  field="create_by" />	
+		<property name="updateTime" type="Date" length="" validate=""  field="update_time" />
+		<property name="createTime" type="Date" length="" validate=""  field="create_time" />
+  </object>
+</model_layer>
+<ui_layer>
+  <ui name="LineChart" title="活跃时间段"> 
+  	<panel name="pToolbar" title="工具条" object="sumactTimes" type="Toolbar">
+ 		<control name="btnQueryDay" title="日" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+   		<control name="btnQueryWeek" title="周" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+   		<control name="btnQueryMonth" title="月" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+   	</panel>
+	<panel name="pTable" title="统计时间段活跃人次" object="operate" type="LineChart" multiple="" >
+		<control name="hour" title="活跃时间段" property="hour" type="DataLink" />
+        <control name="zCount" title="中职" property="zCount" type="TextBox" />
+        <control name="gCount" title="高职" property="gCount" type="TextBox" />
+	 </panel>
+	
+        
+         
+       <!-- 逻辑加载 -->  
+      <flow trigger="" event="OnLoad" filter="">  
+        <procedure name="j2"  logic="Query" ifyes="j3" ifno="">
+	        <param name="Out" value="pTable"></param>
+	        <param name="Sql" value="college/Qryhuoyue"></param>
+      </procedure>  
+     </flow>
+        
+    <!-- 按钮功能实现 -->
+     <flow trigger="pToolbar.btnQueryDay" event="OnClick" filter="">  
+       	<procedure name="QueryByType" logic="Query" ifyes="QueryByType1" ifno="">
+ 		     <param name="Out" value="pTable"></param>
+ 		     <param name="Sql" value="college/Qryhuoyue"></param>
+ 		  </procedure>
+     </flow>
+    <flow trigger="pToolbar.btnQueryWeek" event="OnClick" filter="">  
+       	<procedure name="QueryByType1" logic="Query" ifyes="QueryByType2" ifno="">
+ 		      <param name="Out" value="pTable"></param>
+ 		      <param name="Sql" value="college/QryhuoyueWeek"></param>
+ 		</procedure>
+    </flow>
+    <flow trigger="pToolbar.btnQueryMonth" event="OnClick" filter="">  
+       	<procedure name="QueryByType2" logic="Query" ifyes="" ifno="">
+ 		     <param name="Out" value="pTable"></param>
+ 		      <param name="Sql" value="college/QryhuoyueMonth"></param>
+ 		</procedure>
+ 	</flow>
+    
+	<!-- 布局 -->
+	<layout>
+  		<region location ="North" scale="">
+        	<subregion panel="pToolbar" location ="North" scale=""/>
+      	</region>
+  		<region location ="Center" scale="">
+        	<subregion panel="pTable" location ="East" scale=""/>
+      	</region>
+    </layout>
+    </ui>
+    </ui_layer>
+    </tsoftware>

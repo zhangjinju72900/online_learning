@@ -1,0 +1,1 @@
+update  t_customer_user_class set class_id=#{data.classId} where customer_user_id = #{data.customerId}

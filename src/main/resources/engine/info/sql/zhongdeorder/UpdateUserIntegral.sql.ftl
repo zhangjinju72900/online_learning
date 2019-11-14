@@ -1,0 +1,1 @@
+update t_customer_user set integral=#{data.personIntegral} where id=#{data.userId};

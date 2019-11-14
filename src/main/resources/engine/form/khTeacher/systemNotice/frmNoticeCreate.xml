@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmNoticeCreate" title="发布通知">
+	<panel name="pForm" title="编辑" object="notice" type="Group">
+		<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="1" column="2"/>
+		<control name="eq_className" title="班级" property="className" type="ComboBox" multiple="Y" edit="Y" required="Y" format="" width="1" height="1" column="2"/>
+		<control name="title" title="标题" property="title" type="TextBox" edit="Y" required="Y" format="" width="2" height="1" column="2"/>
+   		<control name="context" title="内容" property="context" type="TextBox" edit="Y"  required="Y" format="" width="2" height="3" column="2"  />
+   		<control name="source" title="来源" property="source" type="TextBox" edit="Y"  required="Y" format="" width="2" height="3" column="2"  initial="'1'"/>
+   		<!-- <control name="status" title="发布状态" property="status" type="TextBox" edit="Y"  required="Y" format="" width="2" height="3" column="2"  initial="'1'"/> -->
+		<control name="fileId" title="附件ID" property="fileId" type="TextBox" edit="Y"  required="N" format="" width="1" height="1" column="2"  />
+		<control name="validFlag" title="删除标识" property="validFlag" type="Hidden" edit="N"  required="N" target=""  format="" width="1" height="1" column="2"  initial="'0'"/>
+		<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="N"  required="N" target="CurrentTime()"  format="" width="1" height="1" column="2"  />
+		<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="N"  required="" initial="session.userInfo.userId" target="session.userInfo.userId"  format="" width="1" height="1" column="2"  />
+		<control name="releaseBy" title="发布人" property="releaseBy" type="Hidden" edit="N"  required="" initial="session.userInfo.userId" target="session.userInfo.userId"  format="" width="1" height="1" column="2"  />
+		<control name="updateTime" title="更新时间" property="updateTime" type="Hidden" edit="N"  required="N" target="CurrentTime()"  format="" width="1" height="1" column="2"  />
+		<control name="releaseTime" title="更新时间" property="releaseTime" type="Hidden" edit="N"  required="N" target="CurrentTime()"  format="" width="1" height="1" column="2"  />
+		<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="N"  required="" target="session.userInfo.userId"  format="" width="1" height="1" column="2"  />
+	</panel>
+	<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+		<control name="save" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+		<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+	</panel>
+	
+	<!-- 加载 -->
+    <flow trigger="" event="OnLoad" filter="" >
+    	<procedure name="jClear"  logic="Clear" ifyes="getClass" ifno="" sync="Y">
+        	<param name="Out" value="pForm"></param>
+    	</procedure>
+    	<procedure name="getClass"  logic="List" ifyes="" ifno="">
+    		<param name="In" value="pForm"></param>
+        	<param name="Out" value="pForm.eq_className"></param>
+        	<param name="Sql" value="teacherClassName"></param>
+        	<param name="Options" value="YorN,[全部/取消]"/>	
+        </procedure>
+	</flow>
+    <!-- 保存 -->
+    <flow trigger="pButton.save" event="OnClick" filter="" defaultEnter="Y" >
+      <procedure name="jssave"  logic="Save" ifyes="jsclose" ifno="">
+        <param name="In" value="pForm"></param>
+        <!-- <param name="Sql" value="khTeacher/systemNotice/insertNotice"></param> -->
+        <param name="Plugin" value="insertMessageRecord"></param>
+        <param name="Msg" value="'已保存'"></param>
+      </procedure>
+      <procedure name="jsclose" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>	
+    <!-- 取消 -->
+    <flow trigger="pButton.cancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>	 
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="pButton" location="South" scale="" />
+      </region>
+      <region location ="Center" scale="">
+        <subregion panel="pForm" location="Center" scale="" />
+      </region>      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+<!-- 活动报名表 model -->
+	<object name="tActivityApply" table="t_activity_apply" primary="id" unique="" order="">
+		<property name="id" type="Long" length="20" initial="" field="id"/>
+		<property name="activityId" type="Long" length="20" initial="" field="activity_id"/>
+		<property name="applyBy" type="Long" length="20" field="apply_by"/>
+		<property name="applyTime" type="Date" length="" field="apply_time"/>
+		<property name="applyType" type="Long" length="20" field="apply_type"/>
+		<property name="validFlag" type="Long" length="20" field="valid_flag"/>
+		<property name="createTime" type="Date" length="" validate=""  field="create_time" />		
+		<property name="createBy" type="Long" length="10" validate=""  field="create_by" />
+		<property name="updateTime" type="Date" length="" validate=""  field="update_time" />
+		<property name="updateBy" type="Long" length="10" validate=""  field="update_by" />
+		
+		<!-- 新增字段 -->
+		<property name="applyByName" type="String" length="50" field=""/>
+		<property name="createByName" type="String" length="50" validate=""  field="" />
+		<property name="updateByName" type="String" length="50" validate=""  field="" />
+ 	</object>  
+ 	
+ 	<!-- 活动表 model -->
+ 	<object name="tActivity" table="t_activity" primary="id" unique="" order="">
+ 		<property name="id" type="Long" length="20" initial="" field="id"/>
+		<property name="title" type="String" length="500" initial="" field="title"/>
+		<property name="content" type="String" length="500" initial="" field="content"/>
+		<property name="originator" type="Long" length="20" initial="" field="originator"/>
+		<property name="originTime" type="Date" length="" initial="" field="origin_time"/>
+		<property name="releaseStatus" type="String" length="50" initial="" field="release_status"/>
+		<property name="startTime" type="Date" length="" initial="" field="start_time"/>
+		<property name="endTime" type="Date" length="" initial="" field="end_time"/>
+		<property name="site" type="String" length="50" initial="" field="site"/>
+		<property name="address" type="String" length="200" initial="" field="address"/>
+		<property name="applyCount" type="Long" length="20" initial="" field="apply_count"/>
+		<property name="joinCount" type="Long" length="10" initial="" field="join_count"/>
+		
+		
+		
+		<property name="likeCount" type="Long" length="10" initial="" field="like_count"/>
+		<property name="reviewCount" type="Long" length="10" initial="" field="review_count"/>
+		<property name="fileId" type="Long" length="10" initial="" field="file_id"/>
+		<property name="ossKey" type="Long" length="10" initial="" field="oss_key"/>
+		<property name="bucketName" type="Long" length="10" initial="" field="bucket_name"/>
+		<property name="activityType" type="Long" length="10" initial="" field="activity_type"/>
+		
+		<property name="recommendFlag" type="Long" length="10" initial="" field="recommend_flag"/>
+		<property name="integral" type="Long" length="10" initial="" field="integral"/>
+		<property name="joinIntegral" type="Long" length="10" initial="" field="join_integral"/>
+		
+		<property name="topFlag" type="Long" length="10" initial="" field="top_flag"/>
+		<property name="topTime" type="Date" length="" initial="" field="top_time"/>
+		<property name="topBy" type="Long" length="20" initial="" field="top_by"/>
+		<property name="validFlag" type="Long" length="10" initial="" field="valid_flag"/>
+				
+		<property name="createTime" type="Date" length="" validate=""  field="create_time" />		
+		<property name="createBy" type="Long" length="10" validate=""  field="create_by" />
+		<property name="updateTime" type="Date" length="" validate=""  field="update_time" />
+		<property name="updateBy" type="Long" length="10" validate=""  field="update_by" />
+		<property name="updateCount" type="Long" length="10" validate=""  field="update_count" />
+		
+		
+		<!-- 新增 -->
+		<property name="originatorByName" type="String" length="50" initial="" field=""/>
+		<property name="createByName" type="String" length="50" initial="" field=""/>
+		<property name="updateByName" type="String" length="50" initial="" field=""/>
+		<property name="topByName" type="String" length="50" initial="" field="top_by"/>
+		<property name="picId" type="Long" length="20" initial="" field=""/>
+		<property name="applyBy" type="Long" length="20" initial="" field=""/>
+ 	</object>  
+ 	
+ 	<!-- 活动图片表 Model -->
+ 	<object name="tActivityPic" table="t_activity_pic" primary="id" unique="" order="">
+ 		<property name="id" type="Long" length="20" initial="" field="id"/>
+		<property name="activityId" type="Long" length="20" initial="" field="activity_id"/>
+		<property name="picId" type="Long" length="20" initial="" field="pic_id"/>
+		<property name="validFlag" type="Long" length="20" initial="" field="valid_flag"/>		
+		<property name="createTime" type="Date" length="" validate=""  field="create_time" />		
+		<property name="createBy" type="Long" length="10" validate=""  field="create_by" />
+		<property name="updateTime" type="Date" length="" validate=""  field="update_time" />
+		<property name="updateBy" type="Long" length="10" validate=""  field="update_by" />
+		
+		<!-- 新增 -->
+		<property name="originatorByName" type="String" length="50" initial="" field=""/>
+		<property name="createByName" type="String" length="50" initial="" field=""/>
+		<property name="updateByName" type="String" length="50" initial="" field=""/>
+		<property name="topByName" type="String" length="50" initial="" field="top_by"/>
+ 	</object>  
+ 	
+ 	
+ 	
+ 	
+ 	<!-- 活动晒图表  model -->
+ 	<object name="tActivityJoinPic" table="t_activity_join_pic" primary="id" unique="" order="">
+ 		<property name="id" type="Long" length="20" initial="" field="id"/>
+		<property name="activityId" type="Long" length="20" initial="" field="activity_id"/>
+		<property name="picId" type="Long" length="20" initial="" field="pic_id"/>
+		<property name="joinUserId" type="Long" length="20" initial="" field="join_user_id"/>
+		<property name="joinTime" type="Date" length="" initial="" field="join_time"/>
+		<property name="checkStatus" type="Long" length="20" initial="" field="check_status"/>
+		<property name="checkTime" type="Date" length="" initial="" field="check_time"/>
+		<property name="checkBy" type="Long" length="20" initial="" field="check_by"/>
+		
+		<property name="topFlag" type="Long" length="10" initial="" field="top_flag"/>
+		<property name="topTime" type="Date" length="" initial="" field="top_time"/>
+		<property name="topBy" type="Long" length="20" initial="" field="top_by"/>
+		<property name="validFlag" type="Long" length="10" initial="" field="valid_flag"/>
+				
+		<property name="createTime" type="Date" length="" validate=""  field="create_time" />		
+		<property name="createBy" type="Long" length="10" validate=""  field="create_by" />
+		<property name="updateTime" type="Date" length="" validate=""  field="update_time" />
+		<property name="updateBy" type="Long" length="10" validate=""  field="update_by" />
+		
+		<!-- 新增 --> 
+		<property name="activity" type="String" length="50" initial="" field=""/>
+		<property name="joinUserName" type="String" length="50" initial="" field=""/>
+		<property name="checkByName" type="String" length="50" initial="" field=""/>
+		<property name="topByName" type="String" length="50" initial="" field=""/>
+		<property name="createByName" type="String" length="50" initial="" field=""/>
+		<property name="updateByName" type="String" length="50" initial="" field=""/>
+ 	</object>  
+ 	
+ 	 
+</model_layer>
+</tsoftware>

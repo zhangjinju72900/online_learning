@@ -1,0 +1,1 @@
+select continuous_sign as continuousSign from t_customer_user where id = #{data.userId} 

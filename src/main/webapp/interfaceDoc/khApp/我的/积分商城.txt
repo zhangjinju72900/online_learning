@@ -1,0 +1,85 @@
+﻿UI名称		积分商城商品列表接口（frmAppGoodsList）
+
+tokenKey	OnLoad__frmAppGoodsList_jQuery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {page: 1, rows: 50}
+
+返回示例
+"data":{"amount":10.00, 
+		"integral":100,
+		"name":"测试商品1",  --商品名称
+		"collectCount":0,  --收藏数
+		"id":25,  --商品ID
+		"picId":"1405,1406" -- 商品图片，多个图片逗号分隔
+		}
+
+
+
+
+UI名称		商品详情接口（frmGoodView）
+
+tokenKey	OnLoad__frmGoodView_qid
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data":{
+	goodId: "1" --商品ID
+}	
+返回示例
+"data": {
+	"name":"12212", --商品名称
+	"collectCount":7, --商品收藏数
+	"payDetail":[{"amount":22.00,"integral":100,"id":1}, --该商品需支付金额数、该订单需支付积分数、支付表ID
+		{"amount":44.00,"integral":200,"id":2}
+	],
+	"id":1, --商品ID
+	"isCollect":0, --当前用户是否已经收藏该商品;0-未收藏，1-已收藏
+	"picId":"2121,21121", --商品图片多个图片,分隔
+	"content":"211111111111" --商品内容
+}
+
+
+
+
+UI名称		积分商城-商品收藏（frmAppGoodsEdit）
+
+tokenKey：  OnClick_pButton_save_frmAppGoodsEdit_jsSave
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		"eq_goodId": "7"  --商品ID
+	},
+
+返回示例
+"data": {"create_by":5,"update_time":null,"create_time":"2018-09-25 11:04:10","collect_by":5,"id":38,"good_id":25,"collect_time":"2018-09-25 11:04:10","goodId":25,"update_by":0,"collect_count":1}
+
+
+
+
+UI名称		积分商城-商品取消收藏（frmAppGoodsEdit）
+
+tokenKey：OnClick_pButton_cancelSave_frmAppGoodsEdit_jsSave
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": {
+		"eq_goodId": "7"  --商品ID
+	},
+
+返回示例
+"data":{"create_by":5,"update_time":null,"create_time":"2018-09-25 11:04:10","collect_by":5,"id":38,"good_id":25,"collect_time":"2018-09-25 11:04:10","goodId":25,"update_by":0,"collect_count":1}

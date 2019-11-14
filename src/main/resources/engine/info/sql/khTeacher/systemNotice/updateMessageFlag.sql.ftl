@@ -1,0 +1,1 @@
+update t_message_record set valid_flag=1 where id=#{data.id}

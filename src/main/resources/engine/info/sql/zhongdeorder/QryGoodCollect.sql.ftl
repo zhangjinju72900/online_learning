@@ -1,0 +1,1 @@
+select id from t_goods_collect where good_id = #{data.goodId} and collect_count = '1' and collect_by = #{data.session.userInfo.userId}

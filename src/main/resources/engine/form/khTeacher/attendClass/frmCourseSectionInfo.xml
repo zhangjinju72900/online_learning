@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmCourseSectionInfo" title="新增">
+	<panel name="pForm" title="新增" object="attendClassSign" type="Group">
+		<control name="sectionId" title="小节ID" property="attendClassRecordId" type="TextBox" edit="Y" required="Y" format="" width="1" height="1" column="2"/>
+		<control name="courseName" title="课程名称" property="courseName" type="TextBox" edit="Y" required="N" format="" width="1" height="1" column="2"/>
+		<control name="sectionName" title="小节名称" property="sectionName" type="TextBox" edit="Y" required="N" format="" width="1" height="1" column="2"/>
+	</panel>
+	<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+		<control name="save" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+		<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+	 </panel>
+	
+	<!-- 加载 -->
+    <flow trigger="" event="OnLoad" filter="" >
+   		<procedure name="jClear"  logic="Clear" ifyes="Listtype" ifno="" sync="Y">
+         <param name="Out" value="pForm"></param>
+      </procedure>
+      
+	</flow>
+    
+       <!-- 保存 -->
+    <flow trigger="pButton.save" event="OnClick" filter=""  defaultEnter="Y">
+      <procedure name="jssave"  logic="Query" ifyes="jsclose" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="sql" value="khTeacher/attendClass/QryCouseSectionInfo"/>
+        <param name="Out" value="pForm"></param>
+        <param name="Msg" value="'已查询'"></param>
+      </procedure>
+    </flow>	
+    
+    <!-- 取消 -->
+    <flow trigger="pButton.cancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>	
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="pButton" location="South" scale="" />
+      </region>
+      <region location ="Center" scale="">
+        <subregion panel="pForm" location="Center" scale="" />
+      </region>      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

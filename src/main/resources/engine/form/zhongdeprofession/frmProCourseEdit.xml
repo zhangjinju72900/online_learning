@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmProCourseEdit" title="配置课程">
+			<panel name="courseListTree" object="tree" type="Tree"
+				multiple="">
+				<control name="id" title="树id" property="id" type="Hidden"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="pid" title="树父id" property="pid" type="Hidden"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="name" title="树节点" property="name" type="DataLink"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+			<panel name="courseHidden" title="查询条件" object=""
+				type="Hidden" multiple="Y">
+				<control name="courseId" title="课程id" property="courseId" type="Hidden"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="treeId" title="树id" property="treeId" type="Hidden"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="pid" title="树父id" property="pid" type="Hidden"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="jid" title="判断id" property="jid" type="Hidden"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+			<panel name="idsHidden" title="隐藏id" object=""
+				type="Hidden" multiple="Y">
+				<control name="ids" title="隐藏id" property="ids" type="Hidden"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="slid" title="隐藏id" property="slid" type="Hidden"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="sid" title="隐藏id" property="sid" type="Hidden"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+			<panel name="courseListTool" title="工具条" object="" type="Toolbar">
+				<control name="ctlAddSection" title="新增小节" property=""
+					type="Button" edit="" required="" format="" width="" height=""
+					column="" />
+				<control name="ctlEditSection" title="编辑小节" property=""
+					type="Button" edit="" required="" format="" width="" height=""
+					column="" />
+				<control name="ctlAddlabel" title="添加标签" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="ctlAddResourse" title="选择资源" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="ctlDeletesec" title="删除小节" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="ctlDeletelab" title="删除标签" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="ctlDeleteResource" title="删除资源" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="cancel" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>	
+			</panel>
+			<panel name="resourceDg" title="列表" object="tcsr" type="Grid"  multiple="">
+				<control name="ctlEdit" title="编辑" property="" type="Link" edit="N" required="" format="" width="150" height="" column=""/>
+				<control name="courseResName" title="课程下资源名称" property="courseResName" type="TextBox" edit="N" required="" format="" width="380" height="" column=""/>
+			    <control name="ctlName" title="原资源名称" property="name" type="TextBox" edit="N" required="" format="" width="380" height="" column=""/>
+			    <control name="ctlCode" title="资源后缀名" property="fileType" type="TextBox" edit="N" required="" format="" width="100" height="" column=""/>
+			    <control name="ctlOrgName" title="资源路径" property="filePath" type="TextBox" edit="N" required="" format="" width="200" height="" column=""/>
+			    <control name="ctlGenderName" title="版本号" property="versionCode" type="TextBox" edit="N" required="" format="" width="80" height="" column=""/> 
+			    <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+			 	<control name="cusresourcesId" title="资源id" property="cusresourcesId" type="Hidden" edit="" required="" format="" width="" height="" column="" />
+				<control name="courseId" title="课程id" property="courseId" type="Hidden" edit="" required="" format="" width="" height="" column="" />
+				<control name="labelId" title="标签id" property="labelId" type="Hidden" edit="" required="" format="" width="" height="" column="" />
+				<control name="sectionId" title="小节id" property="sectionId" type="Hidden" edit="" required="" format="" width="" height="" column="" />
+			 </panel>
+			<!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="jsDec1" server="" logic="DecodeId"
+					ifyes="tree" ifno="">
+					<param name="Out" value="courseHidden.courseId"></param>
+				</procedure>
+				<procedure name="tree" logic="Query" ifyes="qid"
+					ifno="">
+					<param name="In" value="courseHidden"></param>
+					<param name="Out" value="courseListTree"></param>
+					<param name="Sql" value="zhongdeprofession/QryCourseListTree"></param>
+				</procedure>
+				
+			</flow>
+			
+			<!-- 编辑 课程名-->
+			<flow trigger="resourceDg.ctlEdit" event="OnClick" filter="">
+				<procedure name="jsEncodeId" server="" logic="EncodeId" ifyes="jspopup" ifno="">
+					<param name="In" value="resourceDg.id" />
+				</procedure>
+				<procedure name="jspopup" server="" logic="Popup" ifyes="jquery"
+					ifno="">
+					<param name="To" value="frmEditCourseResName"></param>
+					<param name="Mode" value="Edit"></param>
+					<param name="Window" value="Medium"></param>
+					<param name="Title" value="编辑课程资源名"></param>
+				</procedure>
+				<procedure name="jquery"  logic="Query" ifyes="" ifno="">
+			        <param name="In" value="courseHidden"></param>
+			        <param name="Out" value="resourceDg"></param>
+			        <param name="Sql" value="zhongdeprofession/QryLabelFileList"></param>
+      			</procedure>
+			</flow>
+			<!-- 树点击事件 -->
+			<flow trigger="courseListTree" event="OnClick" filter="">
+				<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jsencodeid2" ifno="">
+        			<param name="In" value="courseListTree.id"></param>
+     			</procedure>
+			    <procedure name="jsencodeid2" server="" logic="DecodeId" ifyes="jsPid" ifno="">
+			        <param name="Out" value="courseHidden.treeId"></param>
+			    </procedure>
+			     <procedure name="jsPid" server="" logic="Branch" ifyes="jsencodeid3" ifno="jsencodeid4">
+			        <param name="In" value="getPanelControlValue('courseListTree.pid')!=''"></param>
+			    </procedure>
+			    <procedure name="jsencodeid3" server="" logic="EncodeId" ifyes="jsencodeid4" ifno="">
+        			<param name="In" value="courseListTree.pid"></param>
+     			</procedure>
+			    <procedure name="jsencodeid4" server="" logic="DecodeId" ifyes="j3" ifno="">
+			        <param name="Out" value="courseHidden.pid"></param>
+			    </procedure>
+			    
+				<procedure name="j3"  logic="Query" ifyes="" ifno="">
+			        <param name="In" value="courseHidden"></param>
+			        <param name="Out" value="resourceDg"></param>
+			        <param name="Sql" value="zhongdeprofession/QryLabelFileList"></param>
+      			</procedure>
+			</flow>
+		   <!-- 新增小节 -->
+			<flow trigger="courseListTool.ctlAddSection" event="OnClick"
+				filter="">
+				<procedure name="jsEncodeId" server="" logic="EncodeId"
+					ifyes="jspopup" ifno="">
+					<param name="In" value="courseHidden.courseId" />
+				</procedure>
+				<procedure name="jspopup" server="" logic="Popup" ifyes="tree"
+					ifno="">
+					<param name="To" value="frmAddSection"></param>
+					<param name="Mode" value="Add"></param>
+					<param name="Window" value="Medium"></param>
+					<param name="Title" value="新增小节"></param>
+				</procedure>
+				<procedure name="tree" logic="Query" ifyes="qid"
+					ifno="">
+					<param name="In" value="courseHidden"></param>
+					<param name="Out" value="courseListTree"></param>
+					<param name="Sql" value="zhongdeprofession/QryCourseListTree"></param>
+				</procedure>
+			</flow>
+			 <!-- 编辑小节 -->
+			<flow trigger="courseListTool.ctlEditSection" event="OnClick"
+				filter="">
+				<procedure name="jsEncodeId1" server="" logic="EncodeId"
+					ifyes="jsDecodeId" ifno="jmsg">
+					<param name="In" value="courseListTree.id" />
+				</procedure>
+				<procedure name="jsDecodeId" server="" logic="DecodeId"
+					ifyes="jssave" ifno="">
+					<param name="Out" value="idsHidden.sid" />
+				</procedure>
+				<procedure name="jssave" logic="SaveCustom" ifyes="jsBranch"
+					ifno="">
+					<param name="Sql" value="zhongdeprofession/QryUseless"/>
+					<param name="In" value="idsHidden"></param>
+					<param name="Plugin" value="DoJudgeSIdPlugin" />
+					<param name="Out" value="idsHidden.sid" />
+				</procedure>
+				<procedure name="jsBranch" server="" logic="Branch"
+					ifyes="jsEncodeId2" ifno="jmsg">
+					<param name="In" value="getPanelControlValue('idsHidden.sid')==''" />
+				</procedure>
+				<procedure name="jsEncodeId2" server="" logic="EncodeId"
+					ifyes="jspopup" ifno="">
+					<param name="In" value="courseListTree.id" />
+				</procedure>
+				<procedure name="jmsg" server="" logic="InfoMsg" ifyes=""
+					ifno="">
+					<param name="Msg" value="请选择小节，才能编辑" />
+				</procedure>
+				<procedure name="jspopup" server="" logic="Popup" ifyes="tree"
+					ifno="">
+					<param name="To" value="frmAddSection"></param>
+					<param name="Mode" value="Edit"></param>
+					<param name="Window" value="Medium"></param>
+					<param name="Title" value="编辑小节"></param>
+				</procedure>
+				<procedure name="tree" logic="Query" ifyes=""
+					ifno="">
+					<param name="In" value="courseHidden"></param>
+					<param name="Out" value="courseListTree"></param>
+					<param name="Sql" value="zhongdeprofession/QryCourseListTree"></param>
+				</procedure>
+			</flow>
+			<!-- 添加标签 -->
+			<flow trigger="courseListTool.ctlAddlabel" event="OnClick"
+				filter="">
+				<procedure name="jsEncodeSectionId" server="" logic="EncodeId"
+					ifyes="jsDecodeId" ifno="jmsg">
+					<param name="In" value="courseListTree.id" />
+				</procedure>
+				<!-- <procedure name="jsEncodeCourseId" server="" logic="EncodeId"
+					ifyes="jspopup" ifno="">
+					<param name="In" value="courseHidden.courseId" />
+				</procedure> -->
+				<procedure name="jsDecodeId" server="" logic="DecodeId"
+					ifyes="jssave" ifno="">
+					<param name="Out" value="idsHidden.slid" />
+				</procedure>
+				<procedure name="jssave" logic="SaveCustom" ifyes="jsBranch"
+					ifno="">
+					<param name="Sql" value="zhongdeprofession/QryUseless"/>
+					<param name="In" value="idsHidden"></param>
+					<param name="Plugin" value="DoJudgeIdPlugin" />
+					<param name="Out" value="idsHidden.slid" />
+				</procedure>
+				
+				<procedure name="jsBranch" server="" logic="Branch"
+					ifyes="jmsg" ifno="jsEncodeId">
+					<param name="In" value="getPanelControlValue('idsHidden.slid')==''" />
+				</procedure>
+				<procedure name="jmsg" server="" logic="InfoMsg" ifyes=""
+					ifno="">
+					<param name="Msg" value="请选择小节添加标签" />
+				</procedure>
+				
+				<procedure name="jsEncodeId" server="" logic="EncodeId"
+					ifyes="jspopup" ifno="">
+					<param name="In" value="idsHidden.slid" />
+				</procedure>
+				<procedure name="jspopup" server="" logic="Popup" ifyes="tree"
+					ifno="">
+					<param name="To" value="frmAddLabel"></param>
+					<param name="Mode" value="Add"></param>
+					<param name="Window" value="Medium"></param>
+					<param name="Title" value="添加标签"></param>
+				</procedure>
+				<procedure name="tree" logic="Query" ifyes="qid"
+					ifno="">
+					<param name="In" value="courseHidden"></param>
+					<param name="Out" value="courseListTree"></param>
+					<param name="Sql" value="zhongdeprofession/QryCourseListTree"></param>
+				</procedure>
+			</flow>
+			<!-- 选择资源 -->
+			<flow trigger="courseListTool.ctlAddResourse" event="OnClick"
+				filter="">
+				<procedure name="js1" server="" logic="EncodeId"
+					ifyes="jbsave" ifno="jsMsg">
+					<param name="In" value="courseListTree.id" />
+				</procedure>
+				<!-- <procedure name="js2" server="" logic="DecodeId"  保存后第二次保存数据异常
+					ifyes="jbsave" ifno="">
+					<param name="Out" value="courseHidden.treeId" />
+				</procedure> -->
+				
+				<procedure name="jbsave" logic="SaveCustom" ifyes="jsBranch"
+					ifno="">
+					<param name="Sql" value="zhongdeprofession/QryUseless"/>
+					<param name="In" value="courseHidden"></param>
+					<param name="Plugin" value="DoJudgeSIdPlugin" />
+					<param name="Out" value="courseHidden.jid" />
+				</procedure>
+				<procedure name="jsBranch" server="" logic="Branch"
+					ifyes="jsMsg" ifno="jssave">
+					<param name="In" value="getPanelControlValue('courseHidden.jid')==''" />
+				</procedure>
+				<!-- <procedure name="js3" server="" logic="EncodeId"  保存后第二次保存数据异常
+					ifyes="js4" ifno="jssave">
+					<param name="In" value="courseListTree.pid" />
+				</procedure>
+				<procedure name="js4" server="" logic="DecodeId"
+					ifyes="jssave" ifno="">
+					<param name="Out" value="courseHidden.pid" />
+				</procedure> -->
+				<!-- <procedure name="jsbranch" logic="Branch" ifyes="jsdecodeid"
+					ifno="">
+					<param name="In" value="setStroage(getPanelControlValue('courseHidden.courseId')+','+getPanelControlValue('courseListTree.id')+','+getPanelControlValue('courseListTree.pid'))" />
+				</procedure>
+				<procedure name="jsdecodeid" server="" logic="DecodeId" ifyes="jsEncodeId" ifno="">
+					<param name="Out" value="courseHidden.pid" />
+				</procedure> -->
+				<procedure name="jssave" logic="SaveCustom" ifyes="jsEncodeId"
+					ifno="">
+					<param name="Sql" value="zhongdeprofession/QryUseless"/>
+					<param name="In" value="courseHidden"></param>
+					<param name="Plugin" value="DoTogetherIdPlugin" />
+					<param name="Out" value="idsHidden.ids"></param>
+				</procedure>
+				<procedure name="jsEncodeId" server="" logic="EncodeId"
+					ifyes="jspopup" ifno="">
+					<param name="In" value="idsHidden.ids" />
+				</procedure>
+				<procedure name="jsMsg" server="" logic="InfoMsg" ifyes=""
+					ifno="">
+					<param name="Msg" value="请选择一个标签，才能添加资源" />
+				</procedure>
+				<procedure name="jspopup" server="" logic="Popup" ifyes="jquery"
+					ifno="">
+					<param name="To" value="frmChooseResource"></param>
+					<param name="Mode" value="Add"></param>
+					<param name="Window" value="Large"></param>
+					<param name="Title" value="选择资源"></param>
+				</procedure>
+				<procedure name="jquery"  logic="Query" ifyes="" ifno="">
+			        <param name="In" value="courseHidden"></param>
+			        <param name="Out" value="resourceDg"></param>
+			        <param name="Sql" value="zhongdeprofession/QryLabelFileList"></param>
+      			</procedure>
+			</flow>
+			
+			<!--删除小节-->
+		     <flow trigger="courseListTool.ctlDeletesec" event="OnClick" filter="">
+		      	
+		      	<!-- <procedure name="jencodeid" server="" logic="EncodeId" ifyes="js2" ifno="jmsg">
+		        	<param name="In" value="courseListTree.id" />
+		      	</procedure>
+		      
+				<procedure name="js2" server="" logic="DecodeId" ifyes="jsBranch" ifno="">
+					<param name="Out" value="courseHidden.treeId" />
+				</procedure> -->
+				
+				<procedure name="jsBranch" server="" logic="Branch"
+					ifyes="jcmsg" ifno="jmsg">
+					<param name="In" value="getPanelControlValue('courseHidden.treeId').indexOf('sec-')!=-1" />
+				</procedure>
+		      
+		      	<procedure name="jmsg" server="" logic="InfoMsg" ifyes="" ifno="">
+					<param name="Msg" value="只有选择一个小节，才能删除" />
+				</procedure>
+				
+				
+				<procedure name="jcmsg" server="" logic="ConfirmMsg" ifyes="jencodeid" ifno="">
+		       		<param name="Title" value="删除提示" />
+		      		<param name="Msg" value="确认删除当前选择的小节吗?" />
+		      	</procedure>
+				
+				<procedure name="jencodeid" server="" logic="EncodeId" ifyes="js2" ifno="jmsg">
+		        	<param name="In" value="courseListTree.id" />
+		      	</procedure>
+		      
+				<procedure name="js2" server="" logic="DecodeId" ifyes="je2" ifno="">
+					<param name="Out" value="courseHidden.treeId" />
+				</procedure>
+				
+				<procedure name="je2" server="" logic="EncodeId" ifyes="jd2" ifno="jdelete">
+					<param name="In" value="courseListTree.pid" />
+				</procedure>
+				<procedure name="jd2" server="" logic="DecodeId" ifyes="jdelete" ifno="">
+					<param name="Out" value="courseHidden.pid" />
+				</procedure>
+		      <procedure name="jdelete"  logic="SaveCustom" ifyes="jquery" ifno="">
+		        <param name="In" value="courseHidden" />
+		        <param name="Sql" value="zhongdeprofession/QryUseless"/>
+		        <param name="Plugin" value="deleteSectionPlugin" />
+		        <param name="Msg" value="'删除成功'" />
+		        <!-- <param name="Constraints" value="t_section_label.section_id|该小节包含标签,不能删除;" /> -->
+		      </procedure>
+		      <procedure name="jquery" logic="Query" ifyes="qid" ifno="">
+				<param name="In" value="courseHidden"></param>
+				<param name="Out" value="courseListTree"></param>
+				<param name="Sql" value="zhongdeprofession/QryCourseListTree"></param>
+			  </procedure>          
+		    </flow>
+		    
+		    <!--删除标签-->
+		     <flow trigger="courseListTool.ctlDeletelab" event="OnClick" filter="">
+		      	
+		      	<procedure name="jsBranch1" server="" logic="Branch"
+			     ifyes="jmsg" ifno="jsBranch2">
+			     <param name="In" value="getPanelControlValue('courseHidden.treeId').indexOf('sec-')!=-1" />
+			    </procedure>
+			    
+			    <procedure name="jsBranch2" server="" logic="Branch"
+			     ifyes="jmsg" ifno="jcmsg">
+			     <param name="In" value="getPanelControlValue('courseHidden.treeId').indexOf('cou-')!=-1" />
+			    </procedure>
+		      	
+		      	
+		      
+		      	<procedure name="jmsg" server="" logic="InfoMsg" ifyes="" ifno="">
+					<param name="Msg" value="只有选择一个标签，才能删除" />
+				</procedure>
+				
+				<procedure name="jcmsg" server="" logic="ConfirmMsg" ifyes="jencodeid" ifno="">
+		       		<param name="Title" value="删除提示" />
+		      		<param name="Msg" value="删除当前选中的标签，同时也会删除其他小结下的对应标签，是否删除?" />
+		      	</procedure>
+			
+				
+		      	<procedure name="jencodeid" server="" logic="EncodeId" ifyes="js2" ifno="jmsg">
+		        	<param name="In" value="courseListTree.id" />
+		      	</procedure>
+		      
+				<procedure name="js2" server="" logic="DecodeId" ifyes="je2" ifno="">
+					<param name="Out" value="courseHidden.treeId" />
+				</procedure>
+				
+				
+				<procedure name="je2" server="" logic="EncodeId" ifyes="jd2" ifno="jdelete">
+					<param name="In" value="courseListTree.pid" />
+				</procedure>
+				<procedure name="jd2" server="" logic="DecodeId" ifyes="jdelete" ifno="">
+					<param name="Out" value="courseHidden.pid" />
+				</procedure>
+		      <procedure name="jdelete"  logic="SaveCustom" ifyes="jquery" ifno="">
+		        <param name="In" value="courseHidden" />
+		        <param name="Sql" value="zhongdeprofession/QryUseless"/>
+		        <param name="Plugin" value="deleteLabelPlugin" />
+		        <param name="Msg" value="'删除成功'" />
+		        <!-- <param name="Constraints" value="t_section_label.section_id|该小节包含标签,不能删除;t_course_section_resources.lable_id|该标签下有资源,不能删除;" /> -->
+		      </procedure>
+		      <procedure name="jquery" logic="Query" ifyes="qid" ifno="">
+				<param name="In" value="courseHidden"></param>
+				<param name="Out" value="courseListTree"></param>
+				<param name="Sql" value="zhongdeprofession/QryCourseListTree"></param>
+			  </procedure>          
+		    </flow>
+		     
+		    <!--删除资源-->
+		     <flow trigger="courseListTool.ctlDeleteResource" event="OnClick" filter="">
+		     	<procedure name="j0" server="" logic="EncodeId" ifyes="j1" ifno="jsMsg">
+					<param name="In" value="resourceDg.id" />
+				</procedure>
+		      	<procedure name="j1" server="" logic="ConfirmMsg" ifyes="j2" ifno="">
+		       		<param name="Title" value="删除提示" />
+		        	<param name="Msg" value="确认删除该标签下的资源吗?" />
+		      	</procedure>
+				<procedure name="jsMsg" server="" logic="InfoMsg" ifyes=""
+					ifno="">
+					<param name="Msg" value="请选择要删除的资源" />
+				</procedure>
+		      	<procedure name="j2"  logic="SaveCustom" ifyes="j3" ifno="">
+			        <param name="In" value="resourceDg" />
+		        	<param name="Sql" value="zhongdeprofession/QryUseless"/>
+		        	<param name="Plugin" value="DeleteLabelResourcePlugin" />
+		        	<param name="Msg" value="'删除成功'" />
+		     	 </procedure>
+		      	<procedure name="j3"  logic="Query" ifyes="" ifno="">
+				     <param name="In" value="courseHidden"></param>
+				     <param name="Out" value="resourceDg"></param>
+				     <param name="Sql" value="zhongdeprofession/QryLabelFileList"></param>
+      		  	</procedure>          
+		    </flow>
+		    
+		    <!-- 返回 -->
+		    <flow trigger="courseListTool.cancel" event="OnClick" filter="" >
+		      <procedure name="jsclose" server="/frmProfessionList" logic="Back" ifyes="" ifno="">
+		         	<param name="To" value="frmProfessionList"></param>
+		       	 </procedure>
+		    </flow>	 
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="courseListTool" location="North"
+						scale="" />
+				</region>
+				<region location ="Center" scale="">
+    				<subregion panel="resourceDg" location="Center" scale=""/>
+      			</region>
+				<region location="West" scale="300px">
+					<subregion panel="courseListTree" location="Center" scale="300px" />
+				</region>
+				<region location="South" scale="">
+					<subregion panel="courseHidden" location="Center" scale="" />
+					<subregion panel="idsHidden" location="South" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

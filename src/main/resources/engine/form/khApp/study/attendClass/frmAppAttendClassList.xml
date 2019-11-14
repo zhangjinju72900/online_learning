@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmAppAttendClassList" title="上课记录">
+	        <panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnQuery" title="查询上课记录" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+				<control name="btnQuery2" title="查询上课详情" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			
+			</panel>
+        	
+            <panel name="pCondition" title="查询条件" object="attendClass" type="Group">
+                <control name="startTime" title="发布日期" property="startTime" type="DateBox" edit="Y" required="" format="" width="1" height="1" column="1" />
+                <control name="endTime" title="至" property="endTime" type="DateBox" edit="Y" required="" format="" width="1" height="1" column="1" />
+                <control name="userId" title="人员ID" property="userId" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+            </panel>
+            
+            <panel name="pTable" title="上课记录" object="attendClass" type="Grid" multiple="N" >
+                <control name="id" title="id" property="id" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="attendClassDate" title="日期" property="attendClassDate" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="status" title="status" property="status" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+
+            </panel>
+            
+            <panel name="pTable2" title="上课详情" object="attendClass" type="Grid" multiple="N" >
+            	<control name="showAttendClassDetail" title="查看上课详情" property="" type="Link" edit="" required="" format="" width="150" height="" column=""/>
+                <control name="id" title="上课ID" property="id" type="Hidden" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="attendClassDate" title="日期" property="attendClassDate" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="title" title="提示" property="title" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+
+            </panel>
+            
+            <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		      <procedure name="homeworkQuery" logic="Query" ifyes="" ifno="">
+		      	 <param name="In" value="pCondition"></param>
+		         <param name="Out" value="pTable"></param>
+		         <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+		         <param name="Plugin" value="appAttendClassRecordPlugin" />
+		      </procedure>
+		    </flow>
+		 
+			<!-- 查询点击事件 -->
+		    <flow trigger="pToolbar.btnQuery" event="OnClick" filter="">  
+		      <procedure name="Query"  logic="Query" ifyes="" ifno="" sync="Y">
+		           <param name="In" value="pCondition"></param>
+		           <param name="Out" value="pTable"></param>
+		           <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+		           <param name="Plugin" value="appAttendClassRecordPlugin" />
+		      </procedure> 
+		    </flow>
+		    
+		    <!-- 查询点击事件 -->
+		    <flow trigger="pToolbar.btnQuery2" event="OnClick" filter="">  
+		      <procedure name="Query"  logic="Query" ifyes="" ifno="" sync="Y">
+		           <param name="In" value="pCondition"></param>
+		           <param name="Out" value="pTable2"></param>
+		           <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+		           <param name="Plugin" value="appAttendClassDetailPlugin" />
+		      </procedure> 
+		    </flow>
+		    
+		    <!--查看试题详情 -->
+			<flow trigger="pTable2.showAttendClassDetail" event="OnClick" filter="">
+				<procedure name="annEncodeId" logic="EncodeId" ifyes="j1"
+					ifno="">
+					<param name="In" value="pTable2.id"></param>
+				</procedure>
+				<procedure name="j1" logic="Transition" ifyes="" ifno="">
+					<param name="To" value="frmAppAttendClassDtl"></param>
+					<param name="Mode" value="ReadOnly"></param>
+				</procedure>
+			</flow>
+		    
+            <!-- 布局 -->
+            <layout>
+                <region location ="North" scale="">
+                    <subregion panel="pToolbar" location ="North" scale=""/>
+                </region>
+                <region location ="Center" scale="">
+                	<subregion panel="pCondition" location="North" scale=""/>
+                    <subregion panel="pTable" location="Center" scale=""/>
+                    <subregion panel="pTable2" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

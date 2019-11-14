@@ -1,0 +1,28 @@
+UI名称		参加活动时工作人员扫码接口（scanCodeView）
+
+tokenKey：OnClick_pToolbar_scanCode_scanCodeView_j2
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {id: "8",  --活动ID 
+		userId: "5"}  --用户ID
+
+
+返回示例
+data:{"sex":"1",  --性别 0男，1女
+		"className":"1212,1班",  --班级名称，多个班级逗号隔开
+		"userId":"5",  --用户ID
+		"isApply":"1",  --是否报名，0未报名，1已报名
+		"isJoin":"1",  --是否参加，0未参加，1已参加
+		"classId":"16,6",  --班级ID，多个逗号隔开
+		"schoolId":"2",  --学校ID
+		"grade":"1212,1",  --年级，多个逗号隔开
+		"name":"hello",  --姓名
+		"nickname":"6661212",  --昵称
+		"tel":"test",  --电话
+		"id":"8",  --人员ID
+		"schoolName":"联合大学"  --学校名称
+		}

@@ -1,0 +1,1 @@
+alter table t_customer_user add uuid  varchar(32);

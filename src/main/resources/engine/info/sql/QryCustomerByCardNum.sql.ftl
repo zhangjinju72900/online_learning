@@ -1,0 +1,1 @@
+select id from t_customer_user u where u.card_num=#{data.cardNum}

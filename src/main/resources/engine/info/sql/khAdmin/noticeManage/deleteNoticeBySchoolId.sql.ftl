@@ -1,0 +1,1 @@
+delete from t_notice_school where id = #{data.id}

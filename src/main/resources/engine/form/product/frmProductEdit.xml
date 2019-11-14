@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+			
+	<ui_layer>
+	  <ui name="frmProductEdit" title="商品编辑">
+	  
+		<panel name="hiddenPanel" title="hidden" object="product" type="Hidden">
+			<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+		</panel>
+		
+		<panel name="pnlGroupPop" title="商品基本信息" object="product" type="Group">
+			<control name="id" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+			<control name="code" title="商品编号" property="code" type="Hidden" edit="N" required="" format="" width="1" height="1" column="1"/>
+			<control name="name" title="商品名称" property="name" type="TextBox" edit="Y" required="Y" format="" width="1" height="1" column="1"/>
+			<control name="quantity" title="商品数量" property="quantity" type="TextBox" edit="Y" required="Y" format="" width="5" height="1" column="2"/>
+			<control name="content" title="商品简介" property="content" type="UEditor" edit="Y" required="Y" format="" width="20" height="15" column="2"/>
+			<control name="saleS" title="商品状态" property="saleS" type="ComboBox" edit="Y" required="Y" format="" width="2" height="1" column="5"/>
+			<control name="picId" title="文件ID" property="picId" type="Hidden" edit="Y" required="" format="" width="200" height="" column=""/>
+			<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="Mode=='Add'?CurrentTime():nil"/>
+			<control name="updateTime" title="最后修改时间" property="updateTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="CurrentTime()"/>
+			<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />		
+			<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="Mode=='Add'?session.userInfo.empId:nil" format="" width="1" height="1" column=""  />
+		</panel>
+		
+		<panel name="pnlDown" title="pnlDown" object="" type="Toolbar">
+			<control name="ctlSave" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			<control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		</panel>
+		
+		<panel name="meetFile" title="相关商品单价" object="productDetail" type="Grid"  multiple="">
+			<control name="ctlAdd" title="新增商品单价" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			<control name="ctlDel" title="删除商品单价" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			<control name="id" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+			<control name="goodId" title="图片ID" property="goodId" type="Hidden" edit="Y" required="" format="" width="140" height="" column=""/>
+			<control name="integral" title="积分" property="integral" type="TextBox" edit="Y" required="N" format="" width="100" height="1" column="1"/>
+			<control name="amount" title="元" property="amount" type="TextBox" edit="Y" required="N" format="" width="100" height="1" column="1"/>
+			<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="Mode=='Add'?CurrentTime():nil"/>
+			<control name="updateTime" title="最后修改时间" property="updateTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="CurrentTime()"/>
+			<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />		
+			<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="Mode=='Add'?session.userInfo.empId:nil" format="" width="1" height="1" column=""  />
+		</panel>
+		
+		<panel name="uploadPicture" title="上传图片" object="productPicture" type="Grid"  multiple="">
+			<control name="ctlAdd" title="新增图片" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			<control name="ctlDel" title="删除图片" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			<control name="id" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+			<control name="name" title="商品图片" property="name" type="FileBox" edit="Y" required="N" format="" width="200" height="" column=""/>
+			<control name="picId" title="文件ID" property="picId" type="Hidden" edit="Y" required="" format="" width="200" height="" column=""/>
+			<control name="goodId" title="图片ID" property="goodId" type="Hidden" edit="Y" required="" format="" width="140" height="" column=""/>
+			<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="Mode=='Add'?CurrentTime():nil"/>
+			<control name="updateTime" title="最后修改时间" property="updateTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="CurrentTime()"/>
+			<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />		
+			<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="Mode=='Add'?session.userInfo.empId:nil" format="" width="1" height="1" column=""  />
+			<control name="btnPreview" title="预览图片" property="" type="Link" edit="Y" required="N" format="" width="200" height="" column=""/>
+			<!-- <control name="remark" title="备注" property="remark" type="TextBox" edit="Y" required="N" format="" width="200" height="" column=""/> -->
+		</panel>
+		
+	    <flow trigger="" event="OnLoad" filter="" >
+	    <procedure name="btnClear"  logic="Clear" ifyes="branch" ifno="">
+	        <param name="Out" value="pnlGroupPop"></param>
+	      </procedure>
+	   	  <procedure name="branch" server="" logic="Branch" ifyes="getId" ifno="">
+	        <param name="In" value="getEditMode()=='Edit'"></param>
+	      </procedure> 
+	      <procedure name="getId" server="" logic="DecodeId" ifyes="jList" ifno="">
+	        <param name="Out" value="hiddenPanel.id"></param>
+	      </procedure> 
+	      <procedure name="jList"  logic="List" ifyes="qid" ifno="">
+	        <param name="Out" value="pnlGroupPop.saleS"></param>
+	        <param name="Sql" value="product/QryProductStatus"></param>
+      	  </procedure>
+	      <procedure name="qid"  logic="QueryById" ifyes="jPrice" ifno="">
+	        <param name="In" value="hiddenPanel"></param>
+	        <param name="Out" value="pnlGroupPop"></param>
+	        <param name="Sql" value="product/QryProductList"></param>
+	      </procedure>
+	      <procedure name="jPrice"  logic="Query" ifyes="jListPicture" ifno="">
+	        <param name="In" value="hiddenPanel"></param>
+	        <param name="Out" value="meetFile"></param>
+	        <param name="Sql" value="product/QryFindProductPriceById"></param>
+	      </procedure>
+	      <procedure name="jListPicture"  logic="Query" ifyes="" ifno="">
+	        <param name="In" value="hiddenPanel"></param>
+	        <param name="Out" value="uploadPicture"></param>
+	        <param name="Sql" value="product/QryProductPicture"></param>
+      	  </procedure>
+	      
+<!-- 	  <procedure name="jComboBox"  logic="Query" ifyes="" ifno="">
+	      	<param name="In" value="hiddenPanel"></param>
+	        <param name="Out" value="pnlGroupPop.saleStatus"></param>
+	        <param name="Sql" value="product/QryFindProductStatusById"></param>
+      	  </procedure>
+ -->	    </flow>
+ 
+	    <!-- 预览图片 -->
+       	<flow trigger="uploadPicture.btnPreview" event="OnClick" filter="">
+        		<procedure name="procPreview" logic="PreviewFile" ifyes="" ifno="">
+            		<param name="In" value="uploadPicture.picId"></param>
+        		</procedure>
+        </flow>
+	   	<flow trigger="pnlDown.ctlSave" event="OnClick" filter="Mode!='' &amp;&amp; Mode!='Readonly'" defaultEnter="Y">
+	 	<procedure name="checkPicType"  logic="Branch" ifyes="checkIntegralAmount" ifno="error1">
+          	<param name="In" value="checkPictype('uploadPicture')"></param>
+        </procedure>
+       <procedure name="checkIntegralAmount"  logic="Branch" ifyes="jssave" ifno="error2">
+          	<param name="In" value="checkIntegralAndAmount()"></param>
+        </procedure>	    
+	 	 <procedure name="error1"  logic="InfoMsg" ifyes="" ifno="">
+	        <param name="Msg" value="图片类型不符"></param>
+	      </procedure>
+	    <procedure name="error2"  logic="InfoMsg" ifyes="" ifno="">
+	        <param name="Msg" value="积分与单价不能为负数"></param>
+	      </procedure>
+	      <procedure name="jssave"  logic="Save" ifyes="proTransition" ifno="">
+	        <param name="In" value="pnlGroupPop,meetFile.goodId,uploadPicture.goodId"></param>
+	        	<param name="Plugin" value="insertProductInformation"></param>
+	        <param name="Msg" value="'信息已被保存'"></param>
+	      </procedure>
+	      <procedure name="proTransition" server="/frmProductList" logic="Back" ifyes="" ifno="">
+         	<param name="To" value="frmProductList"></param>
+      	  </procedure>
+	    </flow>
+	    
+	    <flow trigger="pnlDown.ctlCancel" event="OnClick" filter="" >
+	      <procedure name="proTransition" server="/frmProductList" logic="Back" ifyes="" ifno="">
+         	<param name="To" value="frmProductList"></param>
+      	  </procedure>
+	    </flow>
+	    
+		<flow trigger="meetFile.ctlAdd" event="OnClick" filter="" >
+	      <procedure name="addRow" server="" logic="AddRow" ifyes="" ifno="">
+	        <param name="Out" value="meetFile"></param>
+	      </procedure>
+	    </flow>
+	    
+	   	<flow trigger="meetFile.ctlDel" event="OnClick" filter="" >
+	      <procedure name="removeRow" server="" logic="RemoveRow" ifyes="" ifno="">
+	        <param name="In" value="meetFile"></param>
+	      </procedure>
+	    </flow>
+	    
+	    	<flow trigger="uploadPicture.ctlAdd" event="OnClick" filter="" >
+	      <procedure name="addRow" server="" logic="AddRow" ifyes="" ifno="">
+	        <param name="Out" value="uploadPicture"></param>
+	      </procedure>
+	    </flow>
+	    
+	   	<flow trigger="uploadPicture.ctlDel" event="OnClick" filter="" >
+	      <procedure name="removeRow" server="" logic="RemoveRow" ifyes="" ifno="">
+	        <param name="In" value="uploadPicture"></param>
+	      </procedure>
+	    </flow>
+	    
+	     <flow trigger="uploadPicture.name" event="OnClick" filter="">
+	      <procedure name="fileUpload" server="" logic="Upload" ifyes="" ifno="">
+	        <param name="Size" value="1000"></param>
+	        <param name="Type" value="jpg,png,jpeg"></param>
+	        <param name="Bucket" value="public"></param>
+	        <param name="Out" value="uploadPicture.picId"></param>
+	      </procedure>
+	    </flow>
+	    
+	  <layout>
+	      <region location ="North" scale="">
+	        <subregion panel="pnlDown" location="North" scale="" />
+	        
+	      </region>
+	      <region location="South" scale="">
+	       <subregion panel="pnlGroupPop" location="Center" scale="" />
+	      </region>
+	      <region location="Center" scale="">
+	       <subregion panel="meetFile" location="Center" scale="" />
+	        <subregion panel="uploadPicture" location="Center" scale="" />
+	      </region>
+	   <!--    <region location ="North" scale="">
+	        <subregion panel="pnlGroupPop" location="North" scale="" />
+	      </region> -->
+
+	    </layout>
+	  </ui>
+	</ui_layer>
+</tsoftware>

@@ -1,0 +1,1 @@
+select source, release_by from t_information where id = #{data.id}

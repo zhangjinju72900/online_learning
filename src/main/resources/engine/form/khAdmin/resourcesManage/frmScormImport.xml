@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+      xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmScormImport" title="资源编辑">
+   	<panel name="pnlHidden" title="查询条件" object="org" type="Hidden">
+		<control name="eq_id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+        <control name="fileId" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="empGroup" title="tab1" object="tCustomerResources" type="Group">
+		<control name="ctlId" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+		<control name="ctlName1" title="支持格式" property="" type="Label" edit="N" required="" format="" tip="当前支持单个scorm文件上传(zip)" width="80" height="1" column="5"/>
+		<control name="ctlName" title="文件夹名称" property="text" type="TextBox" edit="N" required="" format="" width="80" height="1" column="5"/>
+		<control name="ctlPhoto" title="上传文件" property="" type="FileBox" edit="Y" required="N" format="" width="1" height="1" column="1"  />
+		<control name="ctlPhotoId" title="图片编号" property="" type="Hidden" edit="Y" required="N" format="" width="1" height="1" column="1"  />
+		<control name="ctlCoding" title="编码格式" property="" type="ComboBox" edit="Y" required="Y" format="" width="1" height="1" column="1"/>
+	</panel>
+	<panel name="empDown" title="pnlDown" object="" type="Toolbar">
+		<control name="ctlSave" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+		
+    <flow trigger="" event="OnLoad" filter="" >
+    	
+      <procedure name="getEmptype"  logic="List" ifyes="getId" ifno="">
+        <param name="Out" value="empGroup.ctlCoding"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryResourcesCoding"></param>
+      </procedure>
+    
+      <procedure name="getId" server="" logic="DecodeId" ifyes="jsencodeid" ifno="">
+        <param name="Out" value="pnlHidden.eq_id"></param>
+      </procedure>
+      
+      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jsencodeid2" ifno="">
+        <param name="In" value="pnlHidden.eq_id"></param>
+      </procedure>
+      <procedure name="jsencodeid2" server="" logic="DecodeId" ifyes="qid" ifno="">
+        <param name="Out" value="empGroup.ctlId"></param>
+      </procedure>
+      
+      <procedure name="qid"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pnlHidden"></param>
+        <param name="Out" value="empGroup"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryResourcesList"></param>
+      </procedure>   
+    </flow>
+    
+    <flow trigger="empDown.ctlSave" event="OnClick" filter="" >
+      
+      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jsencodeid2" ifno="">
+      	<param name="In" value="empGroup.ctlPhotoId"></param>
+      </procedure>
+      <procedure name="jsencodeid2" server="" logic="DecodeId" ifyes="jssave" ifno="">
+      	<param name="Out" value="pnlHidden.fileId"></param>
+      </procedure>
+    
+      <procedure name="jssave"  logic="SaveCustom" ifyes="jsclose" ifno="">
+        <param name="In" value="empGroup"></param>
+        <param name="Out" value="empGroup.ctlId"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+        <param name="Plugin" value="importScormExecute" />
+        <param name="Msg" value="'scorm资源已保存'"></param>
+      </procedure>
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>
+    <!-- 取消 -->
+    <flow trigger="empDown.ctlCancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="false"></param>
+      </procedure>
+    </flow>
+    
+    <!-- 图片上传 -->
+     <flow trigger="empGroup.ctlPhoto" event="OnClick" filter="">
+      <procedure name="fileUpload" server="" logic="Upload" ifyes="" ifno="">
+      	<param name="In" value="pnlHidden"></param>
+        <param name="Size" value="10000000"></param>
+        <param name="Type" value="zip"></param>
+        <param name="Bucket" value="public"></param>
+        <param name="Out" value="empGroup.ctlPhotoId"></param>
+      </procedure>
+    </flow>
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="empDown" location="South" scale="" />
+      </region>
+      <region location ="North" scale="">
+        <subregion panel="empGroup" location="Center" scale="" />
+        <subregion panel="pnlHidden" location="North" scale="" />
+      </region>
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

@@ -1,0 +1,1 @@
+delete from t_homework_detail where homework_id=#{data.homeworkId} and question_id in (#{data.deleteQuestionId})

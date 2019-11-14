@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmClassDetail" title="班级管理详情">
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+  		<control name="btnAddStudent" title="加入学生" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+  		<control name="btnAddTeacher" title="加入老师" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="pForm" title="班级管理详情" object="class"  type="Group" multiple="">
+		<control name="eq_classId" title="ID" property="id" type="TextBox" edit="" required="" format="" width="1" height="1" column="1"/>
+		<control name="eq_schoolId" title="学校ID" property="schoolId" type="Hidden" edit="" required="" format="" width="1" height="1" column="1"/>
+		<control name="school" title="学校" property="schoolName" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="classType" title="项目类型" property="classType" type="Hidden" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="classTypeName" title="项目类型" property="classTypeName" type="TextBox" edit="" required="" format="" width="1" height="1" column="2"/>
+		<control name="name" title="班级" property="name" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="grade" title="年级" property="grade" type="TextBox" edit="" required="" format="" width="1" height="1" column="2"/>
+		<control name="curriculumName" title="课表" property="curriculumName" type="TextBox" edit="" required=""  format="" width="1" height="1" column=""/>
+		<control name="startClassTime" title="开课时间" property="startClassTime" type="TextBox" edit="" required="" format="" width="1" height="1" column="2"/>
+		<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="" required=""  format="" width="1" height="1" column=""/>
+		<control name="createName" title="创建人" property="createName" type="Hidden" edit="" required=""  format="" width="1" height="1" column=""/>
+		<control name="updateBy" title="修改人" property="updateBy" type="Hidden" edit="" required="N"  format="" width="1" height="1" column=""  />
+		<control name="updateTime" title="修改时间" property="updateTime" type="Hidden" edit="" required="N" format="" width="1" height="1" column=""  />
+		<control name="userId" title="用户Id" property=""  type="Hidden" edit="N" required="N" format="" width="4" height="3" column="1" initial="" source=""/>
+		<control name="id" title="filter" property="id" type="Hidden" edit="" required="" format="" width="1" height="1" column=""/>
+		 
+  	</panel>
+  	<panel name="pTable1" title="学生" object="customerUserClass" type="Grid">
+		<control name="remove" title="移除成员" property="" type="Link" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="classId" title="classid" property="classId" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="name" title="姓名" property="name" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="sex" title="性别" property="sex" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="cardNum" title="身份证" property="cardNum" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="tel" title="联系电话" property="tel" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="email" title="邮箱" property="email" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+	</panel>
+	<panel name="pTable2" title="老师" object="customerUserClass" type="Grid">
+		<control name="remove" title="移除成员" property="" type="Link" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="classId" title="classid" property="classId" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="name" title="姓名" property="name" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="sex" title="性别" property="sex" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="cardNum" title="身份证" property="cardNum" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="tel" title="联系电话" property="tel" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+		<control name="email" title="邮箱" property="email" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>		
+	</panel> 
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="j1" server="" logic="DecodeId" ifyes="je" ifno="">
+        <param name="Out" value="pForm.eq_classId"></param>
+      </procedure> 
+      <procedure name="je"  logic="QueryById" ifyes="j3" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khAdmin/schoolManage/class/QryClassList"></param>
+      </procedure> 
+      <procedure name="j3"  logic="Query" ifyes="j4" ifno="">
+        <param name="In" value="pForm"/>
+        <param name="Out" value="pTable1"/>
+        <param name="Sql" value="khAdmin/schoolManage/class/QryClassStudent"/>
+      </procedure> 
+      <procedure name="j4"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pForm"/> 
+        <param name="Out" value="pTable2"/>
+        <param name="Sql" value="khAdmin/schoolManage/class/QryClassTeacher"/>
+      </procedure>   
+    </flow>
+    <!-- 加入学生 -->
+   <flow trigger="pToolbar.btnAddStudent" event="OnClick" filter="" >
+      <procedure name="search"  logic="Find" ifyes="save" ifno="">
+        <param name="In" value="pForm.eq_schoolId"/>
+        <param name="Out" value="pForm"/>
+        <param name="Multi" value="Y" />
+        <param name="Sql" value="UserStudent"/>
+        <param name="Title" value="查找用户"/>
+        <param name="Columns" value="id,用户编码,userId|name,用户名"/>
+      </procedure>
+      <procedure name="save" logic="SaveCustom" ifyes="queryTable" ifno="">  
+        <param name="In" value="pForm"/>
+        <param name="Plugin" value="AddClassStudent" />
+         <param name="Sql" value="khAdmin/resourcesManage/QryTest"/> 
+        <param name="Msg" value="操作成功"/>
+      </procedure>   
+      <procedure name="queryTable"  logic="Query" ifyes="j4" ifno="">
+        <param name="In" value="pForm"/>
+        <param name="Out" value="pTable1"/>
+        <param name="Sql" value="khAdmin/schoolManage/class/QryClassStudent"/>
+      </procedure>             
+    </flow>
+    <!-- 加入教师 -->
+   <flow trigger="pToolbar.btnAddTeacher" event="OnClick" filter="" >
+      <procedure name="search"  logic="Find" ifyes="jssave" ifno="">
+        <param name="In" value="pForm.eq_classId"/>
+        <param name="Out" value="pForm"/>
+        <param name="Multi" value="Y" />
+        <param name="Sql" value="UserTeacher"/>
+        <param name="Title" value="查找用户"/>
+        <param name="Columns" value="id,用户编码,userId|name,用户名"/>
+      </procedure>
+      <procedure name="jssave" logic="SaveCustom" ifyes="jsqueryTable" ifno="">
+        <param name="In" value="pForm"/>
+        <param name="Plugin" value="AddClassStudent" />
+        <param name="Sql" value="khAdmin/resourcesManage/QryTest"/> 
+        <param name="Msg" value="操作成功"/>
+      </procedure>   
+      <procedure name="jsqueryTable"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pForm"/>
+        <param name="Out" value="pTable2"/>
+        <param name="Sql" value="khAdmin/schoolManage/class/QryClassTeacher"/>
+      </procedure>                
+    </flow>
+    <!-- 移除成员 -->
+    <flow trigger="pTable1.remove" event="OnClick" filter="row.id!=1">
+      <procedure name="j0" server="" logic="ConfirmMsg" ifyes="j2" ifno="">
+       <param name="Title" value="删除提示"/>
+       <param name="Msg" value="确认移除当前角色的用户吗?"/>
+      </procedure>
+      <procedure name="j2"  logic="Delete" ifyes="queryTable" ifno="">
+        <param name="In" value="pTable1" />
+        <param name="Msg" value="'用户已删除'" />
+      </procedure>
+      <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pForm"/>
+        <param name="Out" value="pTable1"/>
+        <param name="Sql" value="khAdmin/schoolManage/class/QryClassStudent"/>
+      </procedure>              
+    </flow>  
+    <!-- 移除成员2 -->
+    <flow trigger="pTable2.remove" event="OnClick" filter="row.id!=1">
+      <procedure name="j0" server="" logic="ConfirmMsg" ifyes="j2" ifno="">
+       <param name="Title" value="删除提示"/>
+       <param name="Msg" value="确认移除当前角色的用户吗?"/>
+      </procedure>
+      <procedure name="j2"  logic="Delete" ifyes="queryTable" ifno="">
+        <param name="In" value="pTable2" />
+        <param name="Msg" value="'用户已删除'" />
+      </procedure>
+      <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pForm"/>
+        <param name="Out" value="pTable2"/>
+        <param name="Sql" value="khAdmin/schoolManage/class/QryClassTeacher"/>
+      </procedure>              
+    </flow>         
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmClassList" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmClassList"></param>
+       </procedure>
+      </flow>
+    <layout>
+       <region location ="North" scale="">
+       <subregion panel="pToolbar" location="North" scale=""/>
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region> 
+      <region location ="Center" scale="">
+		<subregion panel="pTable1" location="Center" scale=""/>
+		<subregion panel="pTable2" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

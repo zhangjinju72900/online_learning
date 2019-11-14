@@ -1,0 +1,26 @@
+UI名称		我的活动列表接口（frmMyActivityList）
+
+tokenKey	OnLoad__frmMyActivityList_j2
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {page: 1, rows: 50}
+
+返回示例
+"data":{"site":"",  --地点
+		"validFlag":0,  --标识
+		"timeType":"1",  --活动状态 -1未开始，0进行中，1已结束
+		"startTime":"2018-08-28 13:42:06",  --开始时间
+		"id":52,  --活动ID
+		"endTime":"2018-08-28 13:42:09",  --结束时间
+		"title":"121",  --活动标题
+		"applyBy":5,  --报名人ID
+		"picId":0   --活动首图ID，0代表无
+		}
+		
+		
+
+

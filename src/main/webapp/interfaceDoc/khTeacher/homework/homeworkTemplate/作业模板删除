@@ -1,0 +1,32 @@
+UI名称		作业模板删除（frmHomeworkTemplate）
+
+tokenKey	OnClick_pTable_cteDelete_frmHomeworkTemplate_dTemplate
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		 id: "11"		--要删除的模板id
+		}
+
+返回示例
+"data":		{
+		createBy: 0
+		createTime: "2019-01-04 15:23:17"
+		create_by: 2
+		create_time: "2019-01-04 15:23:17"
+		difficultyLevelName: null
+		difficulty_level: 1
+		homeworkTypeName: null
+		homework_type: 1
+		id: 11
+		name: "作业模板33"
+		questionCount: null
+		school_id: 49
+		teacher_id: 2
+		update_by: 2									-更新人
+		update_time: "2019-01-17 16:56:29"				---更新时间
+		valid_flag: 1									--标识（0-正常；1-作废）
+		}

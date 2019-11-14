@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<object name="question" table="t_question" primary="id" unique="" order="">
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="content" type="String" length="2000" initial="" field="content"/>
+			<property name="questionClassifyId" type="Long" length="20" initial="" field="question_classify_id"/>
+			<property name="questionType" type="Long" length="1" initial="" field="question_type"/>
+			<property name="difficultyLevel" type="Long" length="1" initial="" field="difficulty_level"/>
+			<property name="enableStatus" type="Long" length="1" initial="" field="enable_status"/>
+			<property name="answerThought" type="String" length="2000" initial="" field="answer_thought"/>
+			<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+			<property name="createTime" type="Date" length="" initial="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+			<property name="updateTime" type="Date" length="" initial="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+			<property name="dataFlag" type="Long" length="1" initial="" field="data_flag"/>
+			<property name="dataFlagType" type="String" length="4" initial="" field=""/>
+			<property name="teacherId" type="Long" length="20" initial="" field="teacher_id"/>
+
+			<property name="optionsNumber" type="Long" length="10" initial="" field=""/>
+
+			<property name="questionId" type="Long" length="20" initial="" field=""/>
+			<property name="title" type="Long" length="10" initial="" field=""/>
+			<property name="answerContent" type="Long" length="2000" initial="" field=""/>
+			<property name="correctFlag" type="Long" length="1" initial="" field=""/>
+
+
+
+			<!-- 关联表字段 -->
+			<property name="questionClassifyName" type="String" length="100" initial="" field=""/>
+			<property name="questionTypeName" type="String" length="100" initial="" field=""/>
+			<property name="difficultyLevelName" type="String" length="20" initial="" field=""/>
+			<property name="enableStatusName" type="String" length="20" initial="" field=""/>
+			<property name="fileIds" type="Long" length="20" initial="" field=""/>
+			<property name="optionContent" type="String" length="1000" initial="" field=""/>
+			<property name="correctTitle" type="String" length="20" initial="" field=""/>
+		</object>
+		<object name="questionFile" table="t_question_file" primary="id" unique="" order="">
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="questionId" type="Long" length="2000" initial="" field="question_id"/>
+			<property name="fileId" type="Long" length="20" initial="" field="file_id"/>
+			<property name="ossKey" type="String" length="64" initial="" field="oss_key"/>
+			<property name="bucketName" type="String" length="100" initial="" field="bucket_name"/>
+			<property name="createTime" type="Date" length="" initial="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+			<property name="updateTime" type="Date" length="" initial="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+
+			<!-- 关联表字段 -->
+			<property name="fileName" type="String" length="100" initial="" field=""/>
+
+		</object>
+	</model_layer>
+</tsoftware>

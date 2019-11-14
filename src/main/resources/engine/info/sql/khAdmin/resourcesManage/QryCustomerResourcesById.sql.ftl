@@ -1,0 +1,3 @@
+select t.id,f.oss_url as fileId,f.oss_key as ossKey,'' as parentId,'' as versionCode,'教辅资料' as resourcesType,f.path as filePath from t_teaching_assist t LEFT JOIN t_file_index f on f.id=t.file_id where t.id=#{data.id}
+union all
+select id, file_id as fileId, oss_key as ossKey, parent_id as parentId, version_code as versionCode, resources_type as resourcesType, file_path as filePath from t_customer_resources where id = #{data.id}

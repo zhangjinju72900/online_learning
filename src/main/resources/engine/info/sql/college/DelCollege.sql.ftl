@@ -1,0 +1,2 @@
+UPDATE t_school set valid_flag = 1, update_by = #{data.session.userInfo.empId}, update_time = now() WHERE id = #{data.id};
+update t_customer_user set school_id = 0, update_by = #{data.session.userInfo.empId}, update_time = now() where school_id = #{data.id};

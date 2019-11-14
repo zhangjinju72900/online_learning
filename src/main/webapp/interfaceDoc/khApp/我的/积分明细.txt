@@ -1,0 +1,24 @@
+﻿UI名称		积分明细列表接口（frmAppIntegralList）
+
+tokenKey	OnLoad__frmAppIntegralList_jQuery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": eq_customerUserId"5", --人员ID 
+		page: 1, rows: 50}
+
+返回示例
+"data":{"changeTime":"2018-10-12 09:14:15", --变动时间
+	"baseOrderId":126, --上级单据ID
+	"integral":5, --变动分数
+	"changeType":0, --变动项目ID
+	"customerUserId":2, --人员ID
+	"id":186, --ID
+	"changeTypeName":"签到增加", --变动项目
+	"baseOrderType":0 --上级单据类型
+	}
+		
+			

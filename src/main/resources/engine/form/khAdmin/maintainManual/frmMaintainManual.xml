@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+      xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmMaintainManual" title="维修手册">
+  <panel name="brandTree" object="maintainManual"  type="Tree" multiple="" search="Y">
+    <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+    <control name="parentId" title="父id" property="parentId" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+    <control name="name" title="节点名称" property="name" type="DataLink" edit="" required="" format="" width="" height="" column=""/>
+  </panel>
+  <panel name="pToolbar" title="工具条" object="" type="Toolbar">
+    <control name="ctlAdd" title="新增分类" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+  	<control name="ctlEdit" title="编辑分类" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+    <control name="ctlDel" title="删除分类" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+    <control name="ctlAddStudy" title="单个普通资源上传" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+    <control name="ctlAddPPT" title="单个ppt转H5-zip上传" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+  </panel>
+  <panel name="brandGroupDel" title="查询条件" object="maintainManual" type="Hidden"  multiple="Y">
+    <control name="eq_id" title="课程id" property="id" type="TextBox" edit="N" required="" format="" width="1" height="1" column="1"/>
+  </panel>
+    <panel name="brandGroup" title="查询条件" object="maintainManual" type="Hidden"  multiple="Y">
+    <control name="eq_parentId" title="课程id" property="parentId" type="TextBox" edit="N" required="" format="" width="1" height="1" column="1"/>
+  </panel>
+  
+  <panel name="brandGroup2" title="查询条件" object="maintainManual" type="Hidden"  multiple="Y"> 
+  	<control name="resourcesType" title="文件类型" property="resourcesType" type="Hidden" edit="" required="" format="" width="" height="" column="" />
+  </panel>
+  
+  <panel name="manualDg" title="列表" object="maintainManual" type="Grid"  multiple="">
+  	<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+  	<control name="parentId" title="父id" property="parentId" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+    <control name="ctlEdit" title="编辑" property="" type="Link" edit="N" required="" format="" width="120" height="" column=""/>
+    <control name="ctlDel" title="删除" property="" type="Link" edit="N" required="" format="" width="120" height="" column=""/>
+    <control name="ctlName" title="维护手册名称" property="fileName" type="TextBox" edit="N" required="" format="" width="200" height="" column=""/>
+    <control name="ctlType" title="后缀名" property="fileType" type="TextBox" edit="N" required="" format="" width="100" height="" column=""/>  
+    
+    <control name="resourcesType" title="文件类型" property="resourcesType" type="Hidden" edit="N" required="" format="" width="100" height="" column=""/>
+    <control name="resourcesTypeName" title="文件类型" property="resourcesTypeName" type="TextBox" edit="N" required="" format="" width="100" height="" column=""/>
+    <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="N" required="" format="" width="140" height="" column=""/>
+  </panel>
+  
+   <!-- 逻辑加载 -->
+    <flow trigger="" event="OnLoad" filter="">
+      <procedure name="tree"  logic="Query" ifyes="" ifno="">
+        <param name="In" value=""></param>
+        <param name="Out" value="brandTree"></param>
+        <param name="Sql" value="khAdmin/maintainManual/QryManualList"></param>
+      </procedure>
+   </flow>
+   <!-- 树点击 -->
+    <flow trigger="brandTree" event="OnClick" filter="" >
+      <procedure name="j1" server="" logic="EncodeId" ifyes="j2" ifno="">
+        <param name="In" value="brandTree.id"></param>
+      </procedure>
+      <procedure name="j2" server="" logic="DecodeId" ifyes="j3" ifno="">
+        <param name="Out" value="brandGroup.eq_parentId"></param>
+      </procedure>
+		<procedure name="j3" server="" logic="EncodeId" ifyes="j4" ifno="">
+			<param name="In" value="brandTree.id"></param>
+		</procedure>
+		<procedure name="j4" server="" logic="DecodeId" ifyes="queryTable" ifno="">
+			<param name="Out" value="brandGroupDel.eq_id"/>
+		</procedure>
+      <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="brandGroup"></param>
+        <param name="Out" value="manualDg"></param>
+        <param name="Sql" value="khAdmin/maintainManual/QryManualDetails"></param>
+      </procedure>  
+    </flow>
+    <!-- 删除分类 -->
+  	<flow trigger="pToolbar.ctlDel" event="OnClick" filter="">
+		<procedure name="branch" server="" logic="Branch" ifyes="getMsg" ifno="msg">
+		  <param name="In" value="getPanelControlValue('brandGroupDel.eq_id')==''"/>
+	  </procedure>
+	  <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
+		  <param name="Msg" value="请先选择目录"/>
+	  </procedure>
+		<procedure name="msg" server="" logic="ConfirmMsg" ifyes="deleteData" ifno="">
+			<param name="Title" value="删除"/>
+			<param name="Msg" value="确认删除当前分类吗?"/>
+		</procedure>
+		<procedure name="deleteData"  logic="SaveCustom" ifyes="jQuery" ifno="">
+			<param name="In" value="brandGroupDel"/>
+			<param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+			<param name="Plugin" value="DeleteManual" />
+			<param name="Msg" value="'分类已删除'"/>
+		</procedure>
+		
+	  <procedure name="jQuery"  logic="Query" ifyes="jTree" ifno="">
+		  <param name="Out" value="brandTree"/>
+		  <param name="Sql" value="khAdmin/maintainManual/QryManualList2"/>
+	  </procedure>
+	  <procedure name="jTree"  logic="Query" ifyes="" ifno="">
+		  <param name="In" value="brandGroup"/>
+		  <param name="Out" value="manualDg"/>
+		  <param name="Sql" value="khAdmin/maintainManual/QryManualDetails"/>
+	  </procedure>
+	  </flow>
+    <!-- 编辑分类 -->
+    <flow trigger="pToolbar.ctlEdit" event="OnClick" filter="">
+    	<procedure name="branch" server="" logic="Branch" ifyes="getMsg" ifno="jsencodeid">
+        	<param name="In" value="getPanelControlValue('brandGroup.eq_parentId')==''"></param>
+      	</procedure>
+        <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
+       		<param name="Msg" value="请先选择目录"></param>
+        </procedure>
+		<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
+        	<param name="In" value="brandTree.id"></param>
+      	</procedure>
+	  	<procedure name="jspopup" server="" logic="Popup" ifyes="jQuery" ifno="">
+			<param name="To" value="frmMaintainTreeAdd"></param>
+			<param name="Mode" value="Edit"></param>
+			<param name="Window" value="Medium"></param>
+			<param name="Title" value="编辑分支"></param>
+	  	</procedure>
+        <procedure name="jQuery"  logic="Query" ifyes="jTree" ifno="">
+        	<param name="In" value=""></param>
+        	<param name="Out" value="brandTree"></param>
+        	<param name="Sql" value="khAdmin/maintainManual/QryManualList2"></param>
+        </procedure>
+        <procedure name="jTree"  logic="Query" ifyes="" ifno="">
+        	<param name="In" value="brandGroup"></param>
+        	<param name="Out" value="manualDg"></param>
+        	<param name="Sql" value="khAdmin/maintainManual/QryManualDetails"></param>
+        </procedure>
+    </flow>	
+    <!-- 新增分类 -->
+    <flow trigger="pToolbar.ctlAdd" event="OnClick" filter="">
+      	<procedure name="branch" server="" logic="Branch" ifyes="getMsg" ifno="jsencodeid">
+        	<param name="In" value="getPanelControlValue('brandGroup.eq_parentId')==''"></param>
+      	</procedure>
+        <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
+       		<param name="Msg" value="请先选择目录"></param>
+        </procedure>
+		<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
+        	<param name="In" value="brandTree.id"></param>
+      	</procedure>
+	  	<procedure name="jspopup" server="" logic="Popup" ifyes="jQuery" ifno="">
+			<param name="To" value="frmMaintainTreeAdd"></param>
+			<param name="Mode" value="Add"></param>
+			<param name="Window" value="Medium"></param>
+			<param name="Title" value="新增分支"></param>
+	  	</procedure>
+        <procedure name="jQuery"  logic="Query" ifyes="jTree" ifno="">
+        	<param name="In" value=""></param>
+        	<param name="Out" value="brandTree"></param>
+        	<param name="Sql" value="khAdmin/maintainManual/QryManualList2"></param>
+        </procedure>
+        <procedure name="jTree"  logic="Query" ifyes="" ifno="">
+        	<param name="In" value="brandGroup"></param>
+        	<param name="Out" value="manualDg"></param>
+        	<param name="Sql" value="khAdmin/maintainManual/QryManualDetails"></param>
+        </procedure>  
+    </flow>
+    <!-- 新增普通资源 -->
+    <flow trigger="pToolbar.ctlAddStudy" event="OnClick" filter="">
+      	<procedure name="branch" server="" logic="Branch" ifyes="getMsg" ifno="jsencodeid">
+        	<param name="In" value="getPanelControlValue('brandGroup.eq_parentId')==''"></param>
+      	</procedure>
+        <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
+       		<param name="Msg" value="请先选择目录"></param>
+        </procedure>
+		<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
+        	<param name="In" value="brandTree.id"></param>
+      	</procedure>
+	  	<procedure name="jspopup" server="" logic="Popup" ifyes="jTree" ifno="">
+			<param name="To" value="frmMaintainManualAdd"></param>
+			<param name="Mode" value="Add"></param>
+			<param name="Window" value="Medium"></param>
+			<param name="Title" value="新增普通资料"></param>
+	  	</procedure>
+
+        <procedure name="jTree"  logic="Query" ifyes="" ifno="">
+        	<param name="In" value="brandGroup"></param>
+        	<param name="Out" value="manualDg"></param>
+        	<param name="Sql" value="khAdmin/maintainManual/QryManualDetails"></param>
+        </procedure>  
+    </flow>
+    
+    <!-- 新增PPT资源 -->
+    <flow trigger="pToolbar.ctlAddPPT" event="OnClick" filter="">
+      	<procedure name="branch" server="" logic="Branch" ifyes="getMsg" ifno="jsencodeid">
+        	<param name="In" value="getPanelControlValue('brandGroup.eq_parentId')==''"></param>
+      	</procedure>
+        <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
+       		<param name="Msg" value="请先选择目录"></param>
+        </procedure>
+		<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
+        	<param name="In" value="brandTree.id"></param>
+      	</procedure>
+	  	<procedure name="jspopup" server="" logic="Popup" ifyes="jTree" ifno="">
+			<param name="To" value="frmMaintainManualPPTAdd"></param>
+			<param name="Mode" value="Add"></param>
+			<param name="Window" value="Medium"></param>
+			<param name="Title" value="新增PPT转H5-zip资源"></param>
+	  	</procedure>
+        
+        <procedure name="jTree"  logic="Query" ifyes="" ifno="">
+        	<param name="In" value="brandGroup"></param>
+        	<param name="Out" value="manualDg"></param>
+        	<param name="Sql" value="khAdmin/maintainManual/QryManualDetails"></param>
+        </procedure>  
+    </flow>
+    
+    <!-- 编辑 -->
+    <flow trigger="manualDg.ctlEdit" event="OnClick" filter="">
+		
+		<procedure name="jencodeid" server="" logic="EncodeId" ifyes="js2" ifno="">
+        	<param name="In" value="manualDg.resourcesType" />
+      	</procedure>
+      
+		<procedure name="js2" server="" logic="DecodeId" ifyes="jsBranch1" ifno="">
+			<param name="Out" value="brandGroup2.resourcesType" />
+		</procedure>
+		
+		<procedure name="jsBranch1" server="" logic="Branch"
+			ifyes="jsencodeid" ifno="jsencodeid2">
+			<param name="In" value="getPanelControlValue('brandGroup2.resourcesType')=='0'" />
+		</procedure>
+		
+		<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
+        	<param name="In" value="manualDg.id"></param>
+      	</procedure>
+	  	<procedure name="jspopup" logic="Popup" ifyes="jTree" ifno="">
+			<param name="To" value="frmMaintainManualEdit"></param>
+			<param name="Mode" value="Edit"></param>
+			<param name="Window" value="Medium"></param>
+			<param name="Title" value="编辑普通资源"></param>
+	  	</procedure>
+	  	
+	  	<procedure name="jsencodeid2" server="" logic="EncodeId" ifyes="jspopup2" ifno="">
+        	<param name="In" value="manualDg.id"></param>
+      	</procedure>
+	  	<procedure name="jspopup2" logic="Popup" ifyes="jTree" ifno="">
+			<param name="To" value="frmMaintainManualPPTEdit"></param>
+			<param name="Mode" value="Edit"></param>
+			<param name="Window" value="Medium"></param>
+			<param name="Title" value="编辑PPT资源"></param>
+	  	</procedure>
+	  	
+        <procedure name="jTree"  logic="Query" ifyes="" ifno="">
+        	<param name="In" value="brandGroup"></param>
+        	<param name="Out" value="manualDg"></param>
+        	<param name="Sql" value="khAdmin/maintainManual/QryManualDetails"></param>
+        </procedure>  
+    </flow>
+    <!-- 删除 -->
+    <flow trigger="manualDg.ctlDel" event="OnClick" filter="">
+		<procedure name="je" logic="EncodeId" ifyes="jdecode" ifno="">
+        	<param name="In" value="manualDg.id"></param>
+      	</procedure>
+	  	<procedure name="jdecode" logic="DecodeId" ifyes="confirm" ifno="">
+			<param name="Out" value="brandGroupDel.eq_id"></param>
+	  	</procedure>
+	  	<procedure name="confirm" logic="ConfirmMsg" ifyes="jDelete" ifno="">
+			<param name="Title" value="删除分支"></param>
+			<param name="Msg" value="确认删除当前分支吗?"></param>
+	  	</procedure>
+	  	<procedure name="jDelete" logic="SaveCustom" ifyes="jTree" ifno="">
+			<param name="In" value="brandGroupDel"></param>
+			<param name="DAOPlugin" value="deleteManualData"></param>
+			<param name="Sql" value="khAdmin/maintainManual/updateManualFlag"></param>
+			<param name="Msg" value="已删除"></param>
+	  	</procedure>
+        
+        <procedure name="jTree"  logic="Query" ifyes="" ifno="">
+        	<param name="In" value="brandGroup"></param>
+        	<param name="Out" value="manualDg"></param>
+        	<param name="Sql" value="khAdmin/maintainManual/QryManualDetails"></param>
+        </procedure>  
+    </flow>
+    <!-- 布局 --> 
+    <layout>
+      <region location ="North" scale="">
+        <subregion panel="pToolbar" location ="North" scale=""/>
+      </region>
+	  <region location ="Center" scale="">
+		<subregion panel="manualDg" location="Center" scale=""/>
+      </region>
+      <region location ="West" scale="300px">
+        <subregion panel="brandTree" location ="Center" scale="300px"/>
+      </region>
+    </layout>
+  </ui>
+  </ui_layer>
+</tsoftware>

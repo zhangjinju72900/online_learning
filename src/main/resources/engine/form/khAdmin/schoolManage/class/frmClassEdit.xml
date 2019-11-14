@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmClassEdit" title="班级编辑" >
+	<panel name="pForm" title="班级编辑" object="class" type="Group">
+		<control name="id" title="ID" property="id" type="Hidden" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="schoolName" title="学校" property="schoolName" type="PopupBox" edit="Y" required="Y" format="" width="1" height="1" column=""/>
+		<control name="classType" title="项目类型" property="classType" type="ComboBox" edit="Y" required="Y" format="" width="1" height="1" initial="'0'" column="2"/>
+		<control name="name" title="班级" property="name" type="TextBox" edit="Y" required="Y" format=""  width="1" height="1" column=""/>
+		<control name="schoolId" title="学校" property="schoolId" type="Hidden" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="grade" title="年级" property="grade" type="ComboBox" edit="Y" required="Y" format=""  width="1" height="1" column="2"/>
+		<control name="startClassTime" title="开课时间" property="startClassTime" type="DateBox" edit="Y" required="Y" format="" width="1" height="1" column=""/>
+		
+		<control name="curriculumName" title="课表" property="curriculumName" type="PopupBox" edit="Y" required="Y" format="" width="1" height="1" column="2"/>
+		<control name="curriculumId" title="课表ID" property="curriculumId" type="Hidden" edit="Y" required="" format="" width="1" height="1" column=""/>
+		
+		<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="editMode=='Add'?session.userInfo.empId:model.releaseBy" format="" width="1" height="1" column=""  />
+		<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():model.releaseTime" format="" width="1" height="1" column=""  />
+		<control name="updateBy" title="修改人" property="updateBy" type="Hidden" edit="Y" required="N" target="editMode=='Add'?session.userInfo.empId:model.updateBy" format="" width="1" height="1" column=""  />
+		<control name="updateTime" title="修改时间" property="updateTime" type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():model.updateTime" format="" width="1" height="1" column=""  />
+	</panel>
+	
+	<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+		<control name="save" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+		<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+	</panel>
+	
+	<!-- 加载 -->
+    <flow trigger="" event="OnLoad" filter="" >
+    <procedure name="jClear"  logic="Clear" ifyes="List" ifno="" sync="Y">
+         <param name="Out" value="pForm"></param>
+      </procedure>
+      <procedure name="List"  logic="List" ifyes="j3" ifno="" sync="Y">
+         <param name="Out" value="pForm.classType"></param>
+         <param name="Sql" value="khAdmin/schoolManage/class/ListClassType"></param>
+      </procedure>
+      <procedure name="j3" logic="List" ifyes="jBranch" ifno="" sync="Y">
+		<param name="Out" value="pForm.grade"></param>
+		<param name="Sql" value="khAdmin/schoolManage/student/ListGrade"></param>
+	</procedure>
+    <procedure name="jBranch" server="" logic="Branch" ifyes="j1" ifno="">
+      <param name="In" value="getEditMode()=='Edit'"></param>
+     </procedure>
+     <procedure name="j1" server="" logic="DecodeId" ifyes="qid" ifno="">
+        <param name="Out" value="pForm.id" />
+      </procedure> 
+      <procedure name="qid"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pForm" />
+        <param name="Out" value="pForm" />
+        <param name="Sql" value="khAdmin/schoolManage/class/QryClassById" />
+      </procedure>
+    
+	</flow>
+    <!-- 保存 -->
+     <flow trigger="pButton.save" event="OnClick" filter="" defaultEnter="Y">
+      <procedure name="jssave"  logic="Save" ifyes="jsclose" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm.id"></param>
+		<param name="Plugin" value="saveGradeService"></param> 
+		<param name="Msg" value="'班级信息已保存'"></param>
+      </procedure>
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>
+    <!-- 取消 -->
+    <flow trigger="pButton.cancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>	
+    
+     <!-- 选择学校 -->
+   <flow trigger="pForm.schoolName" event="OnClick" filter="">
+      <procedure name="find"  logic="Find" ifyes="" ifno="">
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="SchoolEdit"></param>
+        <param name="Title" value="选择学校"></param>
+        <param name="Columns" value="id,编码,schoolId|name,学校名称,schoolName"></param> 
+        <param name="Window" value="Medium"></param> 
+        </procedure>
+     </flow>
+     
+      <!-- 选择课表 -->
+   <flow trigger="pForm.curriculumName" event="OnClick" filter="">
+      <procedure name="find"  logic="Find" ifyes="" ifno="">
+        <param name="In" value="pForm.schoolId"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="Curriculum"></param>
+        <param name="Title" value="选择课表"></param>
+        <param name="Columns" value="id,编码,curriculumId|name,课表名称,curriculumName"></param> 
+        <param name="Window" value="Medium"></param> 
+        </procedure>
+     </flow>
+    
+    <layout>
+		<region location="South" scale="">
+			<subregion panel="pButton" location="South" scale="" />
+		</region>
+		<region location="Center" scale="">
+			<subregion panel="pForm" location="Center" scale="" />
+		</region>
+	</layout>
+  </ui>
+</ui_layer>
+</tsoftware>

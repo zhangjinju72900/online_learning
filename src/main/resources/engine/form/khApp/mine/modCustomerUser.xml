@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+  <object name="customerUser" table="t_customer_user" primary="id" unique="" order=""> 
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="name" type="String" length="50" initial="" field="name"/>
+   <property name="cardNum" type="String" length="50" initial="" field="card_num"/>
+   <property name="tel" type="String" length="50" initial="" field="tel"/>
+   <property name="password" type="String" length="100" initial="" field="password"/>
+   <property name="sex" type="Long" length="1" initial="" field="sex"/>
+   <property name="loginCount" type="Long" length="10" initial="" field="login_count"/>
+   <property name="learnTime" type="Long" length="10" initial="" field="learn_time"/>
+   <property name="lastLoginTime" type="Date" length="20" initial="" field="last_login_time"/>
+   <property name="email" type="String" length="50" initial="" field="email"/>
+   <property name="schoolId" type="Long" length="20" initial="" field="school_id"/>
+   <property name="fileId" type="Long" length="20" initial="" field="file_id"/>
+   <property name="explain" type="String" length="200" initial="" field="explain"/>
+   <property name="integral" type="Long" length="10" initial="" field="integral"/>
+   <property name="totalIntegral" type="Long" length="10" initial="" field="total_integral"/>
+   <property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+   <property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+   <property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+   <property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+   <property name="readFlag" type="Long" length="2" initial="" field=""/>
+   <property name="readFlagName" type="String" length="10" initial="" field=""/>
+  </object>  
+    <object name="signIn" table="t_sign_in_record" primary="id" unique="" order=""> 
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="userId" type="Long" length="20" initial="" field="user_id"/>
+   <property name="signTime" type="Date"  initial="" field="sign_time"/>
+   <property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+   <property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+   <property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+   <property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+  </object>     
+</model_layer>
+</tsoftware>

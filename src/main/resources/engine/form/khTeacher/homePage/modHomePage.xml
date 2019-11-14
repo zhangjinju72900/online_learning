@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+ <object name="homePage" table="t_attend_class_record" primary="id" unique="" order="" autoinc="Y">
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="classId" type="Long" length="20" initial="" field="class_id"/>
+   <property name="className" type="String" length="50" initial="" field=""/>
+   <property name="courseId" type="Long" length="20" initial="" field="course_id"/>
+   <property name="startTime" type="String" length="50" initial="" field="start_time"/>
+   <property name="endTime" type="String" length="50" initial="" field="end_time"/>
+   <property name="closeTime" type="String" length="50" initial="" field="start_time"/>
+   <property name="givenDate" type="String" length="50" initial="" field="start_time"/>
+   <property name="studentCount" type="Long" length="20" initial="" field="student_count"/>
+   <property name="realStuCount" type="Long" length="20" initial="" field="real_student_count"/>
+   <property name="absenceStuCount" type="Long" length="1" initial="" field=""/>
+   <property name="teacherId" type="Long" length="20" initial="" field="teacher_id"/>
+   <property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+   <property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+   <property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+   <property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+   <property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+   
+
+   <property name="absenteeismFlag" type="Long" length="20" initial="" field=""/>
+</object> 
+</model_layer>
+</tsoftware>

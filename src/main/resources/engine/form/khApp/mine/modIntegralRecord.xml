@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+  <object name="integralRecord" table="t_customer_user_integral_record" primary="id" unique="" order="id desc"> 
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="customerUserId" type="Long" length="20" initial="" field="customer_user_id"/>
+   <property name="baseOrderId" type="Long" length="20" initial="" field="base_order_id"/>
+   <property name="baseOrderType" type="Long" length="4" initial="" field="base_order_type"/>
+   <property name="integral" type="Long" length="10" initial="" field="integral"/>
+   <property name="changeType" type="Long" length="1" initial="" field="change_type"/>
+   <property name="changeTypeName" type="String" length="10" initial="" field=""/>
+   <property name="changeTime" type="Date" length="20" initial="" field="change_time"/>
+   <property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+   <property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+   <property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+   <property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+  </object>     
+</model_layer>
+</tsoftware>

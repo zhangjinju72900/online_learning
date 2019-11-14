@@ -1,0 +1,1 @@
+update t_customer_user set easemod_username=#{data.id} , easemod_password =#{data.id} where id=#{data.id}

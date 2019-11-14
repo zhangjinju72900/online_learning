@@ -1,0 +1,71 @@
+UI名称		出勤管理/班级管理数据统计（frmAttendanceManage）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmAttendanceManage_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"ge_startTime":"",   --起始日期
+		"le_startTime":"",   --截止日期
+		"eq_class":["309","308"],  --班级ID
+		"page":1,"rows":50,"sort":"id","order":"desc"}
+
+返回示例
+"data":{"total":5,"rows":[
+		{"sectionName":"qwe",     --小节名称
+		"signRate":"31.82%",      --缺勤率
+		"studentCount":"15/22",   --出勤人数
+		"courseName":"语文",      --课程名称
+		"className":"匹配",       --班级名称
+		"startTime":"2019-01-05 12:24:44",   --授课时间
+		"id":77,                  --授课ID
+		"check":"缺勤详情",          
+		"class":1429              --班级ID
+		}]}
+
+
+
+
+UI名称		缺勤详情（absenteeismInfo）
+
+tokenKey	OnLoad__absenteeismInfo_qid
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"id":"77",    --授课ID
+		"page":1,"rows":50,"sort":"id","order":"desc"}
+
+返回示例
+"data":{"total":7,
+		"rows":[{
+		"studentId":28558,  --学生ID
+		"name":" 阳磊",     --学生名称
+		"title":"缺勤"      --标题
+		}]}
+		
+		
+		
+		
+缺勤率曲线图
+
+调用形式与登录接口一致
+
+接口地址	/getCurveData
+
+接口类型	POST
+
+参数示例
+"data":{"ge_startTime":"2019-01-05",    --起始时间
+		"le_startTime":"2019-06-06",    --截止时间
+		"eq_class":"35,1429",    		--班级ID
+		}
+
+返回示例
+"data":{"seriesData":[20.0,31.82],      --Y轴数据
+		"xAxisData":["2019-01-16 13:26:11","2019-01-05 12:24:44"]    --X轴数据
+		}		

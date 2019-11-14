@@ -1,0 +1,41 @@
+评论回复接口:
+	UI名称		 咨讯专题详情列表-评论列表-评论（frmCommentAdd）
+	
+	tokenKey：	OnClick_pToolbar_save_frmCommentAdd_jInsert 
+	
+
+	接口地址：   	api/savecustom
+
+	接口类型：	POST
+
+	参数示例:
+			"data": {
+			Mode:"Add"
+			content:"真好呢"	--二级评论内容
+			createBy:"2"		--当前登录人
+			id:null			
+			reviewId:"75"}		--一级评论ID，回复资讯时为0，回复评论时为具体ID' 
+
+	返回示例:
+
+			"data":{		
+			"information_id":17,		--资讯ID
+			"review_id":0,"like_count":0,	--‘评论ID，回复资讯时为0，回复评论时为具体ID'
+			"top_by":0,			--置顶人id
+			"create_time":"2018-09-01 10:58:46",
+			"review_count":0,		 --评论数
+			"valid_flag":0,
+			"content":"祝愿本次活动圆满顺利完成！",		--评论内容
+			"check_status":1,		--审核状态;0:未审核,1:审核通过,2:审核不通过
+			"create_by":1,
+			"update_time":"2018-09-01 10:58:46",
+			"createBy":1,
+			"top_flag":1,			--是否置顶;0:不置顶,1:置顶
+			"check_by":7,
+			"review_time":"2018-09-01 10:58:46",
+			"id":26,			--t_information_review表的id
+			"top_time":null,
+			"update_by":1,
+			"review_by":1,			--评论人id
+			"reviewId":0,
+			"check_time":"2018-09-01 11:01:12"}

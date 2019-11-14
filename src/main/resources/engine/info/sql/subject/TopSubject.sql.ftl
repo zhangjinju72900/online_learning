@@ -1,0 +1,1 @@
+update t_subject set top_flag = 1, top_time=now(), top_by=#{data.session.userInfo.userId} where id=#{data.id} 

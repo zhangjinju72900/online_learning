@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmObjectDetail" title="客观题作业回答详情">
+	 		<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnreturn" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+			<panel name="pCondition" title="查询条件" object="answerDetail" type="Group">
+			 	<control name="homeworkAnswerId" title="作业回答id" property="homeworkAnswerId" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="4"/>
+			</panel>
+			<panel name="pTable" title="查询结果" object="answerDetail" type="Grid" multiple="Y" >
+            	<control name="id" title="回答详情id" property="id" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="homeworkAnswerId" title="作业回答id" property="homeworkAnswerId" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="questionId" title="题目id" property="questionId" type="DataLink" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="questionContent" title="题干" property="questionContent" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="correctTitle" title="正确答案" property="correctTitle" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/>
+                <control name="correctFlag" title="是否正确标识(0正确)" property="correctFlag" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/> 
+                <control name="answerOption" title="所选答案" property="answerOption" type="TextBox" edit="N" required="" format="" width="100" height="1" column=""/> 
+            </panel>
+            <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		        <procedure name="annDecodeId" logic="DecodeId"  ifyes="qDetail" ifno="" >
+			    	<param name="Out" value="pCondition.homeworkAnswerId"></param>
+			   	  </procedure>
+		      <procedure name="qDetail" logic="Query" ifyes="" ifno="">
+		      	 <param name="In" value="pCondition"></param>
+		         <param name="Out" value="pTable"></param>
+		         <param name="Sql" value="khTeacher/homework/homeworkCorrect/QryObjectDetail"></param>
+		      </procedure>
+		    </flow>
+		    
+		    <!-- 试题题库详情 -->               
+		    <flow trigger="pTable.questionId" event="OnClick" filter="">
+		      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="tranToView" ifno="">
+		        <param name="In" value="pTable.questionId"></param>
+		      </procedure>
+		      <procedure name="tranToView"  logic="Transition" ifyes="" ifno="">
+		        <param name="To" value="frmObjQuestDetail"></param>
+		        <param name="Mode" value="Readonly"></param>
+		      </procedure>
+		    </flow> 
+
+   			<!--返回-->
+		    <flow trigger="pToolbar.btnreturn" event="OnClick" filter="">
+		       <procedure name="proTransition" server="/frmObjectAnswer" logic="Back" ifyes="" ifno="">
+		         <param name="To" value="frmObjectAnswer"></param>
+		       </procedure>
+		    </flow>
+            <!-- 布局 -->
+            <layout>
+                <region location ="North" scale="">
+                    <subregion panel="pToolbar" location="North" scale=""/>
+                </region>
+                <region location ="Center" scale="">
+                	<subregion panel="pCondition" location="North" scale=""/>
+                	<subregion panel="pTable" location="Center" scale=""/>
+                	
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

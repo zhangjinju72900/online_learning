@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+<object name="sysNotice" table="t_message_record" primary="id" unique="" order="" autoinc="Y">
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="receiverId" type="Long" length="50" initial="" field="receiver_id"/>
+   <property name="senderId" type="Long" length="50" initial="" field="sender_id"/>
+   <property name="sendType" type="Long" length="10" initial="" field="send_type"/>
+   <property name="sendTime" type="Date" length="500" initial="" field="send_time"/>
+   <property name="baseId" type="Long" length="10" initial="" field="base_id"/>
+   <property name="readFlag" type="Long" length="10" initial="" field="read_flag"/>
+   <property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+   <property name="remark" type="String" length="100" initial="" field="remark"/>
+   <property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+   <property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+   <property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+   <property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+   
+   
+   <property name="releaseTime" type="String" length="100" initial="" field=""/>
+   <property name="title" type="String" length="100" initial="" field=""/>
+   <property name="context" type="String" length="500" initial="" field=""/>
+   <property name="className" type="String" length="100" initial="" field=""/>
+   <property name="fileId" type="String" length="100" initial="" field=""/>
+</object>
+<object name="notice" table="t_notice" primary="id" unique="" order="" autoinc="Y">
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="title" type="String" length="100" initial="" field="title"/>
+   <property name="context" type="String" length="500" initial="" field="context"/>
+    <property name="className" type="String" length="100" initial="" field=""/>
+   <property name="fileId" type="String" length="100" initial="" field=""/>
+   <property name="bucketName" type="String" length="100" initial="" field=""/>
+   <property name="ossKey" type="String" length="100" initial="" field=""/>
+   <property name="fileName" type="String" length="100" initial="" field=""/>
+   <property name="source" type="Long" length="10" initial="" field="source"/>
+   <property name="releaseTime" type="String" length="100" initial="" field="release_time"/>
+   <property name="status" type="String" length="100" initial="" field="release_status"/>
+   <property name="releaseBy" type="Long" length="10" initial="" field="release_by"/>
+   <property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+   <property name="schoolId" type="Long" length="100" initial="" field="school_id"/>
+   <property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+   <property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+   <property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+   <property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+   <property name="headPic" type="Long" length="20" initial="" field=""/>
+   <property name="releaseName" type="Long" length="20" initial="" field=""/>
+   
+   
+</object>
+</model_layer>
+</tsoftware>

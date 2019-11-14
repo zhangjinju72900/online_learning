@@ -1,0 +1,36 @@
+UI名称		手动增加主观题（frmAddObjQuestion）
+
+tokenKey	OnClick_pToolbar_btnSave_frmAddObjQuestion_jssave2
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		answerThought: "kkkkk"		--回答思路
+		content: "ssssssss"			--题干
+		difficultyLevel: "1"		--难度等级；0-简单；1-一般难度；2-比较难；3-困难
+		fileIds: "3373,3374"		--附件id 多个附件的id用,隔开
+		}
+
+返回示例
+"data":		{
+		answerThought: "kkkkk"
+		answer_thought: "kkkkk"
+		content: "ssssssss"
+		create_by: 2
+		create_time: "2019-01-05 11:28:39"
+		data_flag: 1				--数据标识（0-系统试题；1-用户自定义试题）
+		difficultyLevel: 1
+		difficulty_level: 1
+		enable_status: 0			--启用状态；0-启用；1-禁用
+		fileIds: null
+		id: 90						--新插入的主观题id
+		question_classify_id: 0
+		question_type: 3
+		teacher_id: 2
+		update_by: 0
+		update_time: null
+		valid_flag: 0
+		}

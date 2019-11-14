@@ -1,0 +1,28 @@
+UI名称		客观题作业成绩列表（frmObjectScore）
+
+tokenKey	OnLoad__frmObjectScore_qAnswer
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkId: "10"		--客观作业id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		correctTitle: "A"					--题目答案
+		countCommit: 2						--已批改人数
+		countWrong: 1						--错误人数
+		questionContent: "今天是几月份"		--题干
+		questionId: 123						--题目id
+		wrongRate: "50.00%"					--该题已提交学生的错误率
+		}
+
+
+
+

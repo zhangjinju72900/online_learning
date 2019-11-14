@@ -1,0 +1,114 @@
+﻿UI名称		我的消息列表接口（frmMessageList）
+
+tokenKey	OnLoad__frmMessageList_j2
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"eq_listType":"1",   --2：评论，1：点赞，3：系统，4：活动
+"page":1,"rows":50,"sort":"id","order":"desc"}
+
+返回示例
+"data":
+{
+"readFlagName":"未读",--消息是否已读 和readFlag对应 1-"已读" 0-"未读"
+"readFlag":0,--消息已读标识 1表示已读 0表示未读
+"baseId":40,--上级业务ID
+"listType":1,--下拉框类型，1互动2评论3通知4活动，根据sendType决定，10是活动，0/2是互动，1/3是评论，9是通知
+"ufileId":1788,--发送者头像或活动首图
+"ctlSetRead":"设为已读",
+"content":"已给您点赞",
+"senderId":29843,--发送者ID
+"receiverId":7,--接收者ID
+"senderTime":"2018-11-13 17:31:27",--发送时间
+"nickname":"xiaofu",--昵称
+"senderType":0,--发送类型 0:资讯被点赞,1:资讯被评论,10:活动通知
+"id":135--ID
+}
+		
+UI名称  我的消息-设为已读（frmMessageList）		
+		
+tokenKey OnClick_pTable_ctlSetRead_frmMessageList_jInsert
+
+接口地址  /api/savecustom
+
+接口类型  POST
+
+参数示例
+"data":{
+	"id":"42" --t_message_record 消息记录的id
+}
+
+返回示例
+"data":{
+"readFlagName":null,
+"create_time":"2018-11-13 14:08:44",
+"base_id":65,
+"receiver_id":2,
+"send_type":1,
+"readFlag":1,
+"remark":"",	--备注
+"valid_flag":0,
+"ufileId":null,
+"sender_id":29835,
+"read_flag":1,  --是否已读标识 1为已读 0 为未读
+"content":null, --消息内容
+"create_by":2,
+"update_time":"2018-11-13 14:08:44",
+"senderId":29835,
+"send_time":"2018-11-13 14:08:44",
+"receiverId":2,
+"senderTime":null,
+"nickname":null,
+"senderType":null,
+"id":62,
+"update_by":2
+}
+
+
+
+
+
+UI名称  我的消息-删除（frmMessageList）
+
+tokenKey OnClick_pToolbar_btnDelete_frmMessageList_jDelete
+
+接口地址  /api/SaveCustom
+
+接口类型  POST
+
+参数示例
+"data":{
+	"id":"42"
+}
+返回示例
+"data":{
+"create_time":"2018-10-10 16:18:53",
+"base_id":32,
+"receiver_id":113,
+"send_type":0,
+"remark":"",
+"valid_flag":0,
+"ufileId":null,
+"sender_id":7,
+"content":null,
+"create_by":7,
+"update_time":
+"2018-10-24 13:44:01",
+"senderId":7,
+"send_time":"2018-10-10 16:18:53",
+"receiverId":113,
+"senderTime":null,
+"nickname":null,
+"senderType":null,
+"id":42,
+"update_by":113}	
+
+
+	
+		
+		
+
+

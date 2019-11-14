@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmAppBasicList" title="我的基本信息"> 
+  	<panel name="pCondition" title="查询条件" object="signIn" type="Group">
+		<control name="userId" title="用户id" property="userId" type="TextBox" edit="Y" required="N" format="" multiple="N" width="1" height="1" column="" initial="session.userInfo.empId"/>
+		<control name="btnsearch" title="搜索" property="" type="Button" column="2"/>
+	</panel> 
+	<panel name="pTable" title="查询结果" object="customerUser" type="Grid" multiple="N" >
+	    <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="name" title="姓名" property="name" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="integral" title="当前积分" property="integral" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="fileId" title="头像文件ID" property="fileId" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
+		<control name="readFlag" title="是否有未读消息标识" property="readFlag" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="readFlagName" title="是否有未读消息" property="readFlagName" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="ctlSign" title="签到" property="" type="Link" edit="" required="" format="" width="200" height="" column=""/>
+	</panel>
+	<!-- 初始加载 -->
+    <flow trigger="" event="OnLoad" filter="">  
+      <procedure name="jQuery"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pCondition"></param>
+        <param name="Out" value="pTable"></param>
+        <param name="Sql" value="khApp/mine/QryBasic"></param>
+      </procedure>    
+    </flow>	
+    
+     <!-- 搜索 -->
+    <flow trigger="pCondition.btnsearch" event="OnClick" filter="">
+      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pCondition" />
+        <param name="Out" value="pTable" />
+        <param name="Sql" value="khApp/mine/QryBasic"></param>
+      </procedure>              
+    </flow> 
+
+<!-- 签到 -->
+  <flow trigger="pTable.ctlSign" event="OnClick" filter="">
+       <procedure name="jEncodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
+        <param name="In" value="pTable.id"></param>
+      </procedure>
+       <procedure name="jspopup" logic="Popup" ifyes="jQuery" ifno="">
+        <param name="To" value="frmAppSignEdit" />
+        <param name="Mode" value="Add" />
+        <param name="Window" value="Medium" />
+        <param name="Title" value="签到" />
+      </procedure>
+        <procedure name="jQuery"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pCondition"></param>
+        <param name="Out" value="pTable"></param>
+        <param name="Sql" value="khApp/mine/QryBasic"></param>
+      </procedure>   
+    </flow>
+    <!-- 布局 -->
+    <layout>
+   	  <region location ="North" scale="">
+        <subregion panel="pCondition" location ="North" scale=""/>
+      </region>
+	  <region location ="Center" scale="">
+		<subregion panel="pTable" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui> 
+</ui_layer>
+</tsoftware>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+ <model_layer>
+  <object name="activityList" table="t_activity" primary="id" unique="" order="">
+   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="title" type="String" length="50" initial="" field="title"/>
+   <property name="releaseStatus" type="Long" length="1" initial="" field="release_status"/>
+   <property name="startTime" type="Date" length="20" initial="" field="start_time"/>
+   <property name="site" type="String" length="50" initial="" field="site"/>
+   <property name="address" type="String" length="200" initial="" field="address"/>
+   <property name="fileId" type="Long" length="20" initial="" field="file_id"/>
+   <property name="activityType" type="Long" length="1" initial="" field="activity_type"/>
+   <property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+   <property name="integral" type="Long" length="10" initial="" field=""/>
+   <property name="joinIntegral" type="Long" length="10" initial="" field=""/>
+   <property name="originator" type="Long" length="20" initial="" field=""/>
+   <property name="originTime" type="Date" length="20" initial="" field="origin_time"/>
+   <property name="content" type="String" length="" initial="" field="content"/>
+   <property name="applyCount" type="Long" length="10" initial="" field=""/>
+   <property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+   <property name="clickCount" type="Long" length="10" initial="" field=""/>
+   <property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+   <property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+   <property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+   <property name="reviewEdit" type="String" length="200" initial="" field=""/>
+   <property name="liveId" type="Long" length="20" initial="" field=""/>
+   <property name="count" type="Long" length="10" initial="" field=""/>
+   <property name="applyBy" type="Long" length="10" initial="" field=""/>
+   <property name="uName" type="String" length="50" initial="" field=""/>
+   <property name="uFileId" type="Long" length="20" initial="" field=""/>
+   <property name="reviewCount" type="Long" length="10" initial="" field="review_count"/>
+   <property name="likeCount" type="Long" length="10" initial="" field="like_count"/>
+   <property name="roleId" type="Long" length="10" initial="" field=""/>
+
+<property name="releaseTime" type="Date" length="20" initial="" field=""/>
+   <property name="forwardType" type="Long" length="10" initial="" field=""/>
+   <property name="source" type="Long" length="1" initial="" field=""/>
+   <property name="type" type="String" length="50" initial="" field=""/>
+
+  </object>
+  
+  <object name="scanCode" table="t_scan" primary="id" unique="" order="">
+   <property name="id" type="Long" length="20" initial="" field=""/>
+   <property name="userId" type="Long" length="20" initial="" field=""/>
+   <property name="name" type="String" length="50" initial="" field=""/>
+   <property name="nickname" type="String" length="50" initial="" field=""/>
+   <property name="sex" type="Long" length="10" initial="" field=""/>
+   <property name="schoolId" type="Long" length="20" initial="" field=""/>
+   <property name="schoolName" type="String" length="50" initial="" field=""/>
+   <property name="classId" type="String" length="500" initial="" field=""/>
+   <property name="className" type="String" length="500" initial="" field=""/>
+   <property name="grade" type="String" length="50" initial="" field=""/>
+   <property name="tel" type="String" length="50" initial="" field=""/>
+   <property name="isApply" type="Long" length="20" initial="" field=""/>
+   <property name="isJoin" type="Long" length="20" initial="" field=""/>
+  </object>
+ </model_layer>
+</tsoftware>

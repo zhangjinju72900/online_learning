@@ -1,0 +1,1 @@
+select id from  t_homework_detail_answer where create_by=#{data.userId} and homework_detail_id=#{data.homeworkDetailId}

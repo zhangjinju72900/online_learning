@@ -1,0 +1,25 @@
+UI名称		作业模板详情（frmTemplateDetail）
+
+tokenKey	OnLoad__frmTemplateDetail_qQuestionDeTail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkTemplateId: "2"		--作业模板的id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		createBy: 0
+		createTime: null
+		cteDelete: "删除"
+		homeworkTemplateId: 2		--作业模板id
+		id: 7						--作业模板详情id
+		questionContent: "测试用-初中"	--试题题干
+		questionId: 79					--试题id
+		}

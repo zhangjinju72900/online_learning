@@ -1,0 +1,1 @@
+select id from t_customer_user_integral_record where customer_user_id = #{data.userId} and change_type = #{data.changeType} and date(change_time) = CURDATE() 

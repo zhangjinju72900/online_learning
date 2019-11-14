@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<!-- 人员model -->
+		<object name="tOrder" table="t_order" primary="id"
+			unique="" order="order_time desc">
+			<property name="id" type="Long" length="20" initial=""
+				field="id" />	
+			<property name="userId" type="Long" length="20" initial=""
+				field="user_id" />					
+			<property name="code" type="String" length="50" initial=""
+				field="code" />
+			<property name="orderTime" type="Date" length="" validate=""
+				field="order_time" />
+			<property name="orderStatus" type="Long" length="20" initial=""
+				field="order_status" />
+			<property name="integral" type="Long" length="20" initial=""
+				field="integral" />	
+			<property name="amount" type="Double" length="20" initial=""
+				field="amount" />		
+			<property name="realIntegral" type="Long" length="20" initial=""
+				field="real_integral" />
+			<property name="realAmount" type="Double" length="20" initial=""
+				field="real_amount" />
+			<property name="payMethod" type="Long" length="20" initial=""
+				field="pay_method" />
+			<property name="consignAddressId" type="Long" length="20" initial=""
+				field="consign_address_id" />	
+			<property name="logistic" type="String" length="50" initial=""
+				field="logistic" />	
+			<property name="logisticCode" type="String" length="50" initial=""
+				field="logistic_code" />	
+			<property name="createTime" type="Date" length="" validate=""
+				field="create_time" />
+			<property name="createBy" type="Long" length="20" validate=""
+				field="create_by" />
+			<property name="updateTime" type="Date" length="" validate=""
+				field="update_time" />
+			<property name="updateBy" type="Long" length="20" validate=""
+				field="update_by" />	
+			<property name="remark" type="Long" length="100" validate=""
+				field="remark" />	
+
+			<!-- 新增 -->
+			<property name="consignee" type="String" length="50"
+				initial="" field="" />
+			<property name="createByName" type="String" length="50"
+				initial="" field="" />
+			<property name="updateByName" type="String" length="50"
+				initial="" field="" /> 
+			<property name="goodName" type="String" length="50"
+				initial="" field="" />
+			<property name="quantity" type="Long" length="20"
+				initial="" field="" /> 
+			<property name="goodId" type="Long" length="20" initial=""
+				field="" />
+			<property name="picId" type="Long" length="20" initial=""
+				field="" />
+			<property name="tel" type="String" length="100" initial=""
+				field="" />
+			<property name="specification" type="String" length="100" initial=""
+				field="" />	
+			<property name="totalAmount" type="String" length="100" initial=""
+				field="" />	
+		</object>
+	</model_layer>
+</tsoftware>

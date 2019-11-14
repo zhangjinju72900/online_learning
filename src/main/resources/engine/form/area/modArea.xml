@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<object name="area" table="t_region" primary="id" unique="name" order="id desc" autoinc="Y">
+	<property name="id" type="Long" length="10" initial="" field="id"/>
+	<property name="name" type="String" length="50" field="name"/>
+    <property name="createTime" type="Date" length="" validate=""  field="create_time" />
+     <property name="creater" type="String" length="50" field="create_by"/>
+     <property name="updateTime" type="Date" length="" validate=""  field="update_time" />
+     <property name="updater" type="String" length="50" field="update_by"/>
+	
+  </object>       
+</model_layer>
+</tsoftware>

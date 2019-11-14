@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmResourcesList" title="标签页面">
+			<panel name="pHidden" title="查询条件" object="LabelList" type="Hidden">
+				<control name="courseId" title="课程id" property="courseId" type="Hidden"
+						 edit="N" required="N" format=""  width="1" height="1" column=""/>
+				<control name="sectionId" title="课程id" property="sectionId" type="TextBox"
+						 edit="N" required="N" format=""  width="1" height="1" column=""/>		 
+			</panel>
+			<panel name="pTable" title="查询结果" object="LabelList" type="Grid">
+				<control name="id" title="labelId" property="id" type="Hidden"
+						 edit="" required="" format="" width="1" height="" column=""/>
+				<control name="text" title="标签名称" property="text" type="TextBox"
+						 edit="" required="" format="" width="100" height="" column=""/>
+				<control name="courseResName" title="资源名称" property="courseResName" type="TextBox"
+						 edit="" required="" format="" width="100" height="" column=""/>
+			</panel>
+			<!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="jClear" logic="Clear" ifyes="j1" ifno=""
+						   sync="Y">
+					<param name="Out" value="pHidden"/>
+				</procedure>
+				<procedure name="j1" server="" logic="DecodeId" ifyes="queryLabel" ifno="">
+					<param name="Out" value="pHidden.courseId"/>
+				</procedure>
+				<procedure name="queryLabel" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pHidden"/>
+					<param name="Out" value="pTable"/>
+					<param name="Plugin" value="qryResourceDetailAndGroupByLabelPlugin"/>
+					<param name="Sql" value="khTeacher/attendClass/QryAllResourcesList"/>
+				</procedure>
+			</flow>
+
+			<!-- 布局 -->
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pHidden" location="Center" scale=""/>
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pTable" location="Center" scale=""/>
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

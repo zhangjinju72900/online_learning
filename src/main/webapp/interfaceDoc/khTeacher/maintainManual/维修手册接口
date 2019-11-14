@@ -1,0 +1,58 @@
+维修手册树
+
+UI名称		维修手册-维修手册树（frmMaintainTree）
+
+tokenKey	 OnClick_pToolbar_btnQuery_frmMaintainTree_Query
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{"lk_text":"一" --名称
+}
+
+返回示例
+"data":
+		{"pid":"1",		--父id
+		"id":2,		--id
+		"text":"一汽奥迪"}	--名称
+
+维修手册树
+
+UI名称		维修手册-维修手册树-保存搜索记录（frmMaintainTree）
+
+tokenKey	 OnClick_pToolbar_btnQuery_frmMaintainTree_save
+
+接口地址	/api/SaveCustom
+
+接口类型	POST
+
+参数示例
+"data":{"lk_text":"一",--搜索内容
+}
+
+
+返回示例
+"data":
+		{
+		"id":6,		--id
+		}
+
+UI名称		维修手册-搜索记录（frmMaintainTree）
+
+tokenKey	 OnLoad__frmMaintainTree_tree
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data": 	{}
+
+返回示例
+"data":		{
+    searchTime: "2019-01-11 00:46:58", --搜索时间
+    text: "测试数据6",  --搜索内容
+    value: 5    --id
+}

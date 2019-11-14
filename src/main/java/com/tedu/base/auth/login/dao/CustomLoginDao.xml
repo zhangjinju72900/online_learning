@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.base.auth.login.dao.CustomLoginDao">
+<resultMap id="userResultMap" type="com.tedu.base.auth.login.model.UserModel">
+	<id column="ID" property="userId" />
+	<result column="NAME" property="userName" />
+	<result column="customName" property="name" />
+	<result column="mobile" property="mobile" />
+	<result column="nickName" property="nickName" />
+	<result column="EMP_ID" property="empId" />
+	<result column="SALT" property="salt" />
+	<result column="PASSWORD" property="password" />
+	<result column="AUTH_TYPE" property="authType" />
+	<result column="WRONG_COUNT" property="wrongCount" />
+	<result column="VALIDATE" property="validate" />
+	<result column="ROLE_ID" property="roleId" />
+	<result column="validateCode" property="validateCode" />
+	<result column="checkResult" property="checkResult" />
+</resultMap>
+<select id="getCustomUserInfoByName" resultMap="userResultMap" parameterType="java.lang.String">
+SELECT
+	u.id as userId,
+	u.name,
+	u.tel as mobile,
+	u.name as nickName,
+	u.id as empId,
+	right(u.password,32) as salt,
+    u.password,
+    'enable' as status,
+	group_concat(r.name order by r.name  separator ",") as roleName,
+	group_concat(r.id order by r.id  separator ",") as version,
+	easemod_username as validateCode,
+	easemod_password as checkResult  
+FROM
+	t_customer_user u
+	left join t_customer_user_role ur on u.id=ur.customer_user_id 
+	left join t_role r on ur.role_id=r.id 
+WHERE
+	u.valid_flag = 0
+AND (u.card_num = #{userName} or u.tel = #{userName})
+group by u.id 
+</select>
+
+<select id="getTeacherInfoByName" resultMap="userResultMap" parameterType="java.lang.String">
+SELECT
+	u.id as userId,
+	u.name,
+	u.tel as mobile,
+	u.name as nickName,
+	u.id as empId,
+	right(u.password,32) as salt,
+    u.password,
+    'enable' as status,
+	group_concat(r.name order by r.name  separator ",") as roleName,
+	group_concat(r.id order by r.id  separator ",") as version,
+	easemod_username as validateCode,
+	easemod_password as checkResult  
+FROM
+	t_customer_user u
+	left join t_customer_user_role ur on u.id=ur.customer_user_id 
+	left join t_role r on ur.role_id=r.id 
+WHERE
+	u.valid_flag = 0
+AND (u.card_num = #{userName} or u.tel = #{userName})
+group by u.id
+</select>
+
+<select id="getEmployeeInfoByName" resultMap="userResultMap" parameterType="java.lang.String">
+SELECT
+	u.id as userId,
+	u.name,
+	u.tel as mobile,
+	u.name as nickName,
+	u.id as empId,
+	right(u.password,32) as salt,
+    u.password,
+    'enable' as status,
+	group_concat(r.name order by r.name  separator ",") as roleName,
+	group_concat(r.id order by r.id  separator ",") as version,
+	easemod_username as validateCode,
+	easemod_password as checkResult  
+FROM
+	t_customer_user u
+	left join t_customer_user_role ur on u.id=ur.customer_user_id 
+	left join t_role r on ur.role_id=r.id 
+WHERE
+	u.valid_flag = 0
+AND (u.card_num = #{userName} or u.tel = #{userName})
+group by u.id 
+</select>
+
+<update id="updateCustomPwd" useGeneratedKeys="true" >
+	update t_customer_user set
+	password=#{password}
+	where id = #{userId}
+</update>
+
+
+<update id="updateCustomPwdByMobile" useGeneratedKeys="true" >
+	update t_customer_user set
+	password=#{password}
+	where tel = #{mobile}
+</update>
+
+<select id="getResList" resultType="java.util.Map" parameterType="java.lang.String">
+	SELECT
+		res.url AS url,
+		res. NAME AS resName
+	FROM
+		t_resource res
+	LEFT JOIN t_res_func resf ON res.id = resf.RES_ID
+	LEFT JOIN t_function f ON f.id = resf.FUNC_ID
+	LEFT JOIN t_role_func rf ON rf.func_id = f.id
+	LEFT JOIN t_customer_user_role ur ON rf.role_id = ur.ROLE_ID
+	LEFT JOIN t_customer_user u ON ur.customer_user_id = u.id
+	WHERE
+		1 = 1
+	<if test="userName!=null and userName!=''">
+		and u.name = #{userName}
+	</if>
+</select>
+
+<select id="getAuthorization" resultType="java.util.Map" parameterType="java.lang.String">
+	<![CDATA[ select * from (SELECT
+	chm.*,
+	t.name as parentName,
+	t.seq  as parentSeq
+	FROM
+	(
+	SELECT
+	*
+	FROM
+	(
+	SELECT DISTINCT
+	( m.code ),
+	m.type,
+	cast(m.seq as char) as seq, 
+	cast(m.parent as char) as parent,
+	m.name,
+	m.target,
+	r.url,
+	r.resName
+	FROM
+	(
+	select DISTINCT id,url ,resName from (select
+	res.url AS url,
+	res.name AS resName,
+	res.id
+	FROM
+	t_resource res
+	LEFT JOIN t_res_func resf ON res.id = resf.res_id
+	LEFT JOIN t_function f ON f.id = resf.func_id
+	LEFT JOIN t_role_func rf ON rf.func_id = f.id
+	LEFT JOIN t_customer_user_role ur ON rf.role_id = ur.role_id
+	LEFT JOIN t_customer_user u ON ur.customer_user_id = u.id
+	WHERE
+	(u.card_num = #{userName} or u.tel = #{userName})
+	union all
+	select
+	res1.url AS url,
+	res1.name AS resName,
+	res1.id
+	FROM
+	t_resource res1 where res1.Is_auth = 0
+	) resource
+	) r
+	INNER JOIN ( SELECT type, seq, parent, code, name, target, res_id FROM t_menu WHERE res_id IS NOT NULL ) m ON r.id = m.res_id
+	) a ORDER BY a.seq
+	) chm
+	INNER JOIN t_menu t ON chm.parent = t.CODE
+	ORDER BY
+	t.seq,
+	t.name
+	) r ORDER BY r.parentSeq,0+r.seq,r.name
+	]]>
+</select>
+
+<update id="updateLoginData" useGeneratedKeys="true" >
+	update t_customer_user set
+	login_count=login_count+1,
+	last_login_time=now()
+	where id = #{id}
+</update>
+
+
+<select id="selectUserByRolesAndRegions" resultType="java.lang.String" parameterType="java.lang.String">
+	SELECT DISTINCT
+		u.easemod_username
+	FROM
+		t_customer_user u
+	LEFT JOIN t_school s ON u.school_id = s.id
+	LEFT JOIN t_customer_user_role ur ON u.id = ur.customer_user_id
+	WHERE
+		u.easemod_username != ''
+	<if test="regions!=null and regions!=''">
+		and s.region_id in (${regions})
+	</if>
+	<if test="roles!=null and roles!=''">
+		and ur.role_id in (${roles})
+	</if>
+</select>
+
+
+<select id="selectUserByRolesAndSch" resultType="java.lang.String" parameterType="java.lang.String">
+	SELECT DISTINCT
+		u.easemod_username
+	FROM
+		t_customer_user u
+	LEFT JOIN t_customer_user_role ur ON u.id = ur.customer_user_id
+	WHERE
+		u.easemod_username != ''
+	<if test="schools!=null and schools!=''">
+		and u.school_id in (${schools})
+	</if>
+	<if test="roles!=null and roles!=''">
+		and ur.role_id in (${roles})
+	</if>
+</select>
+
+<!-- 根据班级查询用户 -->
+<select id="selectUserByclasses" resultType="java.lang.String" parameterType="java.lang.String">
+	SELECT DISTINCT
+		u.easemod_username
+	FROM
+		t_customer_user u
+	LEFT JOIN t_customer_user_class uc ON u.id = uc.customer_user_id
+	WHERE
+		u.easemod_username != ''
+	<if test="classess!=null and classess!=''">
+		and uc.class_id in (${classess})
+	</if>
+</select>
+
+<select id="getUnregisterUser" resultType="java.util.Map">
+	SELECT
+		id, card_num, school_id, tel
+	FROM
+		t_customer_user
+	WHERE
+	valid_flag = '0' and easemod_username = '' and card_num != ''
+</select>
+
+<update id="updateCustomEasemobUser" useGeneratedKeys="true" parameterType="java.lang.String">
+	update t_customer_user set
+	easemod_username=#{cardNum},
+	easemod_password=#{cardNum}
+	where id = #{id}
+</update>
+		        
+</mapper>

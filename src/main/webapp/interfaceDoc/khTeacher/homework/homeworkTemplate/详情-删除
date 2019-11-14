@@ -1,0 +1,55 @@
+UI名称		作业模板详情（frmTemplateDetail）
+
+tokenKey	OnClick_pTable_cteDelete_frmTemplateDetail_dQuestion
+
+接口地址	/api/delete
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		 id: "6"		--要删除的模板详情id
+		}
+
+返回示例
+"data":		{
+		createBy: 0
+		createTime: null
+		create_by: 0
+		create_time: null
+		homework_template_id: 2		--作业模板id
+		id: 6						--模板详情id
+		questionContent: null
+		questionId: 78				--详情中对应的试题id
+		question_id: 78
+		update_by: 0
+		update_time: null
+		}
+		
+		UI名称		作业模板详情（frmTemplateDetail） 判断是否为最后一题,假如是最后一题将模板删除
+tokenKey	OnClick_pTable_cteDelete_frmTemplateDetail_ss
+接口类型	POST
+接口地址	/api/saveCustom
+
+参数示例
+"data": 	{
+		id: "39"  --要删除的模板详情id
+		 total: 3 ---行数
+
+		}
+		
+	返回示例
+"data":		{
+		createBy: 2
+		createTime:2019-01-29 10:58:26
+		create_by: 2
+		create_time: 2019-01-29 10:58:26
+		homework_template_id: 26		--作业模板id
+		id: 39						--模板详情id
+		questionContent: null
+		questionId: 17				--详情中对应的试题id
+		question_id: 17
+		update_by: 2
+		update_time: 2019-01-29 10:58:26
+		}
+		

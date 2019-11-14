@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmNoticeDetail" title="通知列表详情">
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+  	   
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		
+	</panel>
+	<panel name="pForm" title="通知详情" object="tNotice"  type="Group" multiple="">
+		<control name="id" title="id" property="id" type="Hidden" edit="N" required="" format="" width="" height="" column=""/>
+		<control name="title" title="通知标题" property="title" type="TextBox" edit="N" required="Y" format="" width="1" height="1" column="2"/>
+		<control name="context" title="通知内容" property="context" type="TextBox" edit="N" required="Y" format="" width="1" height="6" column="1"/>
+		<control name="releaseBy" title="发布人id" property="releaseBy" type="Hidden" edit="N" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />		
+		<control name="releaseByna" title="发布人" property="releaseByna" type="TextBox" edit="N" required="N"  format="" width="1" height="1" column=""  />
+		<control name="releaseTime" title="创建日期" property="releaseTime" type="TextBox" edit="N" required="N" target="editMode=='Add'?CurrentTime():nil" format="" width="1" height="1" column="4"  />
+		<control name="releaseStatus" title="是否发布" property="releaseStatus" type="ComboBox" multiple="N" edit="N" required="N" format="" width="1" height="1" column="2"  />
+	</panel>
+	
+    <flow trigger="" event="OnLoad" filter="">  
+      <procedure name="jsencodeid" server="" logic="DecodeId" ifyes="empId" ifno="">
+        <param name="Out" value="pForm.id"></param>
+      </procedure>
+      <procedure name="empId"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khAdmin/noticeManage/QryNoticeList"></param>
+      </procedure>  
+    </flow>
+    
+     <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmNoticeList" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmNoticeList"></param>
+       </procedure>
+      </flow>
+   
+    <layout>
+       <region location ="North" scale="">
+       <subregion panel="pToolbar" location="North" scale=""/>
+		<subregion panel="pForm" location="Center" scale=""/>
+      </region>
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

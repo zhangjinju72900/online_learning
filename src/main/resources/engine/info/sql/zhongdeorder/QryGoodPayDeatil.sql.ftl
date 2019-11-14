@@ -1,0 +1,1 @@
+select id, integral, amount from t_goods_pay_detail where good_id = #{data.goodId} and valid_flag = '0'

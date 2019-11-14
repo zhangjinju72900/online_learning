@@ -1,0 +1,205 @@
+UI����	�༶����ӿڣ�frmClassManageList��
+
+tokenKey	OnLoad__frmClassManageList_jClear
+
+�ӿڵ�ַ	/api/clear
+
+�ӿ�����	POST
+
+����ʾ��
+"data": {    }
+
+����ʾ��
+"data":{     eq_grade: ""
+	eq_teacherId: 2	--��ʦID
+}
+		
+
+
+
+UI����  �༶����-���ݽ�ʦID���꼶��ѯ�༶��frmClassManageList��		
+		
+tokenKey OnClick_pToolbar_btnSearch_frmClassManageList_Query
+
+�ӿڵ�ַ  /api/query
+
+�ӿ�����  POST
+
+����ʾ��
+"data":{
+	eq_grade: "2016" 	--�����б���ѡ��
+	eq_teacherId: "2"	--��ʦID��ϵͳ�Զ���ȡ��
+	order: "desc"
+	page: 1
+	rows: 50
+	sort: "id"
+}
+
+����ʾ��
+"data":{
+            0: {classId: 1257, 	--�༶ID
+	teacherId: 2, 	--��ʦID
+	grade: "2016", 	--�꼶
+	className: "2016���ٷ�ְҵ����ѧԺʾ����",	--�༶ȫ��
+	 id: 30682, 	--��¼ID
+	classType: 1}	--�༶����(0-С������1-���£�2-ά��)
+            1: {classId: 308, 	--�༶ID
+	teacherId: 2, 	--��ʦID
+	grade: "2016",	--�꼶
+ 	className: "2016������1��",	--�༶ȫ��
+ 	id: 6298, 		--��¼ID
+	classType: 3}	--�༶����
+total: 2
+
+
+	
+
+UI����  �༶����-��ѯ�༶������Ϣ��frmClassManageDetail��
+
+tokenKey OnLoad__frmClassManageDetail_je
+
+�ӿڵ�ַ  api/querybyid
+
+�ӿ�����  POST
+
+����ʾ��
+"data":{
+	eq_id: "308"	--�༶ID
+	id: "308"		--�༶ID
+}
+
+����ʾ��	
+"data":{
+	"classRate":null,"
+	classTypeName":"ά��",
+	"className":"2016������1��",
+	"id":308,
+	"eq_classId":308
+}
+
+
+UI����  �༶����-��ѯ�༶��������Ϣ��frmClassManageDetail��
+
+tokenKey OnLoad__frmClassManageDetail_jq
+
+�ӿڵ�ַ  api/query
+
+�ӿ�����  POST
+
+����ʾ��
+"data":{
+	className: "2016������1��"	--�༶����
+	classRate: ""		--�༶����ǩ����
+	classTypeName: "ά��"	--�༶רҵ
+	eq_classId: "308"		--�༶ID��SQL��ѯ������
+	id: "308"			--�༶ID
+}
+
+����ʾ��	
+"data":{
+	"classId":"308",		--�༶ID
+	"classRate":"",		--�༶����ǩ����
+	"classTypeName":"ά��",	--�༶רҵ
+	"class_id":308,		--�༶ID
+	"weeklyRanking":"1.0",	--�༶����ǩ������
+	"className":"2016������1��",	--�༶����
+	"eq_classId":"308"		--�༶ID��SQL�ã�
+}
+
+
+UI����  �༶����-��ѯ�༶��������Ϣ��frmClassManageDetail��
+
+tokenKey OnLoad__frmClassManageDetail_jq2
+
+�ӿڵ�ַ  api/query
+
+�ӿ�����  POST
+
+����ʾ��
+"data":{
+	className: "2016������1��"	--�༶����
+	classRate: ""		--�༶����ǩ����
+	classTypeName: "ά��"	--�༶רҵ
+	eq_classId: "308"		--�༶ID��SQL��ѯ������
+	id: "308"			--�༶ID
+	weeklyRanking: "1.0"		--�༶����ǩ��������
+}
+
+����ʾ��	
+"data":{
+	"classId":"308",		--�༶ID
+	"classRate":"",		--�༶����ǩ����
+	"monthlyRanking":"1.0"	--�༶�ϸ���ǩ��������
+	"classTypeName":"ά��",	--�༶רҵ
+	"class_id":308,		--�༶ID
+	"weeklyRanking":"1.0",	--�༶����ǩ������
+	"className":"2016������1��",	--�༶����
+	"eq_classId":"308"		--�༶ID��SQL�ã�
+}
+
+
+
+
+UI����  �༶����-��ѯ�༶��Ա�б�frmClassManageDetail��
+
+tokenKey OnLoad__frmClassManageDetail_j3
+
+�ӿڵ�ַ  api/query
+
+�ӿ�����  POST
+
+����ʾ��
+"data":{
+	eq_classId: "308"		--�༶ID��SQL��ѯ������
+	id: "308"			--�༶ID
+}
+
+����ʾ��	
+"data":{"total":25,"rows":[
+	{
+		"lastLoginTime":null,		--�ϴε�½ʱ��
+		"classId":308,		--�༶ID
+		"sex":0,			--�Ա�
+		"sexName":"��",		--�����ֵ��Ա�
+		"customerUserId":6860,	--ѧ��ID 
+		"tel":"",			--��ϵ�绰
+		"id":308,			--�༶ID
+		"stuName":" �����",		--ѧ������
+		"fileId":0			--ͷ���ļ�ID
+	}.....
+}
+	
+
+
+
+UI����  �༶����-����ID��ѯ��Ա��Ϣ��frmClassManageDetail��
+
+tokenKey OnClick_pToolbar_btnSearch_frmClassManageDetail_Query
+
+�ӿڵ�ַ  api/query
+
+�ӿ�����  POST
+
+����ʾ��
+"data":{
+	eq_classId: "308"		--�༶ID
+	eq_customerUserId: "5"	--��ѯѧ��ID
+	order: "desc"	
+	page: 1
+	rows: 50
+	sort: "id"
+}
+
+����ʾ��	
+"data":{
+	"lastLoginTime":null,		--�ϴε�½ʱ��
+	"classId":308,		--�༶ID
+	"sex":0,			--�Ա�
+	"sexName":"��",		--�����ֵ��Ա�
+	"customerUserId":5,		--ѧ��ID 
+	"tel":"",			--��ϵ�绰
+	"id":308,			--�༶ID
+	"stuName":" ѧ��",		--ѧ������
+	"fileId":0			--ͷ���ļ�ID
+
+}

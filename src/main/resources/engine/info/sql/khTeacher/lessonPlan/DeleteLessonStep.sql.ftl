@@ -1,0 +1,1 @@
+delete from t_lesson_step where lesson_plan_id=#{data.planId}

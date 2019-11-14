@@ -1,0 +1,1 @@
+select max(id) as id from t_app_update_file_version where base_type = #{data.baseType} and valid_flag = 0

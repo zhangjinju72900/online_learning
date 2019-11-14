@@ -1,0 +1,170 @@
+UI名称		上课-选择班级（frmAttendClass）
+
+tokenKey	OnLoad__frmAttendClass_list1
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data":{}
+
+返回示例
+"data":{
+    "text":"汽修1班",    --班级名称
+    "value":308          --班级ID
+    }
+    
+    
+    
+    
+
+UI名称		上课-根据班级ID选择课程（frmAttendClass）
+
+tokenKey	OnLoad__frmAttendClass_list2
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data":{
+    "classId":"308"   --班级id
+    }
+
+返回示例
+"data":{
+    "text":"123如3",    --课程名称
+    "value":12         --课程ID
+    }
+
+
+
+
+
+
+
+UI名称		上课-根据课程ID选择课程任务（frmAttendClass）
+
+tokenKey	OnLoad__frmAttendClass_list3
+
+接口地址	/api/list
+
+接口类型	POST
+
+参数示例
+"data":{
+    "courseId":"12"    --课程id
+    }
+
+返回示例
+"data":{
+    "text":"任务一",     --任务名称
+    "value":2           --任务ID
+    }
+    
+    
+    
+    
+    
+
+UI名称		上课-执行点名-获取签到二维码（frmAttendClass）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmAttendClass_jSave
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data":{
+    "classId":"308",     --班级ID
+    "courseId":"4",      --课程ID
+    "sectionId":"52"	 --任务ID
+    }
+
+返回示例
+"data":{"attendClassRecordId":"124",     --上课记录ID
+		"schoolId":74,
+		"classId":"308",
+		"courseId":"4",
+		"sectionId":"52",
+		"id":"124",                     --上课记录ID
+		"fileId":"3455",
+		"ossKey":"64c7c90d03f84212b4e273a3bd8e6727.jpg",             --签到二维码 osskey
+		"ossUrl":"http://know-how001.oss-cn-beijing.aliyuncs.com/64c7c90d03f84212b4e273a3bd8e6727.jpg"     --签到二维码 url;二维码格式（knowhow:attend-class:124）
+		}
+      
+      
+   
+    
+      
+
+UI名称		上课-执行点名-获取学生列表（frmAttendClass）
+
+tokenKey	OnClick_pToolbar_btnQuery_frmAttendClass_QueryStudent
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data":{
+    "attendClassRecordId":"308"          --上课记录ID（上课-执行点名-获取签到二维码接口返回）
+    }
+
+返回示例
+"data":{"total":17,"rows":[{
+		"studentId":1,                   --学生ID
+		"ossUrl":'',                     --头像URL，为空时取使用fileId
+		"attendClassRecordId":124,       --上课记录ID
+		"validFlag":1,                   --签到状态 0-已签到，1-未签到
+		"validFlagName":"未签到",         
+		"name":" 访客用户",              --学生姓名
+		"id":862,                        --学生签到记录ID
+		"fileId":0                       --头像文件ID
+		}]}  
+		
+		
+	
+		
+
+
+UI名称		上课-学生使用扫二维码签到（frmQrCodeSignIn）
+
+tokenKey	OnClick_pButton_save_frmQrCodeSignIn_jssave
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data":{
+    "attendClassRecordId":"124",     --上课记录ID
+    "studentId":"4"      			 --学生ID
+    }
+
+返回示例
+"data":{"create_time":"2019-01-04 17:48:41","attendClassRecordId":55,"student_id":2,"valid_flag":0,"sign_time":"2019-01-04 17:48:41","create_by":2,"studentId":2,"update_time":"2019-01-04 17:48:41","school_id":74,"attend_class_record_id":55,"id":1,"update_by":2,"sign_type":0}	
+
+
+
+
+
+
+UI名称		上课-开始上课接口（frmAttendClass）
+
+tokenKey	OnClick_pToolbar_btnStart_frmAttendClass_jSave
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data":{
+    "attendClassRecordId":"124",     		--上课记录ID
+    "ids":"895,894,893"      			 	--学生签到记录ID,多个逗号隔开
+    }
+
+返回示例
+"data":{"attendClassRecordId":"125","schoolId":"","classId":"308","courseId":"4","sectionId":"","ids":"895,894,893","id":"893","session":{"userInfo":{"userId":2,"orgId":0,"userName":"admin","empId":2,"salt":"918E5D6EFECD41B08C8B43DE2B125FDA","password":"{md5}e3f3758d823bc25f345c4341654fb229918E5D6EFECD41B08C8B43DE2B125FDA","authType":"1","wrongCount":0,"validate":0,"validateCode":"admin","version":"1,11","checkResult":"admin","empId_foreign":"t_employee.id","roleName":"Administrator,教师","status":"enable","mobile":"18201689908","nickName":"管理员","adminRole":true}},"studentCount":17,"realStudentCount":3}		

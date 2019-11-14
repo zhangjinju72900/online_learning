@@ -1,0 +1,77 @@
+UI名称		错题集全部课程（frmWrongQuesCollect）
+
+tokenKey	OnClick_pToolbar_btnQry_frmWrongQuesCollect_MisQuestionQuery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+		"data": 	{
+		page: 1
+		rows: 50
+		userId: "2"							--学生用户id
+		}
+
+
+返回示例
+"data":{classId: 308						班级ID
+		courseId: 4							课程ID
+		createBy: 2							创建人
+		createTime: "2019-01-10 11:14:11"	创建时间
+		homeworkDetailId: 9					作业明细ID
+		homeworkId: 10						作业ID
+		id: 3								错题ID
+		questionId: 123						试题ID
+		schoolId: 49						学校ID
+		sectionId: 2						小节ID
+		studentId: 2						学生ID
+		teacherId: 2						教师ID
+		updateBy: 2							更新人
+		updateTime: "2019-01-10 11:14:11"	更新时间
+		validFlag: 0						标识（0-正常；1-作废）
+}
+		
+		
+UI名称		错题集课程分类及数量（frmWrongQuesCollect）
+
+tokenKey	OnClick_pToolbar_btnQry_frmWrongQuesCollect_MisQuestionQuery1
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+		"data": 	{
+		page: 1
+		rows: 50
+		userId: "2"							--学生用户id
+		}
+
+返回示例
+"data":[{classId: 308						班级ID
+		courseName: "语文"						课程名称
+		courseId: 4							课程id
+		createBy: 2							创建人
+		createTime: "2019-01-10 11:14:11"	创建时间
+		homeworkDetailId: 9					作业明细ID
+		homeworkId: 10						作业ID
+		id: 3								错题ID
+		number: 1							题目数量
+		questionId: 123						试题ID
+		schoolId: 49						学校ID
+		sectionId: 2						小节ID
+		studentId: 2						学生ID
+		teacherId: 2						教师ID
+		updateBy: 2							更新人
+		updateTime: "2019-01-10 11:14:11"	更新时间
+		validFlag: 0						标识（0-正常；1-作废）
+		}	
+		...
+		{
+		courseName: "全部错题"				--rows最后一条数据为全部错题的数量
+		number: "3"							--全部错题数量  
+		}
+]
+
+  			

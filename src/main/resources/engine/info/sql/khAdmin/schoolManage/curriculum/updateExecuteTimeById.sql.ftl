@@ -1,0 +1,1 @@
+update t_curriculum set execute_time = #{data.executeDate} where id = #{data.id}

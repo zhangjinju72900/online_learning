@@ -1,0 +1,2 @@
+insert into t_notice_region(notice_id, region_id, create_time, create_by, update_time, update_by)
+values(#{data.noticeId}, #{data.regionId}, now(), #{data.session.userInfo.userId}, now(), #{data.session.userInfo.userId})

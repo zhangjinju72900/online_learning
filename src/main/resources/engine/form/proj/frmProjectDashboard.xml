@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <model_layer>
+        <object name="projectSprint" table="" primary="rowNum" unique="" order="">
+            <property name="projId" type="Long" field=""/>
+            <property name="projName" type="String" field=""/>
+            <property name="sprintId" type="Long" field=""/>
+            <property name="startTime" type="String" field=""/>
+            <property name="testEndTime" type="String" field=""/>
+            <property name="sprintStatus" type="String" field=""/>
+            <property name="orgName" type="String" field=""/>
+            <property name="managerName" type="String" field=""/>
+			<property name="positionName" type="String" length="50" initial="" field=""/>
+            <property name="rowNum" type="Long" field="rowNum"/>
+            <property name="testBy" type="String" field=""/>
+            <property name="testByName" type="String" length="50" initial="" field=""/>
+            <property name="sprintName" type="String"    initial="" field=""/>
+            <property name="openStatus" type="Long" initial="" field="" />
+            <property name="reopen" type="Long" initial="" field="" />
+            <property name="workIn" type="Long" validate="" field=""/>
+            <property name="resolve" type="Long" validate="" field=""/>
+            <property name="test" type="Long" validate="" field=""/>
+            <property name="closeStatus" type="Long" validate="" field=""/>
+            <property name="cancel" type="Long" validate="" field=""/>
+            <property name="unComplete" type="Long" validate="" field=""/>
+            <property name="unDoing" type="Long" validate="" field=""/>
+            <property name="unSolve" type="Long" validate="" field=""/>
+            <property name="total" type="Long" validate="" field=""/>
+            <property name="percent" type="String" validate="" field=""/>
+            <property name="resolvePercent" type="String" validate="" field=""/>
+            <property name="workPercent" type="String" validate="" field=""/>
+        </object>
+    </model_layer>
+    <ui_layer>
+        <ui name="frmProjectDashboard" title="项目迭代看板">
+            <panel name="pnlToolbar" title="工具条" object="" type="Toolbar">
+                <control name="ctlSearch" title="查询" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlClear" title="清空条件" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+                <control name="ctlExport" title="导出清单" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+            </panel>
+
+
+
+            <panel name="pnlCondition" title="查询条件" object="project" type="Group" >
+                <control name="projName" title="项目" property="name" type="PopupBox" edit="Y" required="Y" format=""
+                         width="1" height="1" column="4"/>
+                <control name="projId" title="项目" property="id" type="Hidden" edit="N" required="Y" format=""
+                         width="1" height="1" column=""/>
+            </panel>
+            <panel name="pnlList" title="查询结果" object="projectSprint" type="Grid" page="0">
+                <control name="sprintName" title="迭代名" property="sprintName" type="TextBox" edit="" required="" format=""
+                         width="100" height="" column=""/>
+                <control name="sprintStatus" title="状态" property="sprintStatus" type="TextBox" edit="" required="" format=""
+                         width="100" height="" column=""/>
+                <control name="ctlStartTime" title="开发启动时间" property="startTime" type="TextBox" edit="" required="" format=""
+                         width="100" height="" column=""/>
+                <control name="ctlTestEndTime" title="测试完成时间" property="testEndTime" type="TextBox" edit="" required="" format=""
+                         width="100" height="" column=""/>
+                <control name="openStatus" title="打开" property="openStatus" type="DataLink" edit="" required="" format=""
+                         width="80" height="" column=""
+                         drill="{eq_projId:'${row.projId}',projName:'${row.projName}',eq_sprintId:'${row.sprintId}',eq_issueStatus:'open'}"
+
+                />
+                <control name="reopen" title="重新打开" property="reopen" type="DataLink" edit="" required="N"
+                         format="" width="80" height="1" column=""
+                         drill="{eq_projId:'${row.projId}',projName:'${row.projName}',eq_sprintId:'${row.sprintId}',eq_issueStatus:'reopen'}"
+
+                />
+                <control name="workIn" title="处理中" property="workIn" type="DataLink" edit="" required="N"
+                         format="resolve" width="80" height="1" column=""
+                         drill="{eq_projId:'${row.projId}',projName:'${row.projName}',eq_sprintId:'${row.sprintId}',eq_issueStatus:'workin'}"
+
+                />
+                <control name="resolve" title="已解决" property="resolve" type="DataLink" edit="" required="N"
+                         format="" width="80" height="1" column=""
+                         drill="{eq_projId:'${row.projId}',projName:'${row.projName}',eq_sprintId:'${row.sprintId}',eq_issueStatus:'resolve'}"
+
+                />
+                <control name="test" title="测试中" property="test" type="DataLink" edit="" required="N"
+                         format="" width="80" height="1" column=""
+                         drill="{eq_projId:'${row.projId}',projName:'${row.projName}',eq_sprintId:'${row.sprintId}',eq_issueStatus:'test'}"
+
+                />
+                <control name="closeStatus" title="已关闭" property="closeStatus" type="DataLink" edit="" required="N"
+                         format="cancel" width="80" height="1" column=""
+                         drill="{eq_projId:'${row.projId}',projName:'${row.projName}',eq_sprintId:'${row.sprintId}',eq_issueStatus:'close'}"
+
+                />
+                <control name="cancel" title="已取消" property="cancel" type="DataLink" edit="" required="N"
+                         format="" width="80" height="1" column=""
+                         drill="{eq_projId:'${row.projId}',projName:'${row.projName}',eq_sprintId:'${row.sprintId}',eq_issueStatus:'cancel'}"
+                />
+                <control name="total" title="小计" property="total" type="DataLink" edit="" required="N"
+                         format="" width="80" height="1" column=""
+                         drill="{eq_projId:'${row.projId}',projName:'${row.projName}',eq_sprintId:'${row.sprintId}',eq_issueStatus:'open,reopen,workin,resolve,test,close'}"/>
+
+                <control name="unDoing" title="待处理" property="unDoing" type="DataLink" edit="" required="N"
+                         format="" width="100" height="1" column=""
+                         drill="{eq_projId:'${row.projId}',projName:'${row.projName}',eq_sprintId:'${row.sprintId}',eq_issueStatus:'open,reopen'}"
+                />
+
+                <control name="unSolve" title="未解决" property="unSolve" type="DataLink" edit="" required="N"
+                         format="" width="100" height="1" column=""
+                         drill="{eq_projId:'${row.projId}',projName:'${row.projName}',eq_sprintId:'${row.sprintId}',eq_issueStatus:'open,reopen,workin'}"
+                />
+
+                <control name="unComplete" title="未完成" property="unComplete" type="DataLink" edit="" required="N"
+                         format="" width="100" height="1" column=""
+                         drill="{eq_projId:'${row.projId}',projName:'${row.projName}',eq_sprintId:'${row.sprintId}',eq_issueStatus:'open,reopen,workin,resolve,test'}"
+                />
+
+                <control name="percent" title="解决百分比" property="percent" type="TextBox" edit="" required="N"
+                         format="" width="100" height="1" column=""/>
+                <control name="resolvePercent" title="完成百分比" property="resolvePercent" type="TextBox" edit="" required="N"
+                         format="" width="100" height="1" column=""/>
+
+
+
+            </panel>
+
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="procClear" logic="Clear" ifyes="procQuery" ifno="" sync="Y">
+                    <param name="Out" value="pnlCondition"></param>
+                </procedure>
+            </flow>
+            <!-- 查询 -->
+            <flow trigger="pnlToolbar.ctlSearch" event="OnClick" filter="">
+                <procedure name="proQuery" logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Out" value="pnlList"></param>
+                    <param name="Sql" value="proj/QryProjectIssue"></param>
+                </procedure>
+            </flow>
+            <!-- 清空条件 -->
+            <flow trigger="pnlToolbar.ctlClear" event="OnClick" filter="">
+                <procedure name="proClear" logic="Clear" ifyes="" ifno="">
+                    <param name="Out" value="pnlCondition"></param>
+                </procedure>
+            </flow>
+
+            <!-- 导出 -->
+            <flow trigger="pnlToolbar.ctlExport" event="OnClick" filter="">
+
+                <procedure name="procExport"  logic="Export" ifyes="" ifno="">
+                    <param name="Format" value="pnlList"></param>
+                    <param name="In" value="pnlCondition"></param>
+                    <param name="Sql" value="proj/QryProjectIssue"></param>
+                </procedure>
+            </flow>
+
+            <!-- 项目查询 -->
+
+               <flow trigger="pnlCondition.projName" event="OnClick" filter="">
+                   <procedure name="procProjectFind"  logic="Find" ifyes="" ifno="">
+                       <param name="Out" value="pnlCondition"></param>
+                       <param name="Sql" value="ProjectHasPermission"></param>
+                       <param name="Title" value="项目选择"></param>
+                       <param name="Columns" value="id,编码,projId|name,项目名称,projName"></param>
+                       <param name="Window" value="Large"></param>
+                   </procedure>
+               </flow>
+
+            <!--钻取逻辑-->
+
+            <flow trigger="pnlList.openStatus" event="OnClick" filter="">
+                <procedure name="procEncodeParam"  logic="EncodeParam" ifyes="procToIssueList" ifno="">
+                    <param name="In" value="pnlList.openStatus"></param>
+                    <param name="Out" value="pCondition"></param>
+                </procedure>
+                <procedure name="procToIssueList"  logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmIssueList"></param>
+                    <param name="Mode" value="Edit"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.reopen" event="OnClick" filter="">
+                <procedure name="procEncodeParam"  logic="EncodeParam" ifyes="procToIssueList" ifno="">
+                    <param name="In" value="pnlList.reopen"></param>
+                    <param name="Out" value="pCondition"></param>
+                </procedure>
+                <procedure name="procToIssueList"  logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmIssueList"></param>
+                    <param name="Mode" value="Edit"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.workIn" event="OnClick" filter="">
+                <procedure name="procEncodeParam"  logic="EncodeParam" ifyes="procToIssueList" ifno="">
+                    <param name="In" value="pnlList.workIn"></param>
+                    <param name="Out" value="pCondition"></param>
+                </procedure>
+                <procedure name="procToIssueList"  logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmIssueList"></param>
+                    <param name="Mode" value="Edit"></param>
+                </procedure>
+            </flow>
+            <flow trigger="pnlList.resolve" event="OnClick" filter="">
+                <procedure name="procEncodeParam"  logic="EncodeParam" ifyes="procToIssueList" ifno="">
+                    <param name="In" value="pnlList.resolve"></param>
+                    <param name="Out" value="pCondition"></param>
+                </procedure>
+                <procedure name="procToIssueList"  logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmIssueList"></param>
+                    <param name="Mode" value="Edit"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.test" event="OnClick" filter="">
+                <procedure name="procEncodeParam"  logic="EncodeParam" ifyes="procToIssueList" ifno="">
+                    <param name="In" value="pnlList.test"></param>
+                    <param name="Out" value="pCondition"></param>
+                </procedure>
+                <procedure name="procToIssueList"  logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmIssueList"></param>
+                    <param name="Mode" value="Edit"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.closeStatus" event="OnClick" filter="">
+                <procedure name="procEncodeParam"  logic="EncodeParam" ifyes="procToIssueList" ifno="">
+                    <param name="In" value="pnlList.closeStatus"></param>
+                    <param name="Out" value="pCondition"></param>
+                </procedure>
+                <procedure name="procToIssueList"  logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmIssueList"></param>
+                    <param name="Mode" value="Edit"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.cancel" event="OnClick" filter="">
+                <procedure name="procEncodeParam"  logic="EncodeParam" ifyes="procToIssueList" ifno="">
+                    <param name="In" value="pnlList.cancel"></param>
+                    <param name="Out" value="pCondition"></param>
+                </procedure>
+                <procedure name="procToIssueList"  logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmIssueList"></param>
+                    <param name="Mode" value="Edit"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.unDoing" event="OnClick" filter="">
+                <procedure name="procEncodeParam"  logic="EncodeParam" ifyes="procToIssueList" ifno="">
+                    <param name="In" value="pnlList.unDoing"></param>
+                    <param name="Out" value="pCondition"></param>
+                </procedure>
+                <procedure name="procToIssueList"  logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmIssueList"></param>
+                    <param name="Mode" value="Edit"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.unSolve" event="OnClick" filter="">
+                <procedure name="procEncodeParam"  logic="EncodeParam" ifyes="procToIssueList" ifno="">
+                    <param name="In" value="pnlList.unSolve"></param>
+                    <param name="Out" value="pCondition"></param>
+                </procedure>
+                <procedure name="procToIssueList"  logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmIssueList"></param>
+                    <param name="Mode" value="Edit"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.unComplete" event="OnClick" filter="">
+                <procedure name="procEncodeParam"  logic="EncodeParam" ifyes="procToIssueList" ifno="">
+                    <param name="In" value="pnlList.unComplete"></param>
+                    <param name="Out" value="pCondition"></param>
+                </procedure>
+                <procedure name="procToIssueList"  logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmIssueList"></param>
+                    <param name="Mode" value="Edit"></param>
+                </procedure>
+            </flow>
+
+            <flow trigger="pnlList.total" event="OnClick" filter="">
+                <procedure name="procEncodeParam"  logic="EncodeParam" ifyes="procToIssueList" ifno="">
+                    <param name="In" value="pnlList.total"></param>
+                    <param name="Out" value="pCondition"></param>
+                </procedure>
+                <procedure name="procToIssueList"  logic="Transition" ifyes="" ifno="">
+                    <param name="To" value="frmIssueList"></param>
+                    <param name="Mode" value="Edit"></param>
+                </procedure>
+            </flow>
+
+            <layout>
+                <region location="North" scale="">
+                    <subregion panel="pnlToolbar" location="North" scale=""/>
+                </region>
+                <region location="Center" scale="">
+                    <subregion panel="pnlCondition" location="North" scale=""/>
+                    <subregion panel="pnlList" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

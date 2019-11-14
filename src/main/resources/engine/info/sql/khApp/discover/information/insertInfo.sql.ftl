@@ -1,0 +1,32 @@
+INSERT INTO `t_information` (
+	`title`,
+	`source`,
+	`activity_id`,
+	`release_status`,
+	`release_time`,
+	`release_by`,
+	`release_address`,
+	`longitude`,
+	`latitude`,
+	`create_time`,
+	`create_by`,
+	`update_time`,
+	`update_by`
+)
+VALUES
+	(
+		#{data.title},
+		#{data.source},
+		#{data.activityId},
+		'1',
+		now(),
+		#{data.createBy},
+		#{data.releaseAddress},
+		#{data.longitude},
+		#{data.latitude},
+		now(),
+		#{data.createBy},
+		now(),
+		#{data.createBy}
+	)
+

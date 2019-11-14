@@ -1,0 +1,1 @@
+DELETE FROM t_course_section_resources WHERE id=#{data.id}

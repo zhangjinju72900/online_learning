@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmActivityEdit" title="活动编辑">
+
+			<panel name="pnlHidden" title="查询条件" object="org" type="Hidden">
+				<control name="id" title="id" property="id" type="Hidden"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+
+			<panel name="pfile" title="图片" object="" type="Image">
+				<control name="picture" title="附件" property="" type="ImageView"
+					edit="" required="" format="" width="" height="" column="2" />
+			</panel>
+
+			<panel name="pForm" title="活动编辑" object="activityManage" type="Group">
+				<control name="previewFileId" title="id" property="" type="Hidden"
+					edit="" required="" format="" width="" height="" column="" />
+
+				<control name="id" title="id" property="id" type="Hidden"
+					edit="" required="" format="" width="2" height="" column="2" />
+				<control name="title" title="标题" property="title" type="TextBox"
+					edit="Y" required="Y" format="" width="1" height="1" column="" />
+				<control name="file" title="上传首图" property="file" type="FileBox"
+					edit="Y" required="" format="" width="1" height="1" column="2" />
+				<control name="fileId" title="视频编号" property="fileId" type="Hidden"
+					edit="Y" required="" format="" width="3" height="1" column="" />
+				<control name="eq_releaseStatus" title="是否发布" property="releaseStatus"
+					type="ComboBox" edit="Y" required="" format="" width="1" height="1"
+					column="" />
+				<control name="integral" title="参加送分" property="integral"
+					type="TextBox" edit="Y" required="" format="" width="1" height="1"
+					column="2" />
+				<control name="joinIntegral" title="活动积分" property="joinIntegral"
+					type="TextBox" edit="Y" required="Y" format="" width="1" height="1"
+					column="" />
+				<control name="eq_site" title="活动地点" property="site" type="TextBox"
+					edit="Y" required="" format="" width="1" height="1" column="2" />
+				<control name="eq_activityType" title="类型" property="activityType"
+					type="ComboBox" edit="Y" required="" format="" width="1" height="1"
+					column="" />
+				<control name="address" title="详细地址" property="address"
+					type="TextBox" edit="Y" required="" format="" width="1" height="1"
+					column="2" />
+				<control name="eq_role" title="参与角色" property="role" type="ComboBox"
+					edit="Y" multiple="Y" required="" format="" width="1" height="1"
+					column="" />
+				<control name="eq_region" title="参与地区" property="region"
+					type="ComboBox" edit="Y" multiple="Y" required="Y" format="" width="1"
+					height="1" column="2" />
+					<control name="eq_school" title="学校ID" property="schoolId" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="" />
+				<control name="schoolName" title="学校" property="schoolName" type="PopupBox" edit="Y" required="N" format="" width="1" height="1" column="" initial="'请先选择学校'"/>
+				<control name="classId" title="classId" property="classId" type="Hidden" edit="N" required="" format="" width="1" height="1" column="" />
+				<control name="className" title="班级" property="className" type="PopupBox" multiple="Y" edit="Y" required="N" format="" initial="'请先选择班级'" width="1" height="1" column="2" />
+				<control name="grade" title="年级" property="grade" type="TextBox" edit="N" 
+					required="" format="" width="1" height="1" column="" />
+				
+				<control name="eq_startTime" title="活动开始时间" property="startTime"
+					type="DateTimeBox" edit="Y" required="Y" format="" width="1"
+					height="1" column="2" />
+				<control name="eq_endTime" title="活动结束时间" property="endTime"
+					type="DateTimeBox" edit="Y" required="Y" format="" width="1"
+					height="1" column="2" />
+				<control name="updateTime" title="修改时间" property="updateTime"
+					type="Hidden" edit="Y" required="N" target="CurrentTime()" format=""
+					width="1" height="1" column="" />
+				<control name="updateBy" title="更新人" property="updateBy"
+					type="Hidden" edit="Y" required="N" target="session.userInfo.empId"
+					format="" width="1" height="1" column="" />
+				<control name="createTime" title="创建时间" property="createTime"
+					type="Hidden" edit="Y" required="N"
+					target="editMode=='Add'?CurrentTime():model.createTime" format=""
+					width="1" height="1" column="" />
+				<control name="createBy" title="创建人" property="createBy"
+					type="Hidden" edit="Y" required="N"
+					target="editMode=='Add'?session.userInfo.empId:model.createBy"
+					format="" width="2" height="2" column="2" />
+				<control name="originTime" title="发布时间" property="originTime"
+					type="Hidden" edit="Y" required="N"
+					target="editMode=='Add'?CurrentTime():model.originTime" format=""
+					width="200" height="1" column="" />
+				<control name="originator" title="发布人" property="originator"
+					type="Hidden" edit="Y" required="N"
+					target="editMode=='Add'?session.userInfo.userId:model.originator"
+					format="" width="2" height="2" column="2" />
+				
+				<control name="qrFileId" title="qrFileId" property="qrFileId" type="Hidden"
+					edit="" required="" format="" width="2" height="" column="2" />
+				
+				<control name="content" title="内容" property="content" type="UEditor"
+					edit="Y" required="Y" format="" width="20" height="13" column="1" />
+			</panel>
+
+			<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+				<control name="save" title="确认" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="2" />
+				<control name="preview" title="预览" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="2" />
+				<control name="cancel" title="取消" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="2" />
+			</panel>
+
+
+			<!-- <panel name="pPic" title="上传图片" object="activityPic" type="Grid" 
+				multiple=""> <control name="ctlAdd" title="新增图片" property="" type="Button" 
+				edit="" required="" format="" width="" height="" column=""/> <control name="ctlDel" 
+				title="删除图片" property="" type="Button" edit="" required="" format="" width="" 
+				height="" column=""/> <control name="id" title="id" property="id" type="Hidden" 
+				edit="Y" required="" format="" width="" height="" column=""/> <control name="activityId" 
+				title="活动id" property="activityId" type="Hidden" edit="Y" required="" format="" 
+				width="" height="" column=""/> <control name="picName" title="资讯图片" property="picName" 
+				type="FileBox" edit="Y" required="Y" format="" width="200" height="" column=""/> 
+				<control name="picId" title="文件ID" property="picId" type="Hidden" edit="Y" 
+				required="" target="" format="" width="200" height="" column=""/> <control 
+				name="remark" title="备注" property="remark" type="TextBox" edit="Y" required="" 
+				format="" width="140" height="" column=""/> <control name="createTime" title="创建时间" 
+				property="createTime" type="Hidden" edit="N" required="N" format="" width="1" 
+				height="" column="" target="editMode=='Add'?CurrentTime():model.createTime"/> 
+				<control name="updateTime" title="最后修改时间" property="updateTime" type="Hidden" 
+				edit="N" required="N" format="" width="1" height="" column="" target="editMode=='Add'?model.updateTime:CurrentTime()"/> 
+				<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" 
+				required="N" target="editMode=='Add'?model.updateBy:session.userInfo.empId" 
+				format="" width="1" height="" column="" /> <control name="createBy" title="创建人" 
+				property="createBy" type="Hidden" edit="Y" required="N" target="editMode=='Add'?session.userInfo.empId:model.createBy" 
+				format="" width="1" height="" column="" /> </panel> -->
+			<!-- 加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="jClear" logic="Clear" ifyes="List" ifno=""
+					sync="Y">
+					<param name="Out" value="pForm"></param>
+				</procedure>
+				<procedure name="List" logic="List" ifyes="List2" ifno=""
+					sync="Y">
+					<param name="Out" value="pForm.eq_releaseStatus"></param>
+					<param name="Sql"
+						value="khAdmin/activityManage/ListActivityManageReleaseStatus"></param>
+				</procedure>
+				<procedure name="List2" logic="List" ifyes="List3" ifno=""
+					sync="Y">
+					<param name="Out" value="pForm.eq_activityType"></param>
+					<param name="Sql" value="khAdmin/activityManage/ListActivityManageType"></param>
+				</procedure>
+				<procedure name="List3" logic="List" ifyes="List4" ifno=""
+					sync="Y">
+					<param name="Out" value="pForm.eq_role"></param>
+					<param name="Sql" value="khAdmin/activityManage/ListActivityManageRole"></param>
+					<param name="Options" value="YorN,[全选/取消]" />
+				</procedure>
+				<procedure name="List4" logic="List" ifyes="jBranch" ifno=""
+					sync="Y">
+					<param name="Out" value="pForm.eq_region"></param>
+					<param name="Sql" value="khAdmin/activityManage/ListActivityManageRegion"></param>
+					<param name="Options" value="YorN,[全选/取消]" />
+				</procedure>
+				<procedure name="jBranch" server="" logic="Branch" ifyes="j1"
+					ifno="">
+					<param name="In" value="getEditMode()=='Edit'"></param>
+				</procedure>
+				<procedure name="j1" server="" logic="DecodeId" ifyes="qid"
+					ifno="">
+					<param name="Out" value="pForm.id" />
+				</procedure>
+
+				<!-- <procedure name="j2" server="" logic="EncodeId" ifyes="j3" ifno=""> 
+					<param name="In" value="pForm.id"></param> </procedure> <procedure name="j3" 
+					server="" logic="DecodeId" ifyes="qids" ifno=""> <param name="Out" value="pnlHidden.id"></param> 
+					</procedure> -->
+
+				<!-- <procedure name="picList" logic="Query" ifyes="qid" ifno="" sync=""> 
+					<param name="In" value="pnlHidden" /> <param name="Out" value="pPic"></param> 
+					<param name="Sql" value="khAdmin/activityManage/QryActivityPicList"></param> 
+					</procedure> -->
+				<procedure name="qid" logic="QueryById" ifyes="" ifno="">
+					<param name="In" value="pForm" />
+					<param name="Out" value="pForm" />
+					<param name="Sql" value="khAdmin/activityManage/QryActivityManageList" />
+				</procedure>
+
+			</flow>
+
+<!-- 选择学校 -->
+			<flow trigger="pForm.schoolName" event="OnClick" filter="" >
+				<procedure name="jSearch" logic="Find" ifyes=""
+					ifno="" >
+					<param name="In" value="pForm.eq_region" />
+					<param name="Sql" value="SchoolEditActive" />
+					<param name="Out" value="pForm" />
+					<param name="Title" value="学校选择" />
+					<param name="Options" value="$RESET,重置" />
+					<param name="Window" value="Medium" />
+					<param name="Columns" value="id,学校id,eq_school|name,学校名,schoolName" />
+				</procedure>
+			</flow>
+			<!-- 选择班级 -->
+			<flow trigger="pForm.className" event="OnClick" filter="" >
+				<procedure name="find" logic="Find" ifyes="" ifno="">
+					<param name="In" value="pForm.eq_school"></param>
+					<param name="Out" value="pForm"></param>
+					<param name="Sql" value="QryGradeClassActive"></param>
+					 <param name="Multi" value="Y" />
+					<param name="Title" value="选择班级"></param>
+					<param name="Window" value="Large"></param>
+					<param name="Columns"
+						value="id,班级id,classId|className,班级名称,className|gradeName,年级,grade"></param>
+				</procedure>
+				
+			</flow>
+
+			
+
+
+			<!-- 保存 -->
+			<flow trigger="pButton.save" event="OnClick" filter="">
+				<procedure name="timeIsOut" logic="Branch" ifyes="TimeOut"
+					ifno="jssave">
+					<param name="In"
+						value="getPanelControlValue('pForm.eq_startTime')>getPanelControlValue('pForm.eq_endTime')"></param>
+				</procedure>
+				<procedure name="TimeOut" logic="InfoMsg" ifyes="" ifno="">
+					<param name="Msg" value="活动结束时间不能早于开始时间,请修改"></param>
+				</procedure>
+				<procedure name="jssave" logic="Save" ifyes="jsclose"
+					ifno="">
+					<param name="In" value="pForm"></param>
+					<param name="Plugin" value="updateActivityManagePlugin"></param>
+					<param name="Msg" value="'活动已保存'"></param>
+				</procedure>
+				<!-- <procedure name="jsclose" server="" logic="Close" ifyes="" ifno=""> 
+					<param name="Refresh" value="true"></param> </procedure> -->
+				<procedure name="jsclose" server="/frmActivityList" logic="Back"
+					ifyes="" ifno="">
+					<param name="To" value="frmActivityList"></param>
+				</procedure>
+			</flow>
+
+			<!-- 预览 -->
+			<flow trigger="pButton.preview" event="OnClick" filter="">
+
+				<procedure name="jssave1" logic="Save" ifyes="jssave2"
+					ifno="">
+					<param name="In" value="pForm"></param>
+					<param name="Plugin" value="previewActivityManagePlugin"></param>
+					<param name="Out" value="pForm.id"></param>
+				</procedure>
+
+				<procedure name="jssave2" logic="SaveCustom" ifyes="jImage"
+					ifno="">
+					<param name="In" value="pForm"></param>
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest" />
+					<param name="Plugin" value="activityPreviewPlugin" />
+					<param name="Out" value="pForm.previewFileId"></param>
+					<param name="Msg" value="'活动已保存'"></param>
+				</procedure>
+
+				<procedure name="jImage" server="" logic="Image" ifyes=""
+					ifno="">
+					<param name="In" value="pForm.previewFileId"></param>
+					<param name="Out" value="pfile.picture"></param>
+				</procedure>
+
+			</flow>
+
+			<!-- 取消 -->
+			<flow trigger="pButton.cancel" event="OnClick" filter="">
+				<!-- <procedure name="jsclose" server="" logic="Close" ifyes="" ifno=""> 
+					<param name="Refresh" value="true"></param> </procedure> -->
+				<procedure name="jsclose" server="/frmActivityList" logic="Back"
+					ifyes="" ifno="">
+					<param name="To" value="frmActivityList"></param>
+				</procedure>
+			</flow>
+
+
+			<!-- 新增图片 -->
+			<!-- <flow trigger="pPic.ctlAdd" event="OnClick" filter="" > <procedure 
+				name="addRow" server="" logic="AddRow" ifyes="" ifno=""> <param name="Out" 
+				value="pPic"></param> </procedure> </flow> -->
+			<!-- 图片上传 -->
+			<!-- <flow trigger="pPic.picName" event="OnClick" filter=""> <procedure 
+				name="fileUpload" server="" logic="Upload" ifyes="" ifno=""> <param name="Size" 
+				value="100000000"></param> <param name="Type" value="jpg,png"></param> <param 
+				name="Bucket" value="public"></param> <param name="Out" value="pPic.picId"></param> 
+				</procedure> </flow> -->
+
+			<!-- 删除图片 -->
+			<!-- <flow trigger="pPic.ctlDel" event="OnClick" filter="" > <procedure 
+				name="removeRow" server="" logic="RemoveRow" ifyes="" ifno=""> <param name="In" 
+				value="pPic"></param> </procedure> </flow> -->
+
+			<!-- 上传视频 -->
+			<flow trigger="pForm.file" event="OnClick" filter="">
+				<procedure name="fileUpload" server="" logic="Upload"
+					ifyes="" ifno="">
+					<param name="Size" value="1000000"></param>
+					<param name="Type" value="png,jpg,jpeg"></param>
+					<param name="Bucket" value="public"></param>
+					<param name="Out" value="pForm.fileId"></param>
+				</procedure>
+			</flow>
+
+
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pButton" location="North" scale="" />
+				</region>
+				<!-- <region location="Center" scale=""> <subregion panel="pPic" location="Center" 
+					scale="" /> </region> -->
+				<region location="Center" scale="">
+					<subregion panel="pfile" location="East" scale="20%" />
+					<subregion panel="pForm" location="Center" scale="80%" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

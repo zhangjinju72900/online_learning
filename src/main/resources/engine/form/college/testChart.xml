@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="testChart" title="形成图">
+			<panel name="pToolbar" title="工具按钮" object="" type="Toolbar">
+				<control name="btnQuery" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+			</panel>
+			
+			<panel name="pCondition" title="工具条" object="ncount" type="Group">
+				<control name="createTime" title="选择时间" property="createTime" initial=""
+						 type="DateBox"  edit="Y" required=""  format="" width="1" height="1" column="4" />
+			</panel>
+		<!-- 生成饼图 -->
+		<panel name="tt" title="用户活跃占比" object="ncount" type="PieChart" multiple="">
+				<control name="schoolType" title="职业类型" property="schoolType"
+					type="TextBox"></control>
+				<control name="numCount" title="人数" type="DataLink"
+					property="numCount"></control>
+		</panel>	
+		
+
+		<panel name="pTable" title="活跃用户" object="ncount" type="Grid" multiple="" >
+			 <control name="newUser" title="新增用户" property="newUser" type="TextBox" edit="N" required="" format="" width="150" height="1" column=""/>  
+			<control name="hyUser" title="活跃用户" property="hyUser" type="TextBox" edit="N" required="" format="" width="150" height="1" column=""/> 
+		 	<control name="totalCount" title="活跃次数" property="totalCount" type="TextBox" edit="N" required="" format="" width="150" height="1" column=""/>
+		 	<control name="kjCount" title="浏览课件个数" property="kjCount" type="TextBox" edit="N" required="" format="" width="150" height="1" column=""/>
+		 	<control name="zxCount" title="浏览咨询或动态个数" property="zxCount" type="TextBox" edit="N" required="" format="" width="150" height="1" column=""/>
+		</panel>
+		
+		
+			<!-- 加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="Query" logic="Query" ifyes="Query1" ifno="">
+					<param name="Out" value="tt"></param>
+					<param name="Sql" value="college/QryNumTest1"></param>
+				</procedure>
+				<procedure name="Query1" logic="Query" ifyes="" ifno="">
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="college/QryhyUser1"></param>
+				</procedure>
+			</flow>
+
+
+			<!-- 查询点击事件 -->
+			<flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
+				<procedure name="Query1" logic="Query" ifyes="Query2" ifno="" sync="Y">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Sql" value="college/QryhyUser"></param>
+				</procedure>  
+				<procedure name="Query2" logic="Query" ifyes="" ifno="">
+					 <param name="In" value="pCondition"></param>
+					<param name="Out" value="tt"></param>
+					<!-- <param name="Plugin" value="pieChartPlugin"/> -->
+					<param name="Sql" value="college/QryNumTest"></param>
+				</procedure>  
+			</flow>
+
+
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="West" scale="" />
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pCondition" location="North" scale="" />
+					<subregion panel="tt" location="West" scale="50%" />
+					<subregion panel="pTable" location="East" scale="50%" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

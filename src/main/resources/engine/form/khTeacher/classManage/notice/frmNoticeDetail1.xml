@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="../../../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmNoticeDetail1" title="通知列表详情">
+            <panel name="pToolbar" title="工具条" object="" type="Toolbar">
+                <control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width=""
+                         height="" column=""/>
+            </panel>
+            <panel name="pForm" title="通知详情" object="tNotice" type="Group" multiple="">
+                <control name="eq_id" title="id" property="id" type="Hidden" edit="N" required="" format="" width=""
+                         height="" column=""/>
+                <control name="title" title="通知标题" property="title" type="TextBox" edit="N" required="Y" format=""
+                         width="1" height="1" column="2"/>
+                <control name="context" title="通知内容" property="context" type="TextBox" edit="N" required="Y" format=""
+                         width="1" height="6" column="1"/>
+                <control name="fileId" title="附件id" property="fileId" type="TextBox" edit="N" required="Y" format=""
+                         width="1" height="1" column="2"/>
+
+            </panel>
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="jClear" logic="Clear" ifyes="j2" ifno="">
+                    <param name="Out" value="pForm"/>
+                </procedure>
+                <procedure name="j2" server="" logic="DecodeId" ifyes="empId" ifno="">
+                    <param name="Out" value="pForm.eq_id"/>
+                </procedure>
+                <procedure name="empId" logic="QueryById" ifyes="" ifno="">
+                    <param name="In" value="pForm"/>
+                    <param name="Out" value="pForm"/>
+                    <param name="Sql" value="khTeacher/classManage/notice/QryNoticeDetail"/>
+                </procedure>
+            </flow>
+            <!-- 返回 -->
+            <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+                <procedure name="proTransition" server="/frmNoticeList1" logic="Back" ifyes="" ifno="">
+                    <param name="To" value="frmNoticeList1"/>
+                </procedure>
+            </flow>
+            <layout>
+                <region location="North" scale="">
+                    <subregion panel="pToolbar" location="North" scale=""/>
+                    <subregion panel="pForm" location="Center" scale=""/>
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmLabelEdit" title="编辑">
+	<panel name="pForm" title="编辑" object="classlabel" type="Group">
+	<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="" column=""/>
+		<control name="labelname" title="名称" property="labelname" type="TextBox" edit="Y" required="Y" format="" width="1" height="1" column="2"/>
+	    <control name="eq_typeId" title="分类" property="typeId" type="ComboBox" edit="Y" required="Y"  format="" width="1" height="1" column="2"/>
+        <control name="eq_role" title="角色" property="roleId" type="ComboBox" edit="Y" required="Y" multiple="Y" format="" width="1" height="1" column="2"/>
+        <control name="eq_usedFlag" title="是否常用" property="usedFlag" type="ComboBox" edit="Y" required="Y" multiple="N" format="" width="1" height="1" column="2"/>
+		<control name="showOrder" title="显示顺序" property="showOrder" type="TextBox" edit="Y" required="" initial="'0'" format="" width="1" height="" column="2" />
+		<control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column=""  />
+		<control name="eq_updater" title="更新人" property="updater" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column="2"  />		
+	 </panel>
+	<panel name="pButton" title="工具按钮" object="" type="Toolbar">
+		<control name="save" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+		<control name="cancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column="2"/>
+	</panel>
+	
+	<!-- 加载 -->
+    <flow trigger="" event="OnLoad" filter="" >
+    <procedure name="jClear"  logic="Clear" ifyes="j1" ifno="" sync="Y">
+         <param name="Out" value="pForm"></param>
+      </procedure>
+      
+       
+       <!-- 获取从frmLabelList传过来的id-->
+      <procedure name="j1" server="" logic="DecodeId" ifyes="Listtype" ifno="">
+        <param name="Out" value="pForm.id" />
+      </procedure> 
+     
+      
+      
+          <!-- list逻辑 -->
+  
+       <procedure name="Listtype"  logic="List" ifyes="Listrole" ifno="" sync="Y">
+         <param name="Out" value="pForm.eq_typeId"></param>
+         <param name="Sql" value="classlabel/Listtype"></param>
+      </procedure>
+      
+      <procedure name="Listrole"  logic="List" ifyes="ListUsedFlag" ifno="" sync="Y">
+         <param name="Out" value="pForm.eq_role"></param>
+         <param name="Sql" value="classlabel/Listrole"></param>
+         <param name="Options" value="YorN,[全选/取消]"/>
+      </procedure>
+      <procedure name="ListUsedFlag"  logic="List" ifyes="qid" ifno="" sync="Y">
+         <param name="Out" value="pForm.eq_usedFlag"></param>
+         <param name="Sql" value="classlabel/ListUsedFlag"></param>
+      </procedure>
+    <!--    <procedure name="Listupdater"  logic="List" ifyes="qid" ifno="" sync="Y">
+         <param name="Out" value="pForm.eq_updater"></param>
+         <param name="Sql" value="classlabel/Listupdater"></param>
+     </procedure>  -->
+      
+      
+      
+      
+       <procedure name="qid"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pForm" />
+        <param name="Out" value="pForm" />
+        <param name="Sql" value="classlabel/Qryclasslabel" />
+      </procedure>
+      
+        
+      
+	</flow>
+    
+
+       <!-- 保存 -->
+    <flow trigger="pButton.save" event="OnClick" filter="" defaultEnter="Y" >
+    	<procedure name="jsBranch1" server="" logic="Branch"
+			ifyes="jsBranch2" ifno="jmsg">
+			<param name="In" value="getPanelControlValue('pForm.showOrder')&gt;=0" />
+		</procedure>
+		<procedure name="jsBranch2" server="" logic="Branch"
+			ifyes="jssave" ifno="jmsg">
+			<param name="In" value="getPanelControlValue('pForm.showOrder')&lt;=999" />
+		</procedure>
+		<procedure name="jmsg" server="" logic="InfoMsg" ifyes=""
+			ifno="">
+			<param name="Msg" value="显示顺序有错，请填写0-999之间的数字" />
+		</procedure>
+      <procedure name="jssave"  logic="Save" ifyes="jsclose" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Plugin" value="insertRolePlugin"/>
+        <param name="Msg" value="'已保存'"></param>
+      </procedure>
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>	
+    
+    <!-- 取消 -->
+    <flow trigger="pButton.cancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="true"></param>
+      </procedure>
+    </flow>	
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="pButton" location="South" scale="" />
+      </region>
+      <region location ="Center" scale="">
+        <subregion panel="pForm" location="Center" scale="" />
+      </region>      
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

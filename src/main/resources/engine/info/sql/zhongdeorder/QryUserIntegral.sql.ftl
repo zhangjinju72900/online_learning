@@ -1,0 +1,1 @@
+select u.total_integral,u.integral from t_customer_user u where id=#{data.userId} ;

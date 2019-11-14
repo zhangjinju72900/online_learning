@@ -1,0 +1,1 @@
+select name from t_goods where id=#{data.goodId}

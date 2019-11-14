@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmAppRecordEdit" title="学习记录"> 
+	<panel name="pTable" title="查询结果" object="Record" type="Group" multiple="N" >
+	    <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="customeruserid" title="用户ID" property="customeruserid" type="Hidden" edit="Y" required="" format="" width="150" height="" column="" target="session.userInfo.empId"/>
+		<control name="csrId" title="资源绑定ID" property="csrId" type="TextBox" edit="Y" required="" format="" width="150" height="" column=""/>
+		<control name="courseid" title="课程ID" property="courseid" type="TextBox" edit="Y" required="" format="" width="150" height="" column=""/>
+		<control name="sectionid" title="小节ID" property="sectionid" type="TextBox" edit="Y" required="" format="" width="150" height="" column="4"/>
+		<control name="labelid" title="标签ID" property="labelid" type="TextBox" edit="Y" required="" format="" width="150" height="" column=""/>
+		<control name="resourceid" title="资源ID" property="resourceid" type="TextBox" edit="Y" required="" format="" width="150" height="" column="2"/>
+		<control name="startTime" title="开始时间" property="startTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="editMode=='Add'?CurrentTime():nil"/>
+		<control name="createTime" title="创建时间" property="createtime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="editMode=='Add'?CurrentTime():nil"/>
+		<control name="createBy" title="创建人" property="createby" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="session.userInfo.empId"/>
+		<control name="updateTime" title="更新日期" property="updatetime" type="Hidden" edit="N" required="N" target="CurrentTime()" format="" width="1" height="1" column="1"  />
+	    <control name="updateBy" title="更新人" property="updateby" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="session.userInfo.empId"/>
+	</panel>
+	<panel title="工具按钮" name="pButton" type="Toolbar" object="">
+		<control title="确认-小节" name="save" type="Button" column="" height="" width="" format="" required="" edit="" property=""/>
+		<control title="确认-资源" name="saveResource" type="Button" column="" height="" width="" format="" required="" edit="" property=""/>
+		<control title="取消" name="cancel" type="Button" column="" height="" width="" format="" required="" edit="" property=""/>
+
+	</panel>
+	
+	<!-- 初始加载 -->
+    <flow trigger="" event="OnLoad" filter="">  
+    <procedure name="jclear1"  logic="Clear" ifyes="jsdict1" ifno="">
+           <param name="Out" value="pTable"></param>
+      </procedure>   
+    </flow>	
+ 	<flow trigger="pButton.save" event="OnClick" filter="" >
+      <procedure name="jssave"  logic="Save" ifyes="jsclose" ifno="">
+           <param name="In" value="pTable"></param>
+           <param name="Msg" value="'保存成功'"/>
+      </procedure>
+      <procedure name="jsclose" logic="Close" ifyes="" ifno="">
+      	   <param name="Refresh" value="true"></param>
+      	
+      </procedure>
+	</flow>
+	
+	<flow trigger="pButton.saveResource" event="OnClick" filter="" >
+      <procedure name="jssave"  logic="SaveCustom" ifyes="jsclose" ifno="">
+           <param name="In" value="pTable"></param>
+           <param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+        	<param name="Plugin" value="saveResourceRecord" />
+           <param name="Msg" value="'保存成功'"/>
+      </procedure>
+      <procedure name="jsclose" logic="Close" ifyes="" ifno="">
+      	   <param name="Refresh" value="true"></param>
+      	
+      </procedure>
+	</flow>
+	<!-- 取消 -->
+	<flow trigger="pButton.cancel" event="OnClick" filter="">
+		<procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+			<param name="Refresh" value="true"/>
+		</procedure>
+	</flow>
+    <!-- 布局 -->
+    <layout>
+	  <region location ="Center" scale="">
+		<subregion panel="pTable" location="Center" scale=""/>
+      </region>
+      <region location="South" scale="">
+      	<subregion panel="pButton" location="South" scale=""/>
+      </region>
+    </layout>
+  </ui> 
+</ui_layer>
+</tsoftware>

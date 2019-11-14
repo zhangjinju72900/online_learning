@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmCheckManageList" title="审核管理">
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="btnExport" title="导出" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="btnQuery" title="查询" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="btnClear" title="清空条件" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="btnTop" title="置顶" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="btnRecommend" title="推荐" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+			<panel name="pCondition" title="查询条件" object="checkManage1"
+				type="Group">
+				<control name="lk_content" title="内容" property="content"
+					type="TextBox" edit="Y" required="N" format="" width="1" height="1"
+					column="" />
+				<control name="eq_type" title="类别" property="type" type="ComboBox"
+					edit="Y" required="N" multiple="Y" format="" width="1" height="1"
+					column="" />
+					<control name="lk_reviewName" title="发布人" property="reviewName"
+					type="TextBox" edit="Y" required="" format="" width="1" height="1"
+					column="" />
+				<control name="eq_checkStatus" title="审核状态" property="checkStatus"
+					type="ComboBox" edit="Y" required="N" multiple="Y" format="" width="1"
+					height="1" column="5" />
+				<control name="ge_reviewTime" title="发布日期" property="reviewTime"
+					type="DateBox" edit="Y" required="" format="" width="1" height="1"
+					column="" />
+				<control name="le_reviewTime" title="至" property="reviewTime"
+					type="DateBox" edit="Y" required="" format="" width="1" height="1"
+					column="" />
+				<control name="lk_school" title="学校" property="school"
+					type="TextBox" edit="Y" required="N" format="" width="1" height="1"
+					column="" />
+				<control name="lk_title" title="来源模糊搜索" property="content"
+					type="TextBox" edit="Y" required="N" format="" width="1" height="1"
+					column="5" />
+
+			</panel>
+			<panel name="pTable" title="查询结果" object="checkManage1" type="Grid"
+				multiple="Y">
+				<control name="check" title="通过审核" property="" type="Link"
+					edit="" required="" format="" width="270" height="" column="" />
+				<control name="notCheck" title="驳回审核" property="" type="Link"
+					edit="" required="" format="" width="270" height="" column="" />
+				<control name="btnDelete" title="删除" property="" type="Link"
+					edit="" required="" format="" width="270" height="" column="" />
+				<control name="btnUntop" title="取消置顶" property="" type="Link"  width="270" height="" column=""/>
+				<control name="btnUnrecommand" title="取消推荐" property="" type="Link" width="270" height="" column=""/>
+				<control name="id" title="ID" property="id" type="Hidden"
+					edit="" required="" format="" width="180" height="" column="" />
+				<control name="content" title="内容" property="content" type="DataLink"
+					edit="" required="" format="" width="200" height="" column="" />
+				<control name="informationId" title="主表id" property="informationId"
+					type="Hidden" edit="" required="" format="" width="150" height=""
+					column="" />
+
+				<control name="type" title="类别" property="type" type="Hidden"
+					edit="" required="" format="" width="180" height="" column="" />
+				<control name="checkType" title="类别" property="checkType"
+					type="TextBox" edit="" required="" format="" width="100" height=""
+					column="" />
+				<control name="reviewBy" title="添加人" property="reviewBy"
+					type="Hidden" edit="" required="" format="" width="50" height=""
+					column="" />
+				<control name="school" title="学校" property="school"
+					type="TextBox" edit="" required="" format="" width="150" height=""
+					column="" />
+				<control name="reviewName" title="发布人" property="reviewName"
+					type="TextBox" edit="" required="" format="" width="80" height=""
+					column="" />
+				<control name="title" title="来源" property="title" type="TextBox"
+					edit="" required="" format="" width="150" height="" column="" />
+				<control name="checkStatus" title="审核状态" property="checkStatus"
+					type="Hidden" edit="" required="" format="" width="120" height=""
+					column="" />
+				<control name="status" title="审核状态" property="status" type="TextBox"
+					edit="" required="" format="" width="70" height="" column="" />
+				<control name="topFlag" title="是否置顶" property="topFlag"
+					type="TextBox" edit="" required="" format="" width="50" height=""
+					column="" />
+				<control name="recommendFlag" title="是否推荐" property="recommendFlag"
+					type="TextBox" edit="" required="" format="" width="60" height=""
+					column="" />
+				<control name="ableRecommend" title="能不能推荐" property="ableRecommend"
+					type="TextBox" edit="" required="" format="" width="80" height=""
+					column="" />
+				<control name="reviewTime" title="发布时间" property="reviewTime"
+					type="TextBox" edit="" required="" format="" width="163" height=""
+					column="" />
+				<control name="topTime" title="置顶时间" property="topTime"
+					type="Hidden" edit="" required="" format="" width="160" height=""
+					column="" />
+				<control name="likeCount" title="点赞人数" property="likeCount"
+					type="TextBox" edit="" required="" format="" width="160" height=""
+					column="" />
+				<control name="readPeople" title="阅读人数" property="readPeople"
+					type="TextBox" edit="" required="" format="" width="160" height=""
+					column="" />
+				<control name="tFlag" title="置顶标识" property="tFlag" type="Hidden" width="70" height="" column=""/>
+				<control name="reFlag" title="推荐标识" property="reFlag" type="Hidden" width="70" height="" column=""/>
+		
+			</panel>
+
+			<!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="jClear" logic="Clear" ifyes="List1" ifno=""
+					sync="Y">
+					<param name="Out" value="pCondition"></param>
+				</procedure>
+				<procedure name="List1" logic="List" ifyes="List2" ifno=""
+					sync="Y">
+					<param name="Out" value="pCondition.eq_type"></param>
+					<param name="Sql" value="khAdmin/checkManage/ListCheckManageType"></param>
+					<param name="Options" value="YorN,[全选/取消]" />
+				</procedure>
+				<procedure name="List2" logic="List" ifyes="Query" ifno=""
+					sync="Y">
+					<param name="Out" value="pCondition.eq_checkStatus"></param>
+					<param name="Sql" value="khAdmin/checkManage/ListCheckManageCheckStatus"></param>
+					<param name="Options" value="YorN,[全选/取消]" />
+				</procedure>
+				<procedure name="Query" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Plugin" value="informationCheckListPlugin"/>
+					<param name="Sql" value="khAdmin/checkManage/QryCheckManageList"></param>
+				</procedure>
+			</flow>
+			
+			<!-- 导出 -->
+			<flow trigger="pToolbar.btnExport" event="OnClick" filter="">
+				<procedure name="jsencodeid" server="" logic="EncodeId"
+					ifyes="jsDecodeid" ifno="j0">
+					<param name="In" value="pTable.id"></param>
+				</procedure>
+				<procedure name="j0" server="" logic="InfoMsg"
+					ifyes="jbranch" ifno="">
+					<param name="Msg" value="至少选择一条才可导出！" />
+				</procedure>
+				<procedure name="jsDecodeid" server="" logic="DecodeId"
+					ifyes="jCMsg" ifno="">
+					<param name="out" value="pTable.id"></param>
+				</procedure>
+				<procedure name="jCMsg" server="" logic="ConfirmMsg"
+					ifyes="jbranch" ifno="">
+					<param name="Title" value="导出提示" />
+					<param name="Msg" value="确认导出当前数据吗?" />
+				</procedure>
+			<procedure name="jbranch" server="" logic="Branch" ifyes="" ifno="">
+		    		<param name="In" value="toController('lesson/exportInformation1','pTable.id.inforid')"/>
+		    	</procedure> 
+			</flow>
+			
+			
+			<!-- 查询 -->
+			<flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
+				<procedure name="timeIsOut" logic="Branch" ifyes="TimeOut"
+					ifno="Query">
+					<param name="In"
+						value="getPanelControlValue('pCondition.ge_reviewTime')>getPanelControlValue('pCondition.le_reviewTime')"></param>
+				</procedure>
+				<procedure name="TimeOut" logic="InfoMsg" ifyes="" ifno="">
+					<param name="Msg" value="截止时间不能早于开始时间"></param>
+				</procedure>
+
+				<procedure name="Query" logic="Query" ifyes="" ifno=""
+					sync="Y">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Plugin" value="informationCheckListPlugin"/>
+					<param name="Sql" value="khAdmin/checkManage/QryCheckManageList"></param>
+				</procedure>
+			</flow>
+
+
+			<!-- 清空条件 -->
+			<flow trigger="pToolbar.btnClear" event="OnClick" filter="">
+				<procedure name="clear" logic="Clear" ifyes="" ifno=""
+					sync="Y">
+					<param name="Out" value="pCondition"></param>
+				</procedure>
+			</flow>
+
+
+			<!--点击详情 -->
+			<flow trigger="pTable.content" event="OnClick" filter="">
+				<procedure name="annEncodeId" logic="EncodeId" ifyes="j1"
+					ifno="">
+					<param name="In" value="pTable.id"></param>
+				</procedure>
+				<procedure name="j1" logic="Transition" ifyes="" ifno="">
+					<param name="To" value="frmCheckManageDetail"></param>
+					<param name="Mode" value="ReadOnly"></param>
+				</procedure>
+			</flow>
+
+			<!-- 通过审核 -->
+			<flow trigger="pTable.check" event="OnClick" filter="row.checkStatus != 1">
+				<procedure name="jssave" logic="SaveCustom" ifyes="Query"
+					ifno="">
+					<param name="In" value="pTable" />
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest" />
+					<param name="Plugin" value="informationCheckSuccessPlugin" />
+					<param name="Msg" value="'已通过审核'" />
+				</procedure>
+				<procedure name="Query" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Plugin" value="informationCheckListPlugin"/>
+					<param name="Sql" value="khAdmin/checkManage/QryCheckManageList"></param>
+				</procedure>
+			</flow>
+
+			<!-- 驳回审核 -->
+			<flow trigger="pTable.notCheck" event="OnClick" filter="row.checkStatus != 2">
+				<procedure name="jssave" logic="SaveCustom" ifyes="Query"
+					ifno="">
+					<param name="In" value="pTable" />
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest" />
+					<param name="Plugin" value="informationCheckPlugin" />
+					<param name="Msg" value="'已驳回审核'" />
+				</procedure>
+				<procedure name="Query" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Plugin" value="informationCheckListPlugin"/>
+					<param name="Sql" value="khAdmin/checkManage/QryCheckManageList"></param>
+				</procedure>
+			</flow>
+		
+			<!-- 置顶 -->
+			<flow trigger="pToolbar.btnTop" event="OnClick" filter="">
+
+				<!-- <procedure name="j0" server="" logic="InfoMsg" ifyes="" ifno=""> 
+					<param name="Msg" value="请至少选择一条资讯"></param> </procedure> -->
+
+				<procedure name="je" server="" logic="EncodeId" ifyes="jcheckAudit"
+					ifno="j0">
+					<param name="In" value="pTable.id" />
+				</procedure>
+				<procedure name="j0" server="" logic="InfoMsg" ifyes=""
+					ifno="">
+					<param name="Msg" value="请至少选择一条数据"></param>
+				</procedure>
+				<!-- 判断审核是否通过 -->
+				<procedure name="jcheckAudit" server="" logic="Branch" ifyes="jBranch"
+					ifno="failPass">
+					<param name="In" value="checkStatus('pTable')" />
+				</procedure>
+				<procedure name="failPass" server="" logic="InfoMsg" ifyes=""
+					ifno="">
+					<param name="Msg" value="所选数据审核未通过,不能进行置顶操作"></param>
+				</procedure>
+				
+				<!-- 判断是否已经置顶 -->
+				<procedure name="jBranch" server="" logic="Branch" ifyes="topMsg"
+					ifno="jCMsg">
+					<param name="In" value="topRowDatagrid('pTable')" />
+				</procedure>
+				
+				<procedure name="topMsg" logic="InfoMsg">
+					<param name="Msg" value="所选数据包含已置顶数据" />
+				</procedure> 
+				
+				<procedure name="jCMsg" server="" logic="ConfirmMsg"
+					ifyes="jDelete" ifno="">
+					<param name="Title" value="置顶提示" />
+					<param name="Msg" value="确认置顶当前数据吗?" />
+				</procedure>
+				<procedure name="jDelete" logic="SaveCustom" ifyes="queryInfo"
+					ifno="">
+					<param name="In" value="pTable" />
+					<param name="Plugin" value="TopCheckManagePlugin" />
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+					<param name="Msg" value="'资讯置顶中...'" />
+				</procedure>
+				<procedure name="queryInfo" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Plugin" value="informationCheckListPlugin"/>
+					<param name="Sql" value="khAdmin/checkManage/QryCheckManageList"></param>
+				</procedure>
+			</flow>
+
+
+				<!-- 推荐 -->
+				<flow trigger="pToolbar.btnRecommend" event="OnClick" filter="">
+	
+					<!-- <procedure name="j0" server="" logic="InfoMsg" ifyes="" ifno=""> 
+						<param name="Msg" value="请至少选择一条资讯"></param> </procedure> -->
+					
+					<procedure name="je" server="" logic="EncodeId" ifyes="jcheckAudit"
+						ifno="j0">
+						<param name="In" value="pTable.id" />
+					</procedure>
+					<procedure name="j0" server="" logic="InfoMsg" ifyes=""
+						ifno="">
+						<param name="Msg" value="请至少选择一条数据"></param>
+					</procedure>
+					
+					<!-- 判断审核是否通过 -->
+					<procedure name="jcheckAudit" server="" logic="Branch" ifyes="jBranchRecommend"
+						ifno="failPass">
+						<param name="In" value="checkStatus('pTable')" />
+					</procedure>
+					<procedure name="failPass" server="" logic="InfoMsg" ifyes=""
+						ifno="">
+						<param name="Msg" value="所选数据审核未通过,不能进行推荐操作"></param>
+					</procedure>
+					
+					<!-- 判断当前数据能不能推荐 -->
+					<procedure name="jBranchRecommend" server="" logic="Branch" ifyes="jBranchRecommend1"
+					ifno="notAbleRecommendMsg">
+						<param name="In" value="checkRecommend('pTable')" />
+					</procedure>
+					
+					<procedure name="notAbleRecommendMsg" logic="InfoMsg">
+						<param name="Msg" value="所选数据不能推荐" />
+					</procedure> 
+					
+					<!-- 判断数据是否已经推荐 -->
+					<procedure name="jBranchRecommend1" server="" logic="Branch" ifyes="alreadyRecommendMsg"
+					ifno="jCMsg">
+						<param name="In" value="alreadyRecommend('pTable')" />
+					</procedure>
+					<procedure name="alreadyRecommendMsg" logic="InfoMsg">
+						<param name="Msg" value="所选数据包含已推荐数据" />
+					</procedure> 
+					
+					<procedure name="jCMsg" server="" logic="ConfirmMsg"
+						ifyes="jDelete" ifno="">
+						<param name="Title" value="推荐提示" />
+						<param name="Msg" value="确认推荐当前数据吗?" />
+					</procedure>
+					<procedure name="jDelete" logic="SaveCustom" ifyes="queryInfo"
+						ifno="">
+						<param name="In" value="pTable" />
+						<param name="Plugin" value="RecommendCheckManagePlugin" />
+						<param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+						<param name="Msg" value="'资讯推荐中...'" />
+					</procedure>
+					<procedure name="queryInfo" logic="Query" ifyes="" ifno="">
+						<param name="In" value="pCondition"></param>
+						<param name="Out" value="pTable"></param>
+						<param name="Plugin" value="informationCheckListPlugin"/>
+						<param name="Sql" value="khAdmin/checkManage/QryCheckManageList"></param>
+					</procedure>
+				</flow>
+				<!-- 取消推荐 -->
+				<flow trigger="pTable.btnUnrecommand" event="OnClick" filter="row.reFlag == 1 ">
+				<!-- 判断审核是否通过 -->
+				<procedure name="jcheckAudit" server="" logic="Branch" ifyes="jCMsg"
+					ifno="failPass">
+					<param name="In" value="checkStatus('pTable')" />
+				</procedure>
+				<procedure name="failPass" server="" logic="InfoMsg" ifyes=""
+					ifno="">
+					<param name="Msg" value="所选数据审核未通过,不能进行取消推荐操作"></param>
+				</procedure>
+				<procedure name="jCMsg" server="" logic="ConfirmMsg" ifyes="jssave" ifno="">
+				     <param name="Title" value="取消推荐提示" />
+				     <param name="Msg" value="确认取消推荐码?" />
+				</procedure>
+				<procedure name="jssave" logic="SaveCustom" ifyes="Query" ifno="">
+					<param name="In" value="pTable" />
+					<param name="Plugin" value="unrecommendCheckManagePlugin" />
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest" />
+					<param name="Msg" value="'已取消推荐'" />
+				</procedure>
+				<procedure name="Query" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Plugin" value="informationCheckListPlugin"/>
+					<param name="Sql" value="khAdmin/checkManage/QryCheckManageList"></param>
+				</procedure>
+				</flow>
+		
+				<!-- 取消置顶 -->
+				<flow trigger="pTable.btnUntop" event="OnClick" filter="row.tFlag == 1">
+				<!-- 判断审核是否通过 -->
+				<procedure name="jcheckAudit" server="" logic="Branch" ifyes="jCMsg"
+					ifno="failPass">
+					<param name="In" value="checkStatus('pTable')" />
+				</procedure>
+				<procedure name="failPass" server="" logic="InfoMsg" ifyes=""
+					ifno="">
+					<param name="Msg" value="所选数据审核未通过,不能进行取消置顶操作"></param>
+				</procedure>
+				<procedure name="jCMsg" server="" logic="ConfirmMsg" ifyes="jssave" ifno="">
+				     <param name="Title" value="取消置顶提示" />
+				     <param name="Msg" value="确认取消置顶吗?" />
+				</procedure>
+				<procedure name="jssave" logic="SaveCustom" ifyes="Query" ifno="">
+					<param name="In" value="pTable" />
+					<param name="Plugin" value="untopCheckManagePlugin" />
+					<param name="Sql" value="khAdmin/resourcesManage/QryTest" />
+					<param name="Msg" value="'已取消置顶'" />
+				</procedure>
+				<procedure name="Query" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition"></param>
+					<param name="Out" value="pTable"></param>
+					<param name="Plugin" value="informationCheckListPlugin"/>
+					<param name="Sql" value="khAdmin/checkManage/QryCheckManageList"></param>
+					</procedure>
+				</flow>
+			
+			<!--删除  -->
+			<flow trigger="pTable.btnDelete" event="OnClick" filter="">
+				<procedure name="j0" server="" logic="ConfirmMsg" ifyes="jDelete" ifno="">
+					<param name="Title" value="删除提示" />
+					<param name="Msg" value="确认删除吗?" />
+				</procedure>
+				<procedure name="jDelete"  logic="SaveCustom" ifyes="j3" ifno="">
+				    <param name="In" value="pTable" />
+				    <param name="Plugin" value="updateCheckValidPlugin"/>
+				    <param name="sql" value="informations/DeleteEmpty"/>
+				    <param name="Msg" value="'删除成功'" />
+				</procedure>
+				<procedure name="j3" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pCondition" />
+					<param name="Out" value="pTable" />
+					<param name="Plugin" value="informationCheckListPlugin"/>
+					<param name="Sql" value="khAdmin/checkManage/QryCheckManageList" />
+				</procedure>
+			</flow> 
+			<!-- 布局 -->
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale="" />
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pCondition" location="North" scale="" />
+					<subregion panel="pTable" location="Center" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

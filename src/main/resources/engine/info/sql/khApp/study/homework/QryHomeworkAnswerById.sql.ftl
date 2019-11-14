@@ -1,0 +1,1 @@
+select id, homework_id as homeworkId, homework_type as homeworkType from t_homework_answer where id = #{data.homeworkAnswerId} and student_id = #{data.userId}

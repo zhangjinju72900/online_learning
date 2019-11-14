@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+			
+	<ui_layer>
+	<ui name="frmCurriculumAdd" title="新建课表">
+		<!-- <panel name="hiddenPanel" title="hidden" object="classCurriculumAdd" type="Hidden">
+			<control name="eq_meetId" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+		</panel> -->
+		
+		<panel name="pnlGroupPop" title="选课" object="classCurriculumAdd" type="Group">
+			<control name="id" title="课表编号" property="id" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+			<control name="curriculumName" title="课表名称" property="curriculumName" type="TextBox" edit="Y" required="Y" format="" width="1" height="1" column=""/>
+			<control name="schoolName" title="院校名称" property="schoolName" type="PopupBox" edit="Y" required="Y" format="" width="1" height="1" column="2"/>
+			<control name="eq_schoolId" title="院校编号" property="schoolId" type="Hidden" edit="Y" required="Y" format="" width="1" height="1" column=""/>
+			<control name="eq_executeTime" title="执行时间" property="executeTime" type="DateBox" edit="Y" required="Y" format="" width="5" height="1" column=""/>		
+		
+			<control name="proId" title="课程专业" property="proId" type="ComboBox" edit="Y" required="Y" format="" width="5" height="1" column="2"/>
+			
+			<control name="courseId1" title="1" property="courseId1" type="Hidden" edit="Y" required="" format="" width="5" height="1" column="2"/>
+			<control name="courseId2" title="2" property="courseId2" type="Hidden" edit="Y" required="" format="" width="5" height="1" column="2"/>
+			<control name="courseId3" title="3" property="courseId3" type="Hidden" edit="Y" required="" format="" width="5" height="1" column="2"/>
+			<control name="courseId4" title="4" property="courseId4" type="Hidden" edit="Y" required="" format="" width="5" height="1" column="2"/>
+			<control name="courseId5" title="5" property="courseId5" type="Hidden" edit="Y" required="" format="" width="5" height="1" column="2"/>   
+			
+			<control name="courseName1" title="一年级课程" property="courseName1" type="PopupBox" edit="Y" required="Y" format="" width="5" height="1" column="2"/>
+			<control name="courseName2" title="二年级课程" property="courseName2" type="PopupBox" edit="Y" required="" format="" width="5" height="1" column="2"/>
+			<control name="courseName3" title="三年级课程" property="courseName3" type="PopupBox" edit="Y" required="" format="" width="5" height="1" column="2"/>
+			<control name="courseName4" title="四年级课程" property="courseName4" type="PopupBox" edit="Y" required="" format="" width="5" height="1" column="2"/>
+			<control name="courseName5" title="五年级课程" property="courseName5" type="PopupBox" edit="Y" required="" format="" width="5" height="1" column="2"/>   
+
+			<control name="eq_createTime" title="创建时间" property="createTime" type="Hidden" edit="Y" required="N" format="" width="1" height="1" column="1" target="Mode=='Add'?CurrentTime():nil"/>
+			<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="Mode=='Add'?session.userInfo.empId:nil" format="" width="1" height="1" column=""  />
+			<control name="updateTime" title="最后修改时间" property="updateTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="CurrentTime()"/>
+			<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />		
+			<control name="currentTime" title="当前时间" property="" type="Hidden" edit="Y" required="N" initial="CurrentTime()" format="" width="1" height="1" column=""  />		
+		</panel>
+		
+		<!-- <panel name="selectCourse" title="课程名称" object="classCurriculumAdd" type="Grid"  multiple="">
+			<control name="id" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+			<control name="curriculumName" title="课程名称" property="curriculumName" type="CheckBox" edit="Y"  multiple="Y" required="Y" format="" width="200" height="" column=""/>
+			<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="Mode=='Add'?CurrentTime():nil"/>
+			<control name="updateTime" title="最后修改时间" property="updateTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="CurrentTime()"/>
+			<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />		
+			<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="Mode=='Add'?session.userInfo.empId:nil" format="" width="1" height="1" column=""  />
+		</panel> -->
+		
+		<panel name="pnlDown" title="pnlDown" object="" type="Toolbar">
+			<control name="ctlSave" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			<control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		</panel>
+		
+	<!-- 	<panel name="meetFile" title="年级/班级" object="gradeClass" type="Grid"  multiple="">
+			<control name="ctlAdd" title="新增(年级/班级)" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			<control name="ctlDel" title="删除(年级/班级)" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+			<control name="id" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+			<control name="curriculumId" title="课表ID" property="curriculumId" type="Hidden" edit="Y" required="" format="" width="" height="" column=""/>
+			<control name="classId" title="班级ID" property="classId" type="Hidden" edit="Y" required="Y" format="" width="" height="" column=""/>
+			<control name="className" title="班级" property="className" type="PopupBox" edit="Y" required="Y" format="" width="200" height="1" column="1"/>
+			<control name="gradeName" title="年级" property="gradeName" type="TextBox" edit="Y" required="Y" format="" width="200" height="1" column="1"/>
+			<control name="createTime" title="创建时间" property="createTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="Mode=='Add'?CurrentTime():nil"/>
+			<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="Mode=='Add'?session.userInfo.empId:nil" format="" width="1" height="1" column=""  />
+			<control name="updateTime" title="最后修改时间" property="updateTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="CurrentTime()"/>
+			<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column=""  />		
+		</panel> -->
+		
+	    <flow trigger="" event="OnLoad" filter="" >
+	    	    <procedure name="btnClear"  logic="Clear" ifyes="jsquery" ifno="">
+	        		<param name="Out" value="pnlGroupPop"></param>
+	     	</procedure>	
+	      <procedure name="jsquery"  logic="List" ifyes="" ifno="" sync="Y">
+          	<param name="Out" value="pnlGroupPop.proId"></param>
+         	<param name="Sql" value="course/QryProfessional"></param>
+      	  </procedure>
+	     	<!-- <procedure name="jsquery"  logic="List" ifyes="" ifno="">
+			    <param name="Out" value="pnlGroupPop1.professionalName" />
+			    <param name="Sql" value="course/QryProfessionalCourse"/>
+			</procedure>  -->
+	    </flow>
+	    
+	   	<flow trigger="pnlDown.ctlSave" event="OnClick" filter="Mode!='' &amp;&amp; Mode!='Readonly'" defaultEnter="Y">
+	   	<!-- 	<procedure name="timeIsOut" logic="Branch" ifyes="TimeOut"  ifno="jssave">
+				<param name="In"  value="getPanelControlValue('pnlGroupPop.currentTime') &gt; getPanelControlValue('pnlGroupPop.eq_executeTime')"></param>
+				
+			</procedure>
+			<procedure name="TimeOut" logic="InfoMsg" ifyes="" ifno="">
+				<param name="Msg" value="执行时间不能早于开始时间,请修改"></param>
+			</procedure>  -->
+	   		<procedure name="jssave"  logic="Save" ifyes="jsclose" ifno="">
+		         <param name="In" value="pnlGroupPop"></param>
+		         <param name="Plugin" value="insertCurriculumCoursePlugin2"></param> 
+		         <param name="Msg" value="'信息已被保存'"></param>
+	     	 </procedure>
+	      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+	        <param name="Refresh" value="true"></param>
+	      </procedure>
+	    </flow>
+	    
+	    <flow trigger="pnlDown.ctlCancel" event="OnClick" filter="" >
+	      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+	        <param name="Refresh" value="false"></param>
+	      </procedure>
+	    </flow>
+	<!--     
+		<flow trigger="meetFile.ctlAdd" event="OnClick" filter="" >
+	      <procedure name="addRow" server="" logic="AddRow" ifyes="" ifno="">
+	        <param name="Out" value="meetFile"></param>
+	      </procedure>
+	    </flow>
+	    
+	   	<flow trigger="meetFile.ctlDel" event="OnClick" filter="" >
+	      <procedure name="removeRow" server="" logic="RemoveRow" ifyes="" ifno="">
+	        <param name="In" value="meetFile"></param>
+	      </procedure>
+	    </flow> -->
+	    
+	    <!-- 选择年级班级 -->
+	    <flow trigger="meetFile.className" event="OnClick" filter="" >
+	      <procedure name="find"  logic="Find" ifyes="" ifno="">
+	      	<param name="In" value="pnlGroupPop.eq_schoolId"></param>
+	        <param name="Out" value="meetFile"></param>
+	        <param name="Sql" value="QryGradeClass"></param>
+	        <param name="Title" value="选择班级"></param>
+	         <param name="Window" value="Large"></param>
+	        <param name="Columns" value="id,班级id,classId|className,班级名称,className|gradeName,年级名称,gradeName"></param>
+	      </procedure>
+    		</flow>
+    		
+    		<!-- 选择课程 -->
+
+    	  <flow trigger="pnlGroupPop.courseName1" event="OnClick" filter="" >
+	      <procedure name="find"  logic="Find" ifyes="" ifno="">
+	      	<param name="In" value="pnlGroupPop.proId"/>
+	        <param name="Out" value="pnlGroupPop"/>
+	        <param name="Sql" value="QryCourses"/>
+	        <param name="Multi" value="Y" />
+	        <param name="Title" value="选择课程"/>
+	         <param name="Window" value="Large"/>
+	        <param name="Columns" value="id,课程id,courseId1|name,课程名称,courseName1"/>
+	      </procedure>
+    		</flow>  
+    		
+    		<flow trigger="pnlGroupPop.courseName2" event="OnClick" filter="" >
+	      <procedure name="find"  logic="Find" ifyes="" ifno="">
+	      	<param name="In" value="pnlGroupPop.proId"/>
+	        <param name="Out" value="pnlGroupPop"/>
+	        <param name="Sql" value="QryCourses"/>
+	        <param name="Multi" value="Y" />
+	        <param name="Title" value="选择课程"/>
+	         <param name="Window" value="Large"/>
+	        <param name="Columns" value="id,课程id,courseId2|name,课程名称,courseName2"/>
+	      </procedure>
+    		</flow>
+    		
+    		<flow trigger="pnlGroupPop.courseName3" event="OnClick" filter="" >
+	      <procedure name="find"  logic="Find" ifyes="" ifno="">
+	      	<param name="In" value="pnlGroupPop.proId"/>
+	        <param name="Out" value="pnlGroupPop"/>
+	        <param name="Sql" value="QryCourses"/>
+	        <param name="Multi" value="Y" />
+	        <param name="Title" value="选择课程"/>
+	         <param name="Window" value="Large"/>
+	        <param name="Columns" value="id,课程id,courseId3|name,课程名称,courseName3"/>
+	      </procedure>
+    		</flow>
+    		
+    		<flow trigger="pnlGroupPop.courseName4" event="OnClick" filter="" >
+	      <procedure name="find"  logic="Find" ifyes="" ifno="">
+	      	<param name="In" value="pnlGroupPop.proId"/>
+	        <param name="Out" value="pnlGroupPop"/>
+	        <param name="Sql" value="QryCourses"/>
+	        <param name="Multi" value="Y" />
+	        <param name="Title" value="选择课程"/>
+	         <param name="Window" value="Large"/>
+	        <param name="Columns" value="id,课程id,courseId4|name,课程名称,courseName4"/>
+	      </procedure>
+    		</flow>
+    		
+    		<flow trigger="pnlGroupPop.courseName5" event="OnClick" filter="" >
+	      <procedure name="find"  logic="Find" ifyes="" ifno="">
+	      	<param name="In" value="pnlGroupPop.proId"/>
+	        <param name="Out" value="pnlGroupPop"/>
+	        <param name="Sql" value="QryCourses"/>
+	        <param name="Multi" value="Y" />
+	        <param name="Title" value="选择课程"/>
+	         <param name="Window" value="Large"/>
+	        <param name="Columns" value="id,课程id,courseId5|name,课程名称,courseName5"/>
+	      </procedure>
+    		</flow>
+    	
+    		<!--  选择学校 -->
+    		<flow trigger="pnlGroupPop.schoolName" event="OnClick" filter="">
+     		 <procedure name="jSearch" logic="Find" ifyes="" ifno="">
+      			<param name="In" value="pnlGroupPop"/>
+	        		<param name="Sql" value="SchoolEdit" />
+	        		<param name="Out" value="pnlGroupPop" />
+	        		<param name="Title" value="学校选择" />
+	        		<param name="Options" value="$RESET,重置"/>
+	        		<param name="Columns" value="id,学校id,eq_schoolId|name,学校名,schoolName" />
+         		<param name="Window" value="Medium" />
+      		 </procedure>
+   		</flow> 
+   		
+	   <!--  <flow trigger="selectCourse.ctlAdd" event="OnClick" filter="" >
+	      <procedure name="addRow" server="" logic="AddRow" ifyes="" ifno="">
+	        <param name="Out" value="selectCourse"></param>
+	      </procedure>
+	    </flow>
+	   	<flow trigger="selectCourse.ctlDel" event="OnClick" filter="" >
+	      <procedure name="removeRow" server="" logic="RemoveRow" ifyes="" ifno="">
+	        <param name="In" value="selectCourse"></param>
+	      </procedure>
+	    </flow>
+	    <flow trigger="selectCourse.curriculumName" event="OnClick" filter="" >
+	      <procedure name="List"  logic="List" ifyes="" ifno="" sync="Y">
+          	<param name="Out" value="selectCourse.curriculumName"></param>
+         	<param name="Sql" value="course/QryEstablishCourse"></param>
+         	<param name="Options" value="YorN,[全选/取消]"/>
+      	  </procedure>
+	    </flow> -->
+	    
+	    
+	    <layout>
+	      <region location ="South" scale="">
+	        <subregion panel="pnlDown" location="South" scale="" />
+	      </region>
+	      <region location ="Center" scale="">
+	        <subregion panel="pnlGroupPop" location="Center" scale="" />
+	      </region>
+	     <!--  <region location ="Center" scale="">
+	        <subregion panel="meetFile" location="Center" scale="" />
+	        <subregion panel="selectCourse" location="Center" scale="" />
+	        <subregion panel="hiddenPanel" location="Center" scale="" />
+	      </region>     -->
+	    </layout>
+	  </ui>
+	</ui_layer>
+</tsoftware>

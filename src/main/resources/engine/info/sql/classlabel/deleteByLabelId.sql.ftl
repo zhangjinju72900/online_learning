@@ -1,0 +1,1 @@
+delete from t_label_role where label_id = #{data.labelId}

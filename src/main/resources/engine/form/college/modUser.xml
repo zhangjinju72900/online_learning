@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<object name="ncount" table="t_operate_log" primary="" order="" autoinc="Y">
+	 	<property name="schoolType" type="String" length="" field=""/>
+	  	<property name="numCount" type="String" length="" field=""/>
+	  	<property name="hyStudent" type="String" length="" field=""/>
+	  	<property name="grade" type="String" length="" field=""/>
+	  	<property name="newUser" type="Long" length="" field=""/>
+	 	<property name="totalCount" type="Long" length="" field=""/>
+	 	<property name="hyUser" type="Long" length="" field=""/>
+	 	<property name="kjCount" type="Long" length="" field=""/>
+	 	<property name="zxCount" type="Long" length="" field=""/>
+	  	<property name="teachCount" type="Long" length="" field=""/>
+	  	<property name="createTime" type="Date" length="" field="create_time"></property>
+	  	
+	  	<property name="id" type="Long" length="" field=""/>
+	  
+  </object>       
+</model_layer>
+</tsoftware>

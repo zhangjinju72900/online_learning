@@ -1,0 +1,26 @@
+UI名称		我的关注列表（frmMySubscriptions）
+
+tokenKey：OnLoad__frmMySubscriptions_jQuery
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": {
+		"page": 1,
+		"rows": 50
+	},
+
+返回示例
+"data": {
+		"total": 1,
+		"rows": [
+			{"focusType":0, --关注类型，0：已关注，1：互相关注
+			"focusOnId":7, --关注人ID
+			"nickName":"anquan2", --关注人昵称
+			"customerUserId":5, --当前登陆人ID
+			"id":2, --该条数据ID
+			"fileId":0} --关注人头像ID
+			]
+	},

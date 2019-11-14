@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+  <object name="classManage" table="t_customer_user_class" primary="id" unique="" order="id desc" autoinc="Y">
+		<property name="id" type="Long" length="20" initial="" field="id"/>
+		<property name="classId" type="Long" length="20" initial="" field="class_id"/>
+		<property name="teacherId" type="Long" length="20" field="customer_user_id"/>
+  		<property name="createTime" type="Date" length="" initial="" field="create_time"/>
+  		<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+  		<property name="updateTime" type="Date" length="" initial="" field="update_time"/>
+  		<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+  		
+  		<property name="className" type="String" length="" field=""/>
+  		<property name="classType" type="String" length="" field=""/>
+  		<property name="grade" type="String" length="" field=""/>
+  </object> 
+  
+  
+  <object name="classDetails" table="t_class" primary="id" unique="" order="id desc" autoinc="Y">
+		<property name="id" type="Long" length="20" initial="" field="id"/>
+		<property name="classId" type="Long" length="20" initial="" field="id"/>
+		<property name="name" type="String" length="50" field="name"/>
+		<property name="classType" type="Long" length="1" field="class_type"/>
+		<property name="schoolId" type="Long" length="20" initial="" field="school_id"/>
+		<property name="curriculumId" type="Long" length="20" initial="" field="curriculum_id"/>
+		<property name="grade" type="String" length="20" field="grade"/>
+		<property name="startClassTime" type="Date" length="20" field="start_class_time"/>
+  		<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+  		<property name="createTime" type="Date" length="" initial="" field="create_time"/>
+  		<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+  		<property name="updateTime" type="Date" length="" initial="" field="update_time"/>
+  		<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+  		
+  		
+  		<property name="customerUserId" type="Long" length="100" field=""/>
+  		<property name="fileId" type="Long" length="20" initial="" field="id"/>
+		<property name="stuName" type="String" length="100" field=""/>
+		<property name="tel" type="String" length="100" field=""/>
+		<property name="sex" type="Long" length="1" field=""/>
+		<property name="sexName" type="String" length="100" field=""/>
+		<property name="stuRate" type="String" length="100" field=""/>
+		<property name="lastLoginTime" type="String" length="100" field=""/>
+		<property name="className" type="String" length="100" field=""/>
+		<property name="sutName" type="String" length="100" field=""/>
+  		<property name="classTypeName" type="String" length="" field=""/>
+  		<property name="classRate" type="String" length="" field=""/>
+  		<property name="weeklyRanking" type="String" length="" field=""/>
+  		<property name="monthlyRanking" type="String" length="" field=""/>
+  </object> 
+  <object  name="resourceScore" table="t_course_resources_score" primary="id" unique="" order="" autoinc="Y">
+  		<property name="id" type="Long" length="20" initial="" field="id"/>
+		<property name="customerResourcesId" type="Long" length="20" initial="" field="customer_resources_id"/>
+		<property name="courseId" type="Long" length="20" field="course_id"/>
+		<property name="sectionId" type="Long" length="20" field="section_id"/>
+		<property name="labelId" type="Long" length="20" initial="" field="label_id"/>
+		<property name="customerUserId" type="Long" length="20" initial="" field="customer_user_id"/>
+		<property name="score" type="Double" length="8" field="score"/>
+		<property name="passScore" type="Double" length="8" field="pass_score"/>
+  		<property name="percentScore" type="Double" length="8" initial="" field="percent_score"/>
+  		<property name="passPercent" type="Double" length="" initial="" field="pass_percent"/>
+  		<property name="createTime" type="Date" length="" initial="" field="create_time"/>
+  		<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+  		<property name="updateTime" type="Date" length="" initial="" field="update_time"/>
+  		<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+  		
+  		
+  		<property name="customerUserName" type="String" length="50" initial="" field=""/>
+  		<property name="fileId" type="Long" length="20" field=""/>
+  		<property name="ossUrl" type="String" length="200" field=""/>
+  		<property name="classId" type="Long" length="20" initial="" field=""/>
+  		<property name="customerResourcesIds" type="String" length="1000" field=""/>
+  		<property name="resourceNames" type="String" length="1000" initial="" field=""/>
+		<property name="scores" type="String" length="1000" field=""/>
+		<property name="passScores" type="String" length="1000" field=""/>
+		<property name="percentScores" type="String" length="1000" field=""/>
+		<property name="passPercents" type="String" length="1000" field=""/>
+		<property name="avgScores" type="Double" length="8" field=""/>
+		<property name="avgScoreShow" type="String" length="20" field=""/>
+		
+  </object>
+</model_layer>
+</tsoftware>   

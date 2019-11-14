@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<!-- 人员model -->
+		<object name="tCustomerUser" table="t_customer_user" primary="id"
+			unique="" order="">
+			<property name="id" type="Long" length="20" initial=""
+				field="id" />	
+			<property name="name" type="String" length="50" initial=""
+				field="name" />
+			<property name="nickname" type="String" length="50" initial=""
+				field="nickname" />
+			<property name="userExplain" type="String" length="50" initial=""
+				field="user_explain" />
+			<property name="provinceName" type="String" length="50" initial=""
+				field="" />	
+			<property name="provinceCode" type="String" length="50" initial=""
+				field="province_code" />	
+			<property name="cardNum" type="String" length="50" initial=""
+				field="card_num" />		
+			<property name="tel" type="String" length="50" initial=""
+				field="tel" />
+			<property name="password" type="String" length="100" initial=""
+				field="pic_id" />
+			<property name="sex" type="Long" length="20" initial=""
+				field="sex" />
+			<property name="loginCount" type="Long" length="20" validate=""
+				field="login_count" />
+			<property name="learnTime" type="Date" length="" validate=""
+				field="learn_time" />
+			<property name="lastLoginTime" type="Date" length="" validate=""
+				field="last_login_time" />
+			<property name="email" type="String" length="50" validate=""
+				field="email" />
+			<property name="schoolId" type="Long" length="20" initial=""
+				field="school_id" />
+			<property name="explain" type="String" length="200" initial=""
+				field="explain" />	
+			<property name="integral" type="Long" length="20" initial=""
+				field="integral" />
+			<property name="totalIntegral" type="Long" length="20" initial=""
+				field="total_integral" />
+			<property name="fileId" type="Long" length="20" initial=""
+				field="file_id" />
+			<property name="validFlag" type="Long" length="20" initial=""
+				field="valid_flag" />
+			<property name="createTime" type="Date" length="" validate=""
+				field="create_time" />
+			<property name="createBy" type="Long" length="20" validate=""
+				field="create_by" />
+			<property name="updateTime" type="Date" length="" validate=""
+				field="update_time" />
+			<property name="updateBy" type="Long" length="20" validate=""
+				field="update_by" />	
+
+			<!-- 新增 -->
+			<property name="createByName" type="String" length="50"
+				initial="" field="" />
+			<property name="updateByName" type="String" length="50"
+				initial="" field="" /> 
+			<property name="schoolName" type="String" length="50"
+				initial="" field="" /> 
+			<property name="classId" type="Long" length="20"
+				initial="" field="" /> 
+			<property name="className" type="String" length="50"
+				initial="" field="" /> 
+			<property name="sexName" type="String" length="50" initial=""
+				field="" />			
+		</object>
+	</model_layer>
+</tsoftware>

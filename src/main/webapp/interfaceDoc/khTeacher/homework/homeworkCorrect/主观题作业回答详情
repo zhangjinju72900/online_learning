@@ -1,0 +1,30 @@
+UI名称		主观题作业回答详情（frmAnswerDetail）
+
+tokenKey	OnLoad__frmAnswerDetail_qDetail
+
+接口地址	/api/query
+
+接口类型	POST
+
+参数示例
+"data": 	{
+		homeworkAnswerId: "1"	--作业回答id
+		page: 1
+		rows: 50
+		}
+
+返回示例
+"data":		{
+		content: "所有人都过来"		--回答内容
+(附件url多个附件时url用,隔开)	fileUrl: "http://know-how.oss-cn-beijing.aliyuncs.com/7dbd5ce458c14722a7a00317f761b1e5201901040853082.pdf?Expires=1547014465&OSSAccessKeyId=LTAIHRCquNMasmCH&Signature=S4gy4iftA4nf47rZ7%2FDErtidMFI%3D,http://know-how.oss-cn-beijing.aliyuncs.com/3468195bd7f84a22a9ad2c791619ac22201901040759192.pdf?Expires=1547014465&OSSAccessKeyId=LTAIHRCquNMasmCH&Signature=71n1cn3qE0EmBga34t3EiJ14Nuk%3D"
+		homeworkAnswerId: 1			--作业回答id
+		id: 3						--作业回答详情id
+		questionContent: "今天星期几"	--作业题干
+		questionId: 77				--题目id
+		
+		
+		}
+
+
+
+

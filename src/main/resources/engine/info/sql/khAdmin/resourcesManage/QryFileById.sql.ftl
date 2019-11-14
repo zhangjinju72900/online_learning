@@ -1,0 +1,1 @@
+select uuid, file_type, path, filename, description,oss_key as ossKey,oss_url as ossUrl from t_file_index where id = #{data.fileId}

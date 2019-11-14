@@ -1,0 +1,1 @@
+delete from homework where id=#{data.primaryFieldValue}

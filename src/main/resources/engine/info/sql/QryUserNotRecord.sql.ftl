@@ -1,0 +1,2 @@
+select u.id,u.easemod_username as easName from t_attend_class_sign_record r 
+LEFT JOIN t_customer_user u on u.id = r.student_id where r.attend_class_record_id=#{data.attendClassRecordId} and r.valid_flag=1

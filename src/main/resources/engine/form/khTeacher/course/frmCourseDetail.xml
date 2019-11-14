@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmCourseDetail" title="课程详情">
+			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+				<control name="back" title="返回" property="" type="Button"
+						 edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+			<panel name="pDetail" title="课程概要" object="courseList" type="Group">
+				<control name="name" title="课程名称" property="name" type="TextBox"
+						 edit="N" required="N" format="" initial="" width="1" height="1" column="1"/>
+				<control name="remark" title="课程简介" property="remark" type="TextBox"
+						 edit="N" required="N" format="" initial="" width="1" height="1" column="1"/>
+				<control name="difficultyLevel" title="课程难度" property="difficultyLevel" type="TextBox"
+						 edit="N" required="N" format="" initial="" width="1" height="1" column="1"/>
+				<control name="courseCount" title="课程课时" property="courseCount" type="TextBox"
+						 edit="N" required="N" format="" initial="" width="1" height="1" column="1"/>
+				<control name="fileOssUrl" title="ossurl" property="" type="TextBox"
+						 edit="N" required="N" format="" initial="" width="1" height="1" column="1"/>
+			</panel>
+			
+			<panel name="pTree" object="tree" type="Tree" multiple="">
+				<control name="id" title="树id" property="id" type="Hidden"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="pid" title="树父id" property="pid" type="Hidden"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="name" title="树节点" property="name" type="DataLink"
+						 edit="" required="" format="" width="" height="" column=""/>
+				<control name="typeName" title="树节点" property="typeName" type="Hidden"
+						 edit="" required="" format="" width="" height="" column=""/>
+			</panel>
+			<panel name="pHidden" title="查询条件" object="LabelList" type="Hidden">
+				<control name="courseId" title="课程id" property="courseId" type="Hidden"
+						 edit="N" required="N" format=""  width="1" height="1" column=""/>
+			</panel>
+			<!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="j1" server="" logic="DecodeId" ifyes="tree1" ifno="">
+					<param name="Out" value="pHidden.courseId"/>
+				</procedure>
+				<procedure name="tree1" logic="Query" ifyes="queryDetail" ifno="">
+					<param name="In" value="pHidden"/>
+					<param name="Out" value="pTree"/>
+					<param name="Sql" value="khTeacher/course/QryCourseDetailTree"/>
+				</procedure>
+				<procedure name="queryDetail" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pHidden"/>
+					<param name="Out" value="pDetail"/>
+					<param name="Sql" value="khTeacher/course/QryCourseById"/>
+				</procedure>
+			</flow>
+			<!-- 返回 -->
+			<flow trigger="pToolbar.back" event="OnClick" filter="">
+				<procedure name="proTransition" server="/frmCourseList" logic="Back" ifyes="" ifno="">
+					<param name="To" value="frmCourseList"/>
+				</procedure>
+			</flow>
+			<!-- 布局 -->
+			<layout>
+				<region location="North" scale="">
+					<subregion panel="pToolbar" location="North" scale=""/>
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="pDetail" location="North" scale=""/>
+				</region>
+				<region location="West" scale="400px">
+					<subregion panel="pTree" location="Center" scale="400px"/>
+					<subregion panel="pHidden" location="Center" scale="400px"/>
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

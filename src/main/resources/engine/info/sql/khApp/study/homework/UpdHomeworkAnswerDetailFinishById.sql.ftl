@@ -1,0 +1,1 @@
+update t_homework_detail_answer set status = #{data.status} where homework_answer_id =#{data.homeworkAnswerId}

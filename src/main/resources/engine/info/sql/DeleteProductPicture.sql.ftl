@@ -1,0 +1,1 @@
+DELETE FROM t_goods_pic WHERE good_id = #{data.id}

@@ -1,0 +1,30 @@
+INSERT into t_teaching_assist(
+	name,
+	professional_id,
+	course_id,
+	section_id,
+	visible_flag,
+	file_id,
+	oss_key,
+	bucket_name,
+	teacher_id,
+	create_time,
+	create_by,
+	update_time,
+	update_by
+)
+select 
+	#{data.name},
+	#{data.professionalId},
+	#{data.courseId},
+	#{data.sectionId},
+	#{data.visibleFlag},
+	#{data.fileId},
+	f.oss_key,
+	f.oss_url,
+	#{data.session.userInfo.userId},
+	now(),
+	#{data.session.userInfo.userId},
+	now(),
+	#{data.session.userInfo.userId}
+from t_file_index f where f.id=	#{data.fileId}

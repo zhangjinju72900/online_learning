@@ -1,0 +1,23 @@
+UI名称		保存为作业模板（frmDistribute）
+
+tokenKey	OnClick_pToolbar_btnSaveTemplate_frmDistribute_saveTemplate
+
+接口地址	/api/savecustom
+
+接口类型	POST
+
+参数示例
+"data": 	{
+			difficultyLevel: "1"		--难度等级；0-简单；1-一般难度；2-比较难；3-困难
+			homeworkType: "0"			--作业类型(0-客观题；1-主观题)
+			questionIds: "77,78"		--题目的id(多题id之间用,隔开)
+			templateName: "模板2"		--作业模板名称
+			}
+
+返回示例
+"data":		{
+		}
+
+
+
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<model_layer>
+		<object name="teachingAssist" table="t_teaching_assist" primary="id" unique="" order="id desc">
+			<property name="id" type="Long" length="20" initial="" field="id"/>
+			<property name="name" type="String" length="50" initial="" field="name"/>
+			<property name="professionalId" type="Long" length="20" initial="" field="professional_id"/>
+			<property name="courseId" type="Long" length="20" initial="" field="course_id"/>
+			<property name="sectionId" type="Long" length="20" initial="" field="section_id"/>
+			<property name="visibleFlag" type="Long" length="1" initial="" field="visible_flag"/>
+			<property name="fileId" type="String" length="50" initial="" field="file_id"/>
+			<property name="fileName" type="Long" length="20" initial="" field=""/>
+			<property name="ossKey" type="String" length="64" initial="" field="oss_key"/>
+			<property name="bucketName" type="Long" length="20" initial="" field="bucket_name"/>
+			<property name="teacherId" type="Long" length="20" initial="" field="teacher_id"/>
+			<property name="validFlag" type="Long" length="1" initial="" field="valid_flag"/>
+			<property name="createTime" type="Date" length="20" initial="" field="create_time"/>
+			<property name="createBy" type="Long" length="20" initial="" field="create_by"/>
+			<property name="updateTime" type="Date" length="20" initial="" field="update_time"/>
+			<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
+			
+			<property name="teacherName" type="String" length="50" initial="" field=""/>
+			<property name="professionalName" type="String" length="200" initial="" field=""/>
+			<property name="courseName" type="String" length="200" initial="" field=""/>
+			<property name="sectionName" type="String" length="200" initial="" field=""/>
+			<property name="visibleFlagName" type="String" length="10" initial="" field=""/>
+			<property name="fileType" type="String" length="50" initial="" field=""/>
+			<property name="createName" type="String" length="50" initial="" field=""/>
+			<property name="updateName" type="String" length="50" initial="" field=""/>
+			<property name="regionName" type="String" length="50" initial="" field=""/>
+		</object>
+	</model_layer>
+</tsoftware>

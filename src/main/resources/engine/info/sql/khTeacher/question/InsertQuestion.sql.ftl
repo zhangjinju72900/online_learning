@@ -1,0 +1,28 @@
+insert into t_question (content,
+question_classify_id,
+question_type,
+difficulty_level,
+enable_status,
+answer_thought,
+valid_flag,
+data_flag,
+teacher_id,
+create_time,
+create_by,
+update_time,
+update_by)
+values (
+#{data.content},
+#{data.questionClassifyId},
+#{data.questionType},
+#{data.difficultyLevel},
+0,
+#{data.answerThought},
+0,
+1,
+#{data.session.userInfo.userId},
+now(),
+#{data.session.userInfo.userId},
+now(),
+#{data.session.userInfo.userId}
+)

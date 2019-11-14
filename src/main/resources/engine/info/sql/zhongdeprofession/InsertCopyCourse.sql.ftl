@@ -1,0 +1,30 @@
+INSERT INTO t_course
+(
+	name,
+	professional_id,
+	course_count,
+	difficulty_level,
+	remark,show_order,
+	file_id,
+	visible_flag,
+	valid_flag,
+	create_time,
+	create_by,
+	update_time,
+	update_by
+)
+SELECT 
+	name,
+	professional_id,
+	course_count,
+	difficulty_level,
+	remark,
+	show_order,
+	file_id,
+	visible_flag,
+	valid_flag,
+	NOW(),
+	#{data.session.userInfo.userId},
+	NOW(),
+	#{data.session.userInfo.userId}
+from t_course WHERE id=#{data.id}

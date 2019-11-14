@@ -1,0 +1,1 @@
+update t_customer_user set tel = #{data.tel} where id = #{data.id}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+	<ui_layer>
+		<ui name="frmEditCourseResName" title="编辑课程资源名">
+		<!-- 
+			<panel name="pHidden" title="隐藏" object="tcsr" type="Hidden">
+  				<control name="id" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="2" height="" column="2"/>
+  			</panel> -->
+			<panel name="CourseResGroup" title="课程资源" object="tcsr"
+				type="Group">
+				<control name="id" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="2" height="" column="3" />
+				<control name="courseResName" title="课程资源名" property="courseResName" type="TextBox" edit="Y" required="" format="" width="2" height="2" column="3" />
+				<control name="name" title="原资源名" property="name" type="Hidden" edit="Y" required="" format="" width="2" height="2" column="3" />
+				<control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.userId" format="" width="1" height="1" column="" />
+				<control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column="" />
+			</panel>
+			<panel name="saveConfirm" title="pnlDown" object="" type="Toolbar">
+				<control name="ctlSave" title="确认" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+				<control name="ctlCancel" title="取消" property="" type="Button"
+					edit="" required="" format="" width="" height="" column="" />
+			</panel>
+
+			<!-- 页面逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">
+				<procedure name="jsDec1" server="" logic="DecodeId"
+					ifyes="jssave" ifno="">
+					<param name="Out" value="CourseResGroup.id"></param>
+				</procedure>
+				<procedure name="jssave"  logic="Query" ifyes="" ifno="">
+        			<param name="In" value="CourseResGroup" />
+        			<param name="Out" value="CourseResGroup" />
+        			<param name="Sql" value="zhongdeprofession/QryCourseResName" />
+     			 </procedure>
+			</flow>
+			
+			<!-- 确认 -->
+			<flow trigger="saveConfirm.ctlSave" event="OnClick" filter="" defaultEnter="Y">
+				<procedure name="jssave" logic="SaveCustom" ifyes="jsclose"
+					ifno="">
+					<param name="In" value="CourseResGroup"></param>
+					<param name="Sql" value="zhongdeprofession/UpdateCourseResName"/>
+					<param name="Msg" value="'修改成功'"></param>
+				</procedure>
+				<procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="true"></param>
+				</procedure>
+			</flow>
+
+			<!-- 取消 -->
+			<flow trigger="saveConfirm.ctlCancel" event="OnClick" filter="">
+				<procedure name="jsclose" server="" logic="Close" ifyes=""
+					ifno="">
+					<param name="Refresh" value="false"></param>
+				</procedure>
+			</flow>
+
+			<layout>
+				<region location="South" scale="">
+					<subregion panel="saveConfirm" location="South" scale="" />
+				</region>
+				<region location="Center" scale="">
+					<subregion panel="CourseResGroup" location="Center" scale="" />
+				</region>
+			</layout>
+		</ui>
+	</ui_layer>
+</tsoftware>

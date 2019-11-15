@@ -3,7 +3,7 @@
 	xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
 	<ui_layer>
 		<ui name="frmAddLabel" title="添加标签">
-			<panel name="labelGroup" title="标签" object="tLabel"
+			<panel name="labelGroup" title="标签标签" object="tLabel"
 				type="Group">
 				<control name="label" title="选择标签" property="label" type="ComboBox" edit="Y" required="" format="" width="1" height="" column="1" />
 				<!-- <control name="labelId" title="标签ID" property="id" type="Hidden" edit="Y" required="" format="" width="" height="" column="" /> -->

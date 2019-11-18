@@ -3,7 +3,6 @@ package com.tedu.base.auth.filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -77,21 +76,6 @@ class HmacRequestWrapper extends HttpServletRequestWrapper implements HttpServle
         @Override
         public int read() throws IOException {
             return this.inputStream.read();
-        }
-
-        @Override
-        public boolean isFinished() {
-            return false;
-        }
-
-        @Override
-        public boolean isReady() {
-            return false;
-        }
-
-        @Override
-        public void setReadListener(ReadListener readListener) {
-
         }
     }
 }

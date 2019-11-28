@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmCommunity" title="社区管理">
+            <panel name="empTree" object="tree"  type="Tree" multiple="" search="Y">
+                <control name="id" title="树id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+                <control name="pid" title="树父id" property="pid" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+                <control name="name" title="树节点" property="name" type="DataLink" edit="" required="" format="" width="" height="" column=""/>
+            </panel>
+            <panel name="empTool" title="工具条" object="" type="Toolbar">
+                <control name="ctlAdd" title="新增话题" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+                <control name="ctlDelete" title="删除社区" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+                <control name="ctlAddCom" title="新增社区" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+            </panel>
+            <panel name="empCom" title="查询条件" object="community" type="Hidden"  multiple="Y">
+                <control name="eq_ComId" title="社区编号" property="comId" type="TextBox" edit="" required="" format="" width="1" height="1" column="1"/>
+            </panel>
+            <panel name="empTitle" title="查询条件" object="community" type="Hidden"  multiple="Y">
+                <control name="eq_id" title="话题编号" property="id" type="TextBox" edit="" required="" format="" width="1" height="1" column="1"/>
+            </panel>
+            <panel name="empDg" title="列表" object="community" type="Grid"  multiple="">
+                <control name="ctlDel" title="删除" property="" type="Link" edit="" required="" format="" width="120" height="" column=""/>
+                <control name="title" title="话题名称" property="title" type="DataLink" edit="" required="" format="" width="120" height="" column=""/>
+                <control name="introducer" title="提出人" property="createBy" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
+                <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="N" required="" format="" width="140" height="" column=""/>
+            </panel>
+
+            <!-- 逻辑加载 -->
+            <flow trigger="" event="OnLoad" filter="">
+                <procedure name="tree"  logic="Query" ifyes="" ifno="">
+                    <param name="In" value=""></param>
+                    <param name="Out" value="empTree"></param>
+                    <param name="Sql" value="khAdmin/resMan/QryTree"></param>
+                </procedure>
+            </flow>
+
+
+            <flow trigger="empTree" event="OnClick" filter="" >
+                <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="j2" ifno="">
+                    <param name="In" value="empTree.id"></param>
+                </procedure>
+                <procedure name="j2" server="" logic="DecodeId" ifyes="queryTable" ifno="">
+                    <param name="Out" value="empCom.eq_ComId"></param>
+                </procedure>
+
+                <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
+                    <param name="In" value="empCom"></param>
+                    <param name="Out" value="empDg"></param>
+                    <param name="Sql" value="khAdmin/resMan/QrytalkingList"></param>
+                </procedure>
+            </flow>
+
+
+
+            <flow trigger="empDg.ctlDel" event="OnClick" filter="">
+                <procedure name="msg" server="" logic="ConfirmMsg" ifyes="deleteData" ifno="">
+                    <param name="Title" value="删除"></param>
+                    <param name="Msg" value="确认删除当前话题吗?"></param>
+                </procedure>
+                <procedure name="deleteData"  logic="SaveCustom" ifyes="queryTable" ifno="">
+                    <param name="In" value="empDg" />
+                    <param name="Sql" value="khAdmin/resMan/DeleteTitle"/>
+                    <param name="Msg" value="'话题已删除'" />
+                </procedure>
+                <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
+                    <param name="In" value="empCom"></param>
+                    <param name="Out" value="empDg"></param>
+                    <param name="Sql" value="khAdmin/resMan/QrytalkingList"></param>
+                </procedure>
+            </flow>
+
+
+
+
+            <!-- 布局 -->
+            <layout>
+                <region location ="North" scale="">
+                    <subregion panel="empTool" location ="North" scale=""/>
+                </region>
+                <region location ="Center" scale="">
+                    <subregion panel="empDg" location="Center" scale=""/>
+                </region>
+                <region location ="West" scale="300px">
+                    <subregion panel="empTree" location ="Center" scale="300px"/>
+                </region>
+                <region location ="South" scale="">
+                    <subregion panel="empCom" location="Center" scale="" />
+                </region>
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

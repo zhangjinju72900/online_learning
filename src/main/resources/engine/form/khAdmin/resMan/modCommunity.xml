@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<model_layer>
+	<!-- t_talking表原有字段 -->
+	<object name="community" table="t_talking" primary="id" unique="title" order="id desc" autoinc="Y">
+	<property name="id" type="Long" length="20" initial="" field="id"/>
+		<property name="comId" type="Long" length="20" initial="" field="community_id"/>
+	<property name="title" type="String" length="500" initial="" field="title"/>
+	<property name="createTime" type="Date" length="100" field="create_time"/>
+	<property name="createBy" type="String" length="50" field="create_by"/>
+
+		<!--关联字段-->
+		<property name="name" type="String" length="500" initial="" field=""/><!--社区名称-->
+
+	</object>
+</model_layer>
+</tsoftware>

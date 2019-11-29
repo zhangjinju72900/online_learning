@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+   xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmVideoDetail" title="视频详情">
+   <panel name="pToolbar" title="工具条" object="" type="Toolbar">
+  <control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+ </panel>
+ <panel name="pForm" title="视频详情" object="teachingAssist"  type="Group" multiple="">
+  <control name="id" title="视频id" property="id" type="Hidden" edit="" required="" format="" width="1" height="1" column=""/>
+  <control name="name" title="视频名称" property="name" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+  <control name="teacherName" title="老师名" property="teacherName" type="TextBox"  multiple="Y" edit="" required="" format="" width="1" height="1" column=""/>
+  <control name="professionalName" title="所属专业" property="professionalName" type="TextBox" edit="N" required="" format="" width="1" height="1" column="3" />
+  <control name="courseName" title="所属课程" property="courseName" type="TextBox" edit="N" required="" format="" width="1" height="1" column="" />
+  <control name="sectionName" title="所属小节" property="sectionName" type="TextBox" edit="N" required="" format="" width="1" height="1" column="2" />
+  <control name="visibleFlagName" title="是否公开" property="visibleFlagName" type="TextBox" edit="N" required="" format="" width="1" height="1" column="" />
+  
+   <control name="createTime" title="创建时间" property="createTime" type="TextBox"  multiple="Y" edit="" required="" format="" width="1" height="1" column=""/>
+   <control name="createName" title="创建人" property="createName" type="TextBox"  multiple="Y" edit="" required="" format="" width="1" height="1" column="2"/>
+   <control name="updateTime" title="修改时间" property="updateTime" type="TextBox"  multiple="Y" edit="" required="" format="" width="1" height="1" column=""/>
+   <control name="updateName" title="修改人" property="updateName" type="TextBox"  multiple="Y" edit="" required="" format="" width="1" height="1" column="2"/>
+   <control name="fileId" title="文件编号" property="fileId" type="Hidden" edit="" required="" format="" width="1" height="1" column="" /> 
+	<control name="ossKey" title="ossKey" property="ossKey" type="Hidden" edit="" required="" format="" width="1" height="1" column="2" /> 
+	<control name="filePath" title="filePath" property="" type="Hidden" edit="" required="" format="" width="1" height="1" column="2" /> 
+	 <control name="bucketName" title="bucketName" property="bucketName" type="TextBox" edit="" required="" format="" width="1" height="1" column="2" />  
+   	<control name="download" title="附件下载" property="" type="Button" edit="" required="" format="" width="1" height="1" column="1" /> 
+   </panel>
+ 
+    <flow trigger="" event="OnLoad" filter="" >       
+      <procedure name="j1" server="" logic="DecodeId" ifyes="je" ifno="">
+        <param name="Out" value="pForm.id"></param>
+      </procedure> 
+      <procedure name="je"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khAdmin/teachingAssist/QryAssistListDetail"></param>
+      </procedure> 
+      
+    </flow>
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmAssistList" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmAssistList"></param>
+       </procedure>
+      </flow>
+      
+      
+       <!-- 点击下载附件 -->
+       <flow trigger="pForm.download" event="OnClick" filter="">
+        <procedure name="jbranch" server="" logic="Branch" ifyes="j2" ifno="j1">
+         <param name="In" value="getPanelControlValue('pForm.fileType')=='mp4' || getPanelControlValue('pForm.fileType')=='flv' "></param>
+       </procedure> 
+      <procedure name="j1" server="" logic="Branch" ifyes="" ifno="">
+         <param name="In" value="window.open(getPanelControlValue('pForm.bucketName'))"></param>
+       </procedure> 
+       <procedure name="j2" server="" logic="Branch" ifyes="" ifno="">
+         <param name="In" value="openMp4View('pForm.ossKey')"></param>
+       </procedure> 
+       <!--  <procedure name="j1" server="" logic="Query" ifyes="download" ifno="mess">
+          <param name="In" value="pForm"></param>
+          <param name="Sql" value="khAdmin/resourcesManage/QryTest"/>
+          <param name="Plugin" value="OssDownLoadService"></param>
+           <param name="Out" value="pForm"></param>
+        </procedure>
+         <procedure name="download" server="" logic="Branch" ifyes="" ifno="">
+          <param name="In" value="ossFileDown('pForm.filePath')"></param>
+        </procedure> -->
+      </flow>
+        
+    <layout>
+     <region location ="North" scale="">
+       <subregion panel="pToolbar" location="North" scale=""/>
+      </region>
+      <region location ="Center" scale="">
+  <subregion panel="pForm" location="Center" scale=""/> 
+      </region> 
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

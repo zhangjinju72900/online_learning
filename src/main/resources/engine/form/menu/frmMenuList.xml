@@ -2,8 +2,8 @@
 <tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
 			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
 <!-- 组织列表 -->
-<model_layer>t_menu
-  <object name="menu" table="" primary="CODE" unique="NAME" order="" father="parent">
+<model_layer>
+  <object name="menu" table="t_menu" primary="CODE" unique="NAME" order="" father="parent">
 	<property name="code" type="String" length="" validate=""  field="CODE"/>
 	<property name="nodeType" type="String" length="" validate=""  field=""/>
 	<property name="levels" type="String" length="" validate=""  field=""/>

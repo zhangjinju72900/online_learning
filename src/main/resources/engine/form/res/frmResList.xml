@@ -3,7 +3,7 @@
 			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
 <!-- 组织列表 -->
 <model_layer>
-  <object name="res" table="T_RESOURCE" primary="id" unique="name|url" order="" father="parent">
+  <object name="res" table="t_resource" primary="id" unique="name|url" order="" father="parent">
 	<property name="id" type="Long" length="" validate=""  field="id"/>
 	<property name="popupType" type="String" length="" validate=""  field=""/>
 	<property name="nodeType" type="String" length="" validate=""  field=""/>

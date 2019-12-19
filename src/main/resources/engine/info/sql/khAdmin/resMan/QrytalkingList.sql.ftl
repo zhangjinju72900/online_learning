@@ -2,6 +2,7 @@ select * from (
 SELECT
 t.id,
 t.title,
+t.content as content,
 t.community_id as comId,
 t.create_by as createBy,
 t.create_time as createTime

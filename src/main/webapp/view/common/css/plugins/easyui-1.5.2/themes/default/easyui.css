@@ -127,7 +127,8 @@
   font-size: 12px;
 }
 .panel-title {
-  font-size: 12px;
+  font-family: "Microsoft YaHei", "微软雅黑", Helvetica, Tahoma, STXihei, "华文细黑", STHeiti, "Helvetica Neue", Helvetica, Tahoma, "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun, "宋体", Heiti, "黑体", sans-serif;
+  font-size: 14px;
   font-weight: bold;
   color: #A1B7D4;
   height: 16px;

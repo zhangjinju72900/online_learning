@@ -191,6 +191,8 @@
        	<mvc:exclude-mapping path="/getPlayUrl"/>
        	<mvc:exclude-mapping path="/decrypt"/>
        	<mvc:exclude-mapping path="/encryptVideo"/>
+		<mvc:exclude-mapping path="/getVideo"/>
+		<mvc:exclude-mapping path="/viewMp4"/>
 <!--        	<mvc:exclude-mapping path="/*/edit/*/*"/>目前没有一个明确规律匹配到view，先以已知的为准 -->
         <bean class="com.tedu.base.auth.FormTokenInterceptor"></bean>
     </mvc:interceptor>

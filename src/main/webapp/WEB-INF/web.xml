@@ -134,6 +134,7 @@
      				   /getPlayUrl,
      				   /decrypt,
      				   /encryptVideo,
+				/viewMp4,/getVideo,
      					
 			</param-value>
 		</init-param>

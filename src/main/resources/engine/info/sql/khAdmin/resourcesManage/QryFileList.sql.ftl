@@ -6,6 +6,7 @@ SELECT
 	e.file_path as filePath,
 	e.parent_id as orgId,
 	e.parent_id as parentId,
+	e.file_id fileId,
 	e.backup_type as backupType,
 	e.version_code as versionCode,
 	e.resources_type as resourcesType,

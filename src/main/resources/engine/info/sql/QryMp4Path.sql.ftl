@@ -1,0 +1,1 @@
+select concat(f.path,f.uuid,'.',file_type) as path from t_file_index f where id=#{data.id};

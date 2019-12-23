@@ -2,98 +2,97 @@ package com.tedu.base.file.controller;
 
 import com.tedu.base.common.page.QueryPage;
 import com.tedu.base.engine.service.FormService;
-import com.tedu.base.engine.util.FormLogger;
-import com.tedu.base.util.AESUtil;
-import com.tedu.base.util.AliVideoPlayUtils;
-import com.tedu.base.util.AliVideoService;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.List;
 import java.util.Map;
 
 /**
- * @author yangjixin
  * @Description: TODO
  * @date 2019-08-20
  */
 @Controller
 public class AliVideoController {
 
-    @Resource
-    AliVideoPlayUtils aliVideoPlayUtils;
-
-    @Resource
-    AESUtil aesUtil;
 
     @Resource
     FormService formService;
 
-	@Resource
-	private AliVideoService aliVideoService;
-    @RequestMapping("/decrypt")
-    public void getDecryptKey(HttpServletRequest request, HttpServletResponse response) {
-    	 FormLogger.info("进入解密----");
-         String ciphertext = request.getParameter("CipherText");
-         String mtsHlsUriToken = request.getParameter("MtsHlsUriToken");
-         String vid = aesUtil.decrypt("aliToken", mtsHlsUriToken);
-         String aliKey = "";
-         FormLogger.info("text->" + ciphertext);
-         FormLogger.info("mtsHlsUriToken->" + mtsHlsUriToken);
-         FormLogger.info("vid->" + vid);
+    /**
+     *
+     * @Description: 打开文件
+     * @param: @param request
+     * @param: @return
+     * @return: ResponseJSON
+     */
+    @RequestMapping("/viewMp4")
+    public String viewMp4(HttpServletRequest request, HttpServletResponse response, Model model) {
 
-         QueryPage queryPage = new QueryPage();
-         queryPage.setQueryParam("getAliKey");
-         queryPage.getData().put("vid", vid);
-         List<Map<String, Object>> dataList = (List<Map<String, Object>>) formService.queryBySqlId(queryPage);
-
-         if (dataList != null && dataList.size() > 0) {
-             aliKey = dataList.get(0).get("aliKey").toString();
-         }
-
-         byte[] decryptKey = null;
-         if (aliKey.equals(ciphertext)) {
-             try {
-                 FormLogger.info("解密接口验证正确");
-                 decryptKey = aliVideoPlayUtils.decryptKey(ciphertext);
-             } catch (Exception e) {
-
-             }
-         }
-         try {
-
-
-             response.setHeader("Access-Control-Allow-Origin", "*");
-             response.setStatus(200);
-             //返回base64decode之后的密钥
-             OutputStream responseBody = response.getOutputStream();
-             responseBody.write(decryptKey);
-             responseBody.close();
-         } catch (Exception e) {
-             FormLogger.info("解密报错" + e.getMessage());
-         }
+        String id = request.getParameter("id");
+        model.addAttribute("id",id);
+        return "viewMp4";
     }
 
 
-    @RequestMapping("/encryptVideo")
-    @ResponseBody
-    public void encryptVideo(@RequestBody Map<String, String> params) {
+    /**
+     *
+     * @Description: 打开文件
+     * @param: @param request
+     * @param: @return
+     * @return: ResponseJSON
+     */
+    @RequestMapping("/getVideo")
+    public void getVideo(HttpServletRequest request, HttpServletResponse response) {
+        // InputStream in = null ;
 
-        FormLogger.info("上传完成之后的回调");
-        String vid = params.get("VideoId").toString();
+        try {
+            String path = "";
+            String id = request.getParameter("id");
+            //查询文件路径
+            QueryPage qp = new QueryPage();
+            qp.getData().put("id",id);
+            qp.setQueryParam("QryMp4Path");
+            List<Map<String,Object>> list = formService.queryBySqlId(qp);
+            if(list.size()>0){
+                path = list.get(0).get("path").toString();
+            }
+            String range = request.getHeader("range");
+            File inFile = new File(path);
+            int length = (int) inFile.length();
 
-        FormLogger.info("Vid" + vid);
+            //response.setContentLength(length);
+            response.setHeader("Accept-Ranges", "bytes");
+            response.setHeader("Content-Length",length+"");
+            //response.setHeader( "Content-Disposition", "attachment;filename=" + URLEncoder.encode(key, "UTF-8"));
+            response.setHeader(  "Access-Control-Allow-Origin","*");
+            // 设置在下载框默认显示的文件名
+            response.setContentType("application/octet-stream");// 指明response的返回对象是文件流
+            // 读出文件到response
+            // 这里是先需要把要把文件内容先读到缓冲区
+            // 再把缓冲区的内容写到response的输出流供用户下载
+            InputStream inputStream = new FileInputStream(inFile);
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+            OutputStream outputStream = response.getOutputStream();
+            byte buffer[] = new byte[1024];
+            int len = 0;
+            while ((len = bufferedInputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, len);
+            }
+            // 人走带门
+            bufferedInputStream.close();
+            outputStream.flush();
+            outputStream.close();
 
-        aliVideoPlayUtils.encryptVideo(vid);
-
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
-    
 
 }

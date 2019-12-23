@@ -1,5 +1,25 @@
 package com.tedu.plugin.resource;
 
+import com.aliyun.oss.OSS;
+import com.tedu.base.common.page.QueryPage;
+import com.tedu.base.engine.aspect.ILogicPlugin;
+import com.tedu.base.engine.dao.FormMapper;
+import com.tedu.base.engine.model.FormEngineRequest;
+import com.tedu.base.engine.model.FormEngineResponse;
+import com.tedu.base.engine.model.FormModel;
+import com.tedu.common.constant.CustomerResourcesSourceEnum;
+import com.tedu.common.constant.ResourceTypeEnum;
+import com.tedu.oss.service.CustomResourcesService;
+import com.tedu.oss.service.OssRecordService;
+import com.tedu.oss.service.OssUploadService;
+import com.tedu.plugin.resource.vo.ResourcesFile;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -11,35 +31,7 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import javax.annotation.Resource;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
-import com.aliyun.oss.OSS;
-import com.tedu.base.common.page.QueryPage;
-import com.tedu.base.engine.aspect.ILogicPlugin;
-import com.tedu.base.engine.dao.FormMapper;
-import com.tedu.base.engine.model.FormEngineRequest;
-import com.tedu.base.engine.model.FormEngineResponse;
-import com.tedu.base.engine.model.FormModel;
-import com.tedu.common.constant.CustomerResourcesSourceEnum;
-import com.tedu.common.constant.FtpUploadResourceTypeEnum;
-import com.tedu.common.constant.ResourceTypeEnum;
-import com.tedu.oss.service.CustomResourcesService;
-import com.tedu.oss.service.OssRecordService;
-import com.tedu.oss.service.OssUploadService;
-import com.tedu.plugin.resource.vo.ResourcesFile;
-
 /**
- * 
- * @ClassName: ImportExecute
- * @Description:TODO 用户资源管理-单个资源上传处理类
- * @author: qun
- * @date: 2018年7月27日 下午1:11:12
  *
  */
 @Service("importExecute")

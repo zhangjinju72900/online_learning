@@ -795,6 +795,12 @@ function custom_close(){
 		  if(panelControlName<0)return true;
 		  else return false;
 	  }
+	  function viewMp4(sss){
+		  var id=getPanelControlValue(sss);
+		  //controller的地址+id
+		  window.open(getRootPath_web()+"/viewMp4?id="+id);
+	}
+
 	  
 	  //判断活动积分是否小于0
 	  function ifJionintegralError(panelControlName){

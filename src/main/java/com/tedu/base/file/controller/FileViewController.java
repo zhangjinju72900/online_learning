@@ -1,21 +1,16 @@
 package com.tedu.base.file.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
+import com.aliyun.oss.OSS;
+import com.tedu.base.util.AliVideoPlayUtils;
+import com.tedu.base.util.AliVideoService;
+import com.tedu.oss.service.OssQueryService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.aliyun.oss.OSS;
-import com.tedu.base.util.AliVideoPlayUtils;
-import com.tedu.base.util.AliVideoService;
-import com.tedu.base.util.RedisUtil;
-import com.tedu.oss.service.OssQueryService;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 文件操作接口，包含上传和下载
@@ -42,21 +37,7 @@ public class FileViewController {
 	@Value("${base.website}")
 	private String baseUrl;
 	
-	@RequestMapping("viewMp4")
-	public String viewMp4(Model model,HttpServletRequest request){
-		String key = request.getParameter("key");
-		if(!key.contains(".")){
-			String token = aliVideoService.getToken(key);
-			String url  = AliVideoPlayUtils.getPlaySource(key);
-			model.addAttribute("key", url+"?MtsHlsUriToken="+token);
-		}else{
-			String url = ossQueryServiceImpl.queryObjectByKey(key, ossPriClient, BUCKET_NAME1);
-			model.addAttribute("url", url);
-			
-		}
-		model.addAttribute("ctx", baseUrl);
-		return "h5/viewMp4";
-	}
+
 	
 	
 	@RequestMapping("viewOffice")

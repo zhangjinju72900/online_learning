@@ -267,6 +267,8 @@ public class LoginController {
 	private FormEngineResponse login(FormEngineRequest requestObj, HttpServletRequest request, String type) {
 		FormEngineResponse response = new FormEngineResponse("");
 		Map<String, Object> param = requestObj.getData();
+
+		System.out.println(param.toString());
 		String openId = "";
 		if (param.get("openid") != null) {
 			openId = param.get("openid").toString();
@@ -361,7 +363,7 @@ public class LoginController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				LogUtil.info(dataMap.toString());
+				System.err.println(dataMap.toString());
 				response.setData(dataMap);
 			} catch (UnknownAccountException e) {
 				response.setCode(ErrorCode.LOGIN_USER_INVALID.getCode());

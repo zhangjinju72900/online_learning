@@ -59,7 +59,7 @@
                 </p>
 
             </div>
-            <div class="header-left" style="background:#299be4">
+            <div class="header-left" style="background:rgb(30,144,255)">
             <span class="tedu-logo"><img src="${ctx}/${logImg}" style="display:block;margin:0px 20px auto"/></span>
             </div>
         </div>

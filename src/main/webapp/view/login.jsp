@@ -8,7 +8,7 @@
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
-    <link rel="shortcut icon" href="/view/common/images/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="shortcut icon" href="/view/common/images/favicon.ico"/>
 
     <script src="${ctx}/view/common/css/plugins/easyui-1.5.2/jquery.min.js"></script>
     <script src="${ctx}/view/common/js/jquery-1.8.3.min.js"></script>
@@ -112,7 +112,7 @@
             padding: 0 58px;
             border-radius: 16px;
             overflow: hidden;
-            background: #fff;
+            background: rgba(255,255,255,0.5);
         }
 
         .login-logo {
@@ -135,7 +135,7 @@
         /*通知滚动*/
 
         .mBox-x {
-            width:100%; height:40px; line-height:40px; overflow:hidden;background: rgb(250, 255, 189);
+            width:100%; height:40px; line-height:40px; overflow:hidden;background: rgb(143,122,94);
             /*-webkit-box-sizing: border-box;*/
             /*-moz-box-sizing: border-box;*/
             /*box-sizing: border-box;*/
@@ -336,7 +336,7 @@
             </div>
         </form>
     </div>
-    <div style="height:560px;padding-top:540px;text-align: center">
+    <div style="height:560px;padding-top:540px;text-align: center;color: white;">
         ${copyRight}
     </div>
 

@@ -113,7 +113,7 @@
   border-color: #eee;
 }
 .panel-header {
-  background-color: #2f4258;
+  background-color: #0B1746;
   /* background: -webkit-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
   background: -moz-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
   background: -o-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
@@ -127,7 +127,8 @@
   font-size: 12px;
 }
 .panel-title {
-  font-size: 12px;
+  font-family: "Microsoft YaHei", "微软雅黑", Helvetica, Tahoma, STXihei, "华文细黑", STHeiti, "Helvetica Neue", Helvetica, Tahoma, "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun, "宋体", Heiti, "黑体", sans-serif;
+  font-size: 14px;
   font-weight: bold;
   color: #A1B7D4;
   height: 16px;
@@ -303,7 +304,7 @@
   height: 100% !important;
 }
 .accordion .accordion-header {
-  background: #2f4258;
+  background:#0B1746;
   filter: none;
 }
 .accordion .accordion-header-selected {
@@ -3247,7 +3248,7 @@ tr:nth-child(even){
 .switchbutton-readonly {
   cursor: default;
 }
-/* ���� */
+/* ���� */
 .datagrid-row-selected a{
 	color:#fff !important;
 }

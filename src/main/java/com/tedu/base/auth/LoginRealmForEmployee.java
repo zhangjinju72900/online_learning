@@ -60,6 +60,7 @@ public class LoginRealmForEmployee extends AuthorizingRealm {
      *
      * @author xijianguang
      */
+    @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         //用户名
         if (!principals.fromRealm(getName()).iterator().hasNext())

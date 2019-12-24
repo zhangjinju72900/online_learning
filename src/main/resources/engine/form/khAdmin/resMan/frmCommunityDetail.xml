@@ -16,7 +16,8 @@
   		<!-- <control name="updateName" title="修改人" property="updateName" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
   		<control name="updateTime" title="修改时间" property="updateTime" type="TextBox" edit="" required="N"  format="" width="1" height="1" column="2"  /> -->
   	</panel>
-	
+
+
     <flow trigger="" event="OnLoad" filter="" >
       <procedure name="DecodeId" server="" logic="DecodeId" ifyes="Query" ifno="">
         <param name="Out" value="pForm.id"></param>

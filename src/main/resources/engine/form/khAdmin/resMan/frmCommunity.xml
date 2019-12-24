@@ -83,6 +83,21 @@
             </flow>
 
 
+            <!-- 新增 话题-->
+            <flow trigger="empTool.ctlAdd" event="OnClick" filter="">
+                <procedure name="jspopup" logic="Transition" ifyes="jsquery" ifno="">
+                    <param name="To" value="frmCommunityAdd" />
+                    <param name="Mode" value="Add" />
+                    <!-- <param name="Window" value="Medium" /> -->
+                    <param name="Title" value="新增话题" />
+                </procedure>
+                <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
+                    <param name="In" value="pCondition" />
+                    <param name="Out" value="pTable" />
+                    <param name="Sql" value="khAdmin/resMan/QrytalkingList" />
+                </procedure>
+            </flow>
+
 
 
             <!-- 布局 -->

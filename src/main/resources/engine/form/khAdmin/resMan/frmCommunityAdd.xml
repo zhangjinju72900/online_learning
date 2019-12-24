@@ -15,10 +15,12 @@
 		<control name="previewFileId" title="id" property="" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
 		<control name="id" title="id" property="id" type="Hidden" edit="Y" required="" format="" width="2" height="" column="2"/>
 		<control name="title" title="标题" property="title" type="TextBox" edit="Y" required="Y" format="" width="100" height="1" column=""/>
-		<control name="content" title="内容" property="content" type="UEditor" edit="Y" required="Y" format="" width="20" height="20" column="9"  />
+        <control name="comId" title="社区名称" property="comId" type="ComboBox" edit="Y" required="Y"  format="" width="100" height="1" column="1"/>
+        <control name="content" title="内容" property="content" type="UEditor" edit="Y" required="Y" format="" width="20" height="20" column="9"  />
 		<control name="createTime" title="创建日期" property="createTime" type="Hidden" edit="Y" required="N" target="editMode=='Add'?CurrentTime():nil" format="" width="1" height="1" column="1"  />
 		<control name="createBy" title="创建人" property="createBy" type="Hidden" edit="Y" required="N" target="editMode=='Add'?session.userInfo.empId:nil" format="" width="1" height="1" column="1"  />
-        <control name="comId" title="社区Id" property="comId" type="Hidden" edit="Y" required="Y" initial="11" format="" width="100" height="1" column="1"/>
+       <!-- <control name="comId" title="社区Id" property="comId" type="Hidden" edit="Y"  required="Y"  format="" width="100" height="1" column="1"/>-->
+
         <control name="flag" title="标签" property="flag" type="Hidden" edit="Y" required="Y" initial="0" format="" width="100" height="1" column="1"/>
 	</panel>
 	<panel name="pButton" title="工具按钮" object="" type="Toolbar">
@@ -27,12 +29,17 @@
 	</panel>
 	<!-- 加载 -->
     <flow trigger="" event="OnLoad" filter="" >
-    <procedure name="jClear"  logic="Clear" ifyes="jBranch" ifno="" sync="Y">
+    <procedure name="jClear"  logic="Clear" ifyes="jList" ifno="" sync="Y">
          <param name="Out" value="pForm"></param>
      </procedure>
-     <procedure name="jBranch" server="" logic="Branch" ifyes="j1" ifno="list">
+        <procedure name="jList" server="" logic="List" ifyes="jBranch" ifno="">
+            <param name="Out" value="pForm.comId"></param>
+            <param name="Sql" value="khAdmin/resMan/QryComList"></param>
+        </procedure>
+        <procedure name="jBranch" server="" logic="Branch" ifyes="j1" ifno="list">
       	 <param name="In" value="getEditMode()=='Edit'"></param>
      </procedure>
+
      <procedure name="j1" server="" logic="DecodeId" ifyes="qid" ifno="">
          <param name="Out" value="pHidden.id" />
       </procedure>
@@ -54,7 +61,7 @@
             <procedure name="TimeOut" logic="InfoMsg" ifyes="" ifno="">
                 <param name="Msg" value="发布内容的时间不能迟于现在时间,请修改"></param>
             </procedure> -->
-      <procedure name="jssave"  logic="Save" ifyes="proTransition" ifno="">
+      <procedure name="jssave"  logic="Save" ifyes="" ifno="">
         <param name="In" value="pForm"></param>
         <!--<param name="Plugin" value="SaveCommunityFilesPlugin" ></param>-->
         <param name="Msg" value="'话题已保存'"></param>

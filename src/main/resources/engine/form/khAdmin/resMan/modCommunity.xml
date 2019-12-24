@@ -13,6 +13,7 @@
 		<property name="flag" type="Long" length="1000" field="flag"/>
 		<!--关联字段-->
 		<property name="name" type="String" length="500" initial="" field=""/><!--社区名称-->
+		<property name="comName" type="String" length="20" initial="" field=""/>
 
 	</object>
 </model_layer>

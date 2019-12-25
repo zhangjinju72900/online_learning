@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmCommunityDetail" title="话题详情">
+  	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
+		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="pForm" title="话题详情" object="community"  type="Group" multiple="">
+		<control name="id" title="话题id" property="id" type="Hidden" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="title" title="标题" property="title" type="TextBox" edit="" required="" format="" width="100" height="1" column=""/>
+		<control name="content" title="正文" property="content" type="UEditor" edit="" required="" format="" width="20" height="20" column="3"  />
+		<control name="releaseBy" title="发布人ID" property="createBy" type="Hidden" edit="" required="" target="editMode=='Add'?session.userInfo.empId:model.releaseBy"  format="" width="2" height="2" column="2"/>
+		<control name="releaseTime" title="发布时间" property="createTime" type="Hidden" edit=""  required=""   target="editMode=='Add'?CurrentTime():model.releaseTime" format="" width="1" height="1" column=""  />
+		
+  		<!-- <control name="updateName" title="修改人" property="updateName" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
+  		<control name="updateTime" title="修改时间" property="updateTime" type="TextBox" edit="" required="N"  format="" width="1" height="1" column="2"  /> -->
+  	</panel>
+
+
+    <flow trigger="" event="OnLoad" filter="" >
+      <procedure name="DecodeId" server="" logic="DecodeId" ifyes="Query" ifno="">
+        <param name="Out" value="pForm.id"></param>
+      </procedure> 
+      <procedure name="Query"  logic="QueryById" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pForm"></param>
+        <param name="Sql" value="khAdmin/resMan/QrytalkingList"></param>
+      </procedure>
+
+
+        <!-- <procedure name="j2"  logic="Query" ifyes="j5" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pInformationPic"></param>
+        <param name="Sql" value="informations/QryInformationPics"></param>
+      </procedure>
+     <procedure name="j5"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="pForm"></param>
+        <param name="Out" value="pInformationVideo"></param>
+        <param name="Sql" value="informations/QryInformationVideo"></param>
+      </procedure> -->
+
+
+    </flow>
+    <!-- 返回 -->
+    <flow trigger="pToolbar.btnBack" event="OnClick" filter="">
+       <procedure name="proTransition" server="/frmCommunity" logic="Back" ifyes="" ifno="">
+         <param name="To" value="frmCommunity"></param>
+       </procedure>
+      </flow>
+        <!-- 预览图片 -->
+       <!-- <flow trigger="pInformationPic.btnPreview" event="OnClick" filter="">
+         <procedure name="procPreview" logic="PreviewFile" ifyes="" ifno="">
+             <param name="In" value="pInformationPic.picId"></param>
+         </procedure>
+        
+      </flow> -->
+       <!-- 预览视频 -->
+      <!-- <flow trigger="pInformationVideo.btnPreview" event="OnClick" filter="">
+           <procedure name="procPreview1" logic="PreviewFile" ifyes="" ifno="">
+            <param name="In" value="pInformationVideo.videoId"></param>
+            </procedure> 
+      </flow> -->
+    <layout>
+    	<region location ="North" scale="">
+       <subregion panel="pToolbar" location="North" scale=""/>
+      </region>
+      <region location ="Center" scale="">
+		<subregion panel="pForm" location="Center" scale=""/> 
+        <!-- <subregion panel="pInformationPic" location="Center" scale="" />
+       <subregion panel="pInformationVideo" location="Center" scale="" /> -->
+      </region> 
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

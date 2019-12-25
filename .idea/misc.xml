@@ -13,6 +13,7 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
@@ -30,5 +31,7 @@
       </profile-state>
     </entry>
   </component>
+=======
+>>>>>>> origin/master
   <component name="ProjectRootManager" version="2" languageLevel="JDK_12" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

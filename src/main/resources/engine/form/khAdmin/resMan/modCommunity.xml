@@ -9,9 +9,11 @@
 	<property name="title" type="String" length="500" initial="" field="title"/>
 	<property name="createTime" type="Date" length="100" field="create_time"/>
 	<property name="createBy" type="String" length="50" field="create_by"/>
-
+    <property name="content" type="String" length="1000" field="content"/>
+		<property name="flag" type="Long" length="1000" field="flag"/>
 		<!--关联字段-->
 		<property name="name" type="String" length="500" initial="" field=""/><!--社区名称-->
+		<property name="comName" type="String" length="20" initial="" field=""/>
 
 	</object>
 </model_layer>

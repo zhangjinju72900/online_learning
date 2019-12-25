@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.tedu</groupId>
-  <artifactId>know-how</artifactId>
+  <groupId>com.sxau</groupId>
+  <artifactId>online_learning</artifactId>
   <packaging>war</packaging>
   <version>1.0.0-SNAPSHOT</version>
   <repositories>
@@ -17,12 +17,6 @@
 		        <mybatis.version>3.4.2</mybatis.version>
 	    </properties>
 		<dependencies>
-		<!-- <dependency>
-	        <groupId>org.bytedeco</groupId>
-	        <artifactId>javacv</artifactId>
-	        <version>0.8</version>
-	    </dependency> -->
-	    
 	    <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>javacv</artifactId>
@@ -139,7 +133,7 @@
             <groupId>com.tedu.base.core</groupId>
             <artifactId>base-core</artifactId>
             <version>1.2</version>
-        </dependency> 
+        </dependency>
         <dependency>
 		    <groupId>com.gitee.qdbp.thirdparty</groupId>
 		    <artifactId>ueditor</artifactId>
@@ -580,7 +574,7 @@
             <version>2.2.1</version>
         </dependency>
     <!-- 阿里云视频点播 -->
-    
+
      <dependency>
 	    <groupId>com.aliyun</groupId>
 	    <artifactId>aliyun-java-sdk-core</artifactId>
@@ -604,16 +598,16 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/aliyun-java-vod-upload-1.4.6.jar</systemPath>
         </dependency>
-        
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-kms</artifactId>
             <version>2.7.0</version>
         </dependency>
+
     </dependencies>
   
     <build>
-        <finalName>know-how</finalName>
+        <finalName>online_learning</finalName>
         <filters>
             <filter>src/main/resources/${profiles.active}/system.properties</filter>
         </filters>
@@ -668,7 +662,6 @@
        </plugins>
     </build>
     <profiles>
-        <!-- 本地开发环境 -->
         <profile>
             <id>dev</id>
             <properties>
@@ -678,19 +671,6 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
-        <!-- 本地测试环境 -->
-        <profile>
-            <id>test</id>
-            <properties>
-                <profiles.active>test</profiles.active>
-            </properties>
-        </profile>
-        <!-- 正式上线环境 -->
-        <profile>
-            <id>online</id>
-            <properties>
-                <profiles.active>online</profiles.active>
-            </properties>
-        </profile>
+
     </profiles>
 </project>

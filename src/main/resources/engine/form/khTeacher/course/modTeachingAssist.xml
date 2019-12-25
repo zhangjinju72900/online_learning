@@ -10,7 +10,7 @@
 			<property name="sectionId" type="Long" length="20" initial="" field="section_id"/>
 			<property name="visibleFlag" type="Long" length="1" initial="" field="visible_flag"/>
 			<property name="fileId" type="String" length="50" initial="" field="file_id"/>
-			<property name="fileName" type="Long" length="20" initial="" field=""/>
+			<property name="fileName" type="String" length="20" initial="" field=""/>
 			<property name="ossKey" type="String" length="64" initial="" field="oss_key"/>
 			<property name="bucketName" type="Long" length="20" initial="" field="bucket_name"/>
 			<property name="teacherId" type="Long" length="20" initial="" field="teacher_id"/>

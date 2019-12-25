@@ -45,7 +45,6 @@
 				<control name="createTime" title="创建时间" property="createTime" type="TextBox"  multiple="Y" edit="N" required="" format="" width="150" height="1" column=""/>
 			   	<control name="updateTime" title="修改时间" property="updateTime" type="TextBox"  multiple="Y" edit="N" required="" format="" width="150" height="1" column=""/>
 				<control name="regionName" title="大区" property="regionName" type="TextBox"  edit="N" required="N" format="" width="120" height="1" column="3" />
-	
 			</panel>
 
 			<!-- 逻辑加载 -->
@@ -60,21 +59,6 @@
 			         <param name="Out" value="pCondition"></param>
 			         <param name="Sql" value="college/QryRegionName"></param>
 				</procedure>
-				<!-- <procedure name="listProfess" logic="List" ifyes="listCourse"
-					ifno="">
-					<param name="Out" value="pCondition.eq_professionalId" />
-					<param name="Sql" value="khTeacher/course/ListProfessionalId" />
-				</procedure>
-				<procedure name="listCourse" logic="List" ifyes="listSection"
-					ifno="">
-					<param name="Out" value="pCondition.eq_courseId" />
-					<param name="Sql" value="khTeacher/teachingAssist/QryCourseListByProfess" />
-				</procedure>
-				<procedure name="listSection" logic="List" ifyes="assistQuery"
-					ifno="">
-					<param name="Out" value="pCondition.eq_sectionId" />
-					<param name="Sql" value="khTeacher/teachingAssist/QrySectionListByCourse" />
-				</procedure> -->
 				<procedure name="listVisibleFlag" logic="List" ifyes="assistQuery" ifno="">
 					<param name="Out" value="pCondition.eq_visibleFlag" />
 					<param name="Sql" value="khAdmin/teachingAssist/ListVisibleFlag" />

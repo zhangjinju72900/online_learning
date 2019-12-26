@@ -7,31 +7,27 @@
 				<control name="btnCannel" title="取消" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
 				<control name="btnConfirm" title="立即兑换" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
 			</panel>
-			<panel name="pForm" title="详细信息" object="" type="Group">
-				<control name="goodId" title="商品ID" property="id"
-					type="Hidden" edit="N" required="N" format="" width="1" height="1"
+			<panel name="pForm" title="详细信息" object="goods" type="Group">
+				<control name="eq_id" title="商品ID" property="id"
+					type="Hidden" edit="Y" required="" format="" width="1" height="1"
 					column="" />
 				<control name="goodName" title="商品名称" property="name"
-					type="TextBox" edit="N" required="N" format="" width="1" height="1"
+					type="TextBox" edit="Y" required="" format="" width="1" height="1"
 					column="" />
 					
 				<control name="quantity" title="收藏数量" property="collectCount" type="TextBox"
-					edit="N" required="N" format="" width="1" height="1" column="4" />
+					edit="Y" required="" format="" width="1" height="1" column="4" />
 				
 				<control name="picId" title="图片ID" property="picId" type="TextBox"
-					edit="N" required="N" format="" width="1" height="1" column="" />
+										  edit="Y" required="N" format="" width="1" height="1" column="" />
 
 				<control name="content" title="文字描述" property="content"
-					type="TextBox" edit="Y" required="N" format="" width="1" height="1"
-					column="4" />
-			</panel>
-			
-			<panel name="pFormDetail" title="详细信息" object="" type="Grid">
-				<control name="id" title="商品支付ID" property="id" type="TextBox" edit="N" required="N" format="" width="" height="1" column="1" />
-				<control name="integral" title="需要的积分" property="integral" type="TextBox" edit="N" required="N" format="" width="" height="1" column="1" />
-				<control name="amount" title="需要的金额" property="amount" type="TextBox" edit="N" required="N" format="" width="" height="1" column="1" />
-			</panel>
-
+						 type="TextBox" edit="Y" required="N" format="" width="1" height="1"
+						 column="4" />
+			<control name="payId" title="商品支付ID" property="payId" type="TextBox" edit="N" required="N" format="" width="" height="1" column="" />
+				<control name="integral" title="需要的积分" property="integral" type="TextBox" edit="N" required="N" format="" width="" height="1" column="" />
+			<control name="amount" title="需要的金额" property="amount" type="TextBox" edit="N" required="N" format="" width="" height="1" column="2" />
+		</panel>
 			<flow trigger="pToolbar.btnCannel" event="OnClick" filter="root!=''">
 				<procedure name="jsclose" server="" logic="Back" ifyes=""
 					ifno="">
@@ -41,15 +37,20 @@
 
 			<flow trigger="" event="OnLoad" filter="">
 				<procedure name="j1" logic="DecodeId" ifyes="qid" ifno="">
-					<param name="Out" value="pForm.goodId"></param>
+					<param name="Out" value="pForm.eq_id"></param>
 				</procedure>
-				<procedure name="qid" logic="SaveCustom" ifyes=""
-					ifno="">
+				<procedure name="qid" logic="Query" ifyes="qrydetail" ifno="">
 					<param name="In" value="pForm"></param>
 					<param name="Out" value="pForm"></param>
-					<param name="Plugin" value="goodView"/>
-					<param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
+					<!--<param name="Plugin" value="goodView"/>-->
+					<param name="Sql" value="khAdmin/resourcesManage/QryGoodViewList"></param>
 				</procedure>
+				<!--<procedure name="qrydetail" logic="Query" ifyes="" ifno="">
+					<param name="In" value="pForm"></param>
+					<param name="Out" value="pFormDetail"></param>
+					&lt;!&ndash;<param name="Plugin" value="goodView"/>&ndash;&gt;
+					<param name="Sql" value="khAdmin/resourcesManage/QryGoodViewList"></param>
+				</procedure>&ndash;&gt;-->
 			</flow>
 			
 			<!-- 立即兑换 -->
@@ -76,9 +77,7 @@
 				<region location="North" scale="">
 					<subregion panel="pForm" location="North" scale="" />
 				</region>
-				<region location="Center" scale="">
-					<subregion panel="pFormDetail" location="Center" scale="" />
-				</region>
+
 			</layout>
 		</ui>
 	</ui_layer>

@@ -17,6 +17,8 @@
    <property name="integral" type="Long" length="10" initial="" field=""/>
    <property name="amount" type="Double" length="12" initial="" field=""/>
    <property name="picId" type="Long" length="20" initial="" field=""/>
+   <property name="payId" type="Long" length="20" initial="" field=""/>
+
   </object> 
   
        <!-- 商品收藏 -->    

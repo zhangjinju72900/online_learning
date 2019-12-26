@@ -1,1 +1,0 @@
-select code from t_city where 1=2

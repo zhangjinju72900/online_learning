@@ -9,11 +9,6 @@
     <control name="name" title="树节点" property="name" type="DataLink" edit="" required="" format="" width="" height="" column=""/>
   </panel>
   <panel name="empTool" title="工具条" object="" type="Toolbar">
-   <!--  <control name="ctlAdd" title="新增分类" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
-    <control name="ctlEdit" title="编辑分类" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
-    <control name="ctlDelete" title="删除分类" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
-    <control name="ctlImport" title="导入试题" property="" type="Button" edit="" required="" format="" width="" height="" column=""/> -->
-     <control name="ctlImport" title="导入试题" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
     <control name="ctlAdd1" title="新增试题" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
   </panel>
   <panel name="empGroupDel" title="查询条件" object="quesClassify" type="Hidden"  multiple="Y">

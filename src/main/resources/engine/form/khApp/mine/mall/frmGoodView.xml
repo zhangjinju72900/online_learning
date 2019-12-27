@@ -8,26 +8,24 @@
 				<control name="btnConfirm" title="立即兑换" property="" type="Button" edit="" required="" format="" width="1" height="1" column=""/>
 			</panel>
 			<panel name="pForm" title="详细信息" object="goods" type="Group">
-				<control name="eq_id" title="商品ID" property="id"
-					type="Hidden" edit="Y" required="" format="" width="1" height="1"
-					column="" />
-				<control name="goodName" title="商品名称" property="name"
-					type="TextBox" edit="Y" required="" format="" width="1" height="1"
-					column="" />
-					
+				<control name="eq_ids" title="商品ID" property="ids" type="Hidden"
+						 edit="Y" required="" format="" width="1" height="1" column="" />
+				<control name="goodName" title="商品名称" property="name" type="TextBox"
+						 edit="Y" required="" format="" width="1" height="1" column="" />
 				<control name="quantity" title="收藏数量" property="collectCount" type="TextBox"
-					edit="Y" required="" format="" width="1" height="1" column="4" />
-				
-				<control name="picId" title="图片ID" property="picId" type="TextBox"
-										  edit="Y" required="N" format="" width="1" height="1" column="" />
-
+						 edit="Y" required="" format="" width="1" height="1" column="4" />
+				<control name="picId" title="图片ID" property="picId" type="Hidden"
+						 edit="Y" required="N" format="" width="1" height="1" column="" />
 				<control name="content" title="文字描述" property="content"
-						 type="TextBox" edit="Y" required="N" format="" width="1" height="1"
-						 column="4" />
-			<control name="payId" title="商品支付ID" property="payId" type="TextBox" edit="N" required="N" format="" width="" height="1" column="" />
-				<control name="integral" title="需要的积分" property="integral" type="TextBox" edit="N" required="N" format="" width="" height="1" column="" />
-			<control name="amount" title="需要的金额" property="amount" type="TextBox" edit="N" required="N" format="" width="" height="1" column="2" />
-		</panel>
+						 type="TextBox" edit="Y" required="N" format="" width="1" height="5" column="2" />
+				<control name="payId" title="商品支付ID" property="payId" type="TextBox"
+						 edit="N" required="N" format="" width="1" height="1" column="" />
+				<control name="integral" title="需要的积分" property="integral" type="TextBox"
+						 edit="N" required="N" format="" width="1" height="1" column="4" />
+				<control name="amount" title="需要的金额" property="amount" type="TextBox"
+						 edit="N" required="N" format="" width="1" height="1" column="4" />
+			</panel>
+
 			<flow trigger="pToolbar.btnCannel" event="OnClick" filter="root!=''">
 				<procedure name="jsclose" server="" logic="Back" ifyes=""
 					ifno="">
@@ -37,7 +35,7 @@
 
 			<flow trigger="" event="OnLoad" filter="">
 				<procedure name="j1" logic="DecodeId" ifyes="qid" ifno="">
-					<param name="Out" value="pForm.eq_id"></param>
+					<param name="Out" value="pForm.eq_ids"></param>
 				</procedure>
 				<procedure name="qid" logic="Query" ifyes="qrydetail" ifno="">
 					<param name="In" value="pForm"></param>
@@ -74,8 +72,8 @@
 				<region location="South" scale="400px">
 					<subregion panel="pToolbar" location="South" scale="" />
 				</region>
-				<region location="North" scale="">
-					<subregion panel="pForm" location="North" scale="" />
+				<region location="Center" scale="">
+					<subregion panel="pForm" location="Center" scale="" />
 				</region>
 
 			</layout>

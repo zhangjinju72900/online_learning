@@ -1,6 +1,6 @@
 select a.*,g.amount from (
 SELECT
-tg.id as id,
+tg.id as ids,
 tg.name as name,
 tg.collect_count as collectCount,
 tg.content  AS   content,

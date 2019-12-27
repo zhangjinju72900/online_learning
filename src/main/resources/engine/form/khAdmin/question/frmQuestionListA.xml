@@ -9,40 +9,39 @@
     <control name="name" title="树节点" property="name" type="DataLink" edit="" required="" format="" width="" height="" column=""/>
   </panel>
   <panel name="empTool" title="工具条" object="" type="Toolbar">
-   <!--  <control name="ctlAdd" title="新增分类" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+   <control name="ctlAdd" title="新增分类" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
     <control name="ctlEdit" title="编辑分类" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
     <control name="ctlDelete" title="删除分类" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
-    <control name="ctlImport" title="导入试题" property="" type="Button" edit="" required="" format="" width="" height="" column=""/> -->
-     <control name="ctlImport" title="导入试题" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
-    <control name="ctlAdd1" title="新增试题" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
-  </panel>
-  <panel name="empGroupDel" title="查询条件" object="quesClassify" type="Hidden"  multiple="Y">
-    <control name="eq_Id" title="课程id" property="id" type="TextBox" edit="N" required="" format="" width="1" height="1" column="1"/>
-  </panel>
-  <panel name="empGroup" title="查询条件" object="quesClassify" type="Hidden"  multiple="Y">
-    <control name="eq_OrgId" title="课程id" property="pid" type="TextBox" edit="N" required="" format="" width="1" height="1" column="1"/>
-  </panel>
-  <panel name="empGroupDg" title="查询条件" object="questionA" type="Hidden"  multiple="Y">
-    <control name="id" title="课程id" property="id" type="TextBox" edit="N" required="" format="" width="1" height="1" column="1"/>
-  </panel>
-  
-  <panel name="empDg" title="列表" object="questionA" type="Grid"  multiple="">
-    <control name="ctlEdit" title="编辑" property="" type="Link" edit="N" required="" format="" width="120" height="" column=""/>
-    <control name="ctlDel" title="删除" property="" type="Link" edit="N" required="" format="" width="120" height="" column=""/>
-    <control name="ctlCheck" title="查看题目" property="" type="Link" edit="N" required="" format="" width="120" height="" column=""/>
-    <control name="ctlName" title="试题题干内容" property="content" type="TextBox" edit="N" required="" format="" width="200" height="" column=""/>
-    <control name="ctlType" title="试题类型" property="questionType" type="TextBox" edit="N" required="" format="" width="100" height="" column=""/>
-    <control name="ctlLevel" title="难度等级" property="difficultyLevel" type="TextBox" edit="N" required="" format="" width="80" height="" column=""/>
-    <control name="ctlStatus" title="启用状态" property="enableStatus" type="TextBox" edit="N" required="" format="" width="80" height="" column=""/>
-    <control name="questionClassifyId" title="题库类别" property="questionClassifyId" type="Hidden" edit="N" required="" format="" width="" height="" column=""/>
-    <control name="questionClassifyName" title="题库类别" property="questionClassifyName" type="TextBox" edit="N" required="" format="" width="150" height="" column=""/>
-    <control name="answerThought" title="回答思路" property="answerThought" type="TextBox" edit="N" required="" format="" width="400" height="" column="" />
-    <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="N" required="" format="" width="140" height="" column=""/>
-    
-<!--     <control name="title" title="选项标题" property="title" type="TextBox" edit="N" required="" format="" width="150" height="" column=""/>
-    <control name="acontent" title="选项内容" property="acontent" type="TextBox" edit="N" required="" format="" width="80" height="" column=""/>
-    <control name="correctFlag" title="是否正确答案" property="correctFlag" type="TextBox" edit="N" required="" format="" width="80" height="" column=""/>
- -->    
+      <control name="ctlAdd1" title="新增试题" property="" type="Button" edit="" required="" format="" width="" height="" column="" />
+      <!--  <control name="ctlImport" title="导入试题" property="" type="Button" edit="" required="" format="" width="" height="" column=""/> -->
+     </panel>
+     <panel name="empGroupDel" title="查询条件" object="quesClassify" type="Hidden"  multiple="Y">
+       <control name="eq_Id" title="课程id" property="id" type="TextBox" edit="N" required="" format="" width="1" height="1" column="1"/>
+     </panel>
+     <panel name="empGroup" title="查询条件" object="quesClassify" type="Hidden"  multiple="Y">
+       <control name="eq_OrgId" title="课程id" property="pid" type="TextBox" edit="N" required="" format="" width="1" height="1" column="1"/>
+     </panel>
+     <panel name="empGroupDg" title="查询条件" object="questionA" type="Hidden"  multiple="Y">
+       <control name="id" title="课程id" property="id" type="TextBox" edit="N" required="" format="" width="1" height="1" column="1"/>
+     </panel>
+
+     <panel name="empDg" title="列表" object="questionA" type="Grid"  multiple="">
+       <control name="ctlEdit" title="编辑" property="" type="Link" edit="N" required="" format="" width="120" height="" column=""/>
+       <control name="ctlDel" title="删除" property="" type="Link" edit="N" required="" format="" width="120" height="" column=""/>
+       <control name="ctlCheck" title="查看题目" property="" type="Link" edit="N" required="" format="" width="120" height="" column=""/>
+       <control name="ctlName" title="试题题干内容" property="content" type="TextBox" edit="N" required="" format="" width="200" height="" column=""/>
+       <control name="ctlType" title="试题类型" property="questionType" type="TextBox" edit="N" required="" format="" width="100" height="" column=""/>
+       <control name="ctlLevel" title="难度等级" property="difficultyLevel" type="TextBox" edit="N" required="" format="" width="80" height="" column=""/>
+       <control name="ctlStatus" title="启用状态" property="enableStatus" type="TextBox" edit="N" required="" format="" width="80" height="" column=""/>
+       <control name="questionClassifyId" title="题库类别" property="questionClassifyId" type="Hidden" edit="N" required="" format="" width="" height="" column=""/>
+       <control name="questionClassifyName" title="题库类别" property="questionClassifyName" type="TextBox" edit="N" required="" format="" width="150" height="" column=""/>
+       <control name="answerThought" title="回答思路" property="answerThought" type="TextBox" edit="N" required="" format="" width="400" height="" column="" />
+       <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="N" required="" format="" width="140" height="" column=""/>
+
+   <!--     <control name="title" title="选项标题" property="title" type="TextBox" edit="N" required="" format="" width="150" height="" column=""/>
+       <control name="acontent" title="选项内容" property="acontent" type="TextBox" edit="N" required="" format="" width="80" height="" column=""/>
+       <control name="correctFlag" title="是否正确答案" property="correctFlag" type="TextBox" edit="N" required="" format="" width="80" height="" column=""/>
+    -->
     <control name="id" title="试题id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
   </panel>
    <!-- 导入试题-->
@@ -218,7 +217,7 @@
     
             <!-- 导入题目 -->
       <!-- <flow trigger="empTool.ctlImport" event="OnClick" filter="">
-        	
+
  		<procedure name="importbat" logic="BatchImport" ifyes="" ifno="">
 			<param name="In" value="frmQuesImp.addGroup"></param>
 			<param name="DAOPlugin" value="importQuestionclassifyPlugin" />
@@ -226,10 +225,10 @@
 			<param name="Foreign" value="questionClassifyId|t_question_classify.name|questionClassifyId"></param>
 			<param name="Dict" value="questionType|QryQuesTypeList,difficultyLevel|QryQuesDiffList,enableStatus|QryQuesStatueList"></param>
 			<param name="Window" value="Large"></param>
-		</procedure> 
-		
- 
- 
+		</procedure>
+
+
+
       </flow>-->
     
         <!-- 新增题目 -->

@@ -22,7 +22,7 @@
 						 column="" />
 				<control name="ge_createTime" title="创建时间从" property="createTime"
 						 type="DateBox" edit="Y" required="" format="" width="1" height="1"
-						 column="" />
+						 column="" initial=""/>
 				<control name="le_createTime" title="至" property=""
 						 type="DateBox" edit="Y" required="" format="" width="1" height="1"
 						 column="4" initial=""/>

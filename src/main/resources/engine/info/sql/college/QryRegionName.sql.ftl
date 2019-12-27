@@ -1,6 +1,5 @@
 select * from(select 
-	GROUP_CONCAT(rr.description) as regionName,
-	(select DATE_ADD(curdate(),interval -day(curdate())+1 day)) AS createTime 
+	GROUP_CONCAT(rr.description) as regionName
 from t_customer_user u 
 LEFT JOIN t_customer_user_role r on r.customer_user_id=u.id 
 LEFT JOIN t_role rr on rr.id=r.role_id 

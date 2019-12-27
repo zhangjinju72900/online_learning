@@ -9,7 +9,7 @@ select * from (
 			parent_id
 		END AS pid,
 	name as text
-	from t_question_classify
+	from t_professional
 	where valid_flag=0
 
  ) a 

@@ -6,7 +6,7 @@
 			<panel name="addGroup" title="table" object="quesClassify" type="Group">
 				<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column="" />
 				<control name="name" title="专业名称" property="name" type="TextBox" edit="Y" required="Y" format="" width="3" height="1" column="1" />
-				<control name="remark" title="简介" property="remark" type="TextBox" edit="Y" required="Y" format="" width="3" height="1" column="1" />
+				<control name="remark" title="简介" property="remark" type="TextBox" edit="Y" required="" format="" width="3" height="1" column="1" />
 				<control name="pid" title="pid" property="pid" type="Hidden" edit="" required="" format="" width="" height="" column="" />
 				<control name="updateTime" title="更新日期" property="updateTime" type="Hidden" edit="Y" required="N" target="CurrentTime()" format="" width="1" height="1" column="1"  />
 		        <control name="updateBy" title="更新人" property="updateBy" type="Hidden" edit="Y" required="N" target="session.userInfo.empId" format="" width="1" height="1" column="1"  />		

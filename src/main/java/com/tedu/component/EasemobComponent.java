@@ -35,13 +35,6 @@ import com.tedu.common.constant.EasemobSendTypeEnum;
 
 import net.sf.json.JSONObject;
 
-/**
- * @ClassName: EasemobComponent
- * @Description:TODO环信相关组件
- * @author: qun
- * @date: 2018年8月20日 下午6:07:16
- *
- */
 @Component
 public class EasemobComponent {
 

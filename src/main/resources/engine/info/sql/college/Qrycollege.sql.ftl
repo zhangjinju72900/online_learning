@@ -19,8 +19,8 @@ select * from (
 	(select count(1) from t_customer_user_role ur join t_customer_user u on ur.customer_user_id = u.id where ur.role_id = 11 and u.school_id = s.id and u.valid_flag = 0) as teacherCount,
 	
 	case 
-	when   school_type='0'   then '中职'
-    when   school_type='1'   then '高职'
+	when   school_type='0'   then '专科'
+    when   school_type='1'   then '大学'
 	end as typeName
     from t_school s left join t_region r on s.region_id=r.id
     left join t_customer_user c on s.create_by=c.id

@@ -28,9 +28,6 @@ import com.tedu.component.EasemobComponent;
 
 /**
  * 在保存客户账号信息后将对应的角色关系更新到t_customer_user_role表中
- * 
- * @author quancong
- *
  */
 @Service("InsertCustomUserRolePlugin")
 public class InsertCustomUserRolePlugin implements ILogicPlugin {
@@ -113,17 +110,6 @@ public class InsertCustomUserRolePlugin implements ILogicPlugin {
 				formMapper.saveCustom(cModel);
 			}
 
-		}
-
-		if ("Add".equals(mode)) {//生成环信账号
-			try {
-				easemobComponent.register(easemobComponent.getToken(),userId,
-						userId);
-				customUserServiceImpl.updateEasemobUser(userId, userId);
-			} catch (Exception e) {
-				log.error("新建账号时生成环信账号失败", e);
-				e.printStackTrace();
-			}
 		}
 
 	}

@@ -1,7 +1,8 @@
 select * from (
 select
-name as text,
-code as value
-from t_dict
-where cata_code='t_talking.community_id'
-) a 
+DISTINCT
+id as value,
+name as text
+from t_community
+where id!=1
+) a

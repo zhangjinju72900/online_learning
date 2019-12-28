@@ -1,4 +1,3 @@
 select
-CONCAT('1',
-LPAD(count(1),1,0)) id
+MAX(id) as id
 from t_community c

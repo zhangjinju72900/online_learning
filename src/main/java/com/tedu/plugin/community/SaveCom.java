@@ -32,20 +32,19 @@ public class SaveCom implements ILogicReviser {
         Map<String,Object> map = requestObj.getData();
 
 
-        //查出社区下一个需要的id
+        /*//查出社区下一个需要的id
         QueryPage page = new QueryPage();
         page.setDataByMap(map);
         page.setQueryParam("khAdmin/resMan/QryMaxComId");
         List<Map<String,Object>> list = formMapper.query(page);
+*/
 
-
-         Map<String,Object> map1 = new HashMap<>();
-         String id=list.get(0).get("id").toString();
-           // int id=Integer.parseInt(list.get(0).get("id").toString());
+        /* Map<String,Object> map1 = new HashMap<>();
+            int id=Integer.parseInt(list.get(0).get("id").toString());
                 map1.put("id",id);
-                //将社区插入 到表中
+                //将社区插入 到表中*/
                 CustomFormModel model = new CustomFormModel();
-                model.setData(map1);
+                model.setData(map);
                 model.setSqlId("khAdmin/resMan/InsertCom");
                 formMapper.saveCustom(model);
 

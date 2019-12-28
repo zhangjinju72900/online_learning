@@ -110,6 +110,15 @@
                     <param name="Title" value="新增社区"></param>
                 </procedure>
             </flow>
+
+            <!--删除社区-->
+            <flow trigger="empTool.ctlDelete" event="OnClick" filter="">
+                <procedure name="deleteData" logic="Delete" ifyes="" ifno="">
+                    <param name="In" value="empCom"/>
+                    <param name="Msg" value="话题已删除"/>
+                </procedure>
+            </flow>
+
         <!-- 布局 -->
             <layout>
                 <region location ="North" scale="">

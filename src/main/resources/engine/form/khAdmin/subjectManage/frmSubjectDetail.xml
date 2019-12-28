@@ -43,7 +43,7 @@
 				<control name="informationId" title="咨讯id" property="informationId"
 					type="TextBox" edit="N" required="" format="" width="200" height=""
 					column="1" />
-				<control name="title" title="标题" property="title" type="PopupBox"
+				<control name="title" title="标题" property="title" type="DataLink"
 					edit="N" required="" format="" width="200" height="1" column="1" />
 				<control name="subId" title="专题id" property="subId" type="Hidden"
 					edit="Y" required="" format="" width="" height="" column="" />
@@ -77,6 +77,16 @@
 					<param name="In" value="pForm"></param>
 					<param name="Out" value="pClass"></param>
 					<param name="Sql" value="subject/QrySubjectInformation"></param>
+				</procedure>
+			</flow>
+			<!--点击详情 -->
+			<flow trigger="pClass.title" event="OnClick" filter="">
+				<procedure name="annEncodeId" logic="EncodeId"  ifyes="j1" ifno="" >
+					<param name="In" value="pClass.informationId"></param>
+				</procedure>
+				<procedure name="j1"  logic="Transition" ifyes="" ifno="" >
+					<param name="To" value="frmInformationDetail"></param>
+					<param name="Mode" value="ReadOnly"></param>
 				</procedure>
 			</flow>
 			<!-- 返回 -->

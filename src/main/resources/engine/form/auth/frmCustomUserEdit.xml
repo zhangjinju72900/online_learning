@@ -82,6 +82,45 @@
 					target="editMode=='Add'?session.userInfo.empId:model.createBy"
 					format="" width="1" height="1" column="2" />
 			</panel>
+
+<!--			学校管理导入-->
+			<panel name="pForm1" title="导入模板" object="college" type="Hidden" multiple="" >
+				<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="" column=""/>
+				<control name="name" title="院校名称" property="name" type="DataLink" edit="Y" required="" format="" width="1" height="1" column=""/>
+				<control name="typeName" title="院校类型" property="typeName" type="TextBox" edit="Y" required="" format="" width="1" height="1" column=""/>
+				<control name="regionName" title="大区id" property="regid" type="TextBox" edit="Y" required="" format="" width="1" height="1" column=""/>
+				<control name="provinceName" title="省份id" property="provincecode" type="TextBox" edit="Y" required="" format="" width="1" height="1" column=""/>
+				<control name="studentCount" title="学生人数" property="studentCount" type="TextBox" edit="Y" required="" format="" width="1" height="" column=""/>
+				<control name="teacherCount" title="教师人数" property="teacherCount" type="TextBox" edit="Y" required="" format="" width="1" height="" column=""/>
+				<control name="createTime" title="创建时间" property="createTime" type="TextBox" edit="Y"  required="N"   format="" width="1" height="1" column=""  />
+				<control name="empcreater" title="创建人" property="empcreater" type="Hidden" edit="Y"  required="N"   format="" width="1" height="1" column=""  />
+				<control name="updateTime" title="修改时间" property="updateTime" type="TextBox" edit="Y" required="N"  format="" width="1" height="1" column=""  />
+				<control name="empupdater" title="修改人" property="empupdater" type="Hidden" edit="Y" required="N"  format="" width="1" height="1" column=""  />
+			</panel>
+
+<!--			学生管理导入-->
+			<panel name="pForm2" title="导入模板" object="tStudent" type="Hidden" multiple="" >
+				<control name="id" title="id" property="id" type="Hidden" edit="N" required="" format="" width="1" height="" column="" />
+				<control name="name" title="姓名" property="name" type="TextBox"
+						 edit="Y" required="N" format="" width="1" height="1" column="" />
+				<control name="sex" title="性别" property="sexName" type="TextBox"
+						 edit="Y" required="" format="" width="1" height="" column="" />
+				<control name="cardNum" title="身份证" property="cardNum"
+						 type="TextBox" edit="Y" required="N" format="" width="1" height="1"
+						 column="" />
+				<control name="tel" title="联系电话" property="tel" type="TextBox"
+						 edit="Y" required="N" format="" width="1" height="1" column="" />
+				<control name="schoolId" title="学校Id" property="school" type="TextBox"
+						 edit="Y" required="N" format="" width="1" height="1" column="" />
+				<control name="classId" title="班级Id" property="className"
+						 type="TextBox" edit="Y" required="" format="" width="1" height=""
+						 column="" />
+				<control name="userExplain" title="个性签名" property="userExplain" type="TextBox"
+						 edit="Y" required="N" format="" width="1" height="1" column="" />
+				<control name="grade" title="年级" property="grade" type="TextBox"
+						 edit="Y" required="N" format="" width="1" height="1" column="" />
+			</panel>
+
 			
 			<panel name="pToolbar" title="功能按钮" object="" type="Toolbar">
 				<control name="btnSave" title="确认" property="" type="Button"

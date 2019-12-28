@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+      xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+  <ui name="frmCusResource" title="视频列表">
+  <panel name="empTree" object="tree"  type="Tree" multiple="" search="Y">
+    <control name="id" title="树id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+    <control name="pid" title="树父id" property="pid" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+    <control name="name" title="树节点" property="name" type="DataLink" edit="" required="" format="" width="" height="" column=""/>
+  </panel>
+
+
+  <panel name="empGroup" title="查询条件" object="tCustomerResources" type="Hidden"  multiple="Y">
+    <control name="eq_OrgId" title="上级部门编号" property="parentId" type="TextBox" edit="" required="" format="" width="1" height="1" column="1"/>
+  </panel>
+  <panel name="empGroupDel" title="查询条件" object="tCustomerResources" type="Hidden"  multiple="Y">
+    <control name="eq_id" title="部门编号" property="id" type="TextBox" edit="" required="" format="" width="1" height="1" column="1"/>
+  </panel>
+
+  <panel name="empDg" title="列表" object="tCustomerResources" type="Grid"  multiple="">
+    <control name="preview" title="播放视频" property="" type="Link" edit="" required="" format="" width="120" height="" column=""/>
+    <control name="ctlName" title="视频名称" property="name" type="TextBox" edit="" required="" format="" width="120" height="" column=""/>
+    <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+    <control name="fileId" title="id" property="fileId" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+  </panel>
+  
+   <!-- 逻辑加载 -->
+    <flow trigger="" event="OnLoad" filter="">
+      <procedure name="tree"  logic="Query" ifyes="queryTable" ifno="">
+        <param name="In" value=""></param>
+        <param name="Out" value="empTree"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryResourcesListClose"></param>
+      </procedure>
+     </flow>
+
+    <!-- 树点击事件 -->
+    <flow trigger="empTree" event="OnClick" filter="" >
+      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="j2" ifno="">
+        <param name="In" value="empTree.id"></param>
+      </procedure>
+      <procedure name="j2" server="" logic="DecodeId" ifyes="j3" ifno="">
+        <param name="Out" value="empGroup.eq_OrgId"></param>
+      </procedure>
+      <procedure name="j3" server="" logic="EncodeId" ifyes="j4" ifno="">
+        <param name="In" value="empTree.id"></param>
+      </procedure>
+      <procedure name="j4" server="" logic="DecodeId" ifyes="queryTable" ifno="">
+        <param name="Out" value="empGroupDel.eq_id"></param>
+      </procedure>
+      <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
+        <param name="In" value="empGroup"></param>
+        <param name="Out" value="empDg"></param>
+        <param name="Sql" value="khAdmin/resourcesManage/QryFileList"></param>
+      </procedure>  
+    </flow>
+
+
+      <!--预览视频-->
+      <flow trigger="empDg.preview" event="OnClick" filter="">
+          <procedure name="procPreview1" logic="Branch" ifyes="" ifno="">
+              <param name="In" value="viewMp4('empDg.fileId')"></param>
+          </procedure>
+      </flow>
+
+    <!-- 布局 --> 
+    <layout>
+    <region location ="Center" scale="">
+    <subregion panel="empDg" location="Center" scale=""/>
+      </region>
+      <region location ="West" scale="300px">
+        <subregion panel="empTree" location ="Center" scale="300px"/>
+      </region>
+      <region location ="South" scale="">
+        <subregion panel="empGroup" location="Center" scale="" />
+      </region>
+    </layout>
+  </ui>
+  </ui_layer>
+</tsoftware>

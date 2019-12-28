@@ -31,8 +31,7 @@
 	    <control name="updateTime" title="修改时间" property="updateTime" type="TextBox" edit="" required="N"  format="" width="180" height="1" column=""  />
 	    <control name="empupdater" title="修改人" property="empupdater" type="Hidden" edit="Y" required="N"  format="" width="180" height="1" column=""  />
 	 </panel>
-	
-      
+
         
         
        <!-- 逻辑加载 -->  
@@ -75,18 +74,15 @@
          
      <!-- 批量导入 -->
       <flow trigger="pToolbar.ctlImport" event="OnClick" filter="">
-      <procedure name="importbat" server="" logic="Popup" ifyes="queryTable" ifno="">
-			<param name="To" value="frmCollegeImport"></param>
-			<param name="Mode" value="Add"></param>
-			<param name="Window" value="Large"></param>
-			<param name="Title" value="批量导入院校"></param>
-			 <param name="Foreign" value="eq_region|t_region.name|eq_region,eq_province|t_city.name|eq_province"></param>
-        	<param name="Dict" value="eq_type|college/Listtype"></param>
-	  </procedure>
+          <procedure name="importbat"  logic="BatchImport" ifyes="queryTable" ifno="">
+              <param name="In" value="frmCustomUserEdit.pForm1"/>
+              <param name="Title" value="批量导入用户"/>
+              <param name="Window" value="Large"/>
+          </procedure>
 	   <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
-        	<param name="In" value="pCondition"></param>
-        	<param name="Out" value="pTable"></param>
-        	<param name="Sql" value="college/Qrycollege"></param>
+        	<param name="In" value="pCondition"/>
+        	<param name="Out" value="pTable"/>
+        	<param name="Sql" value="college/Qrycollege"/>
       </procedure>  
 
       </flow>

@@ -58,7 +58,7 @@
 		              <param name="In" value="pForm"></param>
 		              <param name="Plugin" value="goodExChange"/>
 		              <param name="Out" value="pForm.content"></param>
-		              <param name="Msg" value="'获取兑换接口数据成功'"></param>
+		              <param name="Msg" value="'兑换成功'"></param>
 		          </procedure>
 		      </flow>
 			

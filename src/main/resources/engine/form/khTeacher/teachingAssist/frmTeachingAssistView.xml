@@ -15,8 +15,8 @@
                 <control name="courseName" title="课程名" property="courseName" type="TextBox" edit="N" required="N" format="" multiple="N" width="1" height="" column="2"/>
                 <control name="sectionId" title="小节ID" property="sectionId" type="TextBox" edit="N" required="N" format="" multiple="N" width="1" height="" column=""/>
                 <control name="sectionName" title="小节名" property="sectionName" type="TextBox" edit="N" required="N" format="" multiple="N" width="1" height="" column="2"/>
-                <control name="ossKey" title="ossKey" property="ossKey" type="TextBox" edit="N" required="" target="" format="" width="1" height="" column=""/>
-                <control name="bucketName" title="bucketName" property="bucketName" type="TextBox" edit="N" required="" target="" format="" width="1" height="" column="2"/>
+              <!--  <control name="ossKey" title="ossKey" property="ossKey" type="TextBox" edit="N" required="" target="" format="" width="1" height="" column=""/>
+                <control name="bucketName" title="bucketName" property="bucketName" type="TextBox" edit="N" required="" target="" format="" width="1" height="" column="2"/>-->
                 <control name="name" title="名称" property="name" type="TextBox" edit="N" required="" target="" format="" width="1" height="" column=""/>
                 <control name="fileId" title="文件" property="fileId" type="TextBox" edit="N" required="" target="" format="" width="1" height="" column="2"/>
                  <control name="fileName" title="fileName" property="fileName" type="TextBox" edit="N" required="" target="" format="" width="1" height="" column="2"/>

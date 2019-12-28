@@ -38,9 +38,15 @@
     		  </flow>
 				<!-- 模板下载 -->
 			<flow trigger="pformDown.downloadModule" event="OnClick" filter="" defaultEnter="Y">
-				<procedure name="branch" logic="Branch" ifyes="" ifno="">
-                    <param name="In" value="downloadModule('curriculum.xls','课表导入模板')"></param>
+				<procedure name="branch" logic="Branch" ifyes="Mag" ifno="err">
+                    <param name="In" value="downModFile()"></param>
                 </procedure>
+				<procedure name="Mag"  logic="InfoMsg" ifyes="" ifno="">
+					<param name="Msg" value="下载成功"></param>
+				</procedure>
+				<procedure name="err"  logic="InfoMsg" ifyes="" ifno="">
+					<param name="Msg" value="下载失败"></param>
+				</procedure>
 			</flow>
 
 			<!-- 确认 -->

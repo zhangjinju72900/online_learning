@@ -80,7 +80,7 @@
 				</procedure>
 			</flow>
 
-			<!-- 教辅资料详情 -->
+			<!-- 详情 -->
 			<flow trigger="pTable.name" event="OnClick" filter="">
 				<procedure name="y1" server="" logic="EncodeId" ifyes="y2">
 					<param name="In" value="pTable.id"></param>

@@ -103,20 +103,30 @@
             <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="pop2" ifno="j0">
                 <param name="In" value="empTree.id"></param>
             </procedure>
-                <procedure name="pop2" logic="Popup" ifyes="queryTable" ifno="">
+                <procedure name="pop2" logic="Popup" ifyes="tree" ifno="">
                     <param name="To" value="frmComEdit"></param>
                     <param name="Mode" value="Add"></param>
                     <param name="Window" value="Small"></param>
                     <param name="Title" value="新增社区"></param>
                 </procedure>
+                <procedure name="tree"  logic="Query" ifyes="" ifno="">
+                    <param name="In" value=""></param>
+                    <param name="Out" value="empTree"></param>
+                    <param name="Sql" value="khAdmin/resMan/QryTree"></param>
+                </procedure>
             </flow>
 
             <!--删除社区-->
             <flow trigger="empTool.ctlDelete" event="OnClick" filter="">
-                <procedure name="deleteData"  logic="SaveCustom" ifyes="queryTable" ifno="">
+                <procedure name="deleteData"  logic="SaveCustom" ifyes="tree" ifno="">
                     <param name="In" value="empCom" />
                     <param name="Sql" value="khAdmin/resMan/DeleteCom"/>
                     <param name="Msg" value="'社区已删除'" />
+                </procedure>
+                <procedure name="tree"  logic="Query" ifyes="" ifno="">
+                    <param name="In" value=""></param>
+                    <param name="Out" value="empTree"></param>
+                    <param name="Sql" value="khAdmin/resMan/QryTree"></param>
                 </procedure>
             </flow>
 

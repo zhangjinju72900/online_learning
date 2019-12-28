@@ -2,7 +2,7 @@
 <tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
 	<ui_layer>
-		<ui name="frmAddAssist" title="新增教辅资料">
+		<ui name="frmAddAssist" title="新增课件">
 			<panel name="pToolbar" title="工具条" object="" type="Toolbar">
 				<control name="btnSave" title="保存" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
 				<control name="btnCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>

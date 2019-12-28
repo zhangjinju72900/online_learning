@@ -80,7 +80,7 @@
 				</procedure>
 			</flow>
 
-			<!-- 新增教辅资料-->
+			<!-- 新增-->
 			<flow trigger="pToolbar.btnAdd" event="OnClick" filter="">
 				<procedure name="jspopup" logic="Popup" ifyes="assistQuery" ifno="">
 					<param name="To" value="frmAddAssist"/>
@@ -97,7 +97,7 @@
 			</flow>
 
 
-			<!-- 修改教辅资料-->
+			<!-- 修改资料-->
 			<flow trigger="pTable.ctlEdit" event="OnClick" filter="">
 				<procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
 					<param name="In" value="pTable.id"></param>
@@ -114,7 +114,7 @@
 					<param name="Sql" value="khTeacher/teachingAssist/QryAssistList"></param>
 				</procedure>
 			</flow>
-			<!-- 删除教辅资料 -->
+			<!-- 删除资料 -->
 			<flow trigger="pTable.ctlDel" event="OnClick" filter="">
 				<procedure name="j1" server="" logic="ConfirmMsg" ifyes="jssave2">
 					<param name="Title" value="删除提示"></param>
@@ -133,7 +133,7 @@
 				</procedure>
 			</flow>
 
-			<!-- 教辅资料详情 -->
+			<!-- 详情 -->
 			<flow trigger="pTable.name" event="OnClick" filter="">
 				<procedure name="y1" server="" logic="EncodeId" ifyes="y2">
 					<param name="In" value="pTable.id"></param>

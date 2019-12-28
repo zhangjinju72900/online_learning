@@ -70,7 +70,7 @@
 			<property name="updateBy" type="Long" length="20" initial="" field="update_by"/>
   </object>     
   
-  <object name="quesClassify" table="t_question_classify" primary="id" unique="id" order=""  > 
+  <object name="quesClassify" table="t_question_classify" primary="id" unique="id" order=""  >
 			<property name="id" type="Long" length="20" initial="" field="id"/>
 			<property name="name" type="String" length="50" initial="" field="name"/>
 			<property name="pid" type="Long" length="20" initial="" field="parent_id"/>

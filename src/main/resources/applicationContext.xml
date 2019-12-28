@@ -22,8 +22,10 @@
 	http://www.springframework.org/schema/task/spring-task-3.2.xsd
 	http://www.springframework.org/schema/util
 	http://www.springframework.org/schema/util/spring-util-3.0.xsd">
-	    	<!-- 引入同文件夹下的redis属性配置文件-->
-    <import resource="redis-context.xml"/> 
+
+	<!-- 引入同文件夹下的redis属性配置文件-->
+    <import resource="redis-context.xml"/>
+
 	<!-- 启动注解驱动Spring mvc功能，注册请求url和注解POJO类方法的映射 -->
      <mvc:annotation-driven conversion-service="conversionService">
              <mvc:message-converters register-defaults="true">  
@@ -42,7 +44,8 @@
                 </property>  
             </bean>  
 		</mvc:message-converters>
-      </mvc:annotation-driven> 
+      </mvc:annotation-driven>
+
     <bean id="dateConvert" class="com.tedu.base.common.excel.DateConvert"/>
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
@@ -51,6 +54,7 @@
             </set>
         </property>
     </bean>
+
 	<!-- 自动扫描controller包下的所有类，使其认为Spring mvc的控制器 -->
 	<context:component-scan base-package="com.tedu.base,com.tedu.plugin,com.tedu.oss,com.tedu.component,com.tedu.business,com.tedu.inf"><!-- com.tedu.base -->
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -58,11 +62,11 @@
 		<context:exclude-filter type="regex" expression="com.tedu.base.common.redis.*"/><!-- 不依赖redis -->
 	</context:component-scan>
 	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
-	<bean id="springUtils" class="com.tedu.base.task.SpringUtils" /> 
-	<mvc:interceptors>
-    <!--多个拦截器,顺序执行 -->
+	<bean id="springUtils" class="com.tedu.base.task.SpringUtils" />
 
-    <mvc:interceptor>
+	<!--多个拦截器,顺序执行 -->
+	<mvc:interceptors>
+    	<mvc:interceptor>
         <mvc:mapping path="/**"/> 
         <mvc:exclude-mapping path="/view/**/*.js"/>
         <mvc:exclude-mapping path="/view/**/*.css"/>
@@ -196,7 +200,7 @@
 <!--        	<mvc:exclude-mapping path="/*/edit/*/*"/>目前没有一个明确规律匹配到view，先以已知的为准 -->
         <bean class="com.tedu.base.auth.FormTokenInterceptor"></bean>
     </mvc:interceptor>
-</mvc:interceptors> 
+	</mvc:interceptors>
 	
 	
 	<!-- 定时器引擎 -->
@@ -243,6 +247,7 @@
         </property> 
     </bean>
 	<import resource="classpath:spring-mybatis.xml"/>
+
 	<!-- 通用formMapper 执行SQL用 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 	  <constructor-arg index="0" ref="sqlSessionFactory" />
@@ -250,6 +255,5 @@
 	<bean class="com.tedu.base.initial.controller.LoadComponents"/>
 
     <!--工作流配置文件-->
-    <import resource="classpath:spring-activiti.xml"/> 
-
+    <import resource="classpath:spring-activiti.xml"/>
 </beans>

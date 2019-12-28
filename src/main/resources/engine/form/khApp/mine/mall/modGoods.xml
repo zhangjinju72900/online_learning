@@ -3,7 +3,7 @@
    xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
 <model_layer>
   <object name="goods" table="t_goods" primary="id" unique="" order=""> 
-   <property name="id" type="Long" length="20" initial="" field="id"/>
+   <property name="ids" type="Long" length="20" initial="" field="id"/>
    <property name="name" type="String" length="100" initial="" field="name"/>
    <property name="collectCount" type="Long" length="10" initial="" field="collect_count"/>
    <property name="videoId" type="Long" length="20" initial="" field="video_id"/>
@@ -17,6 +17,8 @@
    <property name="integral" type="Long" length="10" initial="" field=""/>
    <property name="amount" type="Double" length="12" initial="" field=""/>
    <property name="picId" type="Long" length="20" initial="" field=""/>
+   <property name="payId" type="Long" length="20" initial="" field=""/>
+
   </object> 
   
        <!-- 商品收藏 -->    

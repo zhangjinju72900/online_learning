@@ -32,11 +32,11 @@
    					<param name="Out" value="addGroup.pid"/>
   					<param name="Sql" value="QryPidList"/> 
   				</procedure> 
- -->		        <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
+ -->		      <!--  <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
         			<param name="In" value="addGroup"></param>
        				<param name="Out" value="addGroup"></param>
         			<param name="Sql" value="khAdmin/question/QryQuestionEdit"></param>
-      			</procedure>
+      			</procedure>-->
       			
 			</flow>
 

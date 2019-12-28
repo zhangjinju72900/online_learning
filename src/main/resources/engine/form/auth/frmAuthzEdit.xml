@@ -140,16 +140,7 @@
         <param name="Title" value="角色分配"/>
         <param name="Columns" value="id,编码,roleId|name,角色"/>
       </procedure>      
-      <!-- 
-      <procedure name="jsDetail"  logic="Master2Detail" ifyes="jssave" ifno=""> 
-      	<param name="In" value="pRole.roleId"/>
-        <param name="Out" value="pTable3"/>
-      </procedure>   
-       <procedure name="jssave" logic="Save" ifyes="jsquery" ifno="">
-        <param name="In" value=",pTable3"/>
-        <param name="Mode" value="Add"/>
-        <param name="Msg" value="'角色授权成功'"/>
-      </procedure>  -->                
+
       <procedure name="jssave" logic="SaveCustom" ifyes="jsquery" ifno="">
         <param name="Sql" value="insertRoleFunc"/>
         <param name="In" value="pRole"/>
@@ -178,12 +169,7 @@
         <param name="In" value=",pTable3"/>
         <param name="Mode" value="Add"/>
         <param name="Msg" value="'资源授权成功'"/>
-      </procedure>                 
-<!--       <procedure name="jssave" logic="SaveCustom" ifyes="jsquery" ifno=""> -->
-<!--         <param name="Sql" value="insertResFunc"/> -->
-<!--         <param name="In" value="pRole"/> -->
-<!--         <param name="Msg" value="'资源授权成功'"/> -->
-<!--       </procedure>         -->
+      </procedure>
       <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
         <param name="In" value="pCondition"/>
         <param name="Out" value="pTable1"/>

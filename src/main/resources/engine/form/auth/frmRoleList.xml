@@ -24,81 +24,81 @@
 	</panel>
     <flow trigger="" event="OnLoad" filter="">
       <procedure name="j1"  logic="Clear" ifyes="j2" ifno="" sync="Y">
-           <param name="Out" value="pCondition"></param>
+           <param name="Out" value="pCondition"/>
       </procedure>  
       <procedure name="j2"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="pCondition"></param>
-        <param name="Out" value="pTable"></param>
-        <param name="Sql" value="QryRoleList"></param>
+        <param name="In" value="pCondition"/>
+        <param name="Out" value="pTable"/>
+        <param name="Sql" value="QryRoleList"/>
       </procedure>   
     </flow>	
-    <flow trigger="pTable.edit" event="OnClick" filter="row.flag!=1">
+    <flow trigger="pTable.edit" event="OnClick">
       <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
-        <param name="In" value="pTable.id"></param>
+        <param name="In" value="pTable.id"/>
       </procedure>
       <procedure name="jspopup" logic="Popup" ifyes="jsquery" ifno="">
-        <param name="To" value="frmRoleEdit"></param>
-        <param name="Mode" value="Edit"></param>
-         <param name="Window" value="Medium"></param>
+        <param name="To" value="frmRoleEdit"/>
+        <param name="Mode" value="Edit"/>
+         <param name="Window" value="Medium"/>
       </procedure>
       <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="pCondition"></param>
-        <param name="Out" value="pTable"></param>
-        <param name="Sql" value="QryRoleList"></param>
+        <param name="In" value="pCondition"/>
+        <param name="Out" value="pTable"/>
+        <param name="Sql" value="QryRoleList"/>
       </procedure>              
     </flow>
     <flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
       <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="pCondition"></param>
-        <param name="Out" value="pTable"></param>
-        <param name="Sql" value="QryRoleList"></param>
+        <param name="In" value="pCondition"/>
+        <param name="Out" value="pTable"/>
+        <param name="Sql" value="QryRoleList"/>
       </procedure>              
     </flow>     
     <flow trigger="pToolbar.btnClear" event="OnClick" filter="">
       <procedure name="jsquery"  logic="Clear" ifyes="" ifno="">
-        <param name="Out" value="pCondition"></param>
+        <param name="Out" value="pCondition"/>
       </procedure>              
     </flow>    
-    <flow trigger="pTable.delete" event="OnClick" filter="row.flag!=1">
+    <flow trigger="pTable.delete" event="OnClick">
       <procedure name="j0" server="" logic="ConfirmMsg" ifyes="j1" ifno="">
        <param name="Title" value="删除提示" />
        <param name="Msg" value="确认删除当前角色吗?" />
       </procedure>
       <procedure name="j1" server="" logic="EncodeId" ifyes="j2" ifno="">
-        <param name="In" value="pTable.id"></param>
+        <param name="In" value="pTable.id"/>
       </procedure>
       <procedure name="j2"  logic="Delete" ifyes="j3" ifno="">
         <param name="In" value="pTable" />
         <param name="Msg" value="model.name+'已删除'" />
-       <param name="Constraints" 
-       	value="t_user_role.role_id|用户角色表中已有此角色的授权信息" />
-       <param name="Cascade" value="t_role_func.role_id;" />	
+        <param name="Constraints" value="t_user_role.role_id|用户角色表中已有此角色的授权信息" />
+        <!--删除掉关联的外键-->
+        <param name="Cascade" value="t_role_func.role_id;" />
       </procedure>
       <procedure name="j3"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="pCondition"></param>
-        <param name="Out" value="pTable"></param>
-        <param name="Sql" value="QryRoleList"></param>
+        <param name="In" value="pCondition"/>
+        <param name="Out" value="pTable"/>
+        <param name="Sql" value="QryRoleList"/>
       </procedure>           
     </flow>      
     <flow trigger="pTable.view" event="OnClick" filter="">
       <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jsgoto" ifno="">
-        <param name="In" value="pTable.id"></param>
+        <param name="In" value="pTable.id"/>
       </procedure>
       <procedure name="jsgoto"  logic="Transition" ifyes="" ifno="">
-        <param name="To" value="frmRoleView"></param>
-        <param name="Mode" value="Readonly"></param>
+        <param name="To" value="frmRoleView"/>
+        <param name="Mode" value="Readonly"/>
       </procedure>
     </flow>    
     <flow trigger="pToolbar.btnCreate" event="OnClick" filter="">
       <procedure name="jspopup" logic="Popup" ifyes="jsquery" ifno="">
-        <param name="To" value="frmRoleEdit"></param>
-        <param name="Mode" value="Add"></param>
-         <param name="Window" value="Medium"></param>
+        <param name="To" value="frmRoleEdit"/>
+        <param name="Mode" value="Add"/>
+         <param name="Window" value="Medium"/>
       </procedure>
       <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="pCondition"></param>
-        <param name="Out" value="pTable"></param>
-        <param name="Sql" value="QryRoleList"></param>
+        <param name="In" value="pCondition"/>
+        <param name="Out" value="pTable"/>
+        <param name="Sql" value="QryRoleList"/>
       </procedure>              
     </flow>      
     <layout>

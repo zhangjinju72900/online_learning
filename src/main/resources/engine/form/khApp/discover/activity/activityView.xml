@@ -112,18 +112,23 @@
             </flow>
             <!--报名-->
             <flow trigger="pToolbar.apply" event="OnClick" filter="">
-                <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
-                    <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
-                    <param name="In" value="pList"></param>
-                    <param name="Plugin" value="ActivityApplyPlugin"/>
-                    <param name="Msg" value="'报名成功'"></param>
+                <procedure name="jAdd"  logic="Popup" ifyes="jQuery" ifno="">
+                    <param name="To" value="frmApplyActivity"></param>
+                    <param name="Mode" value="Add"></param>
+                    <param name="Window" value="Large"/>
+                    <param name="Title" value="报名" />
                 </procedure>
-                <!-- 活动预览接口 -->
-                <procedure name="j2" logic="Query" ifyes="j3" ifno="">
+                <procedure name="jQuery" logic="Query" ifyes="" ifno="">
                     <param name="In" value="pCondition"></param>
                     <param name="Out" value="pList"></param>
-                    <param name="Sql" value="khApp/discover/activity/QryActivityPreView"></param>
+                   <!-- <param name="Plugin" value="informationViewCDN"></param>-->
+                    <param name="Sql" value="khApp/discover/activity/QryActivityView"></param>
                 </procedure>
+                <!--<procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+                    <param name="In" value="pCondition"></param>
+                    <param name="Sql" value="khApp/discover/activity/updateActivityCount"></param>
+                    <param name="Msg" value="'报名成功'"></param>
+                </procedure>-->
             </flow>
 
             <!--点赞-->

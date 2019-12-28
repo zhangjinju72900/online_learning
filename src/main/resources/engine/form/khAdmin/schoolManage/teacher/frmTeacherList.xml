@@ -93,6 +93,12 @@
 					<param name="Window" value="Large"></param>
 					<param name="Title" value="导入教师"></param>
 			  </procedure>
+				<procedure name="importbat"  logic="BatchImport" ifyes="queryTable" ifno="">
+					<param name="In" value="frmCustomUserEdit.pForm2"/>
+					<param name="Title" value="批量导入用户"/>
+					<param name="Plugin" value="ImportStudentPlugin" />
+					<param name="Window" value="Large"/>
+				</procedure>
 		      <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
 		        	<param name="In" value="pCondition"></param>
 					<param name="Out" value="pTable"></param>

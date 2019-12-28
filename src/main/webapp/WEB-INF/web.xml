@@ -195,7 +195,7 @@
            <!-- 白名单 -->
            <param-name>allow</param-name>
            <param-value>218.247.142.216,127.0.0.1</param-value>
-	       </init-param>      
+	       </init-param>
   </servlet>
   <servlet-mapping>
       <servlet-name>DruidStatView</servlet-name>
@@ -231,6 +231,17 @@
 		<servlet-class>com.tedu.base.initial.controller.LoadComponents</servlet-class>
 		<load-on-startup>9</load-on-startup>
 	</servlet>
+
+
+
+	<servlet>
+		<servlet-name>DownloadServlet</servlet-name>
+		<servlet-class>com.tedu.base.DownloadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DownloadServlet</servlet-name>
+		<url-pattern>/template</url-pattern>
+	</servlet-mapping>
 
 	<error-page>
 		<error-code>404</error-code>

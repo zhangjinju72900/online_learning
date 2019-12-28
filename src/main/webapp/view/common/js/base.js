@@ -834,7 +834,7 @@ function custom_close(){
 	  }
 	  
 	  function downloadModule(name,exportName){
-		  window.open(getRootPath_web()+"/templeteDownload?fileName="+name+"&exportName="+exportName);
+		  window.open(getRootPath_web()+"/template?fileName="+name+"&exportName="+exportName);
 	  }
 	  function okSelect(id,name){
 			debugger

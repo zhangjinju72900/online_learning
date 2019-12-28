@@ -91,11 +91,7 @@
 					<param name="Out" value="pCondition.eq_difficultyLevel"/>
 					<param name="Sql" value="khTeacher/question/QryDifficultyList"/>
 				</procedure>
-				<procedure name="questionQuery" logic="Query" ifyes="" ifno="">
-					<param name="In" value="pCondition"/>
-					<param name="Out" value="pTable"/>
-					<param name="Sql" value="khTeacher/question/QryQuestionListForSelect"/>
-				</procedure>
+
 
 			</flow>
 

@@ -3,6 +3,7 @@ select a.*,g.amount from (
 	tg.id as id,
 	tg.name as name,
 	tg.collect_count as collectCount,
+tg.content  AS   content,
 	SUBSTRING_INDEX(GROUP_CONCAT(pic.pic_id  ORDER BY pic.id),',',1) as picId,
 	case when GROUP_CONCAT(tgd.integral order by tgd.integral desc) is null then 0 else SUBSTRING_INDEX(GROUP_CONCAT(tgd.integral order by tgd.integral desc),',',1) end integral,
 	case when GROUP_CONCAT(tgd.id order by tgd.integral desc) is null then 0 else SUBSTRING_INDEX(GROUP_CONCAT(tgd.id order by tgd.integral desc),',',1) end payId

@@ -97,14 +97,14 @@
 			<flow trigger="" event="OnLoad" filter="">
 				<procedure name="tree" logic="Query" ifyes="qid"
 					ifno="">
-					<param name="In" value=""></param>
-					<param name="Out" value="professionTree"></param>
-					<param name="Sql" value="zhongdeprofession/QryCourseTree"></param>
+					<param name="In" value=""/>
+					<param name="Out" value="professionTree"/>
+					<param name="Sql" value="zhongdeprofession/QryCourseTree"/>
 				</procedure>
 				<procedure name="qid" logic="Query" ifyes="" ifno="">
-					<param name="In" value="courseHidden"></param>
-					<param name="Out" value="courseDg"></param>
-					<param name="Sql" value="zhongdeprofession/QryCourseList"></param>
+					<param name="In" value="courseHidden"/>
+					<param name="Out" value="courseDg"/>
+					<param name="Sql" value="zhongdeprofession/QryCourseList"/>
 				</procedure>
 			</flow>
 

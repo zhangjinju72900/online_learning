@@ -43,9 +43,6 @@
 				<control name="schoolName" title="学校名称" property="schoolName"
 					type="TextBox" edit="" required="" format="" width="200" height=""
 					column="" />
-				
-				<!-- <control name="className" title="班级" property="className" type="TextBox" 
-					edit="" required="" format="" width="200" height="" column=""/> -->
 				<control name="createTime" title="创建时间" property="createTime"
 					type="TextBox" edit="" required="" format="" width="200" height=""
 					column="" />

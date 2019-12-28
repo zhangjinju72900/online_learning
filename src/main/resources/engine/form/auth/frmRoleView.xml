@@ -122,18 +122,7 @@
         <param name="In" value="pForm"/>
         <param name="Out" value="pTable2"/>
         <param name="Sql" value="QryRoleFuncList"/>
-      </procedure>                       
-      <!-- 
-      <procedure name="save" logic="SaveCustom" ifyes="queryTable" ifno="">
-        <param name="Sql" value="insertFuncRole"/>
-        <param name="In" value="pForm"/>
-        <param name="Msg" value="操作成功"/>
-      </procedure>            
-      <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="pForm"/>
-        <param name="Out" value="pTable2"/>
-        <param name="Sql" value="QryRoleFuncList"/>
-      </procedure> -->        
+      </procedure>
     </flow>    
     <flow trigger="pTable1.remove" event="OnClick" filter="row.roleId!=1">
       <procedure name="j0" server="" logic="ConfirmMsg" ifyes="j2" ifno="">

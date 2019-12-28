@@ -4,11 +4,11 @@
 <ui_layer>
   <ui name="frmAppGoodsList" title="商品查询"> 
   	<panel name="pCondition" title="查询条件" object="goods" type="Group">
-		<control name="eq_id" title="商品id" property="id" type="TextBox" edit="Y" required="N" format="" multiple="N" width="2" height="1" column=""/>
+		<control name="eq_ids" title="商品id" property="ids" type="TextBox" edit="Y" required="N" format="" multiple="N" width="2" height="1" column=""/>
 		<control name="btnsearch" title="搜索" property="" type="Button" column="5"/>
 	</panel> 
 	<panel name="pTable" title="查询结果" object="goods" type="Grid" multiple="N" >
-	    <control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+	    <control name="ids" title="id" property="ids" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
 		<control name="name" title="名称" property="name" type="DataLink" edit="" required="" format="" width="200" height="" column=""/>
 		<control name="picId" title="图片id" property="picId" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>
 		<control name="collectCount" title="收藏数" property="collectCount" type="TextBox" edit="" required="" format="" width="200" height="" column=""/>

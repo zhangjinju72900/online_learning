@@ -28,64 +28,64 @@
 	</panel>
     <flow trigger="" event="OnLoad" filter="">
       <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="pCondition"></param>
-        <param name="Out" value="pTable"></param>
-        <param name="Sql" value="QryFuncList"></param>
+        <param name="In" value="pCondition"/>
+        <param name="Out" value="pTable"/>
+        <param name="Sql" value="QryFuncList"/>
       </procedure>              
     </flow>	
     <flow trigger="pToolbar.btnQuery" event="OnClick" filter="">
       <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
         <param name="In" value="pCondition" />
-        <param name="Out" value="pTable"></param>
-        <param name="Sql" value="QryFuncList"></param>
+        <param name="Out" value="pTable"/>
+        <param name="Sql" value="QryFuncList"/>
       </procedure>              
     </flow>       
     <flow trigger="pToolbar.btnExport" event="OnClick" filter="">
       <procedure name="exportdata" logic="Export" ifyes="" ifno="">
 		<param name="In" value="pCondition" />      
-        <param name="Format" value="pTable"></param>
-        <param name="Sql" value="QryFuncList"></param>
+        <param name="Format" value="pTable"/>
+        <param name="Sql" value="QryFuncList"/>
       </procedure>
     </flow>          
     <flow trigger="pToolbar.btnClear" event="OnClick" filter="">
       <procedure name="jsquery"  logic="Clear" ifyes="" ifno="">
-        <param name="Out" value="pCondition"></param>
+        <param name="Out" value="pCondition"/>
       </procedure>              
     </flow>        
     <flow trigger="pToolbar.btnCreate" event="OnClick" filter="">
       <procedure name="jspopup" logic="Popup" ifyes="jsquery" ifno="">
-        <param name="To" value="frmPermsEdit"></param>
-        <param name="Mode" value="Add"></param>
-         <param name="Window" value="Medium"></param>
+        <param name="To" value="frmPermsEdit"/>
+        <param name="Mode" value="Add"/>
+         <param name="Window" value="Medium"/>
       </procedure>
       <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="pCondition"></param>
-        <param name="Out" value="pTable"></param>
-        <param name="Sql" value="QryFuncList"></param>
+        <param name="In" value="pCondition"/>
+        <param name="Out" value="pTable"/>
+        <param name="Sql" value="QryFuncList"/>
       </procedure>              
     </flow>        
     <flow trigger="pTable.edit" event="OnClick" filter="">
       <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
-        <param name="In" value="pTable.id"></param>
+        <param name="In" value="pTable.id"/>
       </procedure>
       <procedure name="jspopup" logic="Popup" ifyes="jsquery" ifno="">
-        <param name="To" value="frmPermsEdit"></param>
-        <param name="Mode" value="Edit"></param>
-         <param name="Window" value="Medium"></param>
+        <param name="To" value="frmPermsEdit"/>
+        <param name="Mode" value="Edit"/>
+         <param name="Window" value="Medium"/>
       </procedure>  
       <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="pCondition"></param>
-        <param name="Out" value="pTable"></param>
-        <param name="Sql" value="QryFuncList"></param>
+        <param name="In" value="pCondition"/>
+        <param name="Out" value="pTable"/>
+        <param name="Sql" value="QryFuncList"/>
       </procedure>          
     </flow> 
     <flow trigger="pTable.auth" event="OnClick" filter="">
       <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jsgoto" ifno="">
-        <param name="In" value="pTable.id"></param>
+        <param name="In" value="pTable.id"/>
       </procedure>
       <procedure name="jsgoto"  logic="Transition" ifyes="" ifno="">
-        <param name="To" value="frmAuthzEdit"></param>
-        <param name="Mode" value="Readonly"></param>
+        <param name="To" value="frmAuthzEdit"/>
+        <param name="Mode" value="Readonly"/>
       </procedure>
     </flow> 
     <flow trigger="pTable.delete" event="OnClick" filter="row.id!=1">

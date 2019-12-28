@@ -2,8 +2,6 @@ select * from (
 	select 
 	r.id,
 	r.id as roleId,
-	CASE WHEN r.id = 1 or r.id = 10 or r.id = 11 then 1
-	else 0 end as flag,
 	r.name,
 	r.description,
 	e1.name as updateByName,

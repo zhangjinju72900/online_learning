@@ -8,7 +8,6 @@
 		<control name="bClear" title="清空条件" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
 		<control name="btnNew" title="新增" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
 		<control name="btnImport" title="导入用户" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
-		<control name="btnAdd" title="环信账号同步" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
 	</panel>
   <panel name="schoolTree" object="tree"  type="Tree" multiple="" search="Y">
     <control name="id" title="树id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
@@ -25,8 +24,6 @@
 	</panel>	
 	<panel name="pTable" title="查询结果" object="CustomerUser" type="Grid" page="">
 		<control name="edit" title="编辑" property="" type="Link" edit="" required="" format="" width="80" height="" column=""/>
-		<!-- <control name="lock" title="作废" property="" type="Link" edit="" required="" format="" width="" height="" column=""/>
-		<control name="unlock" title="恢复" property="" type="Link" edit="" required="" format="" width="" height="" column=""/>	 -->	
 		<control name="delete" title="删除" property="" type="Link" edit="" required="" format="" width="80" height="" column=""/>		
 		<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
 		<control name="tel" title="手机号 " property="tel" type="TextBox" edit="" required="" format="" width="100" height="" column=""/>
@@ -49,14 +46,9 @@
            <param name="Out" value="pCondition"></param>
       </procedure>
       <procedure name="j2"  logic="Query" ifyes="" ifno="">
-        <param name="Out" value="schoolTree"></param>
-        <param name="Sql" value="QryRegionAndSchool"></param>
-      </procedure>   
-<!--       <procedure name="j2"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="pCondition"></param>
-        <param name="Out" value="pTable"></param>
-        <param name="Sql" value="QryCustomUserList"></param>
-      </procedure>    -->
+        <param name="Out" value="schoolTree"/>
+        <param name="Sql" value="QryRegionAndSchool"/>
+      </procedure>
     </flow>	
     
      <flow trigger="schoolTree" event="OnClick" filter="" >
@@ -72,42 +64,32 @@
         <param name="Sql" value="QryCustomUserList"></param>
       </procedure>  
     </flow>
+
     <!-- 选择角色 -->
     <flow trigger="pCondition.roleName" event="OnClick" filter="">
-    <procedure name="jSearch" logic="Find" ifyes="" ifno="">
-    <param name="In" value="pCondition"/>
-    <param name="Sql" value="Role" />
-    <param name="Out" value="pCondition" />
-    <param name="Title" value="角色选择" />
-    <param name="Multi" value="Y" />
-    <param name="Options" value="$RESET,重置"/>
-    <param name="Columns" value="id,角色id,roleId|name,角色名,roleName" />
-    <param name="Window" value="Medium" />
-    </procedure>
+        <procedure name="jSearch" logic="Find" ifyes="" ifno="">
+            <param name="In" value="pCondition"/>
+            <param name="Sql" value="Role" />
+            <param name="Out" value="pCondition" />
+            <param name="Title" value="角色选择" />
+            <param name="Multi" value="Y" />
+            <param name="Options" value="$RESET,重置"/>
+            <param name="Columns" value="id,角色id,roleId|name,角色名,roleName" />
+            <param name="Window" value="Medium" />
+        </procedure>
    	</flow>
-    <!-- 环信账号同步 -->
-    <flow trigger="pToolbar.btnAdd" event="OnClick" filter="">
-      <procedure name="jsMsg" logic="ConfirmMsg" ifyes="insertEasemob" ifno="">
-        <param name="Title" value="确认提示"></param>
-        <param name="Msg" value="是否从新创建环信用户？"></param>
-      </procedure>
-      <procedure name="insertEasemob"  logic="SaveCustom" ifyes="" ifno="">
-        <param name="In" value="pTable"></param>
-        <param name="Plugin" value="InsertEasemob"></param>
-        <param name="Sql" value="khAdmin/resourcesManage/QryTest"></param>
-      </procedure>      
-    </flow>    	
+
     <!-- 新增人员 -->
     <flow trigger="pToolbar.btnNew" event="OnClick" filter="">
       <procedure name="jspopup" logic="Popup" ifyes="queryTable" ifno="">
-        <param name="To" value="frmCustomUserEdit"></param>
-        <param name="Mode" value="Add"></param>
-        <param name="Window" value="Medium"></param>
+        <param name="To" value="frmCustomUserEdit"/>
+        <param name="Mode" value="Add"/>
+        <param name="Window" value="Medium"/>
       </procedure>
       <procedure name="queryTable"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="pCondition"></param>
-        <param name="Out" value="pTable"></param>
-        <param name="Sql" value="QryCustomUserList"></param>
+        <param name="In" value="pCondition"/>
+        <param name="Out" value="pTable"/>
+        <param name="Sql" value="QryCustomUserList"/>
       </procedure>      
     </flow>    	
     <!-- 导入用户 -->

@@ -19,7 +19,6 @@
 	    <control name="edit" title="编辑" property="" type="Link" edit="" required="" format="" width="150" height="" column=""/>
 	    <control name="delete" title="删除" property="" type="Link" edit="" required="" format="" width="" height="" column=""/>
 	     <control name="watch" title="查看数据" property="" type="Link" edit="" required="" format="" width="" height="" column=""/>
-		<!-- <control name="content" title="院校数据" property="" type="Link" edit="Y" required="" format="" width="150" height="" column=""/> -->
 		<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="1" height="" column=""/>
 		<control name="name" title="院校名称" property="name" type="DataLink" edit="N" required="" format="" width="165" height="1" column=""/>
 	 	<control name="typeName" title="院校类型" property="typeName" type="TextBox" edit="N" required="" format="" width="80" height="1" column=""/>
@@ -30,21 +29,14 @@
         <control name="createTime" title="创建时间" property="createTime" type="TextBox" edit=""  required="N"   format="" width="180" height="1" column=""  />
 	    <control name="empcreater" title="创建人" property="empcreater" type="Hidden" edit="Y"  required="N"   format="" width="180" height="1" column=""  />
 	    <control name="updateTime" title="修改时间" property="updateTime" type="TextBox" edit="" required="N"  format="" width="180" height="1" column=""  />
-	    <control name="empupdater" title="修改人" property="empupdater" type="Hidden" edit="Y" required="N"  format="" width="180" height="1" column=""  /> 
-	
+	    <control name="empupdater" title="修改人" property="empupdater" type="Hidden" edit="Y" required="N"  format="" width="180" height="1" column=""  />
 	 </panel>
 	
       
         
         
        <!-- 逻辑加载 -->  
-         <flow trigger="" event="OnLoad" filter="">  
-	       
-	     	<procedure name="Query1" logic="Query" ifyes="Query" ifno="">
-		         <param name="In" value="pCondition"></param>
-		         <param name="Out" value="pCondition"></param>
-		         <param name="Sql" value="college/QryRegionName"></param>
-		    </procedure>    
+         <flow trigger="" event="OnLoad" filter="">
 		    <procedure name="Query" logic="Query" ifyes="" ifno="">
 		         <param name="In" value="pCondition"></param>
 		         <param name="Out" value="pTable"></param>
@@ -54,12 +46,12 @@
         
         	<!-- 查询点击事件 -->
         <flow trigger="pToolbar.btnQuery" event="OnClick" filter="">  
-      <procedure name="Query"  logic="Query" ifyes="" ifno="" sync="Y">
-           <param name="In" value="pCondition"></param>
-           <param name="Out" value="pTable"></param>
-           <param name="Sql" value="college/Qrycollege"></param>
-      </procedure>  
-    </flow>
+          <procedure name="Query"  logic="Query" ifyes="" ifno="" sync="Y">
+               <param name="In" value="pCondition"></param>
+               <param name="Out" value="pTable"></param>
+               <param name="Sql" value="college/Qrycollege"></param>
+          </procedure>
+        </flow>
     
     <!-- 新增点击事件-->
     
@@ -96,14 +88,7 @@
         	<param name="Out" value="pTable"></param>
         	<param name="Sql" value="college/Qrycollege"></param>
       </procedure>  
-      
-     <!--   <procedure name="importbat"  logic="BatchImport" ifyes="" ifno="">
-        <param name="In" value="frmCollegeCreate.pForm"></param>
-        <param name="Plugin" value="insertSchoolPlugin" />
-      
-        <param name="Window" value="Large"></param>
-      </procedure>    -->
-      
+
       </flow>
       
       
@@ -148,11 +133,6 @@
       <procedure name="j1" server="" logic="EncodeId" ifyes="j2" ifno="">
         <param name="In" value="pTable.id" />
       </procedure>
-      <!--<procedure name="j2"  logic="Delete" ifyes="j3" ifno="">-->
-        <!--<param name="In" value="pTable" />-->
-        <!--<param name="Msg" value="已删除" />-->
-        <!--<param name="Constraints" value="t_class.school_id|有班级绑定该学校;" />-->
-      <!--</procedure>-->
 	  <procedure name="j2"  logic="SaveCustom" ifyes="j3" ifno="">
 		 <param name="In" value="pTable" />
 		 <param name="Msg" value="已删除" />
@@ -165,25 +145,7 @@
         <param name="Sql" value="college/Qrycollege" />
       </procedure>           
     </flow>  
-	
-    <!--院校内容
-     <flow trigger="pTable.content" event="OnClick" filter="">
-      	<procedure name="j1" server="" logic="EncodeId" ifyes="jspopup" ifno="">
-        	<param name="In" value="pTable.id" />
-      	</procedure>
-      
-       <procedure name="jspopup" logic="Popup" ifyes="j2" ifno="">
-        	<param name="To" value="frmCollegeDataList" />
-        	<param name="Mode" value="Edit" />
-         	<param name="Window" value="Medium" />
-         	<param name="Title" value="院校数据" />
-       </procedure>
-       <procedure name="j2"  logic="Query" ifyes="" ifno="">
-        	<param name="Out" value="pTable" />
-        	<param name="Sql" value="college/Qrycollege" />
-       </procedure>           
-    </flow>  -->
-    
+
 	 <!--watch数据详情 -->
 	 <flow trigger="pTable.watch" event="OnClick" filter="">  
 	   <procedure name="annEncodeId" logic="EncodeId"  ifyes="j1" ifno="" >

@@ -858,4 +858,17 @@ function custom_close(){
 		   }else{
 	       	return false;
 		   }
+
+
 		}
+
+     function downModFile(){
+		    var id=8741;
+			if(id!=null&&id!=""&&id!=undefined){
+				location.href=getRootPath_web()+"/localDownload?fileId="+id+"&methodType=export";
+				return true;
+			}else{
+				return false;
+			}
+
+      }

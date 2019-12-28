@@ -18,8 +18,9 @@
                 <control name="activityType" title="类型" property="activityType" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
                 <control name="uName" title="姓名" property="uName" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
                 <control name="uFileId" title="头像" property="uFileId" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
-
             </panel>
+
+
             <!-- 初始加载 -->
             <flow trigger="" event="OnLoad" filter="">
                 <procedure name="jClear"  logic="Clear" ifyes="jQuery" ifno="" sync="Y">

@@ -116,7 +116,7 @@ public class LoginRealmForEmployee extends AuthorizingRealm {
             throw new AccountException("账号异常");
         } else if (userModels != null && userModels.size() == 1) {
             UserModel userModel = userModels.get(0);
-            if (userModel.getRoleName() == null || userModel.getRoleName().equals("") || userModel.getVersion().equals(DefaultRoleEnum.STUDENT.getCode())) {
+            if (userModel.getRoleName() == null || userModel.getRoleName().equals("") ) {
                 //无授权角色不让登录
                 throw new UnauthenticatedException("账号角色数据异常");
             } else {

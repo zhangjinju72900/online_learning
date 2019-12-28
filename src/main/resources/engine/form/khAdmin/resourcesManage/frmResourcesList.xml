@@ -150,11 +150,6 @@
 		<param name="Title" value="删除"></param>
 		<param name="Msg" value="确认删除当前栏目吗?"></param>
 	</procedure>
-     <!-- <procedure name="jsencodeid"  logic="Delete" ifyes="jsquery" ifno="">
-        <param name="In" value="empGroupDel" />
-        <param name="Msg" value="'已删除'" />
-        <param name="Constraints" value="t_customer_resources.file_id|下级包含其他资源,不能删除;" />
-      </procedure>  -->
       <procedure name="jdelete"  logic="SaveCustom" ifyes="jsquery" ifno="">
 		 <param name="In" value="empGroupDel" />
 		 <param name="Sql" value="zhongdeprofession/QryUseless"/>
@@ -185,107 +180,13 @@
         <param name="Window" value="Medium"></param>
         <param name="Title" value="上传普通资源"></param>
       </procedure>
-      <!-- <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-        <param name="In" value=""></param>
-        <param name="Out" value="empTree"></param>
-        <param name="Sql" value="khAdmin/resourcesManage/QryResourcesList"></param>
-      </procedure>   -->
+
       <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
         <param name="In" value="empGroup"></param>
         <param name="Out" value="empDg"></param>
         <param name="Sql" value="khAdmin/resourcesManage/QryFileList"></param>
       </procedure> 
     </flow>
-    <!-- 导入scorm -->
-    <!--<flow trigger="empTool.ctlScormImport" event="OnClick" filter="">
-      <procedure name="branch" server="" logic="Branch" ifyes="getMsg" ifno="jsencodeid">
-        <param name="In" value="getPanelControlValue('empGroup.eq_OrgId')==''"></param>
-      </procedure>
-      <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
-       <param name="Msg" value="请先选择目录"></param>
-      </procedure> 
-      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
-        <param name="In" value="empGroup.eq_OrgId"></param>
-      </procedure>
-      <procedure name="jspopup" server="" logic="Popup" ifyes="jsquery" ifno="">
-        <param name="To" value="frmScormImport"></param>
-        <param name="Mode" value="Add"></param>
-        <param name="Window" value="Medium"></param>
-        <param name="Title" value="上传scorm资源"></param>
-      </procedure>
-      &lt;!&ndash; <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-      	<param name="In" value=""></param>
-        <param name="Out" value="empTree"></param>
-        <param name="Sql" value="khAdmin/resourcesManage/QryResourcesList"></param>
-      </procedure> &ndash;&gt;
-      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="empGroup"></param>
-        <param name="Out" value="empDg"></param>
-        <param name="Sql" value="khAdmin/resourcesManage/QryFileList"></param>
-      </procedure>
-    </flow>    -->
-    
-    <!-- 导入ppt -->
-    <!--<flow trigger="empTool.ctlPptImport" event="OnClick" filter="">
-      <procedure name="branch" server="" logic="Branch" ifyes="getMsg" ifno="jsencodeid">
-        <param name="In" value="getPanelControlValue('empGroup.eq_OrgId')==''"></param>
-      </procedure>
-      <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
-       <param name="Msg" value="请先选择目录"></param>
-      </procedure> 
-      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
-        <param name="In" value="empGroup.eq_OrgId"></param>
-      </procedure>
-      <procedure name="jspopup" server="" logic="Popup" ifyes="jsquery" ifno="">
-        <param name="To" value="frmPPTImport"></param>
-        <param name="Mode" value="Add"></param>
-        <param name="Window" value="Medium"></param>
-        <param name="Title" value="上传ppt资源"></param>
-      </procedure>
-      &lt;!&ndash; <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-      	<param name="In" value=""></param>
-        <param name="Out" value="empTree"></param>
-        <param name="Sql" value="khAdmin/resourcesManage/QryResourcesList"></param>
-      </procedure> &ndash;&gt;
-      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="empGroup"></param>
-        <param name="Out" value="empDg"></param>
-        <param name="Sql" value="khAdmin/resourcesManage/QryFileList"></param>
-      </procedure>
-    </flow>-->
-    
-    <!-- 编辑 -->
-    <!--<flow trigger="empDg.ctlEdit" event="OnClick" filter="">
-      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
-        <param name="In" value="empDg.id"></param>
-      </procedure>
-      <procedure name="jspopup" logic="Popup" ifyes="jsquery" ifno="">
-         <param name="To" value="frmResourcesFileEdit"></param>
-         <param name="Mode" value="Edit"></param>
-         <param name="Window" value="Medium"></param>
-      </procedure>
-      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="empGroup"></param>
-        <param name="Out" value="empDg"></param>
-        <param name="Sql" value="khAdmin/resourcesManage/QryFileList"></param>
-      </procedure>              
-    </flow>-->
-    <!--&lt;!&ndash; 历史版本 &ndash;&gt;
-    <flow trigger="empDg.ctlVersion" event="OnClick" filter="">
-      <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
-        <param name="In" value="empDg.id"></param>
-      </procedure>
-      <procedure name="jspopup" logic="Popup" ifyes="jsquery" ifno="">
-        <param name="To" value="frmResourcesVersion"></param>
-        <param name="Mode" value="Edit"></param>
-         <param name="Window" value="Medium"></param>
-      </procedure>
-      <procedure name="jsquery"  logic="Query" ifyes="" ifno="">
-        <param name="In" value="empGroup"></param>
-        <param name="Out" value="empDg"></param>
-        <param name="Sql" value="khAdmin/resourcesManage/QryFileList"></param>
-      </procedure>              
-    </flow>-->
 
     <!-- 删除 -->
     <flow trigger="empDg.ctlDel" event="OnClick" filter="">

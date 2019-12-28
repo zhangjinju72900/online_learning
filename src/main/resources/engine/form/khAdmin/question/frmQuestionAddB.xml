@@ -58,9 +58,13 @@
 
 			<!-- 页面逻辑加载 -->
 			<flow trigger="" event="OnLoad" filter="">
+
  				<procedure name="clear"  logic="Clear" ifyes="jsdecodeid" ifno="">
            			<param name="Out" value="addGroup"></param>
-     			</procedure> 
+     			</procedure>
+				<!--<procedure name="jBranch" logic="Branch" ifyes="j3" ifno="jsdecodeid">
+					<param name="In" value="getStorage('frmQuestionAddB_EditMode')=='Add'"/>
+				</procedure>-->
      			<procedure name="jsdecodeid" server="" logic="DecodeId" ifyes="j3" ifno="">
 			        <param name="Out" value="addGroup.questionClassifyId"></param>
 			      </procedure>

@@ -22,6 +22,7 @@
 						 edit="" required="" format="" width="" height="" column=""/>
 			</panel>
 
+
 			<panel name="pCondition" title="查询条件" object="question" type="Group">
 				<control name="eq_id" title="试题编号" property="id" type="TextBox" edit="Y" required="N" format=""
 						 multiple="N" width="1" height="1" column=""/>
@@ -50,10 +51,10 @@
 						 height="1" column=""/>
 				<control name="content" title="题干" property="content" type="TextBox" edit="N" required="" format=""
 						 width="200" height="1" column=""/>
-				<control name="dataFlagType" title="题库类型" property="dataFlagType" type="TextBox" edit="N"
+				<control name="questionClassifyName" title="题库类型" property="questionClassifyName" type="TextBox" edit="N"
 						 required="" format="" width="100" height="1" column=""/>
-				<control name="questionClassifyId" title="试题分类" property="questionClassifyId" type="TextBox" edit="N"
-						 required="" format="" width="100" height="1" column=""/>
+				<!--<control name="questionTypeName" title="试题分类" property="questionTypeName" type="TextBox" edit="N"
+						 required="" format="" width="100" height="1" column=""/>-->
 				<control name="questionTypeName" title="题型" property="questionTypeName" type="TextBox" edit="N"
 						 required="" format="" width="80" height="1" column=""/>
 				<control name="difficultyLevelName" title="难度" property="difficultyLevelName" type="TextBox" edit="N"
@@ -130,6 +131,9 @@
 			</flow>
 			<!-- 新增点击事件 -->
 			<flow trigger="pToolbar.btnAdd" event="OnClick" filter="">
+				<procedure name="jsEncodeId" server="" logic="EncodeId" ifyes="jsPopup" ifno="">
+					<param name="In" value="pCondition.eq_questionClassifyId" />
+				</procedure>
 				<procedure name="jsPopup" server="" logic="Popup" ifyes="Query" ifno="">
 					<param name="To" value="frmQuestionAddB"/>
 					<param name="Mode" value="Add"/>

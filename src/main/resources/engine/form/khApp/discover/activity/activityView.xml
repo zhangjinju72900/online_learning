@@ -148,12 +148,21 @@
 
             <!--评论-->
             <flow trigger="pToolbar.review" event="OnClick" filter="">
-                <procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
+                <procedure name="j1" logic="EncodeId" ifyes="jAdd" ifno="">
+                    <param name="In" value="pCondition.id"></param>
+                </procedure>
+                <procedure name="jAdd"  logic="Popup" ifyes="j2" ifno="">
+                    <param name="To" value="frmReviewActivity"></param>
+                    <param name="Mode" value="Add"></param>
+                    <param name="Window" value="Large"/>
+                    <param name="Title" value="评论" />
+                </procedure>
+                <!--<procedure name="j1" logic="SaveCustom" ifyes="j2" ifno="">
                     <param name="Sql" value="khApp/discover/activity/ActReview"/>
                     <param name="In" value="pList"></param>
                     <param name="Plugin" value="updateActReview"></param>
                     <param name="Msg" value="'评论成功'"></param>
-                </procedure>
+                </procedure>-->
                 <procedure name="j2" logic="Query" ifyes="j3" ifno="">
                     <param name="In" value="pCondition"></param>
                     <param name="Out" value="pList"></param>

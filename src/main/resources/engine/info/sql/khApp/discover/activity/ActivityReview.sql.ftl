@@ -12,15 +12,15 @@ INSERT INTO t_live_review(
 )
 value (
       #{data.id},
-      #{data.createBy},
+      #{data.empId},
       now(),
       #{data.reviewEdit},
       0,
       0,
       now(),
-      #{data.createBy},
+      #{data.empId},
       now(),
-      #{data.createBy}
+      #{data.empId}
 )
 
 

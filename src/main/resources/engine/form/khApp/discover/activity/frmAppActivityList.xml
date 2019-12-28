@@ -8,7 +8,9 @@
                 <control name="btnsearch" title="搜索" property="" type="Button" column="2"/>
             </panel>
             <panel name="pTable" title="查询结果" object="activityList" type="Grid" multiple="N" >
+<!--
             	<control name="scanCode" title="扫码获取信息" property="" type="Link" edit="" required="" format="" width="150" height="" column=""/>
+-->
                 <control name="id" title="id" property="id" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
                 <control name="title" title="标题" property="title" type="DataLink" edit="N" required="" format="" width="100" height="1" column="2"/>
                 <control name="startTime" title="开始时间" property="startTime" type="TextBox" edit="N" required="" format="" width="100" height="1" column="2"/>
@@ -56,7 +58,7 @@
             </flow>
             
             <!--扫码获取信息-->
-            <flow trigger="pTable.scanCode" event="OnClick" filter="">
+           <!-- <flow trigger="pTable.scanCode" event="OnClick" filter="">
                 <procedure name="js" server="" logic="EncodeId" ifno="" ifyes="j2" sync="Y">
                     <param name="In" value="pTable.id"></param>
                 </procedure>
@@ -66,7 +68,7 @@
                     <param name="Mode" value="ReadOnly"></param>
                 </procedure>
 
-            </flow>
+            </flow>-->
             
             <!-- 布局 -->
             <layout>

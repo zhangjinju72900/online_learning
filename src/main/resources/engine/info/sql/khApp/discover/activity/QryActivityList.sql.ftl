@@ -32,6 +32,6 @@ from
        		left join t_file_index fi on a.file_id = fi.id
 		    left join t_customer_user u on a.create_by = u.id
 		    left join t_file_index fi2 on u.file_id = fi2.id
-where a.valid_flag = 0 and a.release_status = 1
+where a.valid_flag = 0 and a.release_status = 1 and a.activity_type=2
 order by a.start_time desc,a.top_flag desc ,a.top_time desc,a.origin_time desc
 ) a

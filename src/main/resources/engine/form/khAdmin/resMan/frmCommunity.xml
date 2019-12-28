@@ -113,9 +113,10 @@
 
             <!--删除社区-->
             <flow trigger="empTool.ctlDelete" event="OnClick" filter="">
-                <procedure name="deleteData" logic="Delete" ifyes="" ifno="">
-                    <param name="In" value="empCom"/>
-                    <param name="Msg" value="话题已删除"/>
+                <procedure name="deleteData"  logic="SaveCustom" ifyes="queryTable" ifno="">
+                    <param name="In" value="empCom" />
+                    <param name="Sql" value="khAdmin/resMan/DeleteCom"/>
+                    <param name="Msg" value="'社区已删除'" />
                 </procedure>
             </flow>
 

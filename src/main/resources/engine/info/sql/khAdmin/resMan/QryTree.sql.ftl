@@ -10,5 +10,6 @@ END AS pid,
 name as text,
 'closed' as state
 from t_community
+where flag=0
 ORDER BY concat(pid,id)
 ) a

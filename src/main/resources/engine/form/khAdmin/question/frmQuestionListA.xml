@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
 <ui_layer>
   <ui name="frmQuestionListA" title="题库管理">
@@ -52,11 +52,11 @@
         <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
        		<param name="Msg" value="请先选择课程"></param>
         </procedure>
-        
+
       <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
         <param name="In" value="empTree.id"></param>
       </procedure>
-      
+
 	  <procedure name="jspopup" server="" logic="Popup" ifyes="queryTable" ifno="">
 			<param name="To" value="frmQuestionImport"></param>
 			<param name="Mode" value="Add"></param>
@@ -67,7 +67,7 @@
         	<param name="In" value="empGroup"></param>
         	<param name="Out" value="empDg"></param>
         	<param name="Sql" value="khAdmin/question/QryQuestionDetal2"></param>
-      </procedure>  
+      </procedure>
     </flow>
    <!-- 逻辑加载 -->
     <flow trigger="" event="OnLoad" filter="">
@@ -89,9 +89,9 @@
         <param name="In" value="empGroup"></param>
         <param name="Out" value="empDg"></param>
         <param name="Sql" value="khAdmin/question/QryQuestionDetal2"></param>
-      </procedure>  
+      </procedure>
     </flow>
-    
+
     <!-- 新增分类 -->
     <flow trigger="empTool.ctlAdd" event="OnClick" filter="">
       	<procedure name="branch" server="" logic="Branch" ifyes="getMsg" ifno="jsencodeid">
@@ -100,13 +100,13 @@
         <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
        		<param name="Msg" value="请先选择目录"></param>
         </procedure>
-        
-        
+
+
       <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
         <param name="In" value="empTree.id"></param>
       </procedure>
-      
-      
+
+
 	  <procedure name="jspopup" server="" logic="Popup" ifyes="queryTable" ifno="">
 			<param name="To" value="frmQuestionAddA"></param>
 			<param name="Mode" value="Add"></param>
@@ -117,7 +117,7 @@
         	<param name="In" value="empGroup"></param>
         	<param name="Out" value="empDg"></param>
         	<param name="Sql" value="khAdmin/question/QryQuestionDetal2"></param>
-        </procedure>  
+        </procedure>
         <procedure name="tree"  logic="Query" ifyes="" ifno="">
         	<param name="In" value=""></param>
         	<param name="Out" value="empTree"></param>
@@ -132,8 +132,8 @@
         <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
          <param name="Msg" value="请先选择目录"></param>
         </procedure>
-        
-        
+
+
       <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="j2" ifno="">
         <param name="In" value="empTree.id"></param>
       </procedure>
@@ -143,8 +143,8 @@
       <procedure name="jsencodeid1" server="" logic="EncodeId" ifyes="jspopup" ifno="">
         <param name="In" value="empGroup.eq_OrgId"></param>
       </procedure>
-      
-      
+
+
    	  <procedure name="jspopup" server="" logic="Popup" ifyes="queryTable" ifno="">
    		<param name="To" value="frmQuestionEditA"></param>
    		<param name="Mode" value="Edit"></param>
@@ -155,14 +155,14 @@
         <param name="In" value="empGroup"></param>
         <param name="Out" value="empDg"></param>
         <param name="Sql" value="khAdmin/question/QryQuestionDetal2"></param>
-      </procedure> 
+      </procedure>
       <procedure name="tree"  logic="Query" ifyes="" ifno="">
         <param name="In" value=""></param>
         <param name="Out" value="empTree"></param>
        	<param name="Sql" value="khAdmin/question/QryQuestionList2"></param>
       </procedure>
     </flow>
-    
+
         <!-- 删除分类 -->
     <flow trigger="empTool.ctlDelete" event="OnClick" filter="">
        <procedure name="branch" server="" logic="Branch" ifyes="getMsg" ifno="clear">
@@ -182,16 +182,16 @@
        <procedure name="jbranch" server="" logic="Branch" ifyes="j0" ifno="confirm">
         	 <param name="In" value="getPanelControlValue('empGroupDg.id')==''"></param>
        </procedure>
-       
+
        <procedure name="confirm" logic="InfoMsg" ifyes="" ifno="">
 			<param name="Msg" value="该目录下有试题，删除可能导致试题丢失，请先对目录数据进行操作！"></param>
 	  	</procedure>
-       
+
        <procedure name="j0" server="" logic="ConfirmMsg" ifyes="jsencodeid" ifno="">
 	       <param name="Title" value="删除提示" />
 	       <param name="Msg" value="确认删除当前题库分类吗?" />
        </procedure>
-       
+
        <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="j2" ifno="">
          	<param name="In" value="empTree.id"></param>
        </procedure>
@@ -201,20 +201,20 @@
        <procedure name="jsencodeid1" server="" logic="EncodeId" ifyes="save" ifno="">
          	<param name="In" value="empGroup.eq_OrgId"></param>
        </procedure>
-       
-       
+
+
        <procedure name="save" server="" logic="SaveCustom" ifyes="tree" ifno="">
             <param name="In" value="empGroup"></param>
         	<param name="Sql" value="khAdmin/question/QryQuestionDelet"></param>
         	<param name="Msg" value="删除成功"></param>
-       </procedure>       
+       </procedure>
       <procedure name="tree"  logic="Query" ifyes="" ifno="">
         <param name="In" value=""></param>
         <param name="Out" value="empTree"></param>
        	<param name="Sql" value="khAdmin/question/QryQuestionList2"></param>
       </procedure>
     </flow>
-    
+
             <!-- 导入题目 -->
       <!-- <flow trigger="empTool.ctlImport" event="OnClick" filter="">
 
@@ -230,7 +230,7 @@
 
 
       </flow>-->
-    
+
         <!-- 新增题目 -->
     <flow trigger="empTool.ctlAdd1" event="OnClick" filter="">
       	<procedure name="branch" server="" logic="Branch" ifyes="getMsg" ifno="jsencodeid">
@@ -239,11 +239,11 @@
         <procedure name="getMsg" server="" logic="InfoMsg" ifyes="" ifno="">
        		<param name="Msg" value="请先选择课程"></param>
         </procedure>
-        
+
       <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
         <param name="In" value="empTree.id"></param>
       </procedure>
-      
+
 	  <procedure name="jspopup" server="" logic="Popup" ifyes="queryTable" ifno="">
 			<param name="To" value="frmQuestionAddB"></param>
 			<param name="Mode" value="Add"></param>
@@ -254,9 +254,9 @@
         	<param name="In" value="empGroup"></param>
         	<param name="Out" value="empDg"></param>
         	<param name="Sql" value="khAdmin/question/QryQuestionDetal2"></param>
-      </procedure>  
+      </procedure>
     </flow>
-    
+
     <!-- 编辑试题选项 -->
     <flow trigger="empDg.ctlEdit" event="OnClick" filter="">
       <procedure name="jsencodeid1" server="" logic="EncodeId" ifyes="jspopup" ifno="">
@@ -273,9 +273,9 @@
         <param name="Out" value="empDg"></param>
         <param name="Sql" value="khAdmin/question/QryQuestionDetal2"></param>
       </procedure>
-      
+
     </flow>
-    
+
     <!-- 查看试题 -->
 	<flow trigger="empDg.ctlCheck" event="OnClick" filter="">
       <procedure name="jsencodeid1" server="" logic="EncodeId" ifyes="jspopup" ifno="">
@@ -287,9 +287,9 @@
    		<param name="Window" value="Large"></param>
    		<param name="Title" value="查看试题"></param>
    	  </procedure>
-   	  
+
     </flow>
- 
+
  	 <!--删除试题  -->
     	<flow trigger="empDg.ctlDel" event="OnClick" filter="">
 		<procedure name="je" logic="EncodeId" ifyes="jdecode" ifno="">
@@ -308,15 +308,15 @@
 			<param name="Sql" value="khAdmin/question/updateQuestionFlag"></param>
 			<param name="Msg" value="已删除"></param>
 	  	</procedure>
-        
+
         <procedure name="jTree"  logic="Query" ifyes="" ifno="">
         	<param name="In" value="empGroup"></param>
         	<param name="Out" value="empDg"></param>
         	<param name="Sql" value="khAdmin/question/QryQuestionDetal2"></param>
-        </procedure>  
+        </procedure>
     </flow>
- 	
-    <!-- 布局 --> 
+
+    <!-- 布局 -->
     <layout>
       <region location ="North" scale="">
         <subregion panel="empTool" location ="North" scale=""/>

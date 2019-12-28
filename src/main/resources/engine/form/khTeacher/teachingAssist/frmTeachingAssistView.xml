@@ -2,11 +2,10 @@
 <tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
     <ui_layer>
-        <ui name="frmTeachingAssistView" title="教辅资料详情">
+        <ui name="frmTeachingAssistView" title="课件详情">
 	        <panel name="pToolbar" title="工具条" object="" type="Toolbar">
 			<control name="btnReturn" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
-			
-			</panel>
+            </panel>
         	
             <panel name="pForm" title="查询条件" object="teachingAssist" type="Group">
             	<control name="id" title="id" property="id" type="TextBox" edit="N" required="N" format="" multiple="N" width="1" height="" column="2"/>
@@ -23,6 +22,7 @@
                  <control name="fileName" title="fileName" property="fileName" type="TextBox" edit="N" required="" target="" format="" width="1" height="" column="2"/>
                 <control name="visibleFlagName" title="是否对学生公开" property="visibleFlagName" type="TextBox" edit="Y" required="" target="" format="" width="1" height="" column="2"/>
 				<control name="visibleFlag" title="是否对学生公开标识" property="visibleFlag" type="Hidden" edit="Y" required="" target="" format="" width="1" height="" column=""/>
+                <control name="downLoad" title="下载文件" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
             </panel>
             <!-- 逻辑加载 -->
 			<flow trigger="" event="OnLoad" filter="">  
@@ -40,8 +40,22 @@
 				
 				
 		    </flow>
-		    
-   			<!-- 返回 -->
+
+            <!-- 下载 -->
+            <flow trigger="pForm.downLoad" event="OnClick" filter="">
+                <procedure name="downloadFile"  logic="Branch" ifyes="Mag" ifno="err">
+                    <param name="In" value="downFileQr('pForm.fileId')"></param>
+                </procedure>
+                <procedure name="Mag"  logic="InfoMsg" ifyes="" ifno="">
+                    <param name="Msg" value="下载成功"></param>
+                </procedure>
+                <procedure name="err"  logic="InfoMsg" ifyes="" ifno="">
+                    <param name="Msg" value="下载失败"></param>
+                </procedure>
+            </flow>
+
+
+            <!-- 返回 -->
 		    <flow trigger="pToolbar.btnReturn" event="OnClick" filter="" >
 		     <procedure name="proTransition" server="/frmTeachingAssist" logic="Back" ifyes="" ifno="">
 	         <param name="To" value="frmTeachingAssist"></param>

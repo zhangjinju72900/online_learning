@@ -27,7 +27,7 @@
 		<control name="config" title="直播配置" property="" type="Hidden" edit="" required="" format="" width="250" height="" column=""/>
 		<control name="btnUntop" title="取消置顶" property="" type="Link" edit="" required="" format="" width="250" height="" column=""/>
 		<control name="btnUnrecommand" title="取消推荐" property="" type="Link" edit="" required="" format="" width="250" height="" column=""/>
-		<control name="id" title="ID" property="id" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
+		<control name="id" title="ID" property="id" type="TextBox" edit="" required="" format="" width="150" height="" column=""/>
 		<control name="qrFileId" title="qrFileId" property="qrFileId" type="Hidden" edit="" required="" format="" width="150" height="" column=""/>
 		<control name="title" title="标题" property="title" type="DataLink" edit="" required="" format="" width="190" height="" column=""/>
 		<control name="activityType" title="类型" property="activityType" type="Hidden" edit="" required="" format="" width="100" height="" column=""/>
@@ -188,9 +188,10 @@
 	        <param name="In" value="pTable.id" />
 	     </procedure>
 	     <procedure name="j2"  logic="SaveCustom" ifyes="j3" ifno="">
+			 <param name="In" value="pTable" />
 	     	<param name="Sql" value="khAdmin/activityManage/DeleteActivityManage"></param>
-	        <param name="In" value="pTable" />
-	        <param name="Msg" value="'活动已删除'" />
+			 <param name="Plugin" value="deleteActivityPlugin"></param>
+			 <param name="Msg" value="'活动已删除'" />
 	     </procedure>
 	     <procedure name="j3"  logic="Query" ifyes="" ifno="">
 	        <param name="In" value="pCondition" />

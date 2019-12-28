@@ -7,7 +7,7 @@
 		<control name="btnBack" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
 	</panel>
 	<panel name="pForm" title="资讯详情" object="informations"  type="Group" multiple="">
-		<control name="id" title="资讯id" property="id" type="Hidden" edit="" required="" format="" width="1" height="1" column=""/>
+		<control name="id" title="资讯id" property="id" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
 		<control name="title" title="标题" property="title" type="TextBox" edit="" required="" format="" width="1" height="1" column=""/>
 		<control name="subjectName" title="标签" property="subjectName" type="TextBox"  multiple="Y" edit="" required="" format="" width="1" height="1" column="2"/>
 		<control name="eq_subjectId" title="标签ID" property="subjectId" type="Hidden"  edit="" required=""  initial="0" format="" width="1" height="1" column=""/>

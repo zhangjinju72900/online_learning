@@ -5,7 +5,7 @@
   <ui name="frmClassList" title="班级管理"> 
 	<panel name="pToolbar" title="工具条" object="" type="Toolbar">
 		<control name="btnHomework" title="查询作业成绩" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
-		<control name="btnScorm" title="查询scorm成绩" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+<!--		<control name="btnScorm" title="查询scorm成绩" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>-->
 		<control name="btnAttendance" title="查询出勤情况" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
 		<control name="btnQuery" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
 		<control name="btnClear" title="清空条件" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>

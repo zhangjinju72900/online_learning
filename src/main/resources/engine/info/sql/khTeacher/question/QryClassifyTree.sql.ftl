@@ -52,13 +52,13 @@ left join t_customer_user_class tcuc on tcl.id = tcuc.class_id
 left join t_customer_user tcu on tcuc.customer_user_id = tcu.id
 where tcu.id = #{data.session.userInfo.userId} and tc.valid_flag = 0 and tp.valid_flag = 0
 
-UNION ALL 
+UNION ALL
 
 select
 	'-1234' ,
 	'0' as id,
 	'' as pid,
-	'中德诺浩课程' as text,
+	'在线学习系统' as text,
 	'closed' as state
 from dual
 )c

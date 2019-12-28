@@ -98,9 +98,19 @@
                 </procedure>
             </flow>
 
-
-
-            <!-- 布局 -->
+            <!--新增社区-->
+            <flow trigger="empTool.ctlAddCom" event="OnClick" filter="">
+            <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="pop2" ifno="j0">
+                <param name="In" value="empTree.id"></param>
+            </procedure>
+                <procedure name="pop2" logic="Popup" ifyes="queryTable" ifno="">
+                    <param name="To" value="frmComEdit"></param>
+                    <param name="Mode" value="Add"></param>
+                    <param name="Window" value="Small"></param>
+                    <param name="Title" value="新增社区"></param>
+                </procedure>
+            </flow>
+        <!-- 布局 -->
             <layout>
                 <region location ="North" scale="">
                     <subregion panel="empTool" location ="North" scale=""/>

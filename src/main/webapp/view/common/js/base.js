@@ -847,3 +847,15 @@ function custom_close(){
 			//window.parent.document.getElementsByName("ctlOrg").value=selectName;
 			custom_close();
 		}
+
+		function downFileQr(fileId){
+	       var id=getPanelControlValue(fileId);
+			//$(".btn-group").trigger("click");
+			//var id=document.getElementById('_easyui_textbox_input11').value;
+	       if(id!=null&&id!=""&&id!=undefined){
+			location.href=getRootPath_web()+"/localDownload?fileId="+id+"&methodType=export";
+			return true;
+		   }else{
+	       	return false;
+		   }
+		}

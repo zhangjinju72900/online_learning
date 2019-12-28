@@ -137,11 +137,6 @@
 					ifno="">
 					<param name="In" value="pTable.id" />
 				</procedure>
-				<!--<procedure name="j2" logic="Delete" ifyes="j3" ifno="j3">-->
-					<!--<param name="In" value="pTable" />-->
-					<!--<param name="Msg" value="'已删除'" />-->
-					<!--<param name="Constraints" value="t_school.region_id|有学校绑定该大区;" />-->
-				<!--</procedure>-->
 				<procedure name="j2" logic="SaveCustom" ifyes="j3" ifno="j3">
 					<param name="In" value="pTable"/>
 					<param name="Msg" value="'已删除'"/>

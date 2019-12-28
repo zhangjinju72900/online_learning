@@ -14,3 +14,4 @@ select * from
 left JOIN
 (select c.`name`,p.price,p.freeshipping from t_postage p
 LEFT JOIN t_city c on c.`code`=p.province)c on c.`name`= b.province)a
+

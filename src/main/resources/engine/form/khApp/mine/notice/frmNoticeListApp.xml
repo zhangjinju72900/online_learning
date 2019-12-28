@@ -2,11 +2,11 @@
 <tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
       xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
 <ui_layer>
-  <ui name="frmAnnounceList" title="通知列表">
+  <ui name="frmAnnounceListApp" title="通知列表">
  
   <panel name="pToolbar" title="工具条" object="" type="Toolbar">
     <control name="btnQuery" title="查询" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
-    <control name="btnCreate" title="新建通知" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+    <!--<control name="btnCreate" title="新建通知" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>-->
   </panel>
   <panel name="pCondition" title="查询条件" object="tNotice" type="Group"  multiple="Y">
     <control name="id" title="id" property="id" type="Hidden" edit="N" required="" format="" width="" height="" column=""/>
@@ -14,8 +14,8 @@
   </panel>
   <panel name="pTable" title="查询结果列表" object="tNotice" type="Grid"  multiple="">
     <control name="id" title="id" property="id" type="Hidden" edit="N" required="" format="" width="" height="" column=""/>
-    <control name="ctlEdit" title="编辑" property="" type="Link" edit="" required="" format="" width="100" height="" column=""/>
-    <control name="ctlDel" title="删除" property="" type="Link" edit="" required="" format="" width="100" height="" column=""/>
+    <!--<control name="ctlEdit" title="编辑" property="" type="Link" edit="" required="" format="" width="100" height="" column=""/>
+    <control name="ctlDel" title="删除" property="" type="Link" edit="" required="" format="" width="100" height="" column=""/>-->
     <control name="lk_title" title="通知标题" property="title" type="DataLink" edit="N" required="N" format="" width="120" height="1" column=""/>
 	<control name="context" title="通知内容" property="context" type="TextBox" edit="N" required="N" format="" width="200" height="1" column=""/>
 	<control name="releaseBy" title="发布人id" property="releaseBy" type="Hidden" edit="N" required="N" target="session.userInfo.empId" format="" width="120" height="1" column=""  />
@@ -48,7 +48,7 @@
     </flow>
     
          <!-- 编辑 -->
-      <flow trigger="pTable.ctlEdit" event="OnClick" filter="row.releaseStatus!='已发布'">
+      <!--<flow trigger="pTable.ctlEdit" event="OnClick" filter="row.releaseStatus!='已发布'">
       <procedure name="jsencodeid" server="" logic="EncodeId" ifyes="jspopup" ifno="">
         <param name="In" value="pTable.id"></param>
       </procedure>
@@ -65,7 +65,7 @@
       </procedure>              
     </flow>
     
-        <!--删除-->
+        &lt;!&ndash;删除&ndash;&gt;
      <flow trigger="pTable.ctlDel" event="OnClick" filter="">
       <procedure name="j0" server="" logic="ConfirmMsg" ifyes="j1" ifno="">
        <param name="Title" value="删除提示" />
@@ -84,7 +84,7 @@
         <param name="Out" value="pTable" />
         <param name="Sql" value="khAdmin/noticeManage/QryNoticeList" />
       </procedure>           
-    </flow>  
+    </flow>  -->
     
     <!--点击详情 -->
     <flow trigger="pTable.lk_title" event="OnClick" filter="">  

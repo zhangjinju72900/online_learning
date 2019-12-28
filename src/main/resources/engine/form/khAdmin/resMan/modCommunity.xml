@@ -14,7 +14,9 @@
 		<!--关联字段-->
 		<property name="name" type="String" length="500" initial="" field=""/><!--社区名称-->
 		<property name="comName" type="String" length="20" initial="" field=""/>
-
+		<property name="parent" type="Long" length="20" initial="" field=""/>
+		<property name="createComTime" type="Date" length="100" field=""/>
+		<property name="createComBy" type="String" length="50" field=""/>
 	</object>
 </model_layer>
 </tsoftware>

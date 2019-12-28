@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+			xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+<ui_layer>
+<!-- 新建组织 -->
+  <ui name="frmComEdit" title="组织弹出">
+	<panel name="pnlDown" title="pnlDown" object="" type="Toolbar">
+		<control name="ctlSave" title="确认" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+		<control name="ctlCancel" title="取消" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+	</panel>
+	<panel name="pnlGroup" title="pnlGroup" object="com" type="Group">
+		<control name="id" title="id" property="id" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+		<control name="parent" title="parent" property="parent" type="Hidden" edit="" required="" format="" width="" height="" column=""/>
+		<control name="name" title="社区名称" property="name" type="TextBox" edit="Y" required="Y" format="" width="1" height="1" column="1"/>
+		<control name="createComTime" title="创建时间" property="createComTime" type="Hidden" edit="N" required="N" format="" width="1" height="1" column="1" target="editMode=='Add'?CurrentTime():nil"/>
+		<control name="createComBy" title="创建人" property="createComBy" type="Hidden" edit="Y" required="N" initial="test" target="" format="" width="1" height="1" column=""  />
+	</panel>
+
+	 <flow trigger="" event="OnLoad" filter="">
+         <procedure name="clear" server="" logic="Clear" ifyes="" ifno="">
+         <param name="Out" value="pnlGroup"></param>
+     </procedure>
+    <!-- <procedure name="DecodeId" server="" logic="DecodeId" ifyes="qid1" ifno="">
+        <param name="Out" value="pnlGroup.parent"></param>
+      </procedure>
+      <procedure name="qid1"  logic="QueryById" ifyes="" ifno="">
+        <param name="In"  value="pnlGroup"></param>
+        <param name="Out" value="pnlGroup"></param>
+        <param name="Sql" value="QryComParentName"></param>
+      </procedure>-->
+	 </flow>
+	<!-- 保存 -->
+    <flow trigger="pnlDown.ctlSave" event="OnClick" filter="" defaultEnter="Y">
+        <!--<procedure name="ptEncodeId" logic="EncodeId" ifyes="jsDecodeId" ifno="">
+            <param name="In" value="pnlGroup.id"/>
+        </procedure>
+        <procedure name="jsDecodeId" logic="DecodeId" ifyes="pTransform" ifno="">
+            <param name="Out" value="pnlGroup.id"/>
+        </procedure>-->
+        <procedure name="pTransform" logic="Transform" ifyes="jssave" ifno="">
+            <param name="In" value="pnlGroup"/>
+            <param name="Out" value="pnlGroup"/>
+            <param name="Plugin" value="com.tedu.plugin.community.SaveCom"/>
+        </procedure>
+       <!-- <procedure name="jssave"  logic="" ifyes="" ifno="">
+            <param name="In" value="pnlGroup.id"></param>
+            <param name="Msg" value="社区已保存"></param>
+        </procedure>-->
+    </flow>
+      <!--取消-->
+        <flow trigger="pnlDown.ctlCancel" event="OnClick" filter="" >
+      <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+        <param name="Refresh" value="false"></param>
+      </procedure>
+    </flow>
+
+    <layout>
+      <region location ="South" scale="">
+        <subregion panel="pnlDown" location="South" scale="" />
+      </region>
+      <region location ="Center" scale="">
+        <subregion panel="pnlGroup" location="Center" scale="" />
+      </region>
+    </layout>
+  </ui>
+</ui_layer>
+</tsoftware>

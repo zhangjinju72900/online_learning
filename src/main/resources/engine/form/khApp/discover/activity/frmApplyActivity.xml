@@ -64,18 +64,15 @@
                            value="id,班级id,classId|className,班级名称,className|gradeName,年级,grade"></param>
                 </procedure>
             </flow>
-            <!--<flow trigger="pToolbar.confirm" event="OnClick" filter="" >
-                <procedure name="j1" logic="Transform" ifyes="jInfo3" ifno="">
+            <flow trigger="pToolbar.confirm" event="OnClick" filter="" >
+                <procedure name="j1" logic="Transform" ifyes="jClose" ifno="">
                     <param name="In" value="pForm"></param>
                     <param name="Plugin" value="com.tedu.plugin.activity.ApplyActivity"></param>
-                </procedure>
-                <procedure name="jInfo3" server="" logic="InfoMsg" ifyes="jClose" ifno="">
-                    <param name="Msg" value="保存成功！"></param>
                 </procedure>
                 <procedure name="jClose" server="" logic="Close" ifyes="" ifno="">
                     <param name="Refresh" value="true"></param>
                 </procedure>
-            </flow>-->
+            </flow>
 
             <!--返回-->
             <flow trigger="pToolbar.back" event="OnClick" filter="" >

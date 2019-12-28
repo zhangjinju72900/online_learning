@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tsoftware  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="../componentConfig.xsd">
+    <ui_layer>
+        <ui name="frmCourseWareDetail" title="课件详情">
+	        <panel name="pToolbar" title="工具条" object="" type="Toolbar">
+			<control name="btnReturn" title="返回" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+            </panel>
+        	
+            <panel name="pForm" title="查询条件" object="teachingAssist" type="Group">
+            	<control name="id" title="id" property="id" type="Hidden" edit="N" required="N" format="" multiple="N" width="1" height="" column=""/>
+                <control name="professionalId" title="专业ID" property="professionalId" type="Hidden" edit="N" required="N" format="" multiple="N" width="1" height="" column=""/>
+                <control name="professionalRName" title="专业名" property="professionalName" type="TextBox" edit="N" required="N" format="" multiple="N" width="1" height="" column="1"/>
+                <control name="courseId" title="课程ID" property="courseId" type="Hidden" edit="N" required="N" format="" multiple="N" width="1" height="" column=""/>
+                <control name="courseName" title="课程名" property="courseName" type="TextBox" edit="N" required="N" format="" multiple="N" width="1" height="" column="1"/>
+                <control name="sectionId" title="小节ID" property="sectionId" type="Hidden" edit="N" required="N" format="" multiple="N" width="1" height="" column=""/>
+                <control name="sectionName" title="小节名" property="sectionName" type="TextBox" edit="N" required="N" format="" multiple="N" width="1" height="" column="1"/>
+                <!--<control name="ossKey" title="ossKey" property="ossKey" type="TextBox" edit="N" required="" target="" format="" width="1" height="" column=""/>
+                <control name="bucketName" title="bucketName" property="bucketName" type="TextBox" edit="N" required="" target="" format="" width="1" height="" column="2"/>-->
+                <control name="name" title="名称" property="name" type="TextBox" edit="N" required="" target="" format="" width="1" height="" column="1"/>
+                <control name="fileId" title="文件" property="fileId" type="Hidden" edit="N" required="" target="" format="" width="1" height="" column=""/>
+                 <control name="fileName" title="fileName" property="fileName" type="TextBox" edit="N" required="" target="" format="" width="1" height="" column="1"/>
+                <!--<control name="visibleFlagName" title="是否对学生公开" property="visibleFlagName" type="TextBox" edit="Y" required="" target="" format="" width="1" height="" column="2"/>-->
+				<control name="visibleFlag" title="是否对学生公开标识" property="visibleFlag" type="Hidden" edit="Y" required="" target="" format="" width="1" height="" column=""/>
+                <control name="downLoad" title="下载文件" property="" type="Button" edit="" required="" format="" width="" height="" column=""/>
+            </panel>
+            <!-- 逻辑加载 -->
+			<flow trigger="" event="OnLoad" filter="">  
+		       <procedure name="jClear"  logic="Clear" ifyes="j1" ifno="" sync="Y">
+		         <param name="Out" value="pForm"></param>
+		      </procedure>
+		      <procedure name="j1" server="" logic="DecodeId" ifyes="qid" ifno="">
+					<param name="Out" value="pForm.id" />
+			  </procedure>
+			  <procedure name="qid" logic="QueryById" ifyes="" ifno="">
+					<param name="In" value="pForm"></param>
+					<param name="Out" value="pForm"></param>
+					<param name="Sql" value="khTeacher/teachingAssist/QryTeachingAssistByIdmy"></param>
+				</procedure>
+				
+				
+		    </flow>
+
+            <!-- 下载 -->
+            <flow trigger="pForm.downLoad" event="OnClick" filter="">
+                <procedure name="downloadFile"  logic="Branch" ifyes="Mag" ifno="err">
+                    <param name="In" value="downFileQr('pForm.fileId')"></param>
+                </procedure>
+                <procedure name="Mag"  logic="InfoMsg" ifyes="" ifno="">
+                    <param name="Msg" value="下载成功"></param>
+                </procedure>
+                <procedure name="err"  logic="InfoMsg" ifyes="" ifno="">
+                    <param name="Msg" value="下载失败"></param>
+                </procedure>
+            </flow>
+
+
+            <!-- 返回 -->
+		    <flow trigger="pToolbar.btnReturn" event="OnClick" filter="" >
+                <procedure name="jsclose" server="" logic="Close" ifyes="" ifno="">
+                    <param name="Refresh" value="true"></param>
+                </procedure>
+		    </flow>	
+            <!-- 布局 -->
+            <layout>
+                <region location ="North" scale="">
+                    <subregion panel="pToolbar" location ="North" scale=""/>
+                </region>
+                <region location ="Center" scale="">
+                	<subregion panel="pForm" location="Center" scale=""/>
+                </region>
+               
+            </layout>
+        </ui>
+    </ui_layer>
+</tsoftware>

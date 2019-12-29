@@ -46,7 +46,7 @@ public class DeleteAssistPlugin implements ILogicPlugin {
 	public void doAfter(FormEngineRequest requestObj, FormModel formModel, Object beforeResult,
 			FormEngineResponse responseObj) {
 		 Map<String,Object> map=(Map<String, Object>) requestObj.getData();
-		 String [] assistIds = map.get("assistId").toString().split(",");
+		 String [] assistIds = map.get("id").toString().split(",");
 		 CustomFormModel cModel = new CustomFormModel();
 		 cModel.setSqlId("khAdmin/teachingAssist/DeleteTeachingAssist");
 		 for(String id:assistIds) {
